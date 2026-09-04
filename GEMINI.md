@@ -34,12 +34,12 @@ Nidhi Tea is an ultra-premium, high-performance single-page e-commerce landing e
 ```
 
 ### Typography Hierarchy
-* **Display / Headlines**: `font-family: Anton, 'Arial Narrow', sans-serif;`
-  * Applied via class `.display-tight` with `text-transform: uppercase`, `line-height: .88`, `letter-spacing: -.005em`.
+* **Display / Headlines**: Google Font **Fraunces** (`font-family: 'Fraunces', serif; font-optical-sizing: auto;`)
+  * Applied to `h1, h2, h3, h4, h5, h6`, Tailwind classes `font-display` / `font-heading`, and `.display-tight` with `text-transform: uppercase`, `line-height: .88`, `letter-spacing: -.005em`, `font-weight: 700`.
 * **Subtitles & Outlined Text**:
   * `.text-outline`: `color: transparent; -webkit-text-stroke: 1.5px var(--cream);`
   * `.number`: `color: transparent; -webkit-text-stroke: 3px var(--cream); letter-spacing: 0.02em;`
-* **Body / Interface**: `font-family: "Inter Tight", system-ui, sans-serif;` with crisp `-webkit-font-smoothing: antialiased`.
+* **Body / Interface**: Google Fonts **Inter Tight** & **Poppins** (`font-family: "Inter Tight", "Poppins", system-ui, sans-serif;`) with crisp `-webkit-font-smoothing: antialiased`.
 
 ### Visual Treatments & Textures
 * **Noise Panels (`.noise-panel`)**: Textured roasted tea cards (`#6D5236` with radial dotted matrix).
@@ -166,7 +166,7 @@ The following IDs and classes are strictly bound to GSAP timelines and scroll li
 * Navigation: `#logoBox`, `#logoImg`, `#navLinks`, `#navPill`, `#navBurger`, `#mobileMenu`
 * Floating Food & Intro: `#intro`, `#introText`, `.intro-word`, `.floating-food`, `.floating-food-item`
 * Benefits: `#benefits`, `.bene-wrap`, `.bene-dim`
-* Products: `#products`, `#productGrid`, `.prod`, `[data-bottle]`, `[data-shadow]`, `.fruitTR`, `.fruitBL`, `.tagline`, `.actions`
+* Products: `#products`, `#productGrid`, `.prod`, `[data-bottle]`, `[data-shadow]`, `.fruitTL`, `.fruitBR`, `.fruitTR`, `.fruitBL`, `.tagline`, `.actions`
 * Why Pinned Section: `#whySection`, `#whyStickyContainer`, `.slide`, `.slide-1`, `.slide-2`, `.slide-3`, `.why-line`, `.num-wrapper`, `.number`
 * Cinema Video: `#cinemaSection`, `#cinemaArena`, `#cinemaFrame`, `#cinemaVideo`, `#cinemaPlayBtn`, `#cinemaMiniPlayBtn`, `#cinemaMuteBtn`, `#cinemaFullscreenBtn`, `#cinemaProgressBar`, `#cinemaProgressFill`, `#cinemaTime`, `#cinemaOverlay`
 * Reviews: `#reviewsSection`, `#reviewTrack`, `.reviews-title`
