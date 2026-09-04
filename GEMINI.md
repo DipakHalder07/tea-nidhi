@@ -24,12 +24,12 @@ Nidhi Tea is an ultra-premium, high-performance single-page e-commerce landing e
 ### Color Palette (Hex & CSS Variables)
 ```css
 :root {
-  --background: #100B06; /* Rich earthy deep obsidian dark background */
+  --background: #896846; /* Rich earthy warm artisan tea background */
   --cream:      #F6E9D7; /* Warm natural organic milk-cream typography & accents */
   --gold:       #BE8D3F; /* Warm heritage artisanal gold (Masala Chai blend tint) */
   --flame:      #F15726; /* Vibrant citrus amber (Honey Lemon Green Tea tint) */
   --cherry:     #C4321C; /* Royal floral ruby (Rose Cardamom Black Tea tint) */
-  --smoke:      #2A231C; /* Deep brown-smoke neutral panel tone */
+  --smoke:      #6D5236; /* Deep roasted tea brown neutral panel tone */
 }
 ```
 
@@ -42,7 +42,7 @@ Nidhi Tea is an ultra-premium, high-performance single-page e-commerce landing e
 * **Body / Interface**: `font-family: "Inter Tight", system-ui, sans-serif;` with crisp `-webkit-font-smoothing: antialiased`.
 
 ### Visual Treatments & Textures
-* **Noise Panels (`.noise-panel`)**: Subtle dark textured cards (`#1A130C` with radial dotted matrix).
+* **Noise Panels (`.noise-panel`)**: Textured roasted tea cards (`#6D5236` with radial dotted matrix).
 * **Dotted Dividers (`.dotted-rule`)**: `repeating-linear-gradient` horizontal rules between sections.
 * **Animated Scroller Line (`.why-line`)**: 300% width repeating linear dotted track driven across the screen by GSAP ScrollTrigger.
 
