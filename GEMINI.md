@@ -46,6 +46,14 @@ Nidhi Tea is an ultra-premium, high-performance single-page e-commerce landing e
 * **Dotted Dividers (`.dotted-rule`)**: `repeating-linear-gradient` horizontal rules between sections.
 * **Animated Scroller Line (`.why-line`)**: 300% width repeating linear dotted track driven across the screen by GSAP ScrollTrigger.
 
+### Shape & Component Architecture
+* **Radius System**: Restrained 10px corner language (`rounded-lg: 10px`, `rounded-xl: 12px`, `rounded-md: 8px`, `rounded-sm: 4px`).
+* **Elevation & Framing**: Flat, framed surfaces with delicate 1px/2px borders rather than heavy drop shadows on card containers.
+* **Buttons**:
+  * Primary (`bg-cream text-background`): `rounded-lg` (10px), 56px height, sturdy padding (`px-3.5 py-3.5`), 2px border.
+  * Secondary (`bg-transparent text-cream border-2 border-cream`): `rounded-lg` (10px), 56px height, outlined counterpart.
+* **Cards & Inputs**: `rounded-lg` (10px), surface fill, clean framed border, generous vertical breathing room.
+
 ---
 
 ## 3. Master Animation Directory

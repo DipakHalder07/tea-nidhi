@@ -36,6 +36,22 @@
             heading: ['"Fraunces"', 'serif'],
             sans: ['"Inter Tight"', '"Poppins"', 'system-ui', 'sans-serif'],
           },
+          borderRadius: {
+            none: '0px',
+            sm: '4px',
+            md: '8px',
+            lg: '10px',
+            xl: '12px',
+            full: '9999px',
+          },
+          spacing: {
+            xs: '10px',
+            sm: '20px',
+            md: '40px',
+            lg: '72px',
+            xl: '104px',
+            gutter: '20px',
+          },
         },
       },
     };
@@ -477,7 +493,7 @@
       <div class="relative z-10 flex items-center justify-center py-6">
         <div class="dotted-rule pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-70"></div>
         <a href="#products"
-          class="group relative z-10 overflow-hidden rounded-sm bg-cream px-7 py-3 font-display text-sm uppercase tracking-wide text-background transition-transform duration-300 hover:scale-105 sm:px-9 shadow-md">
+          class="group relative z-10 overflow-hidden rounded-lg border-2 border-transparent bg-cream px-7 py-3.5 font-display text-sm uppercase tracking-wide text-background transition-transform duration-300 hover:scale-105 sm:px-9">
           <span class="relative z-10 transition-colors duration-300 group-hover:text-cream">Explore Blends</span>
           <span
             class="absolute inset-0 translate-y-full bg-flame transition-transform duration-300 group-hover:translate-y-0"></span>
@@ -849,18 +865,18 @@
       <div>
         <h2 class="display-tight text-3xl text-cream md:text-4xl">Join the Nidhi Tea Family</h2>
         <p class="mt-2 text-sm text-cream/60">New blends. Seasonal specials. Wellness tips. Early access.</p>
-        <form onsubmit="return false" class="mt-6 flex items-center gap-3 border-b border-cream/25 pb-2">
-          <input type="email" required placeholder="Your email..." aria-label="Email address"
-            class="w-full bg-transparent py-2 text-sm text-cream outline-none placeholder:text-cream/40" />
+        <form onsubmit="return false" class="mt-6 flex flex-col sm:flex-row items-stretch gap-2.5">
+          <input type="email" required placeholder="Your email address..." aria-label="Email address"
+            class="flex-1 rounded-lg border border-cream/25 bg-background/50 px-4 py-3 text-sm text-cream outline-none transition-colors focus:border-cream/60 placeholder:text-cream/40" />
           <button type="submit" aria-label="Subscribe"
-            class="font-display text-lg text-cream transition-transform hover:translate-x-1">→</button>
+            class="rounded-lg border-2 border-transparent bg-cream px-5 py-3 font-display text-xs uppercase tracking-wide text-background transition-all hover:bg-flame hover:text-cream cursor-pointer">Subscribe</button>
         </form>
       </div>
       <div class="flex gap-3 md:flex-col">
         <a href="https://www.instagram.com/nidhitea" target="_blank" rel="noopener" aria-label="Instagram"
-          class="noise-panel flex h-16 w-20 items-center justify-center rounded-sm border border-cream/10 font-display text-xs uppercase text-cream/80 hover:text-flame">In</a>
+          class="noise-panel flex h-16 w-20 items-center justify-center rounded-lg border border-cream/20 font-display text-xs uppercase text-cream/80 hover:text-flame">In</a>
         <a href="https://www.facebook.com/nidhitea" target="_blank" rel="noopener" aria-label="Facebook"
-          class="noise-panel flex h-16 w-20 items-center justify-center rounded-sm border border-cream/10 font-display text-xs uppercase text-cream/80 hover:text-flame">Fa</a>
+          class="noise-panel flex h-16 w-20 items-center justify-center rounded-lg border border-cream/20 font-display text-xs uppercase text-cream/80 hover:text-flame">Fa</a>
       </div>
     </div>
     <div
@@ -1333,7 +1349,7 @@
       root.innerHTML = CARDS.map((c, i) => {
         const even = i % 2 === 0;
         return `<div class="bene-wrap sticky" style="z-index:${i + 1}">
-      <div class="relative mb-10 sm:mb-14 md:mb-18 w-full overflow-hidden rounded-lg border border-cream/15 bg-background shadow-[0_40px_80px_-30px_rgba(0,0,0,.95)] transition-transform duration-500" style="transform:translateX(${even ? -6 : 12}px) rotate(${even ? -1.1 : 1.4}deg)">
+      <div class="relative mb-10 sm:mb-14 md:mb-18 w-full overflow-hidden rounded-lg border border-cream/25 bg-background transition-transform duration-500" style="transform:translateX(${even ? -6 : 12}px) rotate(${even ? -1.1 : 1.4}deg)">
         <div class="flex items-center justify-between bg-cream px-4 py-4 sm:px-7 sm:py-5">
           <span class="text-lg leading-none text-background">•</span>
           <h3 class="font-display text-xl uppercase tracking-wide text-background sm:text-3xl md:text-4xl">${c.title}</h3>
@@ -1402,9 +1418,9 @@
       const grid = document.getElementById("productGrid");
       if (!grid) return;
       grid.innerHTML = PRODUCTS.map((p) => `
-    <article data-listing-card="true" class="prod group relative flex min-h-[460px] sm:min-h-[520px] md:min-h-[560px] lg:min-h-[600px] flex-col items-center justify-between overflow-hidden rounded-xl p-5 sm:p-6 md:p-8 gap-5 md:gap-6 shadow-2xl transition-all duration-500 ease-out" style="background:${p.bg}">
+    <article data-listing-card="true" class="prod group relative flex min-h-[460px] sm:min-h-[520px] md:min-h-[560px] lg:min-h-[600px] flex-col items-center justify-between overflow-hidden rounded-lg border border-cream/20 p-5 sm:p-6 md:p-8 gap-5 md:gap-6 transition-all duration-500 ease-out" style="background:${p.bg}">
       <a class="absolute inset-0 z-1" aria-label="${p.name.join(" ")}" href="#products"></a>
-      <div class="absolute z-0 pointer-events-none rounded-xl border border-cream/40 opacity-30 border-dashed inset-2.5"></div>
+      <div class="absolute z-0 pointer-events-none rounded-lg border border-cream/40 opacity-30 border-dashed inset-2.5"></div>
       
       <!-- Header Title & Tagline -->
       <div class="relative flex flex-col items-center text-center w-full pointer-events-none z-10">
@@ -1432,13 +1448,13 @@
 
       <!-- Bottom Action Buttons Container -->
       <div data-buttons-container="true" class="actions relative z-20 grid grid-cols-1 sm:grid-cols-2 gap-2 w-full opacity-100 sm:opacity-0 sm:translate-y-3 transition-all duration-400 ease-out sm:group-hover:opacity-100 sm:group-hover:translate-y-0">
-        <button type="button" class="group/btn relative cursor-pointer flex items-center justify-between overflow-hidden rounded-xl bg-cream px-3.5 py-3 font-display text-xs sm:text-sm uppercase tracking-wide md:px-4 md:py-3 text-background">
+        <button type="button" class="group/btn relative cursor-pointer flex items-center justify-between overflow-hidden rounded-lg border-2 border-transparent bg-cream px-3.5 py-3.5 min-h-[56px] font-display text-xs sm:text-sm uppercase tracking-wide md:px-4 text-background">
           <span class="relative z-10 transition-colors duration-300 group-hover/btn:text-cream">Add to cart</span>
           <span class="relative z-10 transition-colors duration-300 group-hover/btn:text-cream">${p.price}</span>
           <span class="absolute inset-0 translate-y-full bg-background transition-transform duration-300 group-hover/btn:translate-y-0"></span>
         </button>
         <a class="w-full" href="#products">
-          <div class="group/link relative cursor-pointer flex items-center justify-between overflow-hidden rounded-xl border-2 border-cream bg-transparent px-3.5 py-3 font-display text-xs sm:text-sm uppercase tracking-wide text-cream md:px-4 md:py-3">
+          <div class="group/link relative cursor-pointer flex items-center justify-between overflow-hidden rounded-lg border-2 border-cream bg-transparent px-3.5 py-3.5 min-h-[56px] font-display text-xs sm:text-sm uppercase tracking-wide text-cream md:px-4">
             <span class="relative z-10 transition-colors duration-300 group-hover/link:text-background">View product</span>
             <span class="relative z-10 transition-all duration-300 group-hover/link:text-background">↗</span>
             <span class="absolute inset-0 translate-y-full bg-cream transition-transform duration-300 group-hover/link:translate-y-0"></span>
@@ -1863,7 +1879,7 @@
         { name: "Vikram M.", quote: "Switched from supermarket teabags and never looked back.", body: "The difference is night and day. Nidhi Tea tastes like the real thing because it is the real thing.", handle: "" },
       ];
       const card = (r) => `
-    <article class="noise-panel mx-2 flex w-[84vw] max-w-[400px] shrink-0 flex-col overflow-hidden rounded-sm border border-cream/10 sm:w-[320px] md:w-[400px] transition-transform duration-300 hover:scale-[1.02]">
+    <article class="noise-panel mx-2 flex w-[84vw] max-w-[400px] shrink-0 flex-col overflow-hidden rounded-lg border border-cream/20 sm:w-[320px] md:w-[400px] transition-transform duration-300 hover:scale-[1.02]">
       <div class="flex items-center justify-between bg-cream px-5 py-2.5">
         <span class="text-xs text-background">•</span>
         <h3 class="font-display text-base uppercase tracking-wide text-background">${r.name}</h3>
