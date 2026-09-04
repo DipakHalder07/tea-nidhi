@@ -77,7 +77,7 @@ All animations in this project are finalized and calibrated for 60fps hardware-a
 | **13. Why Standalone SVG Arc** | GSAP ScrollTrigger | `#whyIntroSection`, `#whyArcPath`, `svg` | Huge curved headline follows SVG path, reveals with smooth scaling and ambient pulsing background glow. |
 | **14. Why Horizontal Scrub** | GSAP ScrollTrigger Pinned Timeline | `#whySection`, `#whyStickyContainer`, `.slide-1`, `.slide-2`, `.slide-3` | Pinned `300vh` section where 3 giant numbered slides glide horizontally across screen as user scrolls, synchronized with the moving dotted line. |
 | **15. Cinema 4K Video Section** | GSAP ScrollTrigger + HTML5 Video API | `#cinemaSection`, `#cinemaFrame`, `#cinemaVideo` | Video container scales up from 0.88 to 1.0 on scroll, auto-plays when entering viewport, with glassmorphic play/pause, scrubbable progress bar, mute, and fullscreen. |
-| **16. Customer Reviews Marquee** | CSS Keyframe | `#reviewTrack`, `@keyframes bucks-marquee` | Continuous infinite marquee horizontal glide across cards. |
+| **16. Reels Video Slider ("Loved By All")** | GSAP Ticker + Infinite Wrap | `#reviewTrack`, `.reel-video`, `.reel-sound-btn` | Hardware-synchronized continuous infinite auto-glide across 6 creator video review cards with hover-pause, mouse drag/touch swipe, and sound toggle. |
 
 ---
 
@@ -139,12 +139,12 @@ When making modifications or updates, **ONLY** edit within the following safe zo
     ];
     ```
 
-### C. Testimonials & Reviews
-* **Review Cards (`REVIEWS` array)**:
-  * Safe to add, remove, or modify review entries:
+### C. Testimonials & Reels
+* **Reel Cards (`REELS` array)**:
+  * Safe to add, remove, or modify creator reel video entries:
     ```javascript
-    const REVIEWS = [
-      { name: "Priya S.", quote: "...", body: "...", handle: "@handle" },
+    const REELS = [
+      { handle: "@...", displayName: "@...", link: "https://...", video: "video/reels/...", cdn: "https://...", poster: "img/reels/..." },
       ...
     ];
     ```

@@ -465,7 +465,7 @@
                 <img id="heroTopImg"
                   src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png"
                   alt="Tea Spices"
-                  class="relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.75)]" />
+                  class="relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
               </div>
             </div>
 
@@ -477,7 +477,7 @@
                 <img id="heroBottomImg"
                   src="element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png"
                   alt="Tea Strainer"
-                  class="relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.75)]" />
+                  class="relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
               </div>
             </div>
           </div>
@@ -834,8 +834,8 @@
     <section id="reviewsSection" class="relative overflow-hidden py-20 md:py-28">
       <h2 class="reviews-title display-tight text-outline px-4 text-center text-[22vw] leading-none md:text-[19vw]">
         Loved By All</h2>
-      <div class="relative mt-10 flex overflow-hidden">
-        <div id="reviewTrack" class="flex w-max animate-marquee" style="--marquee-duration:48s"></div>
+      <div class="relative mt-8 sm:mt-12 md:mt-16 flex overflow-hidden select-none">
+        <div id="reviewTrack" class="flex w-max will-change-transform cursor-grab active:cursor-grabbing"></div>
       </div>
     </section>
   </main>
@@ -1146,7 +1146,7 @@
 
       wrap.innerHTML = SLIDES.map((s, i) => `
         <div class="hero-slide-item absolute inset-0 flex items-center justify-center pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform opacity-0" data-hero-slide="${i}">
-          <img src="${s.img}" alt="${s.name}" class="hero-floating-pack h-[115%] sm:h-[120%] md:h-[125%] w-auto max-w-none object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.65)]">
+          <img src="${s.img}" alt="${s.name}" class="hero-floating-pack h-[115%] sm:h-[120%] md:h-[125%] w-auto max-w-none object-contain">
         </div>
       `).join("");
       const slides = [...wrap.querySelectorAll(".hero-slide-item")];
@@ -1869,32 +1869,222 @@
         });
       }
 
-      // Reviews Marquee Generation
-      const REVIEWS = [
-        { name: "Priya S.", quote: "Best masala chai I've had outside my grandmother's kitchen.", body: "The spice balance is perfect — not too strong, not too mild. Pure comfort in a cup.", handle: "" },
-        { name: "Rajan K.", quote: "The Honey Lemon Green Tea is absolutely refreshing.", body: "I start every morning with it. It's light, clean, and I can genuinely feel the difference.", handle: "@rajankfit" },
-        { name: "Meera T.", quote: "Finally, a tea brand that takes quality seriously.", body: "No artificial taste, no harsh aftertaste — just pure, honest flavour. Nidhi Tea is now our household staple.", handle: "" },
-        { name: "Arjun D.", quote: "Gifted the assorted pack and my family loved it.", body: "Everyone had their favourite. The Rose Cardamom is my personal obsession now. Absolutely divine.", handle: "@arjun.d" },
-        { name: "Sunita R.", quote: "You can taste the care that goes into every blend.", body: "It smells incredible, steeps beautifully, and tastes even better. This is what premium tea should be.", handle: "" },
-        { name: "Vikram M.", quote: "Switched from supermarket teabags and never looked back.", body: "The difference is night and day. Nidhi Tea tastes like the real thing because it is the real thing.", handle: "" },
+      // Reels Video Slider ("Loved By All")
+      const REELS = [
+        {
+          handle: "@chaistories",
+          displayName: "@CHAISTORIES",
+          link: "https://www.instagram.com/",
+          video: "video/reels/reel-1.mp4"
+        },
+        {
+          handle: "@rajankfit",
+          displayName: "@RAJANKFIT",
+          link: "https://www.instagram.com/",
+          video: "video/reels/reel-2.mp4"
+        },
+        {
+          handle: "@nidhiteaofficial",
+          displayName: "@NIDHITEAOFFICIAL",
+          link: "https://www.instagram.com/",
+          video: "video/reels/reel-3.mp4"
+        },
+        {
+          handle: "@tea_connoisseur",
+          displayName: "@TEA_CONNOISSEUR",
+          link: "https://www.instagram.com/",
+          video: "video/reels/reel-4.mp4"
+        },
+        {
+          handle: "@sip_wellness",
+          displayName: "@SIP_WELLNESS",
+          link: "https://www.instagram.com/",
+          video: "video/reels/reel-5.mp4"
+        }
       ];
-      const card = (r) => `
-    <article class="noise-panel mx-2 flex w-[84vw] max-w-[400px] shrink-0 flex-col overflow-hidden rounded-lg border border-cream/20 sm:w-[320px] md:w-[400px] transition-transform duration-300 hover:scale-[1.02]">
-      <div class="flex items-center justify-between bg-cream px-5 py-2.5">
-        <span class="text-xs text-background">•</span>
-        <h3 class="font-display text-base uppercase tracking-wide text-background">${r.name}</h3>
-        <span class="text-xs text-background">•</span>
-      </div>
-      <div class="flex flex-1 flex-col items-center gap-4 px-7 py-8 text-center">
-        <span class="font-display text-3xl leading-none text-cream/70">“</span>
-        <p class="display-tight text-xl text-cream md:text-2xl">${r.quote}</p>
-        <p class="text-sm text-cream/70">${r.body} ${r.handle ? `<strong class="font-semibold text-cream">(${r.handle})</strong>` : ""}</p>
-      </div>
-    </article>`;
-      const set = `<div class="flex">${REVIEWS.map(card).join("")}</div>`;
+
+      window.toggleReelAudio = function (e, btn) {
+        e.preventDefault();
+        e.stopPropagation();
+        const card = btn.closest("[data-review-card]");
+        const video = card.querySelector("video");
+        const mutedIcon = btn.querySelector(".sound-icon-muted");
+        const unmutedIcon = btn.querySelector(".sound-icon-unmuted");
+        const isMuted = video.muted;
+
+        document.querySelectorAll(".reel-video").forEach((v) => {
+          v.muted = true;
+          const b = v.closest("[data-review-card]")?.querySelector(".reel-sound-btn");
+          if (b) {
+            b.querySelector(".sound-icon-muted")?.classList.remove("hidden");
+            b.querySelector(".sound-icon-unmuted")?.classList.add("hidden");
+          }
+        });
+
+        if (isMuted) {
+          video.muted = false;
+          mutedIcon.classList.add("hidden");
+          unmutedIcon.classList.remove("hidden");
+        }
+      };
+
+      const reelCard = (r) => `
+        <div data-review-card="true" class="group relative flex w-[78vw] sm:w-[320px] md:w-[360px] lg:w-[390px] xl:w-[420px] shrink-0 flex-col transition-transform duration-300">
+          <a href="${r.link}" target="_blank" rel="noreferrer" class="reel-link flex flex-col gap-2 sm:gap-2.5 cursor-inherit select-none" aria-label="Watch ${r.handle} review on Instagram">
+            <!-- Header Pill -->
+            <div class="relative flex h-14 sm:h-16 md:h-20 w-full items-center justify-between rounded-xl bg-cream px-5 sm:px-6 md:px-7 transition-all duration-300 group-hover:bg-cream/90 shadow-sm border border-cream/20">
+              <div class="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-background shrink-0"></div>
+              <p class="truncate px-3 font-display text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide text-background">
+                ${r.displayName}
+              </p>
+              <div class="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-background shrink-0"></div>
+            </div>
+
+            <!-- Video Container -->
+            <div class="relative aspect-[11/14] w-full overflow-hidden rounded-xl bg-background shadow-lg border border-cream/15">
+              <video class="reel-video absolute inset-0 h-full w-full object-cover pointer-events-none"
+                     autoplay loop muted playsinline preload="auto"
+                     aria-label="${r.handle} video review">
+                <source src="${r.video}" type="video/mp4" />
+              </video>
+
+              <!-- Sound Toggle Button -->
+              <button type="button" class="reel-sound-btn absolute bottom-3.5 right-3.5 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-cream backdrop-blur-md transition-transform duration-200 hover:scale-110 hover:bg-flame cursor-pointer pointer-events-auto"
+                      aria-label="Toggle sound for ${r.handle}" onclick="toggleReelAudio(event, this)">
+                <svg class="sound-icon-muted h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                </svg>
+                <svg class="sound-icon-unmuted hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                </svg>
+              </button>
+
+              <!-- Reel Tag Overlay -->
+              <div class="absolute top-3.5 left-3.5 z-20 flex items-center gap-1.5 rounded-full bg-background/70 px-3 py-1 text-xs font-semibold text-cream backdrop-blur-md pointer-events-none">
+                <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                <span>Instagram</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      `;
+
+      const setHtml = `<div class="reel-set flex gap-2.5 sm:gap-3 pr-2.5 sm:pr-3 shrink-0">${REELS.map(reelCard).join("")}</div>`;
       const reviewTrack = document.getElementById("reviewTrack");
       if (reviewTrack) {
-        reviewTrack.innerHTML = set + set;
+        reviewTrack.innerHTML = setHtml + setHtml + setHtml;
+
+        reviewTrack.querySelectorAll("video").forEach((v) => {
+          v.play().catch(() => {});
+        });
+
+        let currentX = 0;
+        let isDragging = false;
+        let isHovered = false;
+        let startX = 0;
+        let prevX = 0;
+        let movedDistance = 0;
+        const speed = 0.85;
+
+        const getSetWidth = () => {
+          const firstSet = reviewTrack.querySelector(".reel-set");
+          return firstSet ? firstSet.offsetWidth : reviewTrack.scrollWidth / 3;
+        };
+
+        const wrapPosition = () => {
+          const setWidth = getSetWidth();
+          if (setWidth > 0) {
+            while (currentX <= -setWidth * 2) {
+              currentX += setWidth;
+            }
+            while (currentX >= 0) {
+              currentX -= setWidth;
+            }
+          }
+        };
+
+        // Center on middle set initially
+        setTimeout(() => {
+          const setWidth = getSetWidth();
+          if (setWidth > 0) {
+            currentX = -setWidth;
+            reviewTrack.style.transform = `translate3d(${currentX}px, 0, 0)`;
+          }
+        }, 120);
+
+        // GSAP Ticker for smooth hardware-synchronized infinite glide
+        gsap.ticker.add(() => {
+          if (!isDragging && !isHovered) {
+            currentX -= speed;
+            wrapPosition();
+            reviewTrack.style.transform = `translate3d(${currentX}px, 0, 0)`;
+          }
+        });
+
+        // Hover pause
+        reviewTrack.addEventListener("mouseenter", () => { isHovered = true; });
+        reviewTrack.addEventListener("mouseleave", () => {
+          if (!isDragging) isHovered = false;
+        });
+
+        // Pointer Drag & Swipe
+        reviewTrack.addEventListener("pointerdown", (e) => {
+          if (e.target.closest(".reel-sound-btn")) return;
+          isDragging = true;
+          isHovered = true;
+          startX = e.clientX;
+          prevX = currentX;
+          movedDistance = 0;
+          reviewTrack.style.cursor = "grabbing";
+        });
+
+        window.addEventListener("pointermove", (e) => {
+          if (!isDragging) return;
+          const delta = e.clientX - startX;
+          movedDistance = Math.abs(delta);
+          currentX = prevX + delta;
+          wrapPosition();
+          reviewTrack.style.transform = `translate3d(${currentX}px, 0, 0)`;
+        });
+
+        const stopDragging = (e) => {
+          if (!isDragging) return;
+          isDragging = false;
+          reviewTrack.style.cursor = "grab";
+          const rect = reviewTrack.getBoundingClientRect();
+          if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+            isHovered = true;
+          } else {
+            isHovered = false;
+          }
+        };
+
+        window.addEventListener("pointerup", stopDragging);
+        window.addEventListener("pointercancel", stopDragging);
+
+        // Prevent accidental link open during drag
+        reviewTrack.addEventListener("click", (e) => {
+          if (movedDistance > 6) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        }, true);
+
+        // Viewport intersection observer to save performance
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const videos = reviewTrack.querySelectorAll("video");
+            if (entry.isIntersecting) {
+              videos.forEach((v) => v.play().catch(() => {}));
+            } else {
+              videos.forEach((v) => v.pause());
+            }
+          });
+        }, { threshold: 0.05 });
+        observer.observe(document.getElementById("reviewsSection"));
       }
     })();
   </script>
