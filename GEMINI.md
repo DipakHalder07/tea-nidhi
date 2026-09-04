@@ -15,7 +15,7 @@ Nidhi Tea is an ultra-premium, high-performance single-page e-commerce landing e
 * **Typography**: Google Fonts — **Anton** (Display / Headlines) and **Inter Tight** (Body / Sans / UI).
 * **Animation Engine**: **GSAP 3.12.5** + **ScrollTrigger** (`https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js` & `ScrollTrigger.min.js`).
 * **Text Splitting**: Built-in native `SplitTextPlugin` class polyfill (zero dependency, no paid GSAP Club token required).
-* **Video Media**: HTML5 4K cinematic video (`nidhi-tea-cinematics-.mp4`) with custom custom glassmorphic UI controls.
+* **Video Media**: Handcrafted creator reviews reels (`video/reels/`) in an infinite continuous auto-sliding showcase.
 
 ---
 
@@ -76,8 +76,7 @@ All animations in this project are finalized and calibrated for 60fps hardware-a
 | **12. Product Cards 3D Lift** | GSAP ScrollTrigger + CSS 3D | `#productGrid .prod`, `[data-bottle]`, `[data-shadow]` | On hover, bottle pack floats upwards (`translateY(-24px)`), shadow contracts, ingredient badges fan out, and action buttons reveal. |
 | **13. Why Standalone SVG Arc** | GSAP ScrollTrigger | `#whyIntroSection`, `#whyArcPath`, `svg` | Huge curved headline follows SVG path, reveals with smooth scaling and ambient pulsing background glow. |
 | **14. Why Horizontal Scrub** | GSAP ScrollTrigger Pinned Timeline | `#whySection`, `#whyStickyContainer`, `.slide-1`, `.slide-2`, `.slide-3` | Pinned `300vh` section where 3 giant numbered slides glide horizontally across screen as user scrolls, synchronized with the moving dotted line. |
-| **15. Cinema 4K Video Section** | GSAP ScrollTrigger + HTML5 Video API | `#cinemaSection`, `#cinemaFrame`, `#cinemaVideo` | Video container scales up from 0.88 to 1.0 on scroll, auto-plays when entering viewport, with glassmorphic play/pause, scrubbable progress bar, mute, and fullscreen. |
-| **16. Reels Video Slider ("Loved By All")** | GSAP Ticker + Infinite Wrap | `#reviewTrack`, `.reel-video`, `.reel-sound-btn` | Hardware-synchronized continuous infinite auto-glide across 6 creator video review cards with hover-pause, mouse drag/touch swipe, and sound toggle. |
+| **15. Reels Video Slider ("Loved By All")** | GSAP Ticker + Infinite Wrap | `#reviewTrack`, `.reel-video`, `.reel-sound-btn` | Hardware-synchronized continuous infinite auto-glide across 5 creator video review cards with hover-pause, mouse drag/touch swipe, and sound toggle. |
 
 ---
 
@@ -95,10 +94,7 @@ All animations in this project are finalized and calibrated for 60fps hardware-a
      2. `Blend N0.02`: **Honey Lemon Green Tea** (`var(--flame)`)
      3. `Blend N0.03`: **Rose Cardamom Black Tea** (`var(--cherry)`)
    * Introduced dual floating companion botanical accents that dynamically swap and bloom per blend.
-3. **Dedicated 4K Cinematic Tea Story Added (`#cinemaSection`)**:
-   * Integrated `nidhi-tea-cinematics-.mp4` with a custom-engineered, fully responsive HTML5 video player.
-   * Features GSAP ScrollTrigger scroll expansion, scroll autoplay/pause, seekable progress bar, time counters, mute/unmute, and fullscreen mode.
-4. **Why Nidhi Tea Section Redesign**:
+3. **Why Nidhi Tea Section Redesign**:
    * Separated into an **Intro Arched Heading Section** (`#whyIntroSection`) using dynamic SVG `<textPath>` and a **3-Phase Scroll-Pinned Scrub** (`#whySection`).
    * Pinned horizontal scrub with 3 slides featuring huge outlined numbers (`01`, `02`, `03`), badge pills, and floating mascot teapots.
 5. **Enhanced Preloader & Elastic Heading Reveal**:
@@ -118,7 +114,6 @@ When making modifications or updates, **ONLY** edit within the following safe zo
     const TEXT = "Premium handcrafted teas sourced from the finest estates. ★ No artificial additives...";
     ```
   * Why Nidhi Tea paragraph copy inside `.slide-1 .text`, `.slide-2 .text`, `.slide-3 .text`.
-  * Cinema header text in `.cinema-header`.
   * Footer about text, copyright notices, and company details.
 
 ### B. Product Offerings & Slide Data
@@ -176,7 +171,6 @@ The following IDs and classes are strictly bound to GSAP timelines and scroll li
 * Benefits: `#benefits`, `.bene-wrap`, `.bene-dim`
 * Products: `#products`, `#productGrid`, `.prod`, `[data-bottle]`, `[data-shadow]`, `.fruitTL`, `.fruitBR`, `.fruitTR`, `.fruitBL`, `.tagline`, `.actions`
 * Why Pinned Section: `#whySection`, `#whyStickyContainer`, `.slide`, `.slide-1`, `.slide-2`, `.slide-3`, `.why-line`, `.num-wrapper`, `.number`
-* Cinema Video: `#cinemaSection`, `#cinemaArena`, `#cinemaFrame`, `#cinemaVideo`, `#cinemaPlayBtn`, `#cinemaMiniPlayBtn`, `#cinemaMuteBtn`, `#cinemaFullscreenBtn`, `#cinemaProgressBar`, `#cinemaProgressFill`, `#cinemaTime`, `#cinemaOverlay`
 * Reviews: `#reviewsSection`, `#reviewTrack`, `.reviews-title`
 * Footer: `#footerSection`, `.footer-grid`
 
@@ -195,8 +189,8 @@ The following IDs and classes are strictly bound to GSAP timelines and scroll li
 * Any element with `will-change-transform` has been placed there to force GPU layer compositing and prevent frame drops during GSAP scrubbing.
 * Do not remove inline styles such as `transform: translate3d(...)` or `clip-path: circle(...)`.
 
-### 5. DO NOT Remove `muted` and `playsinline` on the Video
-* Modern web browsers strictly forbid autoplay for videos with audio. The `muted` and `playsinline` attributes on `#cinemaVideo` are mandatory for the ScrollTrigger intersection autoplay to function.
+### 5. Video Autoplay Best Practices
+* Reel videos keep `muted` and `playsinline` attributes to comply with modern mobile browser autoplay policies.
 
 ---
 
