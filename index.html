@@ -1,0 +1,1839 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/webp" href="img/logo.webp" />
+  <title>Nidhi Tea — Premium Handcrafted Teas. Sip Wellness, Taste Purity.</title>
+  <meta name="description"
+    content="Premium handcrafted teas sourced from the finest estates, delivered fresh to your doorstep. No artificial additives. Pure wellness in every cup." />
+  <meta property="og:title" content="Nidhi Tea — Sip Wellness. Taste Purity. Love Every Cup." />
+  <meta property="og:description"
+    content="Premium handcrafted teas sourced from the finest estates. Organic. Pure. Delivered fresh to your doorstep." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: "#100B06",
+            cream: "#F6E9D7",
+            gold: "#BE8D3F",
+            flame: "#F15726",
+            cherry: "#C4321C",
+            smoke: "#2A231C",
+          },
+          fontFamily: {
+            display: ['Anton', 'Arial Narrow', 'sans-serif'],
+            sans: ['"Inter Tight"', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    :root {
+      --background: #100B06;
+      --cream: #F6E9D7;
+      --gold: #BE8D3F;
+      --flame: #F15726;
+      --cherry: #C4321C;
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--background);
+      color: var(--cream);
+      font-family: "Inter Tight", system-ui, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased
+    }
+
+    ::selection {
+      background: var(--flame);
+      color: var(--cream)
+    }
+
+    .display-tight {
+      font-family: Anton, "Arial Narrow", sans-serif;
+      text-transform: uppercase;
+      line-height: .88;
+      letter-spacing: -.005em;
+      font-weight: 400
+    }
+
+    .text-outline {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--cream);
+    }
+
+    .number {
+      color: transparent;
+      -webkit-text-stroke: 3px var(--cream);
+      letter-spacing: 0.02em;
+    }
+
+    .dotted-rule {
+      background-image: repeating-linear-gradient(to right, rgba(246, 233, 215, .55) 0 4px, transparent 4px 10px);
+    }
+
+    .why-line {
+      width: 300%;
+      height: 100%;
+      background: repeating-linear-gradient(to right,
+          rgba(246, 233, 215, 0.6) 0,
+          rgba(246, 233, 215, 0.6) 5px,
+          transparent 5px,
+          transparent 15px);
+      will-change: transform;
+    }
+
+    .noise-panel {
+      background-color: #1A130C;
+      background-image: radial-gradient(circle at 1px 1px, rgba(246, 233, 215, .07) 1px, transparent 0);
+      background-size: 12px 12px
+    }
+
+    @keyframes bucks-marquee {
+      from {
+        transform: translate3d(0, 0, 0)
+      }
+
+      to {
+        transform: translate3d(-50%, 0, 0)
+      }
+    }
+
+    @keyframes bucks-float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(var(--rot, 0deg))
+      }
+
+      50% {
+        transform: translateY(-18px) rotate(calc(var(--rot, 0deg) + 6deg))
+      }
+    }
+
+    @keyframes bucks-fade {
+      from {
+        opacity: 0;
+        transform: translateY(10px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    @keyframes bucks-scale {
+      from {
+        opacity: 0;
+        transform: scale(.95)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    /* Hero full-color solid circle animation (no opacity / no blur) */
+    @keyframes hero-bg-pulse {
+
+      0%,
+      100% {
+        transform: scale(0.96);
+      }
+
+      50% {
+        transform: scale(1.04);
+      }
+    }
+
+    .animate-hero-bg {
+      animation: hero-bg-pulse 6s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Hero Pack Floating idle animation */
+    @keyframes hero-pack-float {
+
+      0%,
+      100% {
+        transform: rotate(5deg) translateY(0px);
+      }
+
+      50% {
+        transform: rotate(6.5deg) translateY(-16px);
+      }
+    }
+
+    .hero-floating-pack {
+      animation: hero-pack-float 5s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Product grid bottle float */
+    @keyframes product-card-float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .bottle-float {
+      animation: product-card-float 5s ease-in-out infinite;
+    }
+
+    /* Top Right Companion Floating Animation */
+    @keyframes float-companion-top {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(14deg);
+      }
+
+      50% {
+        transform: translateY(-24px) rotate(22deg);
+      }
+    }
+
+    /* Bottom Left Companion Floating Animation */
+    @keyframes float-companion-bottom {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(-14deg);
+      }
+
+      50% {
+        transform: translateY(-22px) rotate(-8deg);
+      }
+    }
+
+    .animate-float-companion-top {
+      animation: float-companion-top 4.2s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .animate-float-companion-bottom {
+      animation: float-companion-bottom 4.6s ease-in-out infinite;
+      animation-delay: 0.6s;
+      will-change: transform;
+    }
+
+    .animate-marquee {
+      animation: bucks-marquee var(--marquee-duration, 40s) linear infinite
+    }
+
+    .animate-float {
+      animation: bucks-float var(--float-duration, 9s) ease-in-out infinite
+    }
+
+    .animate-fade-in {
+      animation: bucks-fade .5s ease-out both
+    }
+
+    .animate-scale-in {
+      animation: bucks-scale .4s ease-out both
+    }
+
+    #heroTitle .char,
+    #heroTitle .word {
+      display: inline-block;
+      will-change: transform;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="relative min-h-screen">
+
+  <!-- ============ LOADER ============ -->
+  <div id="loader" class="fixed inset-0 z-[100] overflow-hidden">
+    <div class="pl-bg absolute inset-0 bg-gold"></div>
+    <div class="pl-revealer absolute inset-0 bg-gold"
+      style="clip-path:circle(0% at 50% 50%);-webkit-clip-path:circle(0% at 50% 50%)"></div>
+    <div class="pl-revealer absolute inset-0 bg-flame"
+      style="clip-path:circle(0% at 50% 50%);-webkit-clip-path:circle(0% at 50% 50%)"></div>
+    <div class="pl-revealer absolute inset-0 bg-cherry"
+      style="clip-path:circle(0% at 50% 50%);-webkit-clip-path:circle(0% at 50% 50%)"></div>
+    <div class="pl-revealer absolute inset-0 bg-background pl-last"
+      style="clip-path:circle(0% at 50% 50%);-webkit-clip-path:circle(0% at 50% 50%)"></div>
+    <div
+      class="pl-item absolute left-1/2 top-1/2 aspect-square w-[26vw] -translate-x-1/2 -translate-y-1/2 scale-0 will-change-transform sm:w-[18vw] lg:w-[13vw]">
+      <img src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png" alt="Tea Spices" class="h-full w-full object-contain" />
+    </div>
+    <div
+      class="pl-item absolute left-1/2 top-1/2 aspect-square w-[26vw] -translate-x-1/2 -translate-y-1/2 scale-0 will-change-transform sm:w-[18vw] lg:w-[13vw]">
+      <img src="element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png" alt="Honey Dipper" class="h-full w-full object-contain" />
+    </div>
+    <div
+      class="pl-item absolute left-1/2 top-1/2 aspect-square w-[26vw] -translate-x-1/2 -translate-y-1/2 scale-0 will-change-transform sm:w-[18vw] lg:w-[13vw]">
+      <img src="element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png" alt="Fresh Tea Leaves" class="h-full w-full object-contain" />
+    </div>
+    <div
+      class="pl-item absolute left-1/2 top-1/2 aspect-square w-[26vw] -translate-x-1/2 -translate-y-1/2 scale-0 will-change-transform sm:w-[18vw] lg:w-[13vw]">
+      <img src="element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png" alt="Loose Leaf Tea" class="h-full w-full object-contain" />
+    </div>
+    <div
+      class="pl-logo absolute left-1/2 top-1/2 w-[52vw] -translate-x-1/2 -translate-y-1/2 scale-50 opacity-0 will-change-transform md:w-[26vw]">
+      <img src="img/logo.webp" alt="Logo" class="h-auto w-full object-contain" />
+    </div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="fixed inset-x-0 top-0 z-50">
+    <nav class="mx-auto flex max-w-[1600px] items-start justify-between px-5 py-4 md:px-8">
+      <a href="#top" class="relative z-10 block shrink-0">
+        <div id="logoBox"
+          class="overflow-hidden transition-all duration-500 ease-out h-14 w-36 sm:h-16 sm:w-44 md:h-20 md:w-52">
+          <img id="logoImg" src="img/logo.webp" alt="Logo"
+            class="h-full w-full object-contain object-left transition-all duration-500 ease-out" />
+        </div>
+      </a>
+
+      <ul id="navLinks" class="hidden items-center gap-9 pt-3 transition-all duration-500 lg:flex">
+        <li><a href="#products"
+            class="group relative font-display text-xl uppercase tracking-wide text-cream transition-colors hover:text-flame">Shop<span
+              class="absolute -bottom-1 left-0 h-px w-0 bg-flame transition-all duration-300 group-hover:w-full"></span></a>
+        </li>
+        <li><a href="#products"
+            class="group relative font-display text-xl uppercase tracking-wide text-cream transition-colors hover:text-flame">Blends<span
+              class="absolute -bottom-1 left-0 h-px w-0 bg-flame transition-all duration-300 group-hover:w-full"></span></a>
+        </li>
+        <li><a href="#products"
+            class="group relative font-display text-xl uppercase tracking-wide text-cream transition-colors hover:text-flame">About<span
+              class="absolute -bottom-1 left-0 h-px w-0 bg-flame transition-all duration-300 group-hover:w-full"></span></a>
+        </li>
+        <li><a href="#products"
+            class="group relative font-display text-xl uppercase tracking-wide text-cream transition-colors hover:text-flame">Contact<span
+              class="absolute -bottom-1 left-0 h-px w-0 bg-flame transition-all duration-300 group-hover:w-full"></span></a>
+        </li>
+        <li><a href="#products"
+            class="group relative font-display text-xl uppercase tracking-wide text-cream transition-colors hover:text-flame">Blog<span
+              class="absolute -bottom-1 left-0 h-px w-0 bg-flame transition-all duration-300 group-hover:w-full"></span></a>
+        </li>
+        <li><button
+            class="font-display text-xl uppercase tracking-wide text-cream transition-colors hover:text-flame">Cart(0)</button>
+        </li>
+      </ul>
+
+      <div id="navPill"
+        class="pointer-events-none absolute right-5 top-4 z-10 flex -translate-y-3 items-center gap-2 opacity-0 transition-all duration-500 md:right-8">
+        <a href="#products"
+          class="group relative hidden overflow-hidden rounded-sm bg-cream px-6 py-3.5 font-display text-sm uppercase tracking-wide text-background sm:block">
+          <span class="relative z-10 transition-colors duration-300 group-hover:text-cream">Shop Tea</span>
+          <span
+            class="absolute inset-0 translate-y-full bg-flame transition-transform duration-300 group-hover:translate-y-0"></span>
+        </a>
+        <button aria-label="Cart"
+          class="flex h-12 w-12 items-center justify-center rounded-sm border border-cream/25 text-cream transition-colors hover:border-flame hover:text-flame"><svg
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-5 w-5">
+            <path d="M3 6h18l-2 12H5L3 6Z" />
+            <path d="M8 6a4 4 0 0 1 8 0" />
+          </svg></button>
+        <button data-menu aria-label="Toggle menu"
+          class="flex h-12 w-12 items-center justify-center rounded-sm border border-cream/25 text-cream transition-colors hover:border-flame hover:text-flame"><svg
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-5 w-5">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg></button>
+      </div>
+
+      <button data-menu id="navBurger" aria-label="Toggle menu"
+        class="relative z-10 flex h-11 w-11 items-center justify-center rounded-sm border border-cream/25 text-cream transition-opacity duration-300 lg:hidden"><svg
+          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-5 w-5">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg></button>
+    </nav>
+
+    <div id="mobileMenu"
+      class="max-h-0 overflow-hidden bg-background/95 backdrop-blur-md transition-[max-height] duration-500">
+      <ul class="mx-auto flex max-w-[1600px] flex-col gap-1 px-6 py-5 md:px-8">
+        <li><a href="#products" class="block py-2 font-display text-2xl uppercase text-cream hover:text-flame">Shop</a>
+        </li>
+        <li><a href="#products"
+            class="block py-2 font-display text-2xl uppercase text-cream hover:text-flame">Blends</a></li>
+        <li><a href="#products" class="block py-2 font-display text-2xl uppercase text-cream hover:text-flame">About</a>
+        </li>
+        <li><a href="#products"
+            class="block py-2 font-display text-2xl uppercase text-cream hover:text-flame">Contact</a></li>
+        <li><a href="#products" class="block py-2 font-display text-2xl uppercase text-cream hover:text-flame">Blog</a>
+        </li>
+        <li><a href="#products"
+            class="block py-2 font-display text-2xl uppercase text-cream hover:text-flame">Cart(0)</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section id="top" class="relative overflow-hidden pt-40 sm:pt-44 md:pt-36">
+      <div class="relative z-10 mx-auto max-w-[1500px] px-5 md:px-10">
+        <h1 id="heroTitle"
+          class="display-tight mx-auto max-w-5xl text-center text-[10vw] leading-[.88] md:text-[5.6rem] lg:text-[6.8rem]">
+          <span class="text-outline">Sip Wellness.</span>
+          <span class="text-cream">Taste Purity. Love Every Cup.</span>
+        </h1>
+      </div>
+
+      <div class="relative z-10 mt-14 md:mt-20">
+        <div class="dotted-rule absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-60"></div>
+        <div
+          class="relative mx-auto flex max-w-[1500px] items-center justify-between px-5 font-display text-[10px] uppercase tracking-[.18em] text-cream md:px-10 md:text-sm">
+          <span id="heroNo" class="bg-background pr-4">Blend N0.01</span>
+          <span id="heroName" class="bg-background pl-4 animate-fade-in">Classic Masala Chai</span>
+        </div>
+      </div>
+
+      <div
+        class="relative z-10 mx-auto flex max-w-[1600px] items-center justify-between gap-2 px-3 py-4 sm:gap-4 sm:px-4 sm:py-6 md:px-8 md:py-8">
+
+        <!-- Horizontal Dotted Line Behind Slider & Buttons -->
+        <div class="dotted-rule pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-70 z-0">
+        </div>
+
+        <button data-hero="-1" aria-label="Previous blend"
+          class="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-background transition-all duration-300 hover:scale-110 hover:bg-flame hover:text-cream sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 shadow-lg cursor-pointer"><span
+            class="text-lg leading-none sm:text-xl md:text-2xl">←</span></button>
+
+        <div class="relative z-10 flex h-[46vh] flex-1 items-center justify-center sm:h-[60vh] md:h-[82vh]">
+          <div id="heroTintWrap"
+            class="absolute flex items-center justify-center pointer-events-none transition-transform duration-500 will-change-transform"
+            style="transform: scale(1);">
+            <div id="heroTint"
+              class="h-64 w-64 rounded-full transition-colors duration-700 sm:h-80 sm:w-80 md:h-[460px] md:w-[460px] lg:h-[540px] lg:w-[540px] animate-hero-bg shadow-2xl"
+              style="background:var(--gold)"></div>
+          </div>
+
+          <!-- Top-Right & Bottom-Left Floating Product Accents (Clean, Large, Transparent Elements) -->
+          <div
+            class="pointer-events-none absolute inset-0 z-30 mx-auto flex max-w-[290px] items-center justify-center sm:max-w-[420px] md:max-w-[540px]">
+
+            <!-- Top Right Companion (Shrink & Bloom on Slide) -->
+            <div id="heroTopWrap"
+              class="absolute -top-6 -right-4 sm:-top-10 sm:-right-8 md:-top-14 md:-right-12 flex items-center justify-center transition-transform duration-500 will-change-transform"
+              style="transform: scale(1);">
+              <div class="animate-float-companion-top relative flex items-center justify-center">
+                <img id="heroTopImg" src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png" alt="Tea Spices"
+                  class="relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.75)]" />
+              </div>
+            </div>
+
+            <!-- Bottom Left Companion (Shrink & Bloom on Slide) -->
+            <div id="heroBottomWrap"
+              class="absolute -bottom-6 -left-4 sm:-bottom-10 sm:-left-8 md:-bottom-14 md:-left-12 flex items-center justify-center transition-transform duration-500 will-change-transform"
+              style="transform: scale(1);">
+              <div class="animate-float-companion-bottom relative flex items-center justify-center">
+                <img id="heroBottomImg" src="element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png" alt="Tea Strainer"
+                  class="relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.75)]" />
+              </div>
+            </div>
+          </div>
+
+          <div id="heroSlides"></div>
+        </div>
+
+        <button data-hero="1" aria-label="Next blend"
+          class="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-background transition-all duration-300 hover:scale-110 hover:bg-flame hover:text-cream sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 shadow-lg cursor-pointer"><span
+            class="text-lg leading-none sm:text-xl md:text-2xl">→</span></button>
+      </div>
+
+      <div class="relative z-10 flex items-center justify-center py-6">
+        <div class="dotted-rule pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-70"></div>
+        <a href="#products"
+          class="group relative z-10 overflow-hidden rounded-sm bg-cream px-7 py-3 font-display text-sm uppercase tracking-wide text-background transition-transform duration-300 hover:scale-105 sm:px-9 shadow-md">
+          <span class="relative z-10 transition-colors duration-300 group-hover:text-cream">Explore Blends</span>
+          <span
+            class="absolute inset-0 translate-y-full bg-flame transition-transform duration-300 group-hover:translate-y-0"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ INTRO TEXT ============ -->
+    <section id="intro" class="relative z-10 px-5 py-10 md:py-16">
+      <p id="introText" class="mx-auto max-w-4xl text-center text-[7vw] leading-[1.15] text-cream md:text-5xl"></p>
+    </section>
+
+    <!-- ============ BENEFITS ============ -->
+    <section class="relative pb-10 md:pb-16">
+      <div class="floating-food pointer-events-none absolute inset-0 overflow-hidden" data-opacity="opacity-70"></div>
+      <div id="benefits" class="relative z-10 mx-auto max-w-[640px] px-4"></div>
+    </section>
+
+    <!-- ============ PRODUCTS ============ -->
+    <section id="products" class="relative overflow-hidden py-8 md:py-14">
+      <div class="relative flex select-none overflow-hidden py-6">
+        <div class="flex w-max animate-marquee" style="--marquee-duration:26s">
+          <span
+            class="display-tight text-outline whitespace-nowrap px-6 text-[19vw] leading-none opacity-70 md:text-[16vw]">Find
+            your perfect blend — Find your perfect blend —</span>
+          <span
+            class="display-tight text-outline whitespace-nowrap px-6 text-[19vw] leading-none opacity-70 md:text-[16vw]">Find
+            your perfect blend — Find your perfect blend —</span>
+        </div>
+      </div>
+
+      <div id="productGrid"
+        class="mx-auto mt-6 grid max-w-[1600px] grid-cols-1 gap-4 px-3 md:grid-cols-3 md:gap-5 md:px-4">
+      </div>
+    </section>
+
+    <!-- ============ WHY NIDHI TEA (STANDALONE INTRO HEADING SECTION) ============ -->
+    <section id="whyIntroSection"
+      class="relative w-full min-h-[85vh] sm:min-h-screen py-16 sm:py-24 md:py-32 flex flex-col items-center justify-center text-center px-2 sm:px-6 md:px-8 bg-background overflow-hidden">
+      <!-- Background Ambient Glow -->
+      <div id="whyIntroGlow"
+        class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[1200px] aspect-square rounded-full bg-gradient-to-tr from-gold/15 via-flame/10 to-transparent blur-[140px] -z-10 transition-transform duration-1000">
+      </div>
+
+      <!-- Top: Giant Curved Arched Heading & Subtitle (Full-Width Edge-to-Edge) -->
+      <div class="why-intro-content flex flex-col items-center w-full max-w-[1600px] mx-auto z-10 select-none">
+        <!-- Giant Arched SVG Headline -->
+        <div
+          class="relative w-full aspect-[1600/320] min-h-[140px] sm:min-h-[220px] md:min-h-[300px] lg:min-h-[340px] flex items-center justify-center">
+          <svg viewBox="0 0 1600 320" class="w-full h-full overflow-visible" preserveAspectRatio="xMidYMid meet"
+            aria-hidden="true">
+            <path id="whyArcPath" d="M 40,300 Q 800,-40 1560,300" fill="none" stroke="none"></path>
+            <text fill="var(--cream)" class="font-display uppercase select-none font-bold"
+              style="font-family: Anton, 'Arial Narrow', sans-serif; font-size: 195px; letter-spacing: 0.05em;">
+              <textPath href="#whyArcPath" startOffset="50%" text-anchor="middle">
+                WHY NIDHI TEA
+              </textPath>
+            </text>
+          </svg>
+        </div>
+
+        <!-- Centered Subtitle Paragraph (Stacked cleanly) -->
+        <p
+          class="why-intro-subtitle text-center font-sans uppercase tracking-[0.14em] sm:tracking-[0.18em] text-gold text-sm sm:text-lg md:text-xl max-w-[360px] sm:max-w-lg md:max-w-xl leading-relaxed mt-4 sm:mt-8 md:mt-10 font-bold">
+          WE CRAFT SMALL-BATCH MOUNTAIN<br>
+          TEAS BECAUSE MASS-PRODUCED<br>
+          TEA TASTES LIKE DUST. WE'RE<br>
+          <strong class="font-bold text-cream">BREWING BETTER DAYS.</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ WHY NIDHI TEA (SCROLL-SCRUBBED PINNED SLIDES) ============ -->
+    <section id="whySection" class="relative w-full h-[300vh] bg-background">
+      <div id="whyStickyContainer"
+        class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center px-4 sm:px-6 md:px-10 bg-background">
+
+        <!-- Full Viewport Width Continuous Dotted Background Line -->
+        <div
+          class="line-wrapper pointer-events-none absolute inset-x-0 w-full h-[2px] top-[48%] sm:top-[46%] -translate-y-1/2 overflow-hidden z-0">
+          <div class="why-line w-[300%] h-full"></div>
+        </div>
+
+        <!-- Slides Stack (Centered in full 100vh) -->
+        <div class="slides relative w-full h-full max-w-5xl flex items-center justify-center">
+
+          <!-- Slide 1 -->
+          <div
+            class="slide slide-1 absolute top-1/2 left-1/2 w-[94%] max-w-3xl flex flex-col items-center text-center will-change-transform z-10">
+            <!-- Massive Outlined Number (Centered over dotted line) -->
+            <div class="num-wrapper relative inline-flex items-center justify-center select-none">
+              <span
+                class="number display-tight text-[44vw] sm:text-[32vw] md:text-[18rem] lg:text-[22rem] leading-none select-none">01</span>
+            </div>
+
+            <!-- Overlapping Large Pill Badge with Prominent Peeking Mascot -->
+            <div class="relative -mt-14 sm:-mt-22 md:-mt-28 z-20 inline-flex items-center justify-center">
+              <div
+                class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-background shadow-[0_20px_45px_rgba(0,0,0,0.75)]">
+                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
+                <h3
+                  class="font-display text-xl uppercase tracking-wider text-background sm:text-3xl md:text-4xl font-extrabold">
+                  ESTATE SOURCED</h3>
+                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
+              </div>
+              <img src="element-img/isolated_rustic_clay_tea_pot_yixing_style_side_view_transparent_background.png" alt="Estate Clay Teapot"
+                class="mascot absolute -right-8 -bottom-6 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-28 sm:h-40 md:h-52 lg:h-60 w-auto animate-float drop-shadow-[0_25px_45px_rgba(0,0,0,0.8)] pointer-events-none -z-10"
+                style="--float-duration:7s">
+            </div>
+
+            <!-- Clear Centered Description Text -->
+            <p
+              class="text mt-6 sm:mt-10 md:mt-12 text-lg sm:text-2xl md:text-3xl font-sans font-normal leading-[1.35] sm:leading-[1.4] text-cream max-w-sm sm:max-w-xl md:max-w-2xl">
+              Direct partnerships with heritage tea gardens across Assam, Darjeeling and the Nilgiris. Pure whole
+              leaves, harvested at peak freshness.
+            </p>
+          </div>
+
+          <!-- Slide 2 -->
+          <div
+            class="slide slide-2 absolute top-1/2 left-1/2 w-[94%] max-w-3xl flex flex-col items-center text-center will-change-transform z-10">
+            <!-- Massive Outlined Number (Centered over dotted line) -->
+            <div class="num-wrapper relative inline-flex items-center justify-center select-none">
+              <span
+                class="number display-tight text-[44vw] sm:text-[32vw] md:text-[18rem] lg:text-[22rem] leading-none select-none">02</span>
+            </div>
+
+            <!-- Overlapping Large Pill Badge with Prominent Peeking Mascot -->
+            <div class="relative -mt-14 sm:-mt-22 md:-mt-28 z-20 inline-flex items-center justify-center">
+              <div
+                class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-background shadow-[0_20px_45px_rgba(0,0,0,0.75)]">
+                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
+                <h3
+                  class="font-display text-xl uppercase tracking-wider text-background sm:text-3xl md:text-4xl font-extrabold">
+                  100% BOTANICALS</h3>
+                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
+              </div>
+              <img src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png" alt="Botanical Spices"
+                class="mascot absolute -right-8 -bottom-6 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-28 sm:h-40 md:h-52 lg:h-60 w-auto animate-float drop-shadow-[0_25px_45px_rgba(0,0,0,0.8)] pointer-events-none -z-10"
+                style="--float-duration:8s">
+            </div>
+
+            <!-- Clear Centered Description Text -->
+            <p
+              class="text mt-6 sm:mt-10 md:mt-12 text-lg sm:text-2xl md:text-3xl font-sans font-normal leading-[1.35] sm:leading-[1.4] text-cream max-w-sm sm:max-w-xl md:max-w-2xl">
+              Fresh crushed mountain spices, sun-dried herbs and raw ginger roots. No powders, no artificial flavours,
+              no synthetic additives.
+            </p>
+          </div>
+
+          <!-- Slide 3 -->
+          <div
+            class="slide slide-3 absolute top-1/2 left-1/2 w-[94%] max-w-3xl flex flex-col items-center text-center will-change-transform z-10">
+            <!-- Massive Outlined Number (Centered over dotted line) -->
+            <div class="num-wrapper relative inline-flex items-center justify-center select-none">
+              <span
+                class="number display-tight text-[44vw] sm:text-[32vw] md:text-[18rem] lg:text-[22rem] leading-none select-none">03</span>
+            </div>
+
+            <!-- Overlapping Large Pill Badge with Prominent Peeking Mascot -->
+            <div class="relative -mt-14 sm:-mt-22 md:-mt-28 z-20 inline-flex items-center justify-center">
+              <div
+                class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-background shadow-[0_20px_45px_rgba(0,0,0,0.75)]">
+                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
+                <h3
+                  class="font-display text-xl uppercase tracking-wider text-background sm:text-3xl md:text-4xl font-extrabold">
+                  ARTISAN FRESH</h3>
+                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
+              </div>
+              <img src="element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png" alt="Artisan Blooming Tea"
+                class="mascot absolute -right-8 -bottom-6 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-28 sm:h-40 md:h-52 lg:h-60 w-auto animate-float drop-shadow-[0_25px_45px_rgba(0,0,0,0.8)] pointer-events-none -z-10"
+                style="--float-duration:7.5s">
+            </div>
+
+            <!-- Clear Centered Description Text -->
+            <p
+              class="text mt-6 sm:mt-10 md:mt-12 text-lg sm:text-2xl md:text-3xl font-sans font-normal leading-[1.35] sm:leading-[1.4] text-cream max-w-sm sm:max-w-xl md:max-w-2xl">
+              Slow-blended in small batches and vacuum-sealed to preserve natural essential oils for a fragrant,
+              soothing cup every single time.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CINEMATIC TEA STORY / VIDEO SECTION ============ -->
+    <section id="cinemaSection" class="relative py-16 sm:py-24 md:py-32 w-full overflow-hidden">
+      <!-- Ambient Glow Behind Video -->
+      <div
+        class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[1100px] aspect-square rounded-full bg-gradient-to-tr from-gold/20 via-flame/15 to-transparent blur-[120px] opacity-70 -z-10">
+      </div>
+
+      <!-- Floating Decorative Leaves / Spices Around Arena -->
+      <div class="pointer-events-none absolute inset-0 overflow-hidden -z-10">
+        <img src="element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png" alt=""
+          class="cinema-leaf absolute -left-6 top-1/4 w-20 sm:w-28 md:w-36 animate-float opacity-60 drop-shadow-2xl"
+          style="--rot:-15deg;--float-duration:7s" />
+        <img src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png" alt=""
+          class="cinema-leaf absolute -right-6 top-1/3 w-20 sm:w-28 md:w-36 animate-float opacity-55 drop-shadow-2xl"
+          style="--rot:20deg;--float-duration:8s;animation-delay:1s" />
+        <img src="element-img/isolated_steaming_cup_of_green_tea_in_a_porcelain_cup_top_down_view.png" alt=""
+          class="cinema-leaf absolute left-8 bottom-12 w-16 sm:w-24 md:w-32 animate-float opacity-55 drop-shadow-2xl"
+          style="--rot:-25deg;--float-duration:6.5s;animation-delay:2s" />
+        <img src="element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png" alt=""
+          class="cinema-leaf absolute right-12 bottom-16 w-18 sm:w-26 md:w-32 animate-float opacity-50 drop-shadow-2xl"
+          style="--rot:15deg;--float-duration:9s;animation-delay:0.5s" />
+      </div>
+
+      <div class="mx-auto flex flex-col items-center px-4 sm:px-6 md:px-8 max-w-[1600px]">
+
+        <!-- Header Text (Consistent with site typography design system) -->
+        <div class="cinema-header flex flex-col items-center text-center max-w-4xl mb-8 sm:mb-12 md:mb-16">
+          <h2
+            class="display-tight uppercase text-4xl sm:text-6xl md:text-7xl lg:text-[76px] xl:text-[84px] leading-[0.92] text-cream tracking-tight">
+            Crafted in Nature. <br class="hidden sm:inline">
+            <span class="text-gold">Brewed in Motion.</span>
+          </h2>
+          <p
+            class="mt-4 sm:mt-6 text-base sm:text-xl md:text-2xl font-sans font-normal text-cream/80 max-w-2xl leading-relaxed">
+            Experience the harmony of hand-plucked tea leaves, freshly crushed mountain spices, and the timeless art of
+            the perfect brew.
+          </p>
+        </div>
+
+        <!-- Cinema Video Arena (Expands smoothly on scroll with GSAP) -->
+        <div id="cinemaArena" class="relative w-full max-w-[1360px] will-change-transform">
+          <div id="cinemaFrame"
+            class="relative w-full aspect-[16/9] overflow-hidden rounded-[24px] sm:rounded-[36px] md:rounded-[48px] border border-dashed border-cream/25 shadow-[0_20px_70px_rgba(0,0,0,0.85)] bg-background">
+
+            <!-- The Video Element -->
+            <video id="cinemaVideo" class="h-full w-full object-cover select-none cursor-pointer" playsinline loop muted
+              preload="auto">
+              <source src="nidhi-tea-cinematics-.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            <!-- Gradient Vignette Overlay -->
+            <div id="cinemaOverlay"
+              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/30 transition-opacity duration-500">
+            </div>
+
+            <!-- Big Central Glassmorphic Play/Pause Button -->
+            <button id="cinemaPlayBtn" type="button" aria-label="Play or Pause Video"
+              class="group absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 items-center justify-center rounded-full bg-cream/15 backdrop-blur-xl border border-cream/40 shadow-[0_0_50px_rgba(0,0,0,0.6)] transition-all duration-400 hover:scale-110 hover:bg-gold hover:border-gold cursor-pointer">
+              <!-- Radial pulse ring -->
+              <span
+                class="absolute inset-0 rounded-full border border-cream/40 animate-ping opacity-30 group-hover:border-gold"></span>
+              <!-- Play Icon -->
+              <svg id="playIcon"
+                class="h-8 w-8 sm:h-10 sm:w-10 text-cream translate-x-0.5 transition-colors group-hover:text-background"
+                viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              <!-- Pause Icon (hidden initially) -->
+              <svg id="pauseIcon"
+                class="h-8 w-8 sm:h-10 sm:w-10 text-cream transition-colors group-hover:text-background hidden"
+                viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+              </svg>
+            </button>
+
+            <!-- Bottom Video Control Bar -->
+            <div
+              class="absolute inset-x-0 bottom-0 z-20 flex flex-col justify-end p-4 sm:p-6 md:p-8 bg-gradient-to-t from-background/95 via-background/60 to-transparent">
+
+              <!-- Progress Bar -->
+              <div id="cinemaProgressBar"
+                class="relative w-full h-1.5 sm:h-2 bg-cream/20 rounded-full overflow-hidden cursor-pointer mb-3 sm:mb-4 group/prog">
+                <div id="cinemaProgressFill"
+                  class="h-full bg-gradient-to-r from-gold to-flame rounded-full w-0 transition-all duration-100 ease-linear">
+                </div>
+              </div>
+
+              <!-- Controls Row -->
+              <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3 sm:gap-4">
+                  <!-- Mini Play/Pause Toggle -->
+                  <button id="cinemaMiniPlayBtn" type="button" aria-label="Toggle playback"
+                    class="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-cream/10 border border-cream/20 text-cream hover:bg-gold hover:text-background transition-colors cursor-pointer">
+                    <svg id="miniPlayIcon" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                    <svg id="miniPauseIcon" class="h-4 w-4 hidden" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                    </svg>
+                  </button>
+
+                  <!-- Sound Mute/Unmute Toggle -->
+                  <button id="cinemaMuteBtn" type="button" aria-label="Toggle mute"
+                    class="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-cream/10 border border-cream/20 text-cream hover:bg-gold hover:text-background transition-colors cursor-pointer">
+                    <svg id="muteIcon" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2">
+                      <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                      <line x1="23" y1="9" x2="17" y2="15" />
+                      <line x1="17" y1="9" x2="23" y2="15" />
+                    </svg>
+                    <svg id="unmuteIcon" class="h-4 w-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2">
+                      <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    </svg>
+                  </button>
+
+                  <!-- Time indicator -->
+                  <span id="cinemaTime" class="font-sans text-xs sm:text-sm font-medium text-cream/75">0:00 /
+                    0:00</span>
+                </div>
+
+                <!-- Right Fullscreen / Quality Tag -->
+                <div class="flex items-center gap-3">
+                  <span class="hidden sm:inline font-display text-xs uppercase tracking-widest text-gold/80">Cinematic
+                    4K</span>
+                  <button id="cinemaFullscreenBtn" type="button" aria-label="Toggle fullscreen"
+                    class="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-cream/10 border border-cream/20 text-cream hover:bg-gold hover:text-background transition-colors cursor-pointer">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path
+                        d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <!-- ============ REVIEWS ============ -->
+    <section id="reviewsSection" class="relative overflow-hidden py-20 md:py-28">
+      <h2 class="reviews-title display-tight text-outline px-4 text-center text-[22vw] leading-none md:text-[19vw]">Loved By All</h2>
+      <div class="relative mt-10 flex overflow-hidden">
+        <div id="reviewTrack" class="flex w-max animate-marquee" style="--marquee-duration:48s"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="footerSection" class="relative border-t border-cream/10 px-5 pb-8 pt-14 md:px-10 overflow-hidden">
+    <div class="footer-grid mx-auto grid max-w-[1600px] grid-cols-1 gap-10 md:grid-cols-[auto_1fr_1.2fr_auto]">
+      <a href="#top" class="block w-36 sm:w-44 md:w-52"><img src="img/logo.webp" alt="Nidhi Tea Logo"
+          class="h-auto w-full object-contain" /></a>
+      <ul class="flex flex-col">
+        <li class="border-b border-cream/10"><a href="#products"
+            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream/85 hover:text-flame">Shop</a>
+        </li>
+        <li class="border-b border-cream/10"><a href="#products"
+            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream/85 hover:text-flame">Blends</a>
+        </li>
+        <li class="border-b border-cream/10"><a href="#products"
+            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream/85 hover:text-flame">About</a>
+        </li>
+        <li class="border-b border-cream/10"><a href="#products"
+            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream/85 hover:text-flame">Blog</a>
+        </li>
+        <li class="border-b border-cream/10"><a href="#products"
+            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream/85 hover:text-flame">Contact</a>
+        </li>
+      </ul>
+      <div>
+        <h2 class="display-tight text-3xl text-cream md:text-4xl">Join the Nidhi Tea Family</h2>
+        <p class="mt-2 text-sm text-cream/60">New blends. Seasonal specials. Wellness tips. Early access.</p>
+        <form onsubmit="return false" class="mt-6 flex items-center gap-3 border-b border-cream/25 pb-2">
+          <input type="email" required placeholder="Your email..." aria-label="Email address"
+            class="w-full bg-transparent py-2 text-sm text-cream outline-none placeholder:text-cream/40" />
+          <button type="submit" aria-label="Subscribe"
+            class="font-display text-lg text-cream transition-transform hover:translate-x-1">→</button>
+        </form>
+      </div>
+      <div class="flex gap-3 md:flex-col">
+        <a href="https://www.instagram.com/nidhitea" target="_blank" rel="noopener" aria-label="Instagram"
+          class="noise-panel flex h-16 w-20 items-center justify-center rounded-sm border border-cream/10 font-display text-xs uppercase text-cream/80 hover:text-flame">In</a>
+        <a href="https://www.facebook.com/nidhitea" target="_blank" rel="noopener" aria-label="Facebook"
+          class="noise-panel flex h-16 w-20 items-center justify-center rounded-sm border border-cream/10 font-display text-xs uppercase text-cream/80 hover:text-flame">Fa</a>
+      </div>
+    </div>
+    <div
+      class="mx-auto mt-12 flex max-w-[1600px] flex-col items-center justify-between gap-2 text-[11px] text-cream/45 md:flex-row">
+      <span>© 2026. Nidhi Tea. All rights reserved.</span><span>Premium Handcrafted Teas from India</span>
+    </div>
+  </footer>
+
+  <script>
+    const A = (n) => "assets/" + n;
+
+    /* ---------- SPLIT TEXT PLUGIN ---------- */
+    const SplitTextPlugin = window.SplitText || class {
+      constructor(target, options = {}) {
+        const elements = typeof target === "string" ? Array.from(document.querySelectorAll(target)) : (Array.isArray(target) ? target : [target]);
+        this.chars = [];
+        this.words = [];
+        this.lines = [];
+
+        elements.forEach((el) => {
+          const wordsClass = options.wordsClass || "word";
+          const charsClass = options.charsClass || "char";
+          const includeChars = options.type && options.type.includes("chars");
+
+          const processNode = (node, extraClasses = []) => {
+            const fragment = document.createDocumentFragment();
+
+            if (node.nodeType === 3) {
+              const text = node.textContent;
+              const wordsArr = text.split(/(\s+)/);
+
+              wordsArr.forEach((part) => {
+                if (/\s+/.test(part)) {
+                  fragment.appendChild(document.createTextNode(part));
+                  return;
+                }
+                if (!part) return;
+
+                const wordSpan = document.createElement("span");
+                wordSpan.className = [wordsClass, ...extraClasses].filter(Boolean).join(" ");
+                wordSpan.style.display = "inline-block";
+
+                if (includeChars) {
+                  part.split("").forEach((char) => {
+                    const charSpan = document.createElement("span");
+                    charSpan.className = [charsClass, ...extraClasses].filter(Boolean).join(" ");
+                    charSpan.style.display = "inline-block";
+                    charSpan.textContent = char;
+                    wordSpan.appendChild(charSpan);
+                    this.chars.push(charSpan);
+                  });
+                } else {
+                  wordSpan.textContent = part;
+                }
+
+                fragment.appendChild(wordSpan);
+                this.words.push(wordSpan);
+              });
+            } else if (node.nodeType === 1) {
+              if (node.tagName === "BR") {
+                fragment.appendChild(node.cloneNode(true));
+              } else {
+                const elementClasses = Array.from(node.classList).filter(c => !["block", "flex", "grid", "hidden", "inline"].includes(c));
+                const combinedClasses = [...extraClasses, ...elementClasses];
+                Array.from(node.childNodes).forEach((child) => {
+                  fragment.appendChild(processNode(child, combinedClasses));
+                });
+                if (node.classList.contains("block")) {
+                  fragment.appendChild(document.createElement("br"));
+                }
+              }
+            }
+
+            return fragment;
+          };
+
+          const childNodes = Array.from(el.childNodes);
+          el.innerHTML = "";
+          childNodes.forEach((child) => {
+            el.appendChild(processNode(child));
+          });
+
+          this.lines.push(el);
+        });
+      }
+
+      static create(target, options) {
+        return new SplitTextPlugin(target, options);
+      }
+    };
+
+    /* ---------- LOADER & HERO HEADING ANIMATION ---------- */
+    (function () {
+      const el = document.getElementById("loader");
+      document.body.style.overflow = "hidden";
+
+      // Split heading into chars and set initial hidden state
+      const heading = SplitTextPlugin.create("#heroTitle", {
+        type: "lines, words, chars",
+        charsClass: "char",
+        wordsClass: "word",
+      });
+
+      gsap.set(heading.chars, { y: 55, opacity: 0, scale: 0.45 });
+
+      const T = [
+        { x: "-20vw", y: "-30vh", rotation: -20 },
+        { x: "25vw", y: "-20vh", rotation: 15 },
+        { x: "-32vw", y: "30vh", rotation: 12 },
+        { x: "15vw", y: "25vh", rotation: -15 },
+      ];
+      const EXIT = 3.5, items = gsap.utils.toArray(".pl-item"), floats = [];
+      const tl = gsap.timeline({ delay: 0.2, onComplete: () => { el.remove(); document.body.style.overflow = ""; } });
+
+      // 1. Circle reveal stagger expansion
+      tl.to(".pl-revealer", { clipPath: "circle(150% at 50% 50%)", duration: 0.9, stagger: 0.2, ease: "power2.inOut" });
+      tl.set(".pl-revealer:not(.pl-last)", { display: "none" });
+
+      // 2. Preloader items float to 4 corners over solid dark background
+      items.forEach((item, i) => {
+        const t = T[i], img = item.querySelector("img");
+        tl.to(item, {
+          x: t.x, y: t.y, scale: 1, rotation: t.rotation, duration: 0.9, ease: "power3.out",
+          onStart: () => {
+            floats[i] = gsap.to(img, { y: gsap.utils.random(-15, -25), duration: gsap.utils.random(1.5, 2.5), ease: "sine.inOut", yoyo: true, repeat: -1, delay: gsap.utils.random(0, 0.5) });
+          }
+        }, i === 0 ? "-=0.5" : "<0.075");
+      });
+
+      tl.to(".pl-logo", { scale: 1, opacity: 1, duration: 0.9, ease: "power3.out" }, "<");
+      tl.set(".pl-bg", { display: "none" });
+      tl.to({}, { duration: 0.5 });
+      tl.add(() => floats.forEach(f => f && f.kill()));
+
+      // 3. EXIT: Food items explode out, Logo shoots up, Loader background fades to opacity 0, and Heading characters elastic pop!
+      items.forEach((item, i) => {
+        const t = T[i];
+        tl.to(item, { x: parseFloat(t.x) * EXIT + "vw", y: parseFloat(t.y) * EXIT + "vh", rotation: t.rotation * 2.5, scale: 2.5, duration: 0.75, ease: "power2.in" }, i === 0 ? ">" : "<0.075");
+      });
+      tl.to(".pl-logo", { y: "-120vh", scale: 2.5, duration: 0.75, ease: "power2.in" }, "<");
+
+      // Fade loader background smoothly from 1 to 0 at exit
+      tl.to("#loader", { autoAlpha: 0, duration: 0.5, ease: "power2.out" }, "<0.1");
+
+      // Hero heading chars pop into view with bouncy elastic animation right as loader background fades out
+      tl.to(
+        heading.chars,
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1.3,
+          stagger: 0.015,
+          ease: "elastic.out(0.75, 0.25)",
+        },
+        "<0.05"
+      );
+
+      // Hero subtitle, badge, and navigation buttons staggered entrance
+      tl.fromTo(
+        "#heroSubtitle",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" },
+        "-=0.8"
+      );
+      tl.fromTo(
+        ["#heroName", "#heroNo"],
+        { y: 25, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.1, duration: 0.8, ease: "power3.out" },
+        "-=0.7"
+      );
+      tl.fromTo(
+        "[data-hero]",
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, stagger: 0.12, duration: 0.7, ease: "back.out(1.8)" },
+        "-=0.6"
+      );
+    })();
+
+    /* ---------- NAV ---------- */
+    (function () {
+      const box = document.getElementById("logoBox"), img = document.getElementById("logoImg"),
+        links = document.getElementById("navLinks"), pill = document.getElementById("navPill"),
+        burger = document.getElementById("navBurger"), menu = document.getElementById("mobileMenu");
+      const big = ["h-14", "w-36", "sm:h-16", "sm:w-44", "md:h-20", "md:w-52"], small = ["h-9", "w-24", "sm:h-10", "sm:w-28", "md:h-11", "md:w-36"];
+      function onScroll() {
+        const s = window.scrollY > 80;
+        box.classList.remove(...(s ? big : small)); box.classList.add(...(s ? small : big));
+        links.classList.toggle("opacity-0", s); links.classList.toggle("-translate-y-2", s); links.classList.toggle("pointer-events-none", s);
+        pill.classList.toggle("opacity-0", !s); pill.classList.toggle("-translate-y-3", !s); pill.classList.toggle("pointer-events-none", !s);
+        burger.classList.toggle("opacity-0", s); burger.classList.toggle("pointer-events-none", s);
+      }
+      onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
+      let open = false;
+      document.querySelectorAll("[data-menu]").forEach((b) => b.addEventListener("click", () => {
+        open = !open; menu.classList.toggle("max-h-0", !open); menu.classList.toggle("max-h-96", open);
+      }));
+      menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => { open = false; menu.classList.add("max-h-0"); menu.classList.remove("max-h-96"); }));
+    })();
+
+    /* ---------- FLOATING INGREDIENTS (Benefits Section) ---------- */
+    (function () {
+      const ITEMS = [
+        ["element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png", "left-[1%] top-[3%] w-32 sm:w-44 md:w-56 lg:w-64", -12, 8, 0],
+        ["element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png", "right-[1%] top-[10%] w-36 sm:w-48 md:w-60 lg:w-72", 14, 10, 0.4],
+        ["element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png", "left-[1%] top-[25%] w-28 sm:w-36 md:w-48 lg:w-56", -16, 9, 0.8],
+        ["element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png", "right-[2%] top-[36%] w-32 sm:w-44 md:w-56 lg:w-64", 10, 11, 0.2],
+        ["element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png", "left-[1%] top-[48%] w-36 sm:w-48 md:w-60 lg:w-72", -14, 8.5, 0.6],
+        ["element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png", "right-[1%] top-[62%] w-36 sm:w-48 md:w-60 lg:w-72", 18, 9.5, 1],
+        ["element-img/isolated_steaming_cup_of_green_tea_in_a_porcelain_cup_top_down_view.png", "left-[2%] top-[74%] w-32 sm:w-44 md:w-56 lg:w-64", -10, 8, 0.3],
+        ["element-img/isolated_rustic_clay_tea_pot_yixing_style_side_view_transparent_background.png", "right-[3%] top-[86%] w-32 sm:w-44 md:w-56 lg:w-64", 12, 10.5, 0.7],
+      ];
+
+      document.querySelectorAll(".floating-food").forEach((wrap) => {
+        wrap.innerHTML = ITEMS.map(([src, cls, rot, dur, delay]) =>
+          `<div class="floating-food-item absolute ${cls} will-change-transform pointer-events-none" style="transform: scale(0); opacity: 0;">
+            <img src="${src}" alt="" loading="lazy" class="h-auto w-full animate-float drop-shadow-[0_25px_45px_rgba(0,0,0,0.75)]" style="--rot:${rot}deg;--float-duration:${dur}s;animation-delay:${delay}s">
+          </div>`
+        ).join("");
+      });
+
+      // GSAP ScrollTrigger Pop-up Elastic Animation on Scroll Entry
+      if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray(".floating-food-item").forEach((item) => {
+          gsap.fromTo(
+            item,
+            { scale: 0, opacity: 0, rotate: -20 },
+            {
+              scale: 1,
+              opacity: 1,
+              rotate: 0,
+              duration: 1.1,
+              ease: "elastic.out(1, 0.35)",
+              scrollTrigger: {
+                trigger: item,
+                start: "top 92%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        });
+      } else {
+        document.querySelectorAll(".floating-food-item").forEach((el) => {
+          el.style.transform = "scale(1)";
+          el.style.opacity = "1";
+        });
+      }
+    })();
+
+    /* ---------- HERO CAROUSEL & INTERACTIVE PARALLAX ---------- */
+    (function () {
+      const SLIDES = [
+        { name: "Classic Masala Chai", img: "img/hero.png", tint: "var(--gold)", topIngredient: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png", bottomIngredient: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png" },
+        { name: "Honey Lemon Green Tea", img: "img/product-2.png", tint: "var(--flame)", topIngredient: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png", bottomIngredient: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png" },
+        { name: "Rose Cardamom Black Tea", img: "img/product-3.png", tint: "var(--cherry)", topIngredient: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png", bottomIngredient: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png" },
+      ];
+      const wrap = document.getElementById("heroSlides"), tint = document.getElementById("heroTint"),
+        tintWrap = document.getElementById("heroTintWrap"),
+        topWrap = document.getElementById("heroTopWrap"), bottomWrap = document.getElementById("heroBottomWrap"),
+        topBg = document.getElementById("heroTopBg"), bottomBg = document.getElementById("heroBottomBg"),
+        topImg = document.getElementById("heroTopImg"), bottomImg = document.getElementById("heroBottomImg"),
+        nameEl = document.getElementById("heroName"), noEl = document.getElementById("heroNo");
+      const heroBtns = document.querySelectorAll("[data-hero]");
+      const heroSection = document.getElementById("hero");
+      let index = 0, autoplayTimer = null, btnPopupTimer = null, isTransitioning = false;
+
+      wrap.innerHTML = SLIDES.map((s, i) => `
+        <div class="hero-slide-item absolute inset-0 flex items-center justify-center pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform opacity-0" data-hero-slide="${i}">
+          <img src="${s.img}" alt="${s.name}" class="hero-floating-pack h-[115%] sm:h-[120%] md:h-[125%] w-auto max-w-none object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.65)]">
+        </div>
+      `).join("");
+      const slides = [...wrap.querySelectorAll(".hero-slide-item")];
+
+      function hideHeroBtns() {
+        heroBtns.forEach((b) => {
+          b.style.transition = "transform 220ms ease-out, opacity 220ms ease-out";
+          b.style.transform = "scale(0)";
+          b.style.opacity = "0";
+          b.style.pointerEvents = "none";
+        });
+      }
+
+      function popupHeroBtns() {
+        clearTimeout(btnPopupTimer);
+        btnPopupTimer = setTimeout(() => {
+          heroBtns.forEach((b) => {
+            b.style.transition = "transform 480ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 320ms ease";
+            b.style.transform = "scale(1)";
+            b.style.opacity = "1";
+            b.style.pointerEvents = "auto";
+          });
+          isTransitioning = false;
+        }, 620);
+      }
+
+      function render(animateEffects = false) {
+        const n = SLIDES.length;
+
+        if (animateEffects) {
+          isTransitioning = true;
+          hideHeroBtns();
+          popupHeroBtns();
+
+          // 1. Center BG shrinks small
+          if (tintWrap) {
+            tintWrap.style.transition = "transform 260ms cubic-bezier(0.4, 0, 0.2, 1)";
+            tintWrap.style.transform = "scale(0.38)";
+          }
+
+          // 2. Left and Right companion elements & solid badge backgrounds shrink small
+          if (topWrap) {
+            topWrap.style.transition = "transform 260ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease";
+            topWrap.style.transform = "scale(0) rotate(-35deg)";
+            topWrap.style.opacity = "0";
+          }
+          if (bottomWrap) {
+            bottomWrap.style.transition = "transform 260ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease";
+            bottomWrap.style.transform = "scale(0) rotate(35deg)";
+            bottomWrap.style.opacity = "0";
+          }
+
+          // 3. At halfway (260ms), update colors, images, and pop BG & companion elements big!
+          setTimeout(() => {
+            if (tint) tint.style.background = SLIDES[index].tint;
+            if (topBg) topBg.style.background = SLIDES[index].tint;
+            if (bottomBg) bottomBg.style.background = SLIDES[index].tint;
+
+            if (tintWrap) {
+              tintWrap.style.transition = "transform 550ms cubic-bezier(0.34, 1.56, 0.64, 1)";
+              tintWrap.style.transform = "scale(1)";
+            }
+
+            if (topImg && bottomImg) {
+              topImg.src = SLIDES[index].topIngredient;
+              bottomImg.src = SLIDES[index].bottomIngredient;
+            }
+
+            if (topWrap) {
+              topWrap.style.transition = "transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 300ms ease";
+              topWrap.style.transform = "scale(1) rotate(0deg)";
+              topWrap.style.opacity = "1";
+            }
+            if (bottomWrap) {
+              bottomWrap.style.transition = "transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 300ms ease";
+              bottomWrap.style.transform = "scale(1) rotate(0deg)";
+              bottomWrap.style.opacity = "1";
+            }
+          }, 260);
+        } else {
+          if (tint) tint.style.background = SLIDES[index].tint;
+          if (topBg) topBg.style.background = SLIDES[index].tint;
+          if (bottomBg) bottomBg.style.background = SLIDES[index].tint;
+          if (tintWrap) tintWrap.style.transform = "scale(1)";
+          if (topWrap) { topWrap.style.transform = "scale(1)"; topWrap.style.opacity = "1"; }
+          if (bottomWrap) { bottomWrap.style.transform = "scale(1)"; bottomWrap.style.opacity = "1"; }
+          if (topImg) topImg.src = SLIDES[index].topIngredient;
+          if (bottomImg) bottomImg.src = SLIDES[index].bottomIngredient;
+        }
+
+        // 4. Product packs slide: active expands from small to big, inactive shrinks away
+        slides.forEach((sl, i) => {
+          let off = i - index;
+          if (off > n / 2) off -= n;
+          if (off < -n / 2) off += n;
+
+          const isActive = off === 0;
+          if (isActive) {
+            sl.style.opacity = "1";
+            sl.style.zIndex = "20";
+            sl.style.pointerEvents = "auto";
+            sl.style.transform = "translate3d(0, 0, 0) scale(1) rotate(0deg)";
+          } else if (off < 0) {
+            sl.style.opacity = "0";
+            sl.style.zIndex = "10";
+            sl.style.pointerEvents = "none";
+            sl.style.transform = "translate3d(-120%, 0, 0) scale(0.35) rotate(-10deg)";
+          } else {
+            sl.style.opacity = "0";
+            sl.style.zIndex = "10";
+            sl.style.pointerEvents = "none";
+            sl.style.transform = "translate3d(120%, 0, 0) scale(0.35) rotate(10deg)";
+          }
+        });
+
+        nameEl.textContent = SLIDES[index].name;
+        nameEl.classList.remove("animate-fade-in");
+        void nameEl.offsetWidth;
+        nameEl.classList.add("animate-fade-in");
+        noEl.textContent = "Blend N0.0" + (index + 1);
+      }
+
+      function go(step) {
+        if (isTransitioning) return;
+        index = (index + step + SLIDES.length) % SLIDES.length;
+        render(true);
+        resetAutoplay();
+      }
+
+      function resetAutoplay() {
+        clearInterval(autoplayTimer);
+        autoplayTimer = setInterval(() => {
+          index = (index + 1) % SLIDES.length;
+          render(true);
+        }, 6000);
+      }
+
+      heroBtns.forEach((b) => b.addEventListener("click", () => go(+b.dataset.hero)));
+      render(false);
+      resetAutoplay();
+
+      // Mouse Parallax on Hero Section
+      if (heroSection && typeof gsap !== "undefined") {
+        heroSection.addEventListener("mousemove", (e) => {
+          const rect = heroSection.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+          gsap.to(tintWrap, { x: x * 20, y: y * 20, duration: 0.8, ease: "power2.out" });
+          gsap.to(wrap, { x: x * 12, y: y * 12, duration: 0.8, ease: "power2.out" });
+        });
+
+        heroSection.addEventListener("mouseleave", () => {
+          gsap.to([tintWrap, wrap], { x: 0, y: 0, duration: 1, ease: "power2.out" });
+        });
+      }
+    })();
+
+    /* ---------- INTRO TEXT (GSAP Scroll Word Reveal) ---------- */
+    (function () {
+      const TEXT = "Premium handcrafted teas sourced from the finest estates. ★ No artificial additives — just pure leaves, pure water, and a moment of peace in every single cup.";
+      const p = document.getElementById("introText");
+      if (!p) return;
+      p.innerHTML = TEXT.split(" ").map((w) => `<span class="intro-word mr-[.28em] inline-block will-change-transform" style="opacity:.15">${w}</span>`).join("");
+      const words = [...p.querySelectorAll(".intro-word")];
+
+      if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.to(words, {
+          opacity: 1,
+          stagger: 0.05,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#intro",
+            start: "top 80%",
+            end: "bottom 45%",
+            scrub: 0.5,
+          },
+        });
+      } else {
+        function onScroll() {
+          const r = p.getBoundingClientRect(), vh = innerHeight;
+          const prog = Math.min(Math.max((vh * 0.85 - r.top) / (vh * 0.7), 0), 1);
+          words.forEach((w, i) => { w.style.opacity = prog > i / words.length ? 1 : 0.15; });
+        }
+        onScroll(); addEventListener("scroll", onScroll, { passive: true });
+      }
+    })();
+
+    /* ---------- BENEFITS (sticky stack + dim) ---------- */
+    (function () {
+      const CARDS = [
+        { title: "100% Natural", icon: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png", body: "No artificial flavours. No synthetic colours. Every blend is made with leaves, herbs, and botanicals exactly as nature intended — nothing more, nothing less." },
+        { title: "Ethically Sourced", icon: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png", body: "We partner directly with small-estate farmers across Darjeeling, Assam, and the Nilgiris. Fresh harvests, fair wages, and full traceability from garden to cup." },
+        { title: "No Preservatives", icon: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png", body: "Every pack is sealed at peak freshness without chemicals or preservatives. What you steep is what nature grew — authentic, clean, and alive with flavour." },
+        { title: "Wellness First", icon: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png", body: "Nidhi Tea blends are crafted with your well-being in mind — rich in antioxidants, calming adaptogens, and natural goodness that nourishes from the inside out." },
+      ];
+      const root = document.getElementById("benefits");
+      if (!root) return;
+      root.innerHTML = CARDS.map((c, i) => {
+        const even = i % 2 === 0;
+        return `<div class="bene-wrap sticky" style="z-index:${i + 1}">
+      <div class="relative mb-10 sm:mb-14 md:mb-18 w-full overflow-hidden rounded-lg border border-cream/15 bg-background shadow-[0_40px_80px_-30px_rgba(0,0,0,.95)] transition-transform duration-500" style="transform:translateX(${even ? -6 : 12}px) rotate(${even ? -1.1 : 1.4}deg)">
+        <div class="flex items-center justify-between bg-cream px-4 py-4 sm:px-7 sm:py-5">
+          <span class="text-lg leading-none text-background">•</span>
+          <h3 class="font-display text-xl uppercase tracking-wide text-background sm:text-3xl md:text-4xl">${c.title}</h3>
+          <span class="text-lg leading-none text-background">•</span>
+        </div>
+        <div class="flex h-[300px] flex-col items-center justify-center gap-6 bg-background px-6 text-center sm:h-[360px] sm:gap-10 sm:px-12 md:h-[420px]">
+          <span class="flex h-20 w-20 items-center justify-center rounded-full border border-cream/35 sm:h-28 sm:w-28">
+            <img src="${c.icon}" alt="" loading="lazy" class="h-12 w-12 object-contain opacity-95 sm:h-16 sm:w-16">
+          </span>
+          <p class="text-base leading-relaxed text-cream/85 sm:text-lg">${c.body}</p>
+        </div>
+        <div class="bene-dim pointer-events-none absolute inset-0 bg-background transition-opacity duration-300" style="opacity:0"></div>
+      </div>
+    </div>`;
+      }).join("");
+
+      const wraps = [...root.querySelectorAll(".bene-wrap")], dims = [...root.querySelectorAll(".bene-dim")];
+      let HEADER = 74, BASE = 96;
+      function measure() {
+        const small = innerWidth < 640; HEADER = small ? 52 : 74; BASE = small ? 76 : 96;
+        wraps.forEach((w, i) => (w.style.top = BASE + i * HEADER + "px"));
+        onScroll();
+      }
+      function onScroll() {
+        let active = 0;
+        wraps.forEach((w, i) => { if (w.getBoundingClientRect().top <= BASE + i * HEADER + 2) active = i; });
+        dims.forEach((d, i) => (d.style.opacity = i < active ? 0.45 : 0));
+      }
+      measure(); addEventListener("resize", measure); addEventListener("scroll", onScroll, { passive: true });
+    })();
+
+    /* ---------- PRODUCTS (GSAP Staggered Reveal + 3D Hover) ---------- */
+    (function () {
+      const PRODUCTS = [
+        { name: ["Classic", "Masala", "Chai"], tagline: "Bold Spices. Warm Comfort. A Cup That Feels Like Home.", front: "img/hero.png", fruit: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png", bg: "#BE8D3F", price: "₹299" },
+        { name: ["Honey", "Lemon", "Green Tea"], tagline: "Citrus Bright. Honey Sweet. Pure Morning Clarity.", front: "img/product-2.png", fruit: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png", bg: "#F15726", price: "₹299" },
+        { name: ["Rose", "Cardamom", "Black Tea"], tagline: "Floral Notes. Warm Depth. Elegance in Every Sip.", front: "img/product-3.png", fruit: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png", bg: "#C4321C", price: "₹299" },
+      ];
+      const grid = document.getElementById("productGrid");
+      if (!grid) return;
+      grid.innerHTML = PRODUCTS.map((p) => `
+    <article data-listing-card="true" class="prod group relative flex min-h-[460px] sm:min-h-[520px] md:min-h-[560px] lg:min-h-[600px] flex-col items-center justify-between overflow-hidden rounded-xl p-5 sm:p-6 md:p-8 gap-5 md:gap-6 shadow-2xl transition-all duration-500 ease-out" style="background:${p.bg}">
+      <a class="absolute inset-0 z-1" aria-label="${p.name.join(" ")}" href="#products"></a>
+      <div class="absolute z-0 pointer-events-none rounded-xl border border-cream/40 opacity-30 border-dashed inset-2.5"></div>
+      
+      <!-- Header Title & Tagline -->
+      <div class="relative flex flex-col items-center text-center w-full pointer-events-none z-10">
+        <h3 data-title="true" class="uppercase flex flex-col font-display text-[1.8rem] sm:text-[2.2rem] md:text-[2.6rem] lg:text-[36px] xl:text-[40px] leading-[0.9] text-cream">
+          ${p.name.map((l) => `<span>${l}</span>`).join("")}
+        </h3>
+        <div data-tagline-wrapper="true" class="tagline mt-1.5 text-xs sm:text-sm font-sans text-cream/90 opacity-100 sm:opacity-0 transition-all duration-400 ease-out">
+          <p class="leading-tight text-cream">${p.tagline}</p>
+        </div>
+      </div>
+
+      <!-- Bottle & Shadow Container -->
+      <div class="relative pointer-events-none w-full max-w-[280px] sm:max-w-[320px] h-56 sm:h-64 md:h-[260px] lg:h-[290px] flex items-center justify-center my-auto">
+        <div data-bottle="true" class="bottle absolute inset-0 z-10 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-center" style="transform: translate(0px, 12px) rotate(3deg) scale(1.32); transform-origin: 50% 50%;">
+          <div class="bottle-float relative w-full h-full flex items-center justify-center">
+            <img src="${p.front}" alt="${p.name.join(" ")}" class="relative w-full h-full object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,.65)]" />
+          </div>
+          <img src="${p.fruit}" alt="" class="fruitTR absolute -top-2.5 -right-2.5 sm:-top-4 sm:-right-4 md:-top-5 md:-right-5 h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain opacity-0 scale-75 transition-all duration-500 pointer-events-none drop-shadow-[0_15px_25px_rgba(0,0,0,0.5)]" />
+          <img src="${p.fruit}" alt="" class="fruitBL absolute -bottom-2.5 -left-2.5 sm:-bottom-4 sm:-left-4 md:-bottom-5 md:-left-5 h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain opacity-0 scale-75 transition-all duration-500 pointer-events-none drop-shadow-[0_15px_25px_rgba(0,0,0,0.5)]" />
+        </div>
+        <div data-shadow="true" class="shadow-el absolute bottom-0 left-1/2 w-40 sm:w-48 h-7 rounded-3xl blur-lg bg-black/75 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]" style="transform: translate(-50%, 28px) scale(1.3); opacity: 1;"></div>
+      </div>
+
+      <!-- Bottom Action Buttons Container -->
+      <div data-buttons-container="true" class="actions relative z-20 grid grid-cols-1 sm:grid-cols-2 gap-2 w-full opacity-100 sm:opacity-0 sm:translate-y-3 transition-all duration-400 ease-out sm:group-hover:opacity-100 sm:group-hover:translate-y-0">
+        <button type="button" class="group/btn relative cursor-pointer flex items-center justify-between overflow-hidden rounded-xl bg-cream px-3.5 py-3 font-display text-xs sm:text-sm uppercase tracking-wide md:px-4 md:py-3 text-background">
+          <span class="relative z-10 transition-colors duration-300 group-hover/btn:text-cream">Add to cart</span>
+          <span class="relative z-10 transition-colors duration-300 group-hover/btn:text-cream">${p.price}</span>
+          <span class="absolute inset-0 translate-y-full bg-background transition-transform duration-300 group-hover/btn:translate-y-0"></span>
+        </button>
+        <a class="w-full" href="#products">
+          <div class="group/link relative cursor-pointer flex items-center justify-between overflow-hidden rounded-xl border-2 border-cream bg-transparent px-3.5 py-3 font-display text-xs sm:text-sm uppercase tracking-wide text-cream md:px-4 md:py-3">
+            <span class="relative z-10 transition-colors duration-300 group-hover/link:text-background">View product</span>
+            <span class="relative z-10 transition-all duration-300 group-hover/link:text-background">↗</span>
+            <span class="absolute inset-0 translate-y-full bg-cream transition-transform duration-300 group-hover/link:translate-y-0"></span>
+          </div>
+        </a>
+      </div>
+    </article>`).join("");
+
+      const cards = [...grid.querySelectorAll(".prod")];
+
+      // GSAP ScrollTrigger Entrance for Product Cards (Reliable once trigger - always visible)
+      if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.fromTo(
+          cards,
+          { y: 50, opacity: 0.3 },
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.12,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: "#products",
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
+      }
+
+      cards.forEach((c) => {
+        const tagline = c.querySelector(".tagline");
+        const fruitTR = c.querySelector(".fruitTR");
+        const fruitBL = c.querySelector(".fruitBL");
+        const actions = c.querySelector(".actions");
+        const bottle = c.querySelector(".bottle");
+        const shadowEl = c.querySelector(".shadow-el");
+
+        c.addEventListener("mouseenter", () => {
+          if (window.innerWidth >= 640) {
+            if (tagline) { tagline.style.opacity = "1"; tagline.style.transform = "translateY(0)"; }
+            if (fruitTR) { fruitTR.style.opacity = "1"; fruitTR.style.transform = "rotate(16deg) scale(1)"; }
+            if (fruitBL) { fruitBL.style.opacity = "1"; fruitBL.style.transform = "rotate(-16deg) scale(1)"; }
+            if (actions) { actions.style.opacity = "1"; actions.style.transform = "translateY(0)"; actions.style.pointerEvents = "auto"; }
+            if (bottle) { bottle.style.transform = "translate(0px, -24px) rotate(3deg) scale(1, 1)"; }
+            if (shadowEl) { shadowEl.style.transform = "translate(-50%, 0%) scale(1, 1)"; shadowEl.style.opacity = "0.65"; }
+          }
+        });
+        c.addEventListener("mouseleave", () => {
+          if (window.innerWidth >= 640) {
+            if (tagline) { tagline.style.opacity = "0"; tagline.style.transform = "translateY(-8px)"; }
+            if (fruitTR) { fruitTR.style.opacity = "0"; fruitTR.style.transform = "rotate(0deg) scale(0.75)"; }
+            if (fruitBL) { fruitBL.style.opacity = "0"; fruitBL.style.transform = "rotate(0deg) scale(0.75)"; }
+            if (actions) { actions.style.opacity = "0"; actions.style.transform = "translateY(12px)"; actions.style.pointerEvents = "none"; }
+            if (bottle) { bottle.style.transform = "translate(0px, 12px) rotate(3deg) scale(1.32, 1.32)"; }
+            if (shadowEl) { shadowEl.style.transform = "translate(-50%, 28px) scale(1.3, 1.3)"; shadowEl.style.opacity = "1"; }
+          }
+        });
+      });
+    })();
+
+    /* ---------- WHY NIDHI TEA (Standalone Arched Heading Reveal) ---------- */
+    (function () {
+      if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      // SVG Arched Headline Reveal
+      gsap.from(".why-intro-content svg", {
+        scrollTrigger: {
+          trigger: "#whyIntroSection",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        y: 60,
+        scale: 0.92,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+      });
+
+      // Subtitle Reveal
+      gsap.from(".why-intro-subtitle", {
+        scrollTrigger: {
+          trigger: "#whyIntroSection",
+          start: "top 75%",
+          toggleActions: "play none none reverse",
+        },
+        y: 35,
+        opacity: 0,
+        duration: 1,
+        delay: 0.25,
+        ease: "power3.out",
+      });
+
+      // Ambient Glow Pulse
+      const glow = document.getElementById("whyIntroGlow");
+      if (glow) {
+        gsap.to(glow, {
+          scale: 1.18,
+          opacity: 0.9,
+          duration: 3.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      }
+    })();
+
+    /* ---------- WHY NIDHI TEA (Scroll-Scrubbed Pinned Slides) ---------- */
+    (function () {
+      if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.getElementById("whySection");
+      if (!section) return;
+
+      // Base placement: all slides full opacity, centered horizontally & vertically
+      gsap.set(".slide", {
+        yPercent: -50,
+        left: "50%",
+        top: "50%",
+        opacity: 1,
+      });
+
+      // Slide 1: starts centered
+      gsap.set(".slide-1", {
+        xPercent: -50,
+      });
+
+      // Slides 2 & 3: start off-screen to the right
+      gsap.set(".slide-2, .slide-3", {
+        xPercent: 130,
+      });
+
+      // Scroll-scrubbed GSAP Timeline (Pure horizontal slide, no fade)
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#whySection",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true,
+        },
+        defaults: { ease: "none" },
+      });
+
+      // Phase 1: Slide 1 goes left, Slide 2 enters from right to center
+      tl.to(".slide-1", {
+        xPercent: -230,
+        duration: 1,
+      }, 0)
+        .fromTo(".slide-2",
+          { xPercent: 130 },
+          { xPercent: -50, duration: 1 },
+          0
+        );
+
+      // Phase 2: Slide 2 goes left, Slide 3 enters from right to center
+      tl.to(".slide-2", {
+        xPercent: -230,
+        duration: 1,
+      }, 1)
+        .fromTo(".slide-3",
+          { xPercent: 130 },
+          { xPercent: -50, duration: 1 },
+          1
+        );
+
+      // Continuous moving dotted line across scroll
+      tl.fromTo(".why-line",
+        { xPercent: 0 },
+        { xPercent: -50, duration: 2, ease: "none" },
+        0
+      );
+    })();
+
+    /* ---------- CINEMATIC VIDEO SECTION WITH GSAP ---------- */
+    (function () {
+      const section = document.getElementById("cinemaSection");
+      const frame = document.getElementById("cinemaFrame");
+      const video = document.getElementById("cinemaVideo");
+      const playBtn = document.getElementById("cinemaPlayBtn");
+      const miniPlayBtn = document.getElementById("cinemaMiniPlayBtn");
+      const muteBtn = document.getElementById("cinemaMuteBtn");
+      const fsBtn = document.getElementById("cinemaFullscreenBtn");
+      const playIcon = document.getElementById("playIcon");
+      const pauseIcon = document.getElementById("pauseIcon");
+      const miniPlayIcon = document.getElementById("miniPlayIcon");
+      const miniPauseIcon = document.getElementById("miniPauseIcon");
+      const muteIcon = document.getElementById("muteIcon");
+      const unmuteIcon = document.getElementById("unmuteIcon");
+      const progressFill = document.getElementById("cinemaProgressFill");
+      const progressBar = document.getElementById("cinemaProgressBar");
+      const timeDisplay = document.getElementById("cinemaTime");
+      const overlay = document.getElementById("cinemaOverlay");
+
+      if (!section || !video) return;
+
+      // 1. GSAP ScrollTrigger Cinematic Animations
+      if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Header text reveal animation
+        gsap.from(".cinema-header", {
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+          y: 40,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+        });
+
+        // Floating leaves parallax scrub
+        gsap.utils.toArray(".cinema-leaf").forEach((leaf, i) => {
+          gsap.to(leaf, {
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1.5,
+            },
+            y: (i % 2 === 0 ? -60 : 60),
+            rotation: "+=18",
+          });
+        });
+
+        // Frame scale expansion & border radius morph on scroll
+        gsap.fromTo(
+          frame,
+          { scale: 0.88, borderRadius: "56px" },
+          {
+            scrollTrigger: {
+              trigger: section,
+              start: "top 70%",
+              end: "center center",
+              scrub: 1,
+            },
+            scale: 1,
+            borderRadius: "28px",
+            ease: "power2.out",
+          }
+        );
+
+        // Autoplay when scrolled into viewport if muted
+        ScrollTrigger.create({
+          trigger: video,
+          start: "top 65%",
+          end: "bottom 20%",
+          onEnter: () => {
+            if (video.paused) {
+              video.play().catch(() => { });
+              updatePlayState(true);
+            }
+          },
+          onLeave: () => {
+            if (!video.paused) {
+              video.pause();
+              updatePlayState(false);
+            }
+          },
+          onEnterBack: () => {
+            if (video.paused) {
+              video.play().catch(() => { });
+              updatePlayState(true);
+            }
+          },
+          onLeaveBack: () => {
+            if (!video.paused) {
+              video.pause();
+              updatePlayState(false);
+            }
+          },
+        });
+      }
+
+      // Helper function to update play UI
+      function updatePlayState(isPlaying) {
+        if (isPlaying) {
+          if (playIcon) playIcon.classList.add("hidden");
+          if (pauseIcon) pauseIcon.classList.remove("hidden");
+          if (miniPlayIcon) miniPlayIcon.classList.add("hidden");
+          if (miniPauseIcon) miniPauseIcon.classList.remove("hidden");
+          if (playBtn) {
+            playBtn.style.opacity = "0";
+            playBtn.style.pointerEvents = "none";
+          }
+          if (overlay) overlay.style.opacity = "0.2";
+        } else {
+          if (playIcon) playIcon.classList.remove("hidden");
+          if (pauseIcon) pauseIcon.classList.add("hidden");
+          if (miniPlayIcon) miniPlayIcon.classList.remove("hidden");
+          if (miniPauseIcon) miniPauseIcon.classList.add("hidden");
+          if (playBtn) {
+            playBtn.style.opacity = "1";
+            playBtn.style.pointerEvents = "auto";
+          }
+          if (overlay) overlay.style.opacity = "0.7";
+        }
+      }
+
+      // Toggle Play/Pause
+      function togglePlay() {
+        if (video.paused) {
+          video.play().then(() => updatePlayState(true)).catch(() => { });
+        } else {
+          video.pause();
+          updatePlayState(false);
+        }
+      }
+
+      if (playBtn) playBtn.addEventListener("click", togglePlay);
+      if (miniPlayBtn) miniPlayBtn.addEventListener("click", togglePlay);
+      video.addEventListener("click", togglePlay);
+
+      // Frame Hover: reveal play button if currently playing
+      frame.addEventListener("mouseenter", () => {
+        if (!video.paused && playBtn) {
+          playBtn.style.opacity = "0.85";
+          playBtn.style.pointerEvents = "auto";
+        }
+      });
+      frame.addEventListener("mouseleave", () => {
+        if (!video.paused && playBtn) {
+          playBtn.style.opacity = "0";
+          playBtn.style.pointerEvents = "none";
+        }
+      });
+
+      // Toggle Mute
+      if (muteBtn) {
+        muteBtn.addEventListener("click", () => {
+          video.muted = !video.muted;
+          if (video.muted) {
+            if (muteIcon) muteIcon.classList.remove("hidden");
+            if (unmuteIcon) unmuteIcon.classList.add("hidden");
+          } else {
+            if (muteIcon) muteIcon.classList.add("hidden");
+            if (unmuteIcon) unmuteIcon.classList.remove("hidden");
+          }
+        });
+      }
+
+      // Time format helper
+      function fmtTime(s) {
+        const m = Math.floor(s / 60) || 0;
+        const sec = Math.floor(s % 60) || 0;
+        return `${m}:${sec < 10 ? "0" : ""}${sec}`;
+      }
+
+      video.addEventListener("timeupdate", () => {
+        if (!video.duration) return;
+        const pct = (video.currentTime / video.duration) * 100;
+        if (progressFill) progressFill.style.width = pct + "%";
+        if (timeDisplay) timeDisplay.textContent = `${fmtTime(video.currentTime)} / ${fmtTime(video.duration)}`;
+      });
+
+      // Seek on progress bar click
+      if (progressBar) {
+        progressBar.addEventListener("click", (e) => {
+          const rect = progressBar.getBoundingClientRect();
+          const pos = (e.clientX - rect.left) / rect.width;
+          video.currentTime = pos * video.duration;
+        });
+      }
+
+      // Fullscreen
+      if (fsBtn) {
+        fsBtn.addEventListener("click", () => {
+          if (!document.fullscreenElement) {
+            frame.requestFullscreen ? frame.requestFullscreen() : video.requestFullscreen();
+          } else {
+            document.exitFullscreen && document.exitFullscreen();
+          }
+        });
+      }
+    })();
+
+    /* ---------- REVIEWS & FOOTER (GSAP ScrollTrigger Reveals) ---------- */
+    (function () {
+      if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Reviews Heading Reveal
+        gsap.from(".reviews-title", {
+          scrollTrigger: {
+            trigger: "#reviewsSection",
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+          y: 50,
+          scale: 0.95,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+        });
+
+        // Footer Staggered Columns Reveal
+        gsap.from(".footer-grid > *", {
+          scrollTrigger: {
+            trigger: "#footerSection",
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+          y: 40,
+          opacity: 0,
+          stagger: 0.1,
+          duration: 0.9,
+          ease: "power3.out",
+        });
+      }
+
+      // Reviews Marquee Generation
+      const REVIEWS = [
+        { name: "Priya S.", quote: "Best masala chai I've had outside my grandmother's kitchen.", body: "The spice balance is perfect — not too strong, not too mild. Pure comfort in a cup.", handle: "" },
+        { name: "Rajan K.", quote: "The Honey Lemon Green Tea is absolutely refreshing.", body: "I start every morning with it. It's light, clean, and I can genuinely feel the difference.", handle: "@rajankfit" },
+        { name: "Meera T.", quote: "Finally, a tea brand that takes quality seriously.", body: "No artificial taste, no harsh aftertaste — just pure, honest flavour. Nidhi Tea is now our household staple.", handle: "" },
+        { name: "Arjun D.", quote: "Gifted the assorted pack and my family loved it.", body: "Everyone had their favourite. The Rose Cardamom is my personal obsession now. Absolutely divine.", handle: "@arjun.d" },
+        { name: "Sunita R.", quote: "You can taste the care that goes into every blend.", body: "It smells incredible, steeps beautifully, and tastes even better. This is what premium tea should be.", handle: "" },
+        { name: "Vikram M.", quote: "Switched from supermarket teabags and never looked back.", body: "The difference is night and day. Nidhi Tea tastes like the real thing because it is the real thing.", handle: "" },
+      ];
+      const card = (r) => `
+    <article class="noise-panel mx-2 flex w-[84vw] max-w-[400px] shrink-0 flex-col overflow-hidden rounded-sm border border-cream/10 sm:w-[320px] md:w-[400px] transition-transform duration-300 hover:scale-[1.02]">
+      <div class="flex items-center justify-between bg-cream px-5 py-2.5">
+        <span class="text-xs text-background">•</span>
+        <h3 class="font-display text-base uppercase tracking-wide text-background">${r.name}</h3>
+        <span class="text-xs text-background">•</span>
+      </div>
+      <div class="flex flex-1 flex-col items-center gap-4 px-7 py-8 text-center">
+        <span class="font-display text-3xl leading-none text-cream/70">“</span>
+        <p class="display-tight text-xl text-cream md:text-2xl">${r.quote}</p>
+        <p class="text-sm text-cream/70">${r.body} ${r.handle ? `<strong class="font-semibold text-cream">(${r.handle})</strong>` : ""}</p>
+      </div>
+    </article>`;
+      const set = `<div class="flex">${REVIEWS.map(card).join("")}</div>`;
+      const reviewTrack = document.getElementById("reviewTrack");
+      if (reviewTrack) {
+        reviewTrack.innerHTML = set + set;
+      }
+    })();
+  </script>
+</body>
+
+</html>
