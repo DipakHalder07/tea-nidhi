@@ -1458,11 +1458,11 @@
 
       <!-- Bottle & Shadow Container -->
       <div class="relative pointer-events-none w-full max-w-[280px] sm:max-w-[320px] h-56 sm:h-64 md:h-[260px] lg:h-[290px] flex items-center justify-center my-auto">
-        <!-- Top-Left Botanical Companion (BEHIND pack, z-0, large, pops up on hover) -->
-        <img src="${p.fruitTL}" alt="" class="fruitTL absolute -top-8 -left-8 sm:-top-10 sm:-left-10 md:-top-12 md:-left-12 w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 drop-shadow-[0_12px_24px_rgba(0,0,0,0.45)] group-hover:opacity-100 group-hover:scale-110" />
+        <!-- Left Botanical Companion (BEHIND product, z-0, small, centered on product left side) -->
+        <img src="${p.fruitTL}" alt="" class="fruitTL absolute top-[30%] sm:top-[32%] left-1 sm:left-2 md:left-3 w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 drop-shadow-[0_8px_16px_rgba(0,0,0,0.35)] group-hover:opacity-100 group-hover:scale-110" />
         
-        <!-- Bottom-Right Botanical Companion (BEHIND pack, z-0, large, pops up on hover) -->
-        <img src="${p.fruitBR}" alt="" class="fruitBR absolute -bottom-8 -right-8 sm:-bottom-10 sm:-right-10 md:-bottom-12 md:-right-12 w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 drop-shadow-[0_12px_24px_rgba(0,0,0,0.45)] group-hover:opacity-100 group-hover:scale-110" />
+        <!-- Right Botanical Companion (BEHIND product, z-0, small, centered on product right side) -->
+        <img src="${p.fruitBR}" alt="" class="fruitBR absolute top-[36%] sm:top-[38%] right-1 sm:right-2 md:right-3 w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 drop-shadow-[0_8px_16px_rgba(0,0,0,0.35)] group-hover:opacity-100 group-hover:scale-110" />
 
         <!-- Product Pack (Layered IN FRONT, z-10) -->
         <div data-bottle="true" class="bottle relative w-full h-full z-10 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-center" style="transform: translate(0px, 12px) rotate(3deg) scale(1.32); transform-origin: 50% 50%;">
@@ -1504,8 +1504,8 @@
 
         function showCardDetails() {
           if (tagline) { tagline.style.opacity = "1"; tagline.style.transform = "translateY(0)"; }
-          if (fruitTL) { fruitTL.style.opacity = "1"; fruitTL.style.transform = "translate(-16px, -16px) rotate(-16deg) scale(1.15)"; }
-          if (fruitBR) { fruitBR.style.opacity = "1"; fruitBR.style.transform = "translate(16px, 16px) rotate(16deg) scale(1.15)"; }
+          if (fruitTL) { fruitTL.style.opacity = "1"; fruitTL.style.transform = "translate(-12px, -6px) rotate(-14deg) scale(1.12)"; }
+          if (fruitBR) { fruitBR.style.opacity = "1"; fruitBR.style.transform = "translate(12px, 6px) rotate(14deg) scale(1.12)"; }
           if (actions) { actions.style.opacity = "1"; actions.style.transform = "translateY(0)"; actions.style.pointerEvents = "auto"; }
           if (bottle) { bottle.style.transform = "translate(0px, -24px) rotate(3deg) scale(1, 1)"; }
           if (shadowEl) { shadowEl.style.display = "none"; }
