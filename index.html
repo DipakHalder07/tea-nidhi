@@ -25,12 +25,13 @@
       theme: {
         extend: {
           colors: {
-            background: "#100B06",
-            cream: "#F6E9D7",
-            gold: "#BE8D3F",
-            flame: "#F15726",
-            cherry: "#C4321C",
-            smoke: "#2A231C",
+            background: "#d3712b",
+            cream: "#FFF5EA",
+            gold: "#F7C665",
+            flame: "#1A0E06",
+            cherry: "#9B1D2A",
+            smoke: "#3D1C08",
+            espresso: "#1A0E06",
           },
           fontFamily: {
             display: ['"Fraunces"', 'serif'],
@@ -59,11 +60,12 @@
   </script>
   <style>
     :root {
-      --background: #100B06;
-      --cream: #F6E9D7;
-      --gold: #BE8D3F;
-      --flame: #F15726;
-      --cherry: #C4321C;
+      --background: #d3712b;
+      --cream: #FFF5EA;
+      --gold: #F7C665;
+      --flame: #1A0E06;
+      --cherry: #9B1D2A;
+      --espresso: #1A0E06;
     }
 
     html {
@@ -74,7 +76,7 @@
       background: var(--background);
       color: var(--cream);
       font-family: "Inter Tight", system-ui, sans-serif;
-      overflow-x: hidden;
+      overflow-x: clip;
       -webkit-font-smoothing: antialiased
     }
 
@@ -89,7 +91,7 @@
     }
 
     ::selection {
-      background: var(--flame);
+      background: var(--espresso);
       color: var(--cream)
     }
 
@@ -114,35 +116,37 @@
     }
 
     .dotted-rule {
-      background-image: repeating-linear-gradient(to right, rgba(246, 233, 215, .55) 0 4px, transparent 4px 10px);
+      background-image: repeating-linear-gradient(to right, rgba(255, 245, 234, .55) 0 4px, transparent 4px 10px);
     }
 
     .why-line {
       width: 300%;
       height: 100%;
       background: repeating-linear-gradient(to right,
-          rgba(246, 233, 215, 0.6) 0,
-          rgba(246, 233, 215, 0.6) 5px,
+          rgba(255, 245, 234, 0.6) 0,
+          rgba(255, 245, 234, 0.6) 5px,
           transparent 5px,
           transparent 15px);
       will-change: transform;
     }
 
     .noise-panel {
-      background-color: #1A130C;
-      background-image: radial-gradient(circle at 1px 1px, rgba(246, 233, 215, .07) 1px, transparent 0);
+      background-color: #1A0E06;
+      background-image: radial-gradient(circle at 1px 1px, rgba(255, 245, 234, .1) 1px, transparent 0);
       background-size: 12px 12px
     }
 
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
+
     .no-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
 
-    .fruitTL, .fruitBR {
+    .fruitTL,
+    .fruitBR {
       transition: opacity 0.35s ease-out, transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
       transform-origin: center center;
       will-change: transform, opacity;
@@ -288,6 +292,34 @@
       animation: bucks-scale .4s ease-out both
     }
 
+    @keyframes leaf-drift-1 {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+      }
+      50% {
+        transform: translate3d(14px, -20px, 0) rotate(8deg);
+      }
+    }
+
+    @keyframes leaf-drift-2 {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+      }
+      50% {
+        transform: translate3d(-16px, -18px, 0) rotate(-10deg);
+      }
+    }
+
+    .animate-leaf-1 {
+      animation: leaf-drift-1 9s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .animate-leaf-2 {
+      animation: leaf-drift-2 11s ease-in-out infinite;
+      will-change: transform;
+    }
+
     #heroTitle .char,
     #heroTitle .word {
       display: inline-block;
@@ -316,6 +348,10 @@
 </head>
 
 <body class="relative min-h-screen">
+
+  <!-- ============ AMBIENT BOTANICAL TEA LEAF PATTERN BACKGROUND ============ -->
+  <div class="pointer-events-none fixed inset-0 z-0 bg-repeat opacity-85 select-none"
+    style="background-image: url('element-img/tea-leaf-pattern.svg'); background-size: 260px 260px;"></div>
 
   <!-- ============ LOADER ============ -->
   <div id="loader" class="fixed inset-0 z-[100] overflow-hidden">
@@ -441,6 +477,11 @@
   <main>
     <!-- ============ HERO ============ -->
     <section id="top" class="relative overflow-hidden pt-40 sm:pt-44 md:pt-36">
+      <!-- Ambient Botanical Leaf Watermarks in Background -->
+      <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+        class="pointer-events-none absolute -top-16 -left-20 w-[420px] sm:w-[540px] md:w-[680px] h-auto opacity-20 -rotate-45 select-none z-0 filter drop-shadow-sm" />
+      <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+        class="pointer-events-none absolute -bottom-20 -right-24 w-[450px] sm:w-[580px] md:w-[720px] h-auto opacity-20 rotate-135 select-none z-0 filter drop-shadow-sm" />
       <div class="relative z-10 mx-auto max-w-[1500px] px-5 md:px-10">
         <h1 id="heroTitle"
           class="display-tight mx-auto max-w-5xl text-center text-[10vw] leading-[.88] md:text-[5.6rem] lg:text-[6.8rem]">
@@ -466,7 +507,7 @@
         </div>
 
         <button data-hero="-1" aria-label="Previous blend"
-          class="relative z-40 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-background transition-all duration-300 hover:scale-110 hover:bg-flame hover:text-cream sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 shadow-lg cursor-pointer"
+          class="relative z-40 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-espresso transition-all duration-300 hover:scale-110 hover:bg-espresso hover:text-cream sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 shadow-2xl cursor-pointer"
           style="touch-action: manipulation;"><span
             class="pointer-events-none text-lg leading-none sm:text-xl md:text-2xl">←</span></button>
 
@@ -512,7 +553,7 @@
         </div>
 
         <button data-hero="1" aria-label="Next blend"
-          class="relative z-40 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-background transition-all duration-300 hover:scale-110 hover:bg-flame hover:text-cream sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 shadow-lg cursor-pointer"
+          class="relative z-40 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-espresso transition-all duration-300 hover:scale-110 hover:bg-espresso hover:text-cream sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 shadow-2xl cursor-pointer"
           style="touch-action: manipulation;"><span
             class="pointer-events-none text-lg leading-none sm:text-xl md:text-2xl">→</span></button>
       </div>
@@ -520,23 +561,38 @@
       <div class="relative z-10 flex items-center justify-center py-6">
         <div class="dotted-rule pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-70"></div>
         <a href="#products"
-          class="group relative z-10 overflow-hidden rounded-lg border-2 border-transparent bg-cream px-7 py-3.5 font-display text-sm uppercase tracking-wide text-background transition-transform duration-300 hover:scale-105 sm:px-9">
+          class="group relative z-10 overflow-hidden rounded-lg border-2 border-transparent bg-cream px-7 py-3.5 font-display text-sm uppercase tracking-wide text-espresso transition-transform duration-300 hover:scale-105 sm:px-9 shadow-xl">
           <span class="relative z-10 transition-colors duration-300 group-hover:text-cream">Explore Blends</span>
           <span
-            class="absolute inset-0 translate-y-full bg-flame transition-transform duration-300 group-hover:translate-y-0"></span>
+            class="absolute inset-0 translate-y-full bg-espresso transition-transform duration-300 group-hover:translate-y-0"></span>
         </a>
       </div>
     </section>
 
     <!-- ============ INTRO TEXT ============ -->
-    <section id="intro" class="relative z-10 px-5 py-10 md:py-16">
+    <section id="intro" class="relative z-10 px-5 py-10 md:py-16 overflow-hidden">
+      <!-- Ambient Floating Fresh Tea Leaves Behind Intro -->
+      <div class="pointer-events-none absolute top-1/2 left-3 sm:left-12 -translate-y-1/2 opacity-35 animate-leaf-1 z-0">
+        <img src="element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png" alt="" class="w-20 sm:w-28 md:w-36 h-auto object-contain filter drop-shadow-md" />
+      </div>
+      <div class="pointer-events-none absolute top-1/2 right-3 sm:right-12 -translate-y-1/2 opacity-30 animate-leaf-2 z-0">
+        <img src="element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png" alt="" class="w-24 sm:w-32 md:w-40 h-auto object-contain -scale-x-100 filter drop-shadow-md" />
+      </div>
       <p id="introText"
-        class="mx-auto max-w-4xl text-center text-[7vw] leading-[1.15] text-cream md:text-5xl font-semibold"></p>
+        class="relative z-10 mx-auto max-w-4xl text-center text-[7vw] leading-[1.15] text-cream md:text-5xl font-semibold"></p>
     </section>
 
     <!-- ============ BENEFITS ============ -->
     <section class="relative pb-10 md:pb-16">
-      <div class="floating-food pointer-events-none absolute inset-0 overflow-hidden" data-opacity="opacity-70"></div>
+      <!-- Ambient Botanical Leaf Accents in Benefits Background -->
+      <div class="pointer-events-none absolute inset-0 overflow-hidden z-0">
+        <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+          class="absolute -top-10 -left-28 w-[400px] sm:w-[520px] md:w-[640px] h-auto opacity-15 rotate-12 select-none" />
+        <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+          class="absolute -bottom-16 -right-24 w-[420px] sm:w-[540px] md:w-[660px] h-auto opacity-15 -rotate-160 select-none" />
+      </div>
+
+      <div class="floating-food pointer-events-none absolute inset-0 overflow-hidden z-0" data-opacity="opacity-70"></div>
       <div id="benefits" class="relative z-10 mx-auto max-w-[640px] px-4"></div>
     </section>
 
@@ -554,7 +610,8 @@
       </div>
 
       <!-- Slider Header Controls Bar -->
-      <div class="mx-auto max-w-[1600px] px-4 sm:px-6 md:px-8 mt-2 sm:mt-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+      <div
+        class="mx-auto max-w-[1600px] px-4 sm:px-6 md:px-8 mt-2 sm:mt-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <div class="flex items-center gap-2 mb-2">
             <span class="inline-block w-2 h-2 rounded-full bg-gold animate-pulse"></span>
@@ -568,20 +625,23 @@
         <!-- Slider Navigation Controls & Counter -->
         <div class="flex items-center gap-3 self-end sm:self-auto">
           <div id="prodCounter" class="text-xs sm:text-sm font-mono text-cream/60 tracking-wider mr-1 select-none">
-            <span id="prodCurrentIndex" class="text-cream font-bold text-base">01</span> / <span id="prodTotalCount">05</span>
+            <span id="prodCurrentIndex" class="text-cream font-bold text-base">01</span> / <span
+              id="prodTotalCount">05</span>
           </div>
-          
+
           <button id="prodPrev" type="button" aria-label="Previous Blend"
             class="group w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-cream/30 bg-smoke/70 hover:bg-cream hover:text-background text-cream flex items-center justify-center transition-all duration-300 active:scale-90 cursor-pointer backdrop-blur-md shadow-lg">
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:-translate-x-0.5" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          
+
           <button id="prodNext" type="button" aria-label="Next Blend"
             class="group w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-cream/30 bg-smoke/70 hover:bg-cream hover:text-background text-cream flex items-center justify-center transition-all duration-300 active:scale-90 cursor-pointer backdrop-blur-md shadow-lg">
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-0.5" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
@@ -597,7 +657,8 @@
         <!-- Slider Progress Indicator Bar -->
         <div class="mx-auto max-w-[240px] sm:max-w-[320px] px-4 mt-2">
           <div class="w-full h-1 bg-cream/15 rounded-full overflow-hidden">
-            <div id="prodProgressBar" class="h-full bg-gold transition-all duration-300 rounded-full" style="width: 20%;"></div>
+            <div id="prodProgressBar" class="h-full bg-gold transition-all duration-300 rounded-full"
+              style="width: 20%;"></div>
           </div>
         </div>
       </div>
@@ -608,8 +669,14 @@
       class="relative w-full min-h-[85vh] sm:min-h-screen py-16 sm:py-24 md:py-32 flex flex-col items-center justify-center text-center px-2 sm:px-6 md:px-8 bg-background overflow-hidden">
       <!-- Background Ambient Glow -->
       <div id="whyIntroGlow"
-        class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[1200px] aspect-square rounded-full bg-gradient-to-tr from-gold/15 via-flame/10 to-transparent blur-[140px] -z-10 transition-transform duration-1000">
+        class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[1200px] aspect-square rounded-full bg-gradient-to-tr from-cream/20 via-gold/15 to-transparent blur-[140px] -z-10 transition-transform duration-1000">
       </div>
+
+      <!-- Ambient Botanical Tea Leaf Branch Silhouettes -->
+      <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+        class="pointer-events-none absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/4 w-[480px] md:w-[620px] h-auto opacity-15 rotate-25 select-none z-0" />
+      <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+        class="pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/4 w-[480px] md:w-[620px] h-auto opacity-15 -rotate-155 select-none z-0" />
 
       <!-- Top: Giant Curved Arched Heading & Subtitle (Full-Width Edge-to-Edge) -->
       <div class="why-intro-content flex flex-col items-center w-full max-w-[1600px] mx-auto z-10 select-none">
@@ -630,11 +697,11 @@
 
         <!-- Centered Subtitle Paragraph (Stacked cleanly) -->
         <p
-          class="why-intro-subtitle text-center font-sans uppercase tracking-[0.14em] sm:tracking-[0.18em] text-gold text-sm sm:text-lg md:text-xl max-w-[360px] sm:max-w-lg md:max-w-xl leading-relaxed mt-4 sm:mt-8 md:mt-10 font-bold">
+          class="why-intro-subtitle text-center font-sans uppercase tracking-[0.14em] sm:tracking-[0.18em] text-cream text-sm sm:text-lg md:text-xl max-w-[360px] sm:max-w-lg md:max-w-xl leading-relaxed mt-4 sm:mt-8 md:mt-10 font-bold">
           WE CRAFT SMALL-BATCH MOUNTAIN<br>
           TEAS BECAUSE MASS-PRODUCED<br>
           TEA TASTES LIKE DUST. WE'RE<br>
-          <strong class="font-bold text-cream">BREWING BETTER DAYS.</strong>
+          <strong class="font-bold text-cream underline decoration-cream/40 underline-offset-4">BREWING BETTER DAYS.</strong>
         </p>
       </div>
     </section>
@@ -665,12 +732,12 @@
             <!-- Overlapping Large Pill Badge with Prominent Peeking Mascot -->
             <div class="relative m-4 sm:-mt-22 md:-mt-28 z-20 inline-flex items-center justify-center">
               <div
-                class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-background shadow-[0_20px_45px_rgba(0,0,0,0.75)]">
-                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
+                class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-espresso shadow-[0_20px_45px_rgba(0,0,0,0.5)]">
+                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-espresso"></span>
                 <h3
-                  class="font-display text-xl uppercase tracking-wider text-background sm:text-3xl md:text-4xl font-extrabold">
+                  class="font-display text-xl uppercase tracking-wider text-espresso sm:text-3xl md:text-4xl font-extrabold">
                   ESTATE SOURCED</h3>
-                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
+                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-espresso"></span>
               </div>
               <img src="element-img/isolated_rustic_clay_tea_pot_yixing_style_side_view_transparent_background.png"
                 alt="Estate Clay Teapot"
@@ -698,12 +765,12 @@
             <!-- Overlapping Large Pill Badge with Prominent Peeking Mascot -->
             <div class="relative -mt-14 sm:-mt-22 md:-mt-28 z-20 inline-flex items-center justify-center">
               <div
-                class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-background shadow-[0_20px_45px_rgba(0,0,0,0.75)]">
-                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
+                class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-espresso shadow-[0_20px_45px_rgba(0,0,0,0.5)]">
+                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-espresso"></span>
                 <h3
-                  class="font-display text-xl uppercase tracking-wider text-background sm:text-3xl md:text-4xl font-extrabold">
+                  class="font-display text-xl uppercase tracking-wider text-espresso sm:text-3xl md:text-4xl font-extrabold">
                   100% BOTANICALS</h3>
-                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
+                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-espresso"></span>
               </div>
               <img src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png"
                 alt="Botanical Spices"
@@ -731,12 +798,12 @@
             <!-- Overlapping Large Pill Badge with Prominent Peeking Mascot -->
             <div class="relative -mt-14 sm:-mt-22 md:-mt-28 z-20 inline-flex items-center justify-center">
               <div
-                class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-background shadow-[0_20px_45px_rgba(0,0,0,0.75)]">
-                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
+                class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-espresso shadow-[0_20px_45px_rgba(0,0,0,0.5)]">
+                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-espresso"></span>
                 <h3
-                  class="font-display text-xl uppercase tracking-wider text-background sm:text-3xl md:text-4xl font-extrabold">
+                  class="font-display text-xl uppercase tracking-wider text-espresso sm:text-3xl md:text-4xl font-extrabold">
                   ARTISAN FRESH</h3>
-                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
+                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-espresso"></span>
               </div>
               <img src="element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png"
                 alt="Artisan Blooming Tea"
@@ -768,46 +835,49 @@
   </main>
 
   <!-- ============ FOOTER ============ -->
-  <footer id="footerSection" class="relative border-t border-cream/10 px-5 pb-8 pt-14 md:px-10 overflow-hidden">
+  <footer id="footerSection" class="relative border-t border-cream/20 px-5 pb-8 pt-14 md:px-10 overflow-hidden bg-background">
+    <!-- Ambient Botanical Tea Branch in Footer -->
+    <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+      class="pointer-events-none absolute -bottom-24 -right-20 w-[450px] sm:w-[560px] md:w-[680px] h-auto opacity-15 rotate-45 select-none z-0" />
     <div class="footer-grid mx-auto grid max-w-[1600px] grid-cols-1 gap-10 md:grid-cols-[auto_1fr_1.2fr_auto]">
       <a href="#top" class="block w-36 sm:w-44 md:w-52"><img src="img/logo.webp" alt="Nidhi Tea Logo"
           class="h-auto w-full object-contain" /></a>
       <ul class="flex flex-col">
-        <li class="border-b border-cream/10"><a href="#products"
-            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream/85 hover:text-flame">Shop</a>
+        <li class="border-b border-cream/15"><a href="#products"
+            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream hover:text-espresso transition-colors">Shop</a>
         </li>
-        <li class="border-b border-cream/10"><a href="#products"
-            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream/85 hover:text-flame">Blends</a>
+        <li class="border-b border-cream/15"><a href="#products"
+            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream hover:text-espresso transition-colors">Blends</a>
         </li>
-        <li class="border-b border-cream/10"><a href="#products"
-            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream/85 hover:text-flame">About</a>
+        <li class="border-b border-cream/15"><a href="#products"
+            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream hover:text-espresso transition-colors">About</a>
         </li>
-        <li class="border-b border-cream/10"><a href="#products"
-            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream/85 hover:text-flame">Blog</a>
+        <li class="border-b border-cream/15"><a href="#products"
+            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream hover:text-espresso transition-colors">Blog</a>
         </li>
-        <li class="border-b border-cream/10"><a href="#products"
-            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream/85 hover:text-flame">Contact</a>
+        <li class="border-b border-cream/15"><a href="#products"
+            class="block py-2.5 font-display text-sm uppercase tracking-wide text-cream hover:text-espresso transition-colors">Contact</a>
         </li>
       </ul>
       <div>
         <h2 class="display-tight text-3xl text-cream md:text-4xl">Join the Nidhi Tea Family</h2>
-        <p class="mt-2 text-sm text-cream/60">New blends. Seasonal specials. Wellness tips. Early access.</p>
+        <p class="mt-2 text-sm text-cream/80">New blends. Seasonal specials. Wellness tips. Early access.</p>
         <form onsubmit="return false" class="mt-6 flex flex-col sm:flex-row items-stretch gap-2.5">
           <input type="email" required placeholder="Your email address..." aria-label="Email address"
-            class="flex-1 rounded-lg border border-cream/25 bg-background/50 px-4 py-3 text-sm text-cream outline-none transition-colors focus:border-cream/60 placeholder:text-cream/40" />
+            class="flex-1 rounded-lg border border-cream/35 bg-cream/15 px-4 py-3 text-sm text-cream outline-none transition-colors focus:border-cream focus:bg-cream/25 placeholder:text-cream/65" />
           <button type="submit" aria-label="Subscribe"
-            class="rounded-lg border-2 border-transparent bg-cream px-5 py-3 font-display text-xs uppercase tracking-wide text-background transition-all hover:bg-flame hover:text-cream cursor-pointer">Subscribe</button>
+            class="rounded-lg border-2 border-transparent bg-cream px-5 py-3 font-display text-xs uppercase tracking-wide text-espresso font-extrabold transition-all hover:bg-espresso hover:text-cream cursor-pointer shadow-md">Subscribe</button>
         </form>
       </div>
       <div class="flex gap-3 md:flex-col">
         <a href="https://www.instagram.com/nidhitea" target="_blank" rel="noopener" aria-label="Instagram"
-          class="noise-panel flex h-16 w-20 items-center justify-center rounded-lg border border-cream/20 font-display text-xs uppercase text-cream/80 hover:text-flame">In</a>
+          class="noise-panel flex h-16 w-20 items-center justify-center rounded-lg border border-cream/25 font-display text-xs uppercase text-cream hover:bg-cream hover:text-espresso transition-all">In</a>
         <a href="https://www.facebook.com/nidhitea" target="_blank" rel="noopener" aria-label="Facebook"
-          class="noise-panel flex h-16 w-20 items-center justify-center rounded-lg border border-cream/20 font-display text-xs uppercase text-cream/80 hover:text-flame">Fa</a>
+          class="noise-panel flex h-16 w-20 items-center justify-center rounded-lg border border-cream/25 font-display text-xs uppercase text-cream hover:bg-cream hover:text-espresso transition-all">Fa</a>
       </div>
     </div>
     <div
-      class="mx-auto mt-12 flex max-w-[1600px] flex-col items-center justify-between gap-2 text-[11px] text-cream/45 md:flex-row">
+      class="mx-auto mt-12 flex max-w-[1600px] flex-col items-center justify-between gap-2 text-[11px] text-cream/70 md:flex-row">
       <span>© 2026. Nidhi Tea. All rights reserved.</span><span>Premium Handcrafted Teas from India</span>
     </div>
   </footer>
@@ -1058,7 +1128,7 @@
     (function () {
       const SLIDES = [
         { name: "Classic Masala Chai", img: "img/hero.png", tint: "var(--gold)", topIngredient: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png", bottomIngredient: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png" },
-        { name: "Honey Lemon Green Tea", img: "img/product-2.png", tint: "var(--flame)", topIngredient: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png", bottomIngredient: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png" },
+        { name: "Honey Lemon Green Tea", img: "img/product-2.png", tint: "#2E6941", topIngredient: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png", bottomIngredient: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png" },
         { name: "Rose Cardamom Black Tea", img: "img/product-3.png", tint: "var(--cherry)", topIngredient: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png", bottomIngredient: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png" },
       ];
       const wrap = document.getElementById("heroSlides"), tint = document.getElementById("heroTint"),
@@ -1336,11 +1406,145 @@
       }
     })();
 
+    /* ---------- FLOATING INGREDIENTS (Benefits Section with Depth of Field Blur) ---------- */
+    (function () {
+      const ITEMS = [
+        {
+          src: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png",
+          pos: "left-[1%] sm:left-[3%] top-[3%] w-28 sm:w-40 md:w-52 lg:w-60",
+          blur: "",
+          opacity: "opacity-90",
+          rot: -12,
+          dur: 8,
+          delay: 0
+        },
+        {
+          src: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png",
+          pos: "right-[2%] sm:right-[4%] top-[6%] w-32 sm:w-44 md:w-56 lg:w-64",
+          blur: "",
+          opacity: "opacity-90",
+          rot: 16,
+          dur: 9.5,
+          delay: 0.4
+        },
+        {
+          src: "element-img/dried_lemon_slice.png",
+          pos: "left-[4%] sm:left-[7%] top-[19%] w-24 sm:w-36 md:w-48 lg:w-56",
+          blur: "blur-[3.5px]",
+          opacity: "opacity-75",
+          rot: -22,
+          dur: 7.5,
+          delay: 0.8
+        },
+        {
+          src: "element-img/cinnamon_stick.png",
+          pos: "right-[3%] sm:right-[6%] top-[24%] w-28 sm:w-36 md:w-44 lg:w-52",
+          blur: "",
+          opacity: "opacity-85",
+          rot: 14,
+          dur: 8.5,
+          delay: 0.2
+        },
+        {
+          src: "element-img/green_cardamom.png",
+          pos: "left-[2%] sm:left-[5%] top-[39%] w-20 sm:w-28 md:w-36 lg:w-40",
+          blur: "blur-[1.5px]",
+          opacity: "opacity-80",
+          rot: -15,
+          dur: 10,
+          delay: 0.6
+        },
+        {
+          src: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png",
+          pos: "right-[2%] sm:right-[5%] top-[44%] w-32 sm:w-44 md:w-56 lg:w-64",
+          blur: "",
+          opacity: "opacity-85",
+          rot: -8,
+          dur: 9,
+          delay: 1.0
+        },
+        {
+          src: "element-img/star_anise.png",
+          pos: "right-[6%] sm:right-[9%] top-[64%] w-22 sm:w-32 md:w-40 lg:w-44",
+          blur: "blur-[2px]",
+          opacity: "opacity-80",
+          rot: 24,
+          dur: 8,
+          delay: 0.3
+        },
+        {
+          src: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png",
+          pos: "-left-6 sm:-left-3 top-[69%] w-36 sm:w-52 md:w-68 lg:w-80",
+          blur: "blur-[4.5px]",
+          opacity: "opacity-75",
+          rot: 10,
+          dur: 11,
+          delay: 0.5
+        },
+        {
+          src: "element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png",
+          pos: "-right-4 sm:-right-1 top-[83%] w-36 sm:w-52 md:w-68 lg:w-80",
+          blur: "blur-[3.5px]",
+          opacity: "opacity-75",
+          rot: -10,
+          dur: 10.5,
+          delay: 0.7
+        },
+        {
+          src: "element-img/isolated_steaming_cup_of_green_tea_in_a_porcelain_cup_top_down_view.png",
+          pos: "left-[4%] sm:left-[7%] top-[88%] w-28 sm:w-40 md:w-52 lg:w-60",
+          blur: "",
+          opacity: "opacity-80",
+          rot: -12,
+          dur: 8.5,
+          delay: 0.9
+        },
+      ];
+
+      const wrap = document.querySelector(".floating-food");
+      if (!wrap) return;
+
+      wrap.innerHTML = ITEMS.map((item) =>
+        `<div class="floating-food-item absolute ${item.pos} will-change-transform pointer-events-none ${item.opacity}" style="transform: scale(0); opacity: 0;">
+          <img src="${item.src}" alt="" loading="lazy" class="h-auto w-full animate-float ${item.blur} drop-shadow-[0_20px_40px_rgba(0,0,0,0.65)]" style="--rot:${item.rot}deg;--float-duration:${item.dur}s;animation-delay:${item.delay}s">
+        </div>`
+      ).join("");
+
+      // GSAP ScrollTrigger Pop-up Elastic Animation on Scroll Entry
+      if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray(".floating-food-item").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { scale: 0, opacity: 0, rotate: -20 },
+            {
+              scale: 1,
+              opacity: 1,
+              rotate: 0,
+              duration: 1.1,
+              ease: "elastic.out(1, 0.35)",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 92%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        });
+      } else {
+        document.querySelectorAll(".floating-food-item").forEach((el) => {
+          el.style.transform = "scale(1)";
+          el.style.opacity = "1";
+        });
+      }
+    })();
+
     /* ---------- BENEFITS (sticky stack + dim) ---------- */
     (function () {
       const CARDS = [
         {
           title: "100% Natural",
+          bg: "#9E5F20",
           icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-10 w-10 sm:h-14 sm:w-14 text-cream" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
             <path d="M5.05857 11.7421C6.97712 11.9781 8.73113 10.5535 8.97628 8.56018C9.22142 6.56689 6.93885 4.64584 7.76802 2C3.66477 2.59449 2.25056 5.90113 2.02862 7.70572C1.78348 9.69901 3.14003 11.5062 5.05857 11.7421Z"></path>
             <path d="M7 20C5.07536 15.3242 4.76992 11.1941 5.13275 8" stroke-linecap="round"></path>
@@ -1349,28 +1553,60 @@
           </svg>`,
           body: "No artificial flavours. No synthetic colours. Every blend is made with leaves, herbs, and botanicals exactly as nature intended — nothing more, nothing less."
         },
-        { title: "Ethically Sourced", icon: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png", body: "We partner directly with small-estate farmers across Darjeeling, Assam, and the Nilgiris. Fresh harvests, fair wages, and full traceability from garden to cup." },
-        { title: "No Preservatives", icon: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png", body: "Every pack is sealed at peak freshness without chemicals or preservatives. What you steep is what nature grew — authentic, clean, and alive with flavour." },
-        { title: "Wellness First", icon: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png", body: "Nidhi Tea blends are crafted with your well-being in mind — rich in antioxidants, calming adaptogens, and natural goodness that nourishes from the inside out." },
+        { 
+          title: "Ethically Sourced", 
+          bg: "#245836",
+          icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-10 w-10 sm:h-14 sm:w-14 text-cream" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 13V6"></path>
+            <path d="M12 6C12 3.5 14 1.5 16.8 1.5C16.8 4 14.8 6 12 6Z"></path>
+            <path d="M12 8.5C12 6.5 10.2 4.8 7.8 4.8C7.8 6.8 9.6 8.5 12 8.5Z"></path>
+            <path d="M2.5 14C4.2 13 6.5 13.2 8 14.5L9.5 16C11 17.3 13 17.3 14.5 16L16 14.5C17.5 13.2 19.8 13 21.5 14"></path>
+            <path d="M4.5 18.5C7.2 20.8 10 21.8 12 21.8C14 21.8 16.8 20.8 19.5 18.5"></path>
+          </svg>`,
+          body: "We partner directly with small-estate farmers across Darjeeling, Assam, and the Nilgiris. Fresh harvests, fair wages, and full traceability from garden to cup." 
+        },
+        { 
+          title: "No Preservatives", 
+          bg: "#871B26",
+          icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-10 w-10 sm:h-14 sm:w-14 text-cream" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22S20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z"></path>
+            <path d="M12 7.5C12 7.5 15.5 9 15.5 12.5C15.5 15 13.5 16.5 12 16.5C10.5 16.5 8.5 15 8.5 12.5C8.5 9 12 7.5 12 7.5Z"></path>
+            <path d="M12 7.5V16.5"></path>
+            <path d="M12 12C13.2 11 14.2 11.2 14.8 11.5"></path>
+            <path d="M12 13.5C10.8 12.8 10 13 9.4 13.3"></path>
+          </svg>`,
+          body: "Every pack is sealed at peak freshness without chemicals or preservatives. What you steep is what nature grew — authentic, clean, and alive with flavour." 
+        },
+        { 
+          title: "Wellness First", 
+          bg: "#452410",
+          icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-10 w-10 sm:h-14 sm:w-14 text-cream" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19.5 13.572L12 21L4.5 13.572C2.5 11.572 2.5 8.2 4.5 6.2C6.5 4.2 9.8 4.2 11.8 6.2L12 6.4L12.2 6.2C14.2 4.2 17.5 4.2 19.5 6.2C21.5 8.2 21.5 11.572 19.5 13.572Z"></path>
+            <path d="M12 9V16"></path>
+            <path d="M12 11.5C13.5 10.2 15 10.5 16 11"></path>
+            <path d="M12 13.5C10.5 12.5 9.5 12.8 8.8 13.2"></path>
+          </svg>`,
+          body: "Nidhi Tea blends are crafted with your well-being in mind — rich in antioxidants, calming adaptogens, and natural goodness that nourishes from the inside out." 
+        },
       ];
       const root = document.getElementById("benefits");
       if (!root) return;
       root.innerHTML = CARDS.map((c, i) => {
         const even = i % 2 === 0;
         return `<div class="bene-wrap sticky" style="z-index:${i + 1}">
-      <div class="relative mb-10 sm:mb-14 md:mb-18 w-full overflow-hidden rounded-lg border border-cream/25 bg-background transition-transform duration-500" style="transform:translateX(${even ? -6 : 12}px) rotate(${even ? -1.1 : 1.4}deg)">
+      <div class="relative mb-10 sm:mb-14 md:mb-18 w-full overflow-hidden rounded-2xl border-2 border-cream/35 shadow-[0_25px_60px_rgba(0,0,0,0.35)] transition-transform duration-500" style="background:${c.bg}; transform:translateX(${even ? -6 : 12}px) rotate(${even ? -1.1 : 1.4}deg)">
         <div class="flex items-center justify-between bg-cream px-4 py-4 sm:px-7 sm:py-5">
-          <span class="text-lg leading-none text-background">•</span>
-          <h3 class="font-display text-xl uppercase tracking-wide text-background sm:text-3xl md:text-4xl">${c.title}</h3>
-          <span class="text-lg leading-none text-background">•</span>
+          <span class="text-lg leading-none text-espresso font-bold">•</span>
+          <h3 class="font-display text-xl uppercase tracking-wide text-espresso sm:text-3xl md:text-4xl font-extrabold">${c.title}</h3>
+          <span class="text-lg leading-none text-espresso font-bold">•</span>
         </div>
-        <div class="flex h-[300px] flex-col items-center justify-center gap-6 bg-background px-6 text-center sm:h-[360px] sm:gap-10 sm:px-12 md:h-[420px]">
-          <span class="flex h-20 w-20 items-center justify-center rounded-full border border-cream/35 sm:h-28 sm:w-28 text-cream">
+        <div class="flex h-[300px] flex-col items-center justify-center gap-6 px-6 text-center sm:h-[360px] sm:gap-10 sm:px-12 md:h-[420px]" style="background:${c.bg}">
+          <span class="flex h-20 w-20 items-center justify-center rounded-full border border-cream/35 bg-cream/10 sm:h-28 sm:w-28 text-cream shadow-inner backdrop-blur-sm">
             ${c.icon.trim().startsWith("<svg") ? c.icon : `<img src="${c.icon}" alt="" loading="lazy" class="h-12 w-12 object-contain opacity-95 sm:h-16 sm:w-16">`}
           </span>
-          <p class="text-base leading-relaxed text-cream/85 sm:text-lg">${c.body}</p>
+          <p class="text-base leading-relaxed text-cream/95 sm:text-lg max-w-lg font-medium">${c.body}</p>
         </div>
-        <div class="bene-dim pointer-events-none absolute inset-0 bg-background transition-opacity duration-300" style="opacity:0"></div>
+        <div class="bene-dim pointer-events-none absolute inset-0 bg-black transition-opacity duration-300" style="opacity:0"></div>
       </div>
     </div>`;
       }).join("");
@@ -1387,7 +1623,11 @@
         wraps.forEach((w, i) => { if (w.getBoundingClientRect().top <= BASE + i * HEADER + 2) active = i; });
         dims.forEach((d, i) => (d.style.opacity = i < active ? 0.45 : 0));
       }
-      measure(); addEventListener("resize", measure); addEventListener("scroll", onScroll, { passive: true });
+      measure();
+      addEventListener("resize", measure);
+      addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("load", measure);
+      window.addEventListener("loaderComplete", measure);
     })();
 
     /* ---------- PRODUCTS (Slider Carousel + 3D Hover + Subtle Elements) ---------- */
@@ -1399,7 +1639,7 @@
           front: "img/hero.png",
           fruitTL: "element-img/cinnamon_stick.png",
           fruitBR: "element-img/star_anise.png",
-          bg: "#BE8D3F",
+          bg: "#9E5F20",
           price: "₹299",
         },
         {
@@ -1408,7 +1648,7 @@
           front: "img/product-2.png",
           fruitTL: "element-img/dried_lemon_slice.png",
           fruitBR: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png",
-          bg: "#D96B27",
+          bg: "#245836",
           price: "₹349",
         },
         {
@@ -1417,7 +1657,7 @@
           front: "img/product-3.png",
           fruitTL: "element-img/green_cardamom.png",
           fruitBR: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png",
-          bg: "#B82E28",
+          bg: "#871B26",
           price: "₹399",
         },
         {
@@ -1426,7 +1666,7 @@
           front: "img/3-1.png",
           fruitTL: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png",
           fruitBR: "element-img/cinnamon_stick.png",
-          bg: "#7A4924",
+          bg: "#452410",
           price: "₹449",
         },
         {
@@ -1435,14 +1675,14 @@
           front: "img/product-2.png",
           fruitTL: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png",
           fruitBR: "element-img/star_anise.png",
-          bg: "#4E6D38",
+          bg: "#2B4734",
           price: "₹379",
         },
       ];
       const grid = document.getElementById("productGrid");
       if (!grid) return;
       grid.innerHTML = PRODUCTS.map((p) => `
-    <article data-listing-card="true" class="prod group relative flex min-h-[530px] sm:min-h-[570px] md:min-h-[610px] w-[300px] sm:w-[350px] md:w-[380px] lg:w-[400px] shrink-0 snap-start flex-col items-center justify-between overflow-hidden rounded-xl border border-cream/20 p-5 sm:p-6 md:p-7 gap-4 md:gap-5 transition-all duration-500 ease-out" style="background:${p.bg}">
+    <article data-listing-card="true" class="prod group relative flex min-h-[530px] sm:min-h-[570px] md:min-h-[610px] w-[300px] sm:w-[350px] md:w-[380px] lg:w-[400px] shrink-0 snap-start flex-col items-center justify-between overflow-hidden rounded-xl border border-cream/25 p-5 sm:p-6 md:p-7 gap-4 md:gap-5 shadow-[0_20px_50px_rgba(0,0,0,0.25)] transition-all duration-500 ease-out" style="background:${p.bg}">
       <a class="absolute inset-0 z-1" aria-label="${p.name.join(" ")}" href="#products"></a>
       <div class="absolute z-0 pointer-events-none rounded-lg border border-cream/40 border-dashed inset-2.5"></div>
       
@@ -1477,16 +1717,16 @@
       <!-- Bottom Action Buttons Container (Hidden at idle, slides up on hover or click to take bottom place) -->
       <div data-buttons-container="true" class="actions absolute bottom-4 sm:bottom-5 md:bottom-6 left-4 right-4 sm:left-5 sm:right-5 md:left-6 md:right-6 z-20 flex flex-col gap-2.5 opacity-0 translate-y-6 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
         <!-- Top Button: ADD TO CART -->
-        <button type="button" class="group/btn relative cursor-pointer w-full flex items-center justify-between rounded-xl bg-cream px-5 py-3.5 sm:py-4 min-h-[48px] sm:min-h-[52px] font-display font-black text-sm sm:text-base uppercase tracking-wider text-background shadow-md transition-all duration-300 hover:brightness-105 active:scale-[0.98]">
-          <span class="font-display font-black uppercase tracking-wider text-background">ADD TO CART</span>
-          <span class="font-display font-black uppercase tracking-wider text-background">${p.price}</span>
+        <button type="button" class="group/btn relative cursor-pointer w-full flex items-center justify-between rounded-xl bg-cream px-5 py-3.5 sm:py-4 min-h-[48px] sm:min-h-[52px] font-display font-black text-sm sm:text-base uppercase tracking-wider text-espresso shadow-md transition-all duration-300 hover:bg-espresso hover:text-cream active:scale-[0.98]">
+          <span class="font-display font-black uppercase tracking-wider text-espresso transition-colors group-hover/btn:text-cream">ADD TO CART</span>
+          <span class="font-display font-black uppercase tracking-wider text-espresso transition-colors group-hover/btn:text-cream">${p.price}</span>
         </button>
 
         <!-- Bottom Button: VIEW PRODUCT -->
         <a class="w-full block" href="#products">
-          <div class="group/link relative cursor-pointer w-full flex items-center justify-between rounded-xl border-2 border-cream bg-transparent px-5 py-3.5 sm:py-4 min-h-[48px] sm:min-h-[52px] font-display font-black text-sm sm:text-base uppercase tracking-wider text-cream transition-all duration-300 hover:bg-cream hover:text-background active:scale-[0.98]">
-            <span class="font-display font-black uppercase tracking-wider transition-colors duration-300 group-hover/link:text-background">VIEW PRODUCT</span>
-            <span class="font-display font-black text-lg sm:text-xl transition-all duration-300 group-hover/link:text-background group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">↗</span>
+          <div class="group/link relative cursor-pointer w-full flex items-center justify-between rounded-xl border-2 border-cream bg-transparent px-5 py-3.5 sm:py-4 min-h-[48px] sm:min-h-[52px] font-display font-black text-sm sm:text-base uppercase tracking-wider text-cream transition-all duration-300 hover:bg-cream hover:text-espresso active:scale-[0.98]">
+            <span class="font-display font-black uppercase tracking-wider transition-colors duration-300 group-hover/link:text-espresso">VIEW PRODUCT</span>
+            <span class="font-display font-black text-lg sm:text-xl transition-all duration-300 group-hover/link:text-espresso group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">↗</span>
           </div>
         </a>
       </div>
@@ -1574,7 +1814,7 @@
         const scrollLeft = grid.scrollLeft;
         const maxScroll = grid.scrollWidth - grid.clientWidth;
         const progress = maxScroll > 0 ? (scrollLeft / maxScroll) : 0;
-        
+
         if (progressBar) {
           const pct = Math.max(20, Math.min(100, Math.round(progress * 80 + 20)));
           progressBar.style.width = pct + "%";
@@ -1854,16 +2094,16 @@
         <div data-review-card="true" class="group relative flex w-[78vw] sm:w-[320px] md:w-[360px] lg:w-[390px] xl:w-[420px] shrink-0 flex-col transition-transform duration-300">
           <a href="${r.link}" target="_blank" rel="noreferrer" class="reel-link flex flex-col gap-2 sm:gap-2.5 cursor-inherit select-none" aria-label="Watch ${r.handle} review on Instagram">
             <!-- Header Pill -->
-            <div class="relative flex h-14 sm:h-16 md:h-20 w-full items-center justify-between rounded-xl bg-cream px-5 sm:px-6 md:px-7 transition-all duration-300 group-hover:bg-cream/90 shadow-sm border border-cream/20">
-              <div class="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-background shrink-0"></div>
-              <p class="truncate px-3 font-display text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide text-background">
+            <div class="relative flex h-14 sm:h-16 md:h-20 w-full items-center justify-between rounded-xl bg-cream px-5 sm:px-6 md:px-7 transition-all duration-300 group-hover:bg-cream/90 shadow-md border border-cream/20">
+              <div class="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-espresso shrink-0"></div>
+              <p class="truncate px-3 font-display text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide text-espresso">
                 ${r.displayName}
               </p>
-              <div class="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-background shrink-0"></div>
+              <div class="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-espresso shrink-0"></div>
             </div>
 
             <!-- Video Container -->
-            <div class="relative aspect-[11/14] w-full overflow-hidden rounded-xl bg-background shadow-lg border border-cream/15">
+            <div class="relative aspect-[11/14] w-full overflow-hidden rounded-xl bg-[#1A0E06] shadow-2xl border border-cream/25">
               <video class="reel-video absolute inset-0 h-full w-full object-cover pointer-events-none"
                      autoplay loop muted playsinline preload="auto"
                      aria-label="${r.handle} video review">
@@ -1871,7 +2111,7 @@
               </video>
 
               <!-- Sound Toggle Button -->
-              <button type="button" class="reel-sound-btn absolute bottom-3.5 right-3.5 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-cream backdrop-blur-md transition-transform duration-200 hover:scale-110 hover:bg-flame cursor-pointer pointer-events-auto"
+              <button type="button" class="reel-sound-btn absolute bottom-3.5 right-3.5 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-[#1A0E06]/85 text-cream backdrop-blur-md transition-all duration-200 hover:scale-110 hover:bg-cream hover:text-espresso cursor-pointer pointer-events-auto"
                       aria-label="Toggle sound for ${r.handle}" onclick="toggleReelAudio(event, this)">
                 <svg class="sound-icon-muted h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
@@ -1883,7 +2123,7 @@
               </button>
 
               <!-- Reel Tag Overlay -->
-              <div class="absolute top-3.5 left-3.5 z-20 flex items-center gap-1.5 rounded-full bg-background/70 px-3 py-1 text-xs font-semibold text-cream backdrop-blur-md pointer-events-none">
+              <div class="absolute top-3.5 left-3.5 z-20 flex items-center gap-1.5 rounded-full bg-[#1A0E06]/80 px-3 py-1 text-xs font-semibold text-cream backdrop-blur-md pointer-events-none">
                 <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                 </svg>
