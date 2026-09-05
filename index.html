@@ -404,6 +404,51 @@
       transform: translateY(0px) !important;
       opacity: 1 !important;
     }
+
+    /* ============ CUSTOM CURSOR (Bucks Sauce Style) ============ */
+    @media (pointer: fine) {
+      * { cursor: none !important; }
+    }
+    .custom-cursor {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--cream);
+      pointer-events: none;
+      z-index: 99999;
+      mix-blend-mode: difference;
+      top: 0;
+      left: 0;
+      will-change: transform, width, height;
+      opacity: 0;
+    }
+
+    /* ============ BURGER → X ANIMATION ============ */
+    #navBurger .burger-line {
+      transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+                  width 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+                  opacity 0.25s ease;
+    }
+    #navBurger.menu-active {
+      background: var(--cream) !important;
+      border-color: var(--cream) !important;
+      color: #1A0E06 !important;
+    }
+    #navBurger.menu-active .burger-line:first-child {
+      transform: translateY(4.5px) rotate(45deg) !important;
+    }
+    #navBurger.menu-active .burger-line:last-child {
+      transform: translateY(-3.5px) rotate(-45deg) !important;
+      width: 100% !important;
+    }
+
+    /* ============ MENU — GSAP OWNS VISIBILITY ============ */
+    #mobileMenu {
+      opacity: 1;
+      transform: none;
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -498,12 +543,10 @@
         <!-- Modern Bucks-Style Hamburger Menu Button -->
         <button data-menu id="navBurger" aria-label="Toggle menu" type="button"
           class="group/menu relative flex h-12 items-center gap-2.5 sm:gap-3 rounded-xl border-2 border-cream/40 bg-background/80 px-4 sm:px-5 text-cream backdrop-blur-md transition-all duration-300 hover:border-cream hover:bg-cream hover:text-espresso active:scale-95 cursor-pointer shadow-lg shadow-black/25">
-          <span class="hidden sm:inline-block font-display text-sm uppercase tracking-widest font-bold">Menu</span>
-          <div class="flex flex-col justify-center gap-1.5 w-5 sm:w-6 h-4 pointer-events-none">
-            <span
-              class="block h-[2px] w-full bg-current rounded-full transition-all duration-300 ease-out group-hover/menu:translate-x-1"></span>
-            <span
-              class="block h-[2px] w-3/4 bg-current rounded-full transition-all duration-300 ease-out group-hover/menu:w-full"></span>
+          <span class="hidden sm:inline-block font-display text-sm uppercase tracking-widest font-bold pointer-events-none">Menu</span>
+          <div class="flex flex-col justify-center gap-[6px] w-5 sm:w-5 pointer-events-none">
+            <span class="burger-line block h-[2px] w-full bg-current rounded-full"></span>
+            <span class="burger-line block h-[2px] w-3/4 bg-current rounded-full"></span>
           </div>
         </button>
       </div>
@@ -511,7 +554,7 @@
 
     <!-- ============ FULLSCREEN MODERN OVERLAY MENU ============ -->
     <div id="mobileMenu"
-      class="fixed inset-0 z-[100] flex flex-col justify-between bg-background/98 backdrop-blur-2xl transition-all duration-500 opacity-0 pointer-events-none -translate-y-2 will-change-transform overflow-hidden select-none">
+      class="fixed inset-0 z-[100] flex flex-col justify-between bg-background/98 backdrop-blur-2xl pointer-events-none will-change-transform overflow-hidden select-none">
 
       <!-- Ambient Background Tea Leaf Pattern & Subtle Watermarks -->
       <div class="pointer-events-none absolute inset-0 z-0 bg-repeat opacity-15"
@@ -1336,12 +1379,20 @@
         links = document.getElementById("navLinks"), pill = document.getElementById("navPill"),
         burger = document.getElementById("navBurger"), menu = document.getElementById("mobileMenu");
       const big = ["h-14", "w-36", "sm:h-16", "sm:w-44", "md:h-20", "md:w-52"], small = ["h-9", "w-24", "sm:h-10", "sm:w-28", "md:h-11", "md:w-36"];
+
+      // Set menu initial hidden state via GSAP (GSAP owns all menu visibility)
+      if (typeof gsap !== "undefined") {
+        gsap.set(menu, { autoAlpha: 0, clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" });
+      }
+
       function onScroll() {
         const s = window.scrollY > 80;
+        // Resize logo on scroll
         box.classList.remove(...(s ? big : small)); box.classList.add(...(s ? small : big));
+        // Legacy links container (empty, kept for compat)
         links.classList.toggle("opacity-0", s); links.classList.toggle("-translate-y-2", s); links.classList.toggle("pointer-events-none", s);
-        pill.classList.toggle("opacity-0", !s); pill.classList.toggle("-translate-y-3", !s); pill.classList.toggle("pointer-events-none", !s);
-        burger.classList.toggle("opacity-0", s); burger.classList.toggle("pointer-events-none", s);
+        // navPill (cart + burger) is ALWAYS visible — no toggling
+        // navBurger is inside navPill and ALWAYS accessible — no toggling
       }
       onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -1354,26 +1405,70 @@
       const previewLinks = menu.querySelectorAll("a[data-preview]");
       let isMenuOpen = false;
 
+      let menuTl = null;
+
       function openFullscreenMenu() {
+        if (isMenuOpen) return;
         isMenuOpen = true;
-        menu.classList.remove("opacity-0", "pointer-events-none", "-translate-y-2");
-        menu.classList.add("opacity-100", "pointer-events-auto", "translate-y-0");
         document.body.style.overflow = "hidden";
+        burger.classList.add("menu-active");
+        menu.classList.remove("pointer-events-none");
+        menu.classList.add("pointer-events-auto");
 
         if (typeof gsap !== "undefined") {
-          gsap.fromTo(
-            menu.querySelectorAll(".menu-item"),
-            { y: 35, opacity: 0 },
-            { y: 0, opacity: 1, stagger: 0.06, duration: 0.5, ease: "power3.out", delay: 0.08 }
+          if (menuTl) menuTl.kill();
+          menuTl = gsap.timeline();
+          // 1. Full overlay sweeps down via clip-path polygon
+          menuTl.fromTo(menu,
+            { autoAlpha: 1, clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
+            { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", duration: 0.7, ease: "power4.inOut" }
           );
+          // 2. Nav items stagger up
+          menuTl.fromTo(menu.querySelectorAll(".menu-item"),
+            { y: 64, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.07, duration: 0.55, ease: "power3.out" },
+            "-=0.38"
+          );
+          // 3. Right preview card slides in
+          const previewCol = menu.querySelector(".lg\\:flex");
+          if (previewCol) {
+            menuTl.fromTo(previewCol, { x: 50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, "-=0.4");
+          }
+          // 4. Bottom bar fades up
+          const bottomBar = menu.querySelector(".border-t.border-cream\/15");
+          if (bottomBar) {
+            menuTl.fromTo(bottomBar, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, "-=0.3");
+          }
         }
       }
 
       function closeFullscreenMenu() {
+        if (!isMenuOpen) return;
         isMenuOpen = false;
-        menu.classList.add("opacity-0", "pointer-events-none", "-translate-y-2");
-        menu.classList.remove("opacity-100", "pointer-events-auto", "translate-y-0");
         document.body.style.overflow = "";
+        burger.classList.remove("menu-active");
+
+        if (typeof gsap !== "undefined") {
+          if (menuTl) menuTl.kill();
+          menuTl = gsap.timeline({
+            onComplete: () => {
+              menu.classList.add("pointer-events-none");
+              menu.classList.remove("pointer-events-auto");
+            }
+          });
+          // 1. Nav items stagger down quickly
+          menuTl.to(menu.querySelectorAll(".menu-item"),
+            { y: -28, opacity: 0, stagger: 0.03, duration: 0.28, ease: "power2.in" }
+          );
+          // 2. Overlay wipes up via clip-path
+          menuTl.to(menu,
+            { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)", duration: 0.52, ease: "power4.inOut" },
+            "-=0.14"
+          );
+        } else {
+          menu.classList.add("pointer-events-none");
+          menu.classList.remove("pointer-events-auto");
+        }
       }
 
       openBtns.forEach((btn) => {
@@ -2061,7 +2156,7 @@
           if (isVisible) {
             hideCardDetails();
           } else {
-            cards.forEach(other => {
+            cards.forEach((other) => {
               if (other !== c) {
                 const otherAct = other.querySelector(".actions");
                 const otherTL = other.querySelector(".fruitTL");
@@ -2111,6 +2206,29 @@
           }, 2000);
         }, 750);
       });
+
+      // ---- PRODUCT CARDS: Scroll-Triggered Stagger Entrance (Bucks Sauce Style) ----
+      if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+        gsap.registerPlugin(ScrollTrigger);
+        const allCards = [...grid.querySelectorAll(".prod")];
+        gsap.set(allCards, { y: 80, opacity: 0, scale: 0.93 });
+
+        ScrollTrigger.batch(allCards, {
+          onEnter: (batch) => {
+            gsap.to(batch, {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.85,
+              stagger: 0.09,
+              ease: "power3.out",
+              overwrite: true,
+            });
+          },
+          start: "top 90%",
+          once: true,
+        });
+      }
     })();
 
     /* ---------- WHY NIDHI TEA (Standalone Arched Heading Reveal) ---------- */
@@ -2478,6 +2596,112 @@
         }, { threshold: 0.05 });
         observer.observe(document.getElementById("reviewsSection"));
       }
+    })();
+
+    /* ---------- HERO SCROLL PARALLAX + SECTION REVEALS (Bucks Sauce Style) ---------- */
+    (function () {
+      if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero section fades and gently drifts upward as user scrolls away
+      const heroSection = document.getElementById("top");
+      if (heroSection) {
+        gsap.to(heroSection, {
+          scrollTrigger: {
+            trigger: heroSection,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.8,
+          },
+          y: -55,
+          opacity: 0.45,
+          scale: 0.965,
+          ease: "none",
+        });
+      }
+
+      // Products section heading slides up on scroll
+      const productsH2 = document.querySelector("#products h2");
+      if (productsH2) {
+        gsap.from(productsH2, {
+          scrollTrigger: {
+            trigger: productsH2,
+            start: "top 88%",
+            toggleActions: "play none none reverse",
+          },
+          y: 45,
+          opacity: 0,
+          duration: 0.9,
+          ease: "power3.out",
+        });
+      }
+
+      // Products badge pill slides in
+      const productsBadge = document.querySelector("#products .flex.items-center.gap-3");
+      if (productsBadge) {
+        gsap.from(productsBadge, {
+          scrollTrigger: {
+            trigger: productsBadge,
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+          x: 30,
+          opacity: 0,
+          duration: 0.7,
+          delay: 0.15,
+          ease: "power3.out",
+        });
+      }
+    })();
+
+    /* ---------- CUSTOM CURSOR (Bucks Sauce Signature) ---------- */
+    (function () {
+      // Only on devices with fine pointer (desktop/laptop)
+      if (!window.matchMedia("(pointer: fine)").matches) return;
+      if (typeof gsap === "undefined") return;
+
+      const cursor = document.createElement("div");
+      cursor.className = "custom-cursor";
+      document.body.appendChild(cursor);
+
+      let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+      let curX = mouseX, curY = mouseY;
+      let isVisible = false;
+
+      // Position cursor at center initially (hidden)
+      gsap.set(cursor, { xPercent: -50, yPercent: -50, x: mouseX, y: mouseY });
+
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!isVisible) {
+          isVisible = true;
+          gsap.to(cursor, { autoAlpha: 1, duration: 0.4 });
+        }
+      });
+
+      document.addEventListener("mouseleave", () => {
+        isVisible = false;
+        gsap.to(cursor, { autoAlpha: 0, duration: 0.3 });
+      });
+
+      // GSAP ticker: cursor follows mouse with spring-like lag
+      gsap.ticker.add(() => {
+        curX += (mouseX - curX) * 0.14;
+        curY += (mouseY - curY) * 0.14;
+        gsap.set(cursor, { x: curX, y: curY });
+      });
+
+      // Scale up on interactive elements
+      const hoverTargets = document.querySelectorAll("a, button, [data-menu], [data-menu-close], .prod, input, label");
+      hoverTargets.forEach((el) => {
+        el.addEventListener("mouseenter", () => {
+          gsap.to(cursor, { width: 30, height: 30, duration: 0.22, ease: "power2.out" });
+        });
+        el.addEventListener("mouseleave", () => {
+          gsap.to(cursor, { width: 10, height: 10, duration: 0.22, ease: "power2.out" });
+        });
+      });
     })();
   </script>
 </body>
