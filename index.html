@@ -293,18 +293,24 @@
     }
 
     @keyframes leaf-drift-1 {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translate3d(0, 0, 0) rotate(0deg);
       }
+
       50% {
         transform: translate3d(14px, -20px, 0) rotate(8deg);
       }
     }
 
     @keyframes leaf-drift-2 {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translate3d(0, 0, 0) rotate(0deg);
       }
+
       50% {
         transform: translate3d(-16px, -18px, 0) rotate(-10deg);
       }
@@ -342,12 +348,72 @@
       will-change: transform, opacity;
       transform-origin: 50% 100%;
     }
+
+    /* ============ BUTTON ROLLING & MULTI-STATE CART ANIMATION ============ */
+    @keyframes bucks-loading-dot {
+
+      0%,
+      80%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.35;
+      }
+
+      40% {
+        transform: translateY(-5px);
+        opacity: 1;
+      }
+    }
+
+    .animate-bucks-dot {
+      animation: bucks-loading-dot 0.8s ease-in-out infinite;
+    }
+
+    .btn-adding [data-button-bg="true"],
+    .btn-added [data-button-bg="true"] {
+      background-color: var(--espresso, #100B06) !important;
+      border-color: var(--espresso, #100B06) !important;
+    }
+
+    .btn-adding .btn-label-default,
+    .btn-adding .btn-label-hover,
+    .btn-adding .btn-price-default,
+    .btn-adding .btn-price-hover {
+      transform: translateY(-120%) !important;
+      opacity: 0 !important;
+    }
+
+    .btn-adding .btn-label-adding,
+    .btn-adding .btn-dots {
+      transform: translateY(0px) !important;
+      opacity: 1 !important;
+    }
+
+    .btn-added .btn-label-default,
+    .btn-added .btn-label-hover,
+    .btn-added .btn-label-adding,
+    .btn-added .btn-price-default,
+    .btn-added .btn-price-hover,
+    .btn-added .btn-dots {
+      transform: translateY(-120%) !important;
+      opacity: 0 !important;
+    }
+
+    .btn-added .btn-label-added,
+    .btn-added .btn-check {
+      transform: translateY(0px) !important;
+      opacity: 1 !important;
+    }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 
 <body class="relative min-h-screen">
+
+  <!-- ============ AMBIENT BOTANICAL TEA LEAF PATTERN BACKGROUND ============ -->
+  <div class="pointer-events-none fixed inset-0 z-0 bg-repeat opacity-85 select-none"
+    style="background-image: url('element-img/tea-leaf-pattern.svg'); background-size: 260px 260px;"></div>
 
   <!-- ============ LOADER ============ -->
   <div id="loader" class="fixed inset-0 z-[100] overflow-hidden">
@@ -367,8 +433,7 @@
     </div>
     <div
       class="pl-item absolute left-1/2 top-1/2 aspect-square w-[26vw] -translate-x-1/2 -translate-y-1/2 scale-0 will-change-transform sm:w-[18vw] lg:w-[13vw]">
-      <img src="element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png"
-        alt="Honey Dipper" class="h-full w-full object-contain" />
+      <img src="img/honey.webp" alt="Honey Dipper" class="h-full w-full object-contain" />
     </div>
     <div
       class="pl-item absolute left-1/2 top-1/2 aspect-square w-[26vw] -translate-x-1/2 -translate-y-1/2 scale-0 will-change-transform sm:w-[18vw] lg:w-[13vw]">
@@ -397,91 +462,296 @@
         </div>
       </a>
 
-      <ul id="navLinks" class="hidden items-center gap-9 pt-3 transition-all duration-500 lg:flex">
-        <li><a href="#products"
-            class="group relative font-display text-xl uppercase tracking-wide text-cream transition-colors hover:text-flame">Shop<span
-              class="absolute -bottom-1 left-0 h-px w-0 bg-flame transition-all duration-300 group-hover:w-full"></span></a>
-        </li>
-        <li><a href="#products"
-            class="group relative font-display text-xl uppercase tracking-wide text-cream transition-colors hover:text-flame">Blends<span
-              class="absolute -bottom-1 left-0 h-px w-0 bg-flame transition-all duration-300 group-hover:w-full"></span></a>
-        </li>
-        <li><a href="#products"
-            class="group relative font-display text-xl uppercase tracking-wide text-cream transition-colors hover:text-flame">About<span
-              class="absolute -bottom-1 left-0 h-px w-0 bg-flame transition-all duration-300 group-hover:w-full"></span></a>
-        </li>
-        <li><a href="#products"
-            class="group relative font-display text-xl uppercase tracking-wide text-cream transition-colors hover:text-flame">Contact<span
-              class="absolute -bottom-1 left-0 h-px w-0 bg-flame transition-all duration-300 group-hover:w-full"></span></a>
-        </li>
-        <li><a href="#products"
-            class="group relative font-display text-xl uppercase tracking-wide text-cream transition-colors hover:text-flame">Blog<span
-              class="absolute -bottom-1 left-0 h-px w-0 bg-flame transition-all duration-300 group-hover:w-full"></span></a>
-        </li>
-        <li><button
-            class="font-display text-xl uppercase tracking-wide text-cream transition-colors hover:text-flame">Cart(0)</button>
-        </li>
-      </ul>
+      <!-- Hidden legacy container to prevent any script reference errors -->
+      <div id="navLinks" class="hidden"></div>
 
-      <div id="navPill"
-        class="pointer-events-none absolute right-5 top-4 z-10 flex -translate-y-3 items-center gap-2 opacity-0 transition-all duration-500 md:right-8">
+      <!-- Modern Actions Cluster: Shop Tea CTA + Cart Button + Modern Hamburger Menu Button -->
+      <div id="navPill" class="relative z-10 flex items-center gap-2.5 sm:gap-3 transition-all duration-500">
+        <!-- Shop Tea CTA Button with rolling double-text -->
         <a href="#products"
-          class="group relative hidden overflow-hidden rounded-sm bg-cream px-6 py-3.5 font-display text-sm uppercase tracking-wide text-background sm:block">
-          <span class="relative z-10 transition-colors duration-300 group-hover:text-cream">Shop Tea</span>
+          class="group/button relative hidden overflow-hidden rounded-xl border-2 border-cream bg-cream px-5 py-3 font-display text-sm uppercase tracking-wider text-espresso transition-all duration-300 md:inline-flex active:scale-95 shadow-md">
+          <div data-button-bg="true"
+            class="absolute inset-0 rounded-xl overflow-hidden bg-cream transition-all duration-300 group-hover/button:bg-espresso pointer-events-none">
+          </div>
           <span
-            class="absolute inset-0 translate-y-full bg-flame transition-transform duration-300 group-hover:translate-y-0"></span>
+            class="relative z-20 flex items-center justify-center leading-none h-[1.2em] overflow-hidden pointer-events-none">
+            <span class="invisible whitespace-pre font-bold" aria-hidden="true">Shop Tea</span>
+            <span
+              class="absolute inset-0 flex items-center justify-center whitespace-pre transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-espresso group-hover/button:text-cream font-bold">Shop
+              Tea</span>
+            <span
+              class="absolute inset-0 flex items-center justify-center whitespace-pre translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-cream font-bold">Shop
+              Tea</span>
+          </span>
         </a>
-        <button aria-label="Cart"
-          class="flex h-12 w-12 items-center justify-center rounded-sm border border-cream/25 text-cream transition-colors hover:border-flame hover:text-flame"><svg
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-5 w-5">
-            <path d="M3 6h18l-2 12H5L3 6Z" />
-            <path d="M8 6a4 4 0 0 1 8 0" />
-          </svg></button>
-        <button data-menu aria-label="Toggle menu"
-          class="flex h-12 w-12 items-center justify-center rounded-sm border border-cream/25 text-cream transition-colors hover:border-flame hover:text-flame"><svg
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-5 w-5">
-            <path d="M4 7h16M4 12h16M4 17h16" />
-          </svg></button>
-      </div>
 
-      <button data-menu id="navBurger" aria-label="Toggle menu"
-        class="relative z-10 flex h-11 w-11 items-center justify-center rounded-sm border border-cream/25 text-cream transition-opacity duration-300 lg:hidden"><svg
-          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-5 w-5">
-          <path d="M4 7h16M4 12h16M4 17h16" />
-        </svg></button>
+        <!-- Modern Cart Button -->
+        <a href="#products" aria-label="Cart"
+          class="group/cart relative flex h-12 w-12 items-center justify-center rounded-xl border-2 border-cream/35 bg-background/80 backdrop-blur-md text-cream transition-all duration-300 hover:border-cream hover:bg-cream hover:text-espresso active:scale-95 cursor-pointer shadow-md">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            class="h-5 w-5 transition-transform duration-300 group-hover/cart:scale-110">
+            <path d="M3 6h18l-2 12H5L3 6Z" stroke-linejoin="round" />
+            <path d="M8 6a4 4 0 0 1 8 0" />
+          </svg>
+          <span
+            class="absolute -top-1 -right-1 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-flame font-display text-[10px] font-bold text-cream ring-2 ring-background">0</span>
+        </a>
+
+        <!-- Modern Bucks-Style Hamburger Menu Button -->
+        <button data-menu id="navBurger" aria-label="Toggle menu" type="button"
+          class="group/menu relative flex h-12 items-center gap-2.5 sm:gap-3 rounded-xl border-2 border-cream/40 bg-background/80 px-4 sm:px-5 text-cream backdrop-blur-md transition-all duration-300 hover:border-cream hover:bg-cream hover:text-espresso active:scale-95 cursor-pointer shadow-lg shadow-black/25">
+          <span class="hidden sm:inline-block font-display text-sm uppercase tracking-widest font-bold">Menu</span>
+          <div class="flex flex-col justify-center gap-1.5 w-5 sm:w-6 h-4 pointer-events-none">
+            <span
+              class="block h-[2px] w-full bg-current rounded-full transition-all duration-300 ease-out group-hover/menu:translate-x-1"></span>
+            <span
+              class="block h-[2px] w-3/4 bg-current rounded-full transition-all duration-300 ease-out group-hover/menu:w-full"></span>
+          </div>
+        </button>
+      </div>
     </nav>
 
+    <!-- ============ FULLSCREEN MODERN OVERLAY MENU ============ -->
     <div id="mobileMenu"
-      class="max-h-0 overflow-hidden bg-background/95 backdrop-blur-md transition-[max-height] duration-500">
-      <ul class="mx-auto flex max-w-[1600px] flex-col gap-1 px-6 py-5 md:px-8">
-        <li><a href="#products" class="block py-2 font-display text-2xl uppercase text-cream hover:text-flame">Shop</a>
-        </li>
-        <li><a href="#products"
-            class="block py-2 font-display text-2xl uppercase text-cream hover:text-flame">Blends</a></li>
-        <li><a href="#products" class="block py-2 font-display text-2xl uppercase text-cream hover:text-flame">About</a>
-        </li>
-        <li><a href="#products"
-            class="block py-2 font-display text-2xl uppercase text-cream hover:text-flame">Contact</a></li>
-        <li><a href="#products" class="block py-2 font-display text-2xl uppercase text-cream hover:text-flame">Blog</a>
-        </li>
-        <li><a href="#products"
-            class="block py-2 font-display text-2xl uppercase text-cream hover:text-flame">Cart(0)</a></li>
-      </ul>
+      class="fixed inset-0 z-[100] flex flex-col justify-between bg-background/98 backdrop-blur-2xl transition-all duration-500 opacity-0 pointer-events-none -translate-y-2 will-change-transform overflow-hidden select-none">
+
+      <!-- Ambient Background Tea Leaf Pattern & Subtle Watermarks -->
+      <div class="pointer-events-none absolute inset-0 z-0 bg-repeat opacity-15"
+        style="background-image: url('element-img/tea-leaf-pattern.svg'); background-size: 260px 260px;"></div>
+      <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+        class="pointer-events-none absolute -top-20 -left-20 w-[420px] md:w-[620px] h-auto opacity-10 -rotate-45" />
+      <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+        class="pointer-events-none absolute -bottom-20 -right-20 w-[420px] md:w-[620px] h-auto opacity-10 rotate-135" />
+
+      <!-- Top Header Bar inside Menu -->
+      <div
+        class="relative z-10 w-full border-b border-cream/15 px-6 py-5 sm:px-10 sm:py-6 bg-background/60 backdrop-blur-md">
+        <div class="mx-auto flex max-w-[1600px] items-center justify-between">
+          <a href="#top" data-menu-close class="block h-10 w-28 sm:h-12 sm:w-36">
+            <img src="img/logo.webp" alt="Nidhi Tea Logo" class="h-full w-full object-contain object-left" />
+          </a>
+
+          <div class="hidden sm:flex items-center gap-3 rounded-full border border-cream/20 bg-cream/5 px-4 py-1.5">
+            <span class="h-2 w-2 rounded-full bg-gold animate-pulse"></span>
+            <span class="font-sans text-xs uppercase tracking-[0.2em] text-cream/80">Mountain Handcrafted Artisan
+              Teas</span>
+          </div>
+
+          <!-- Modern Close Button with Hover Animation -->
+          <button type="button" data-menu-close aria-label="Close menu"
+            class="group relative flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-full border-2 border-cream bg-cream text-espresso transition-all duration-300 hover:bg-gold hover:text-white hover:border-gold hover:scale-105 active:scale-95 cursor-pointer shadow-xl">
+            <svg class="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:rotate-90" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Middle Content: Two Columns on Desktop, Clean Scroll on Mobile -->
+      <div
+        class="relative z-10 mx-auto flex w-full max-w-[1600px] flex-1 flex-col lg:flex-row items-center justify-between gap-8 lg:gap-14 px-6 py-6 sm:px-10 sm:py-10 overflow-y-auto no-scrollbar">
+
+        <!-- Left: Huge Editorial Nav Items with Stagger and Subtitles -->
+        <nav class="w-full lg:w-7/12 flex flex-col justify-center my-auto">
+          <ul class="flex flex-col w-full divide-y divide-cream/15 divide-dashed">
+
+            <!-- Item 1: Shop Teas -->
+            <li class="menu-item transition-all duration-300">
+              <a href="#products" data-menu-close data-preview="img/hero.png" data-preview-title="Classic Masala Chai"
+                data-preview-desc="Slow-crushed mountain spices & Assam CTC"
+                class="group flex w-full items-center justify-between py-3.5 sm:py-4 md:py-5 cursor-pointer">
+                <div class="flex items-baseline gap-4 sm:gap-6">
+                  <span class="font-mono text-xs sm:text-sm text-gold/90 font-bold tracking-widest">01</span>
+                  <div class="flex flex-col">
+                    <span
+                      class="font-display text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-cream transition-all duration-300 group-hover:text-gold group-hover:translate-x-2 sm:group-hover:translate-x-4">Shop
+                      Teas</span>
+                    <span
+                      class="font-sans text-xs sm:text-sm text-cream/50 group-hover:text-cream/80 transition-colors">Explore
+                      our signature artisan harvest collection</span>
+                  </div>
+                </div>
+                <span
+                  class="font-display text-xl sm:text-2xl text-gold opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">↗</span>
+              </a>
+            </li>
+
+            <!-- Item 2: Master Blends -->
+            <li class="menu-item transition-all duration-300">
+              <a href="#products" data-menu-close data-preview="img/product-2.png"
+                data-preview-title="Honey Lemon Green Tea"
+                data-preview-desc="High-grown green tea leaves & organic raw honey"
+                class="group flex w-full items-center justify-between py-3.5 sm:py-4 md:py-5 cursor-pointer">
+                <div class="flex items-baseline gap-4 sm:gap-6">
+                  <span class="font-mono text-xs sm:text-sm text-gold/90 font-bold tracking-widest">02</span>
+                  <div class="flex flex-col">
+                    <span
+                      class="font-display text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-cream transition-all duration-300 group-hover:text-gold group-hover:translate-x-2 sm:group-hover:translate-x-4">Master
+                      Blends</span>
+                    <span
+                      class="font-sans text-xs sm:text-sm text-cream/50 group-hover:text-cream/80 transition-colors">Chai,
+                      Green, Oolong & Herbal infusions</span>
+                  </div>
+                </div>
+                <span
+                  class="font-display text-xl sm:text-2xl text-gold opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">↗</span>
+              </a>
+            </li>
+
+            <!-- Item 3: Pure Benefits -->
+            <li class="menu-item transition-all duration-300">
+              <a href="#benefits" data-menu-close
+                data-preview="element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png"
+                data-preview-title="100% Mountain Botanicals"
+                data-preview-desc="Rich in natural antioxidants and essential oils"
+                class="group flex w-full items-center justify-between py-3.5 sm:py-4 md:py-5 cursor-pointer">
+                <div class="flex items-baseline gap-4 sm:gap-6">
+                  <span class="font-mono text-xs sm:text-sm text-gold/90 font-bold tracking-widest">03</span>
+                  <div class="flex flex-col">
+                    <span
+                      class="font-display text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-cream transition-all duration-300 group-hover:text-gold group-hover:translate-x-2 sm:group-hover:translate-x-4">Pure
+                      Benefits</span>
+                    <span
+                      class="font-sans text-xs sm:text-sm text-cream/50 group-hover:text-cream/80 transition-colors">Wellness
+                      in every single steeped cup</span>
+                  </div>
+                </div>
+                <span
+                  class="font-display text-xl sm:text-2xl text-gold opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">↗</span>
+              </a>
+            </li>
+
+            <!-- Item 4: Why Nidhi Tea -->
+            <li class="menu-item transition-all duration-300">
+              <a href="#whyIntroSection" data-menu-close
+                data-preview="element-img/isolated_rustic_clay_tea_pot_yixing_style_side_view_transparent_background.png"
+                data-preview-title="Direct Estate Sourcing"
+                data-preview-desc="Partnered directly with heritage tea gardens"
+                class="group flex w-full items-center justify-between py-3.5 sm:py-4 md:py-5 cursor-pointer">
+                <div class="flex items-baseline gap-4 sm:gap-6">
+                  <span class="font-mono text-xs sm:text-sm text-gold/90 font-bold tracking-widest">04</span>
+                  <div class="flex flex-col">
+                    <span
+                      class="font-display text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-cream transition-all duration-300 group-hover:text-gold group-hover:translate-x-2 sm:group-hover:translate-x-4">Why
+                      Nidhi Tea</span>
+                    <span
+                      class="font-sans text-xs sm:text-sm text-cream/50 group-hover:text-cream/80 transition-colors">Our
+                      philosophy, single-origin integrity & craft</span>
+                  </div>
+                </div>
+                <span
+                  class="font-display text-xl sm:text-2xl text-gold opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">↗</span>
+              </a>
+            </li>
+
+            <!-- Item 5: Customer Reviews -->
+            <li class="menu-item transition-all duration-300">
+              <a href="#reviewsSection" data-menu-close
+                data-preview="element-img/isolated_steaming_cup_of_green_tea_in_a_porcelain_cup_top_down_view.png"
+                data-preview-title="Loved By Tea Lovers"
+                data-preview-desc="4.9 / 5 Stars across 10,000+ happy households"
+                class="group flex w-full items-center justify-between py-3.5 sm:py-4 md:py-5 cursor-pointer">
+                <div class="flex items-baseline gap-4 sm:gap-6">
+                  <span class="font-mono text-xs sm:text-sm text-gold/90 font-bold tracking-widest">05</span>
+                  <div class="flex flex-col">
+                    <span
+                      class="font-display text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-cream transition-all duration-300 group-hover:text-gold group-hover:translate-x-2 sm:group-hover:translate-x-4">Customer
+                      Stories</span>
+                    <span
+                      class="font-sans text-xs sm:text-sm text-cream/50 group-hover:text-cream/80 transition-colors">Real
+                      feedback & creator reviews</span>
+                  </div>
+                </div>
+                <span
+                  class="font-display text-xl sm:text-2xl text-gold opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">↗</span>
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- Right: Modern Interactive Preview Card (Hidden on Mobile, Visible on Desktop) -->
+        <div class="hidden lg:flex w-5/12 flex-col items-center justify-center pl-8">
+          <div
+            class="relative w-full max-w-[420px] overflow-hidden rounded-2xl border border-cream/20 bg-smoke/80 p-8 shadow-2xl backdrop-blur-md">
+
+            <!-- Card Header Badge -->
+            <div class="flex items-center justify-between pb-6 border-b border-cream/15">
+              <span class="font-mono text-xs uppercase tracking-[0.2em] text-gold font-semibold">Artisan Harvest</span>
+              <div class="flex items-center gap-1 text-gold text-xs">★★★★★</div>
+            </div>
+
+            <!-- Dynamic Floating Preview Image -->
+            <div class="relative flex h-[240px] w-full items-center justify-center my-6">
+              <div class="absolute h-40 w-40 rounded-full bg-gold/15 blur-2xl"></div>
+              <img id="menuHoverImg" src="img/hero.png" alt="Tea Preview"
+                class="relative z-10 max-h-[220px] w-auto max-w-[260px] object-contain transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] scale-100" />
+            </div>
+
+            <!-- Card Bottom Details -->
+            <div class="border-t border-cream/15 pt-5">
+              <h4 id="menuHoverTitle" class="font-display text-xl uppercase tracking-wide text-cream">Classic Masala
+                Chai</h4>
+              <p id="menuHoverDesc" class="mt-1 font-sans text-xs leading-relaxed text-cream/65">Slow-crushed mountain
+                spices & Assam CTC</p>
+
+              <div class="mt-4 flex items-center justify-between">
+                <span class="font-mono text-sm font-bold text-gold">From ₹299</span>
+                <span class="font-sans text-xs uppercase tracking-wider text-cream/50">Small Batch 2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Info Bar inside Menu -->
+      <div class="relative z-10 w-full border-t border-cream/15 px-6 py-4 sm:px-10 sm:py-5 bg-background/90">
+        <div
+          class="mx-auto flex max-w-[1600px] flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-cream/70 font-sans">
+          <div class="flex items-center gap-4 sm:gap-6">
+            <span class="text-cream/90 font-medium">Contact: care@nidhitea.com</span>
+            <span class="hidden md:inline text-cream/30">|</span>
+            <span class="hidden md:inline">Toll Free: 1800-NIDHI-TEA</span>
+          </div>
+
+          <div class="flex items-center gap-5 sm:gap-8 font-display uppercase tracking-wider text-cream">
+            <a href="https://instagram.com" target="_blank" rel="noreferrer"
+              class="hover:text-gold transition-colors">Instagram ↗</a>
+            <a href="https://facebook.com" target="_blank" rel="noreferrer"
+              class="hover:text-gold transition-colors">Facebook ↗</a>
+            <a href="https://whatsapp.com" target="_blank" rel="noreferrer"
+              class="hover:text-gold transition-colors">WhatsApp ↗</a>
+          </div>
+
+          <div class="hidden lg:block text-cream/50 text-xs">
+            Free shipping across India on orders over ₹499
+          </div>
+        </div>
+      </div>
+
     </div>
   </header>
 
   <main>
     <!-- ============ HERO ============ -->
-    <section id="top" class="relative overflow-hidden pt-40 sm:pt-44 md:pt-36">
+    <section id="top" class="relative overflow-hidden pt-28 sm:pt-32 md:pt-32">
+      <!-- Ambient Botanical Leaf Watermarks in Background -->
+      <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+        class="pointer-events-none absolute -top-16 -left-20 w-[240px] sm:w-[460px] md:w-[620px] h-auto opacity-10 sm:opacity-15 -rotate-45 select-none z-0" />
+      <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+        class="pointer-events-none absolute -bottom-20 -right-24 w-[260px] sm:w-[500px] md:w-[660px] h-auto opacity-10 sm:opacity-15 rotate-135 select-none z-0" />
+
       <div class="relative z-10 mx-auto max-w-[1500px] px-5 md:px-10">
         <h1 id="heroTitle"
-          class="display-tight mx-auto max-w-5xl text-center text-[10vw] leading-[.88] md:text-[5.6rem] lg:text-[6.8rem]">
+          class="display-tight mx-auto max-w-4xl text-center text-[8vw] leading-[.92] md:text-[4rem] lg:text-[4.8rem]">
           <span class="text-outline">Sip Wellness.</span>
           <span class="text-cream">Taste Purity. Love Every Cup.</span>
         </h1>
       </div>
 
-      <div class="relative z-10 mt-14 md:mt-20">
+      <div class="relative z-10 mt-6 sm:mt-8 md:mt-10">
         <div class="dotted-rule absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-60"></div>
         <div
           class="relative mx-auto flex max-w-[1500px] items-center justify-between px-5 font-display text-[10px] uppercase tracking-[.18em] text-cream md:px-10 md:text-sm">
@@ -490,72 +760,87 @@
         </div>
       </div>
 
-      <div
-        class="relative z-10 mx-auto flex max-w-[1600px] items-center justify-between gap-2 px-3 py-4 sm:gap-4 sm:px-4 sm:py-6 md:px-8 md:py-8">
-
-        <!-- Horizontal Dotted Line Behind Slider & Buttons -->
+      <!-- ============ HERO CAROUSEL ROW WITH FULL-WIDTH DOTTED LINE ============ -->
+      <div class="relative z-10 w-full my-2 sm:my-3 md:my-4">
+        <!-- Edge-to-Edge Full-Width Horizontal Dotted Line Behind Slider & Navigation Buttons -->
         <div class="dotted-rule pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-70 z-0">
         </div>
 
-        <button data-hero="-1" aria-label="Previous blend"
-          class="relative z-40 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-espresso transition-all duration-300 hover:scale-110 hover:bg-espresso hover:text-cream sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 cursor-pointer"
-          style="touch-action: manipulation;"><span
-            class="pointer-events-none text-lg leading-none sm:text-xl md:text-2xl">←</span></button>
+        <div
+          class="relative z-10 mx-auto flex max-w-[1500px] items-center justify-between gap-2 px-3 sm:gap-4 sm:px-4 md:px-8">
 
-        <div class="relative z-10 flex h-[46vh] flex-1 items-center justify-center sm:h-[60vh] md:h-[82vh]">
-          <div id="heroTintWrap"
-            class="absolute flex items-center justify-center pointer-events-none transition-transform duration-500 will-change-transform"
-            style="transform: scale(1);">
-            <div id="heroTint"
-              class="h-64 w-64 rounded-full transition-colors duration-700 sm:h-80 sm:w-80 md:h-[480px] md:w-[480px] lg:h-[580px] lg:w-[580px] xl:h-[680px] xl:w-[680px] 2xl:h-[760px] 2xl:w-[760px] animate-hero-bg"
-              style="background:var(--gold)"></div>
-          </div>
+          <button data-hero="-1" aria-label="Previous blend"
+            class="relative z-40 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cream text-espresso transition-all duration-300 hover:scale-110 hover:bg-espresso hover:text-cream sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 cursor-pointer"
+            style="touch-action: manipulation;"><span
+              class="pointer-events-none text-sm leading-none sm:text-base md:text-lg">←</span></button>
 
-          <!-- Top-Right & Bottom-Left Floating Product Accents (Clean, Large, Transparent Elements) -->
           <div
-            class="pointer-events-none absolute inset-0 z-20 mx-auto flex max-w-[290px] items-center justify-center sm:max-w-[420px] md:max-w-[540px] lg:max-w-[620px] xl:max-w-[720px] 2xl:max-w-[800px]">
-
-            <!-- Top Right Companion (Shrink & Bloom on Slide) -->
-            <div id="heroTopWrap"
-              class="pointer-events-none absolute -top-6 -right-4 sm:-top-10 sm:-right-8 md:-top-14 md:-right-12 flex items-center justify-center transition-transform duration-500 will-change-transform"
+            class="relative z-10 flex h-[38vh] sm:h-[44vh] md:h-[50vh] lg:h-[54vh] max-h-[480px] flex-1 items-center justify-center">
+            <div id="heroTintWrap"
+              class="absolute flex items-center justify-center pointer-events-none transition-transform duration-500 will-change-transform"
               style="transform: scale(1);">
-              <div class="animate-float-companion-top pointer-events-none relative flex items-center justify-center">
-                <img id="heroTopImg"
-                  src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png"
-                  alt="Tea Spices"
-                  class="pointer-events-none relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
+              <div id="heroTint"
+                class="h-44 w-44 rounded-full transition-colors duration-700 sm:h-56 sm:w-56 md:h-[300px] md:w-[300px] lg:h-[340px] lg:w-[340px] xl:h-[380px] xl:w-[380px] animate-hero-bg"
+                style="background:var(--gold)"></div>
+            </div>
+
+            <!-- Top-Right & Bottom-Left Floating Product Accents (Clean, Compact on Mobile) -->
+            <div
+              class="pointer-events-none absolute inset-0 z-20 mx-auto flex max-w-[260px] items-center justify-center sm:max-w-[290px] md:max-w-[350px] lg:max-w-[400px] xl:max-w-[440px]">
+
+              <!-- Top Right Companion (Shrink & Bloom on Slide, compact on mobile) -->
+              <div id="heroTopWrap"
+                class="pointer-events-none absolute -top-3 right-0 sm:-top-6 sm:-right-4 md:-top-8 md:-right-6 flex items-center justify-center transition-transform duration-500 will-change-transform"
+                style="transform: scale(1);">
+                <div class="animate-float-companion-top pointer-events-none relative flex items-center justify-center">
+                  <img id="heroTopImg"
+                    src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png"
+                    alt="Tea Spices"
+                    class="pointer-events-none relative z-10 w-12 sm:w-18 md:w-28 lg:w-36 xl:w-40 h-auto object-contain" />
+                </div>
+              </div>
+
+              <!-- Bottom Left Companion (Hidden on mobile to prevent 2-place element clutter, visible on sm+) -->
+              <div id="heroBottomWrap"
+                class="pointer-events-none absolute -bottom-4 -left-2 sm:-bottom-6 sm:-left-4 md:-bottom-8 md:-left-6 hidden sm:flex items-center justify-center transition-transform duration-500 will-change-transform"
+                style="transform: scale(1);">
+                <div
+                  class="animate-float-companion-bottom pointer-events-none relative flex items-center justify-center">
+                  <img id="heroBottomImg"
+                    src="element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png"
+                    alt="Tea Strainer"
+                    class="pointer-events-none relative z-10 w-12 sm:w-18 md:w-28 lg:w-36 xl:w-40 h-auto object-contain" />
+                </div>
               </div>
             </div>
 
-            <!-- Bottom Left Companion (Shrink & Bloom on Slide) -->
-            <div id="heroBottomWrap"
-              class="pointer-events-none absolute -bottom-6 -left-4 sm:-bottom-10 sm:-left-8 md:-bottom-14 md:-left-12 flex items-center justify-center transition-transform duration-500 will-change-transform"
-              style="transform: scale(1);">
-              <div class="animate-float-companion-bottom pointer-events-none relative flex items-center justify-center">
-                <img id="heroBottomImg"
-                  src="element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png"
-                  alt="Tea Strainer"
-                  class="pointer-events-none relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
-              </div>
-            </div>
+            <div id="heroSlides" class="pointer-events-none"></div>
           </div>
 
-          <div id="heroSlides" class="pointer-events-none"></div>
+          <button data-hero="1" aria-label="Next blend"
+            class="relative z-40 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cream text-espresso transition-all duration-300 hover:scale-110 hover:bg-espresso hover:text-cream sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 cursor-pointer"
+            style="touch-action: manipulation;"><span
+              class="pointer-events-none text-sm leading-none sm:text-base md:text-lg">→</span></button>
         </div>
-
-        <button data-hero="1" aria-label="Next blend"
-          class="relative z-40 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-espresso transition-all duration-300 hover:scale-110 hover:bg-espresso hover:text-cream sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 cursor-pointer"
-          style="touch-action: manipulation;"><span
-            class="pointer-events-none text-lg leading-none sm:text-xl md:text-2xl">→</span></button>
       </div>
 
-      <div class="relative z-10 flex items-center justify-center py-6">
+      <div class="relative z-10 flex items-center justify-center py-4 sm:py-5">
         <div class="dotted-rule pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-70"></div>
         <a href="#products"
-          class="group relative z-10 overflow-hidden rounded-lg border-2 border-transparent bg-cream px-7 py-3.5 font-display text-sm uppercase tracking-wide text-espresso transition-transform duration-300 hover:scale-105 sm:px-9">
-          <span class="relative z-10 transition-colors duration-300 group-hover:text-cream">Explore Blends</span>
+          class="group/button relative z-10 overflow-hidden rounded-xl border-2 border-cream bg-cream px-6 py-3.5 font-display text-sm uppercase tracking-wide text-espresso transition-all duration-300 active:scale-95 cursor-pointer">
+          <div data-button-bg="true"
+            class="absolute inset-0 rounded-xl overflow-hidden bg-cream transition-all duration-300 group-hover/button:bg-espresso pointer-events-none">
+          </div>
           <span
-            class="absolute inset-0 translate-y-full bg-espresso transition-transform duration-300 group-hover:translate-y-0"></span>
+            class="relative z-20 flex items-center justify-center leading-none h-[1.2em] overflow-hidden pointer-events-none">
+            <span class="invisible whitespace-pre" aria-hidden="true">Explore Blends</span>
+            <span
+              class="absolute inset-0 flex items-center justify-center whitespace-pre transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-espresso group-hover/button:text-cream">Explore
+              Blends</span>
+            <span
+              class="absolute inset-0 flex items-center justify-center whitespace-pre translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-cream">Explore
+              Blends</span>
+          </span>
         </a>
       </div>
     </section>
@@ -563,13 +848,22 @@
     <!-- ============ INTRO TEXT ============ -->
     <section id="intro" class="relative z-10 px-5 py-10 md:py-16 overflow-hidden">
       <p id="introText"
-        class="relative z-10 mx-auto max-w-4xl text-center text-[7vw] leading-[1.15] text-cream md:text-5xl font-semibold"></p>
+        class="relative z-10 mx-auto max-w-4xl text-center text-[7vw] leading-[1.15] text-cream md:text-5xl font-semibold">
+      </p>
     </section>
 
     <!-- ============ BENEFITS ============ -->
     <section class="relative pb-10 md:pb-16">
+      <!-- Ambient Botanical Leaf Accents in Benefits Background -->
+      <div class="pointer-events-none absolute inset-0 overflow-hidden z-0">
+        <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+          class="absolute -top-10 -left-28 w-[400px] sm:w-[520px] md:w-[640px] h-auto opacity-12 rotate-12 select-none" />
+        <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+          class="absolute -bottom-16 -right-24 w-[420px] sm:w-[540px] md:w-[660px] h-auto opacity-12 -rotate-160 select-none" />
+      </div>
 
-      <div class="floating-food pointer-events-none absolute inset-0 overflow-hidden z-0" data-opacity="opacity-70"></div>
+      <div class="floating-food pointer-events-none absolute inset-0 overflow-hidden z-0" data-opacity="opacity-70">
+      </div>
       <div id="benefits" class="relative z-10 mx-auto max-w-[640px] px-4"></div>
     </section>
 
@@ -649,7 +943,11 @@
         class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[1200px] aspect-square rounded-full bg-gradient-to-tr from-cream/20 via-gold/15 to-transparent blur-[140px] -z-10 transition-transform duration-1000">
       </div>
 
-
+      <!-- Ambient Botanical Tea Leaf Branch Silhouettes -->
+      <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+        class="pointer-events-none absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/4 w-[480px] md:w-[620px] h-auto opacity-15 rotate-25 select-none z-0" />
+      <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+        class="pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/4 w-[480px] md:w-[620px] h-auto opacity-15 -rotate-155 select-none z-0" />
 
       <!-- Top: Giant Curved Arched Heading & Subtitle (Full-Width Edge-to-Edge) -->
       <div class="why-intro-content flex flex-col items-center w-full max-w-[1600px] mx-auto z-10 select-none">
@@ -674,7 +972,8 @@
           WE CRAFT SMALL-BATCH MOUNTAIN<br>
           TEAS BECAUSE MASS-PRODUCED<br>
           TEA TASTES LIKE DUST. WE'RE<br>
-          <strong class="font-bold text-cream underline decoration-cream/40 underline-offset-4">BREWING BETTER DAYS.</strong>
+          <strong class="font-bold text-cream underline decoration-cream/40 underline-offset-4">BREWING BETTER
+            DAYS.</strong>
         </p>
       </div>
     </section>
@@ -683,6 +982,27 @@
     <section id="whySection" class="relative w-full h-[300vh] bg-background">
       <div id="whyStickyContainer"
         class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center px-4 sm:px-6 md:px-10 bg-background">
+
+        <!-- Ambient Repeating Tea Leaf Pattern Background -->
+        <div class="pointer-events-none absolute inset-0 z-0 bg-repeat opacity-60 select-none"
+          style="background-image: url('element-img/tea-leaf-pattern.svg'); background-size: 260px 260px;"></div>
+
+        <!-- Ambient Botanical Tea Leaf Branch Silhouettes in Background -->
+        <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+          class="pointer-events-none absolute -top-16 -left-20 w-[420px] sm:w-[540px] md:w-[680px] h-auto opacity-15 -rotate-45 select-none z-0" />
+        <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+          class="pointer-events-none absolute -bottom-20 -right-24 w-[450px] sm:w-[580px] md:w-[720px] h-auto opacity-15 rotate-135 select-none z-0" />
+
+        <!-- Ambient Circular SVG Dashed Ring (Framing Slide Content) -->
+        <div
+          class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[960px] aspect-square z-0 select-none">
+          <svg viewBox="0 0 960 960" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="480" cy="480" r="470" stroke="#F6E9D7" stroke-width="1.2" stroke-dasharray="4 10"
+              opacity="0.18" />
+            <circle cx="480" cy="480" r="410" stroke="#BE8D3F" stroke-width="0.8" stroke-dasharray="2 8"
+              opacity="0.14" />
+          </svg>
+        </div>
 
         <!-- Full Viewport Width Continuous Dotted Background Line -->
         <div
@@ -702,8 +1022,8 @@
                 class="number display-tight text-[44vw] sm:text-[32vw] md:text-[18rem] lg:text-[22rem] leading-none select-none">01</span>
             </div>
 
-            <!-- Overlapping Large Pill Badge with Prominent Peeking Mascot -->
-            <div class="relative m-4 sm:-mt-22 md:-mt-28 z-20 inline-flex items-center justify-center">
+            <!-- Large Pill Badge with Prominent Peeking Mascot (10px margin, no negative margin) -->
+            <div class="relative mt-[10px] z-20 inline-flex items-center justify-center">
               <div
                 class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-espresso">
                 <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-espresso"></span>
@@ -735,8 +1055,8 @@
                 class="number display-tight text-[44vw] sm:text-[32vw] md:text-[18rem] lg:text-[22rem] leading-none select-none">02</span>
             </div>
 
-            <!-- Overlapping Large Pill Badge with Prominent Peeking Mascot -->
-            <div class="relative -mt-14 sm:-mt-22 md:-mt-28 z-20 inline-flex items-center justify-center">
+            <!-- Large Pill Badge with Prominent Peeking Mascot (10px margin, no negative margin) -->
+            <div class="relative mt-[10px] z-20 inline-flex items-center justify-center">
               <div
                 class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-espresso">
                 <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-espresso"></span>
@@ -768,8 +1088,8 @@
                 class="number display-tight text-[44vw] sm:text-[32vw] md:text-[18rem] lg:text-[22rem] leading-none select-none">03</span>
             </div>
 
-            <!-- Overlapping Large Pill Badge with Prominent Peeking Mascot -->
-            <div class="relative -mt-14 sm:-mt-22 md:-mt-28 z-20 inline-flex items-center justify-center">
+            <!-- Large Pill Badge with Prominent Peeking Mascot (10px margin, no negative margin) -->
+            <div class="relative mt-[10px] z-20 inline-flex items-center justify-center">
               <div
                 class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-espresso">
                 <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-espresso"></span>
@@ -808,7 +1128,11 @@
   </main>
 
   <!-- ============ FOOTER ============ -->
-  <footer id="footerSection" class="relative border-t border-cream/20 px-5 pb-8 pt-14 md:px-10 overflow-hidden bg-background">
+  <footer id="footerSection"
+    class="relative border-t border-cream/20 px-5 pb-8 pt-14 md:px-10 overflow-hidden bg-background">
+    <!-- Ambient Botanical Tea Branch in Footer -->
+    <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+      class="pointer-events-none absolute -bottom-24 -right-20 w-[450px] sm:w-[560px] md:w-[680px] h-auto opacity-15 rotate-45 select-none z-0" />
 
     <div class="footer-grid mx-auto grid max-w-[1600px] grid-cols-1 gap-10 md:grid-cols-[auto_1fr_1.2fr_auto]">
       <a href="#top" class="block w-36 sm:w-44 md:w-52"><img src="img/logo.webp" alt="Nidhi Tea Logo"
@@ -837,7 +1161,19 @@
           <input type="email" required placeholder="Your email address..." aria-label="Email address"
             class="flex-1 rounded-lg border border-cream/35 bg-cream/15 px-4 py-3 text-sm text-cream outline-none transition-colors focus:border-cream focus:bg-cream/25 placeholder:text-cream/65" />
           <button type="submit" aria-label="Subscribe"
-            class="rounded-lg border-2 border-transparent bg-cream px-5 py-3 font-display text-xs uppercase tracking-wide text-espresso font-extrabold transition-all hover:bg-espresso hover:text-cream cursor-pointer">Subscribe</button>
+            class="group/button relative overflow-hidden rounded-xl border-2 border-cream bg-cream px-6 py-3 font-display text-xs uppercase tracking-wide text-espresso font-extrabold transition-all duration-300 active:scale-95 cursor-pointer">
+            <div data-button-bg="true"
+              class="absolute inset-0 rounded-xl overflow-hidden bg-cream transition-all duration-300 group-hover/button:bg-espresso pointer-events-none">
+            </div>
+            <span
+              class="relative z-20 flex items-center justify-center leading-none h-[1.2em] overflow-hidden pointer-events-none">
+              <span class="invisible whitespace-pre" aria-hidden="true">Subscribe</span>
+              <span
+                class="absolute inset-0 flex items-center justify-center whitespace-pre transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-espresso group-hover/button:text-cream">Subscribe</span>
+              <span
+                class="absolute inset-0 flex items-center justify-center whitespace-pre translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-cream">Subscribe</span>
+            </span>
+          </button>
         </form>
       </div>
       <div class="flex gap-3 md:flex-col">
@@ -1038,11 +1374,82 @@
         burger.classList.toggle("opacity-0", s); burger.classList.toggle("pointer-events-none", s);
       }
       onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
-      let open = false;
-      document.querySelectorAll("[data-menu]").forEach((b) => b.addEventListener("click", () => {
-        open = !open; menu.classList.toggle("max-h-0", !open); menu.classList.toggle("max-h-96", open);
-      }));
-      menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => { open = false; menu.classList.add("max-h-0"); menu.classList.remove("max-h-96"); }));
+
+      // Fullscreen Modern Overlay Menu Controller
+      const openBtns = document.querySelectorAll("[data-menu]");
+      const closeBtns = menu.querySelectorAll("[data-menu-close]");
+      const hoverImg = document.getElementById("menuHoverImg");
+      const hoverTitle = document.getElementById("menuHoverTitle");
+      const hoverDesc = document.getElementById("menuHoverDesc");
+      const previewLinks = menu.querySelectorAll("a[data-preview]");
+      let isMenuOpen = false;
+
+      function openFullscreenMenu() {
+        isMenuOpen = true;
+        menu.classList.remove("opacity-0", "pointer-events-none", "-translate-y-2");
+        menu.classList.add("opacity-100", "pointer-events-auto", "translate-y-0");
+        document.body.style.overflow = "hidden";
+
+        if (typeof gsap !== "undefined") {
+          gsap.fromTo(
+            menu.querySelectorAll(".menu-item"),
+            { y: 35, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.06, duration: 0.5, ease: "power3.out", delay: 0.08 }
+          );
+        }
+      }
+
+      function closeFullscreenMenu() {
+        isMenuOpen = false;
+        menu.classList.add("opacity-0", "pointer-events-none", "-translate-y-2");
+        menu.classList.remove("opacity-100", "pointer-events-auto", "translate-y-0");
+        document.body.style.overflow = "";
+      }
+
+      openBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          openFullscreenMenu();
+        });
+      });
+
+      closeBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          closeFullscreenMenu();
+        });
+      });
+
+      menu.querySelectorAll("a").forEach((a) => {
+        a.addEventListener("click", () => {
+          closeFullscreenMenu();
+        });
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && isMenuOpen) {
+          closeFullscreenMenu();
+        }
+      });
+
+      previewLinks.forEach((link) => {
+        link.addEventListener("mouseenter", () => {
+          const previewSrc = link.getAttribute("data-preview");
+          const previewTitle = link.getAttribute("data-preview-title");
+          const previewDesc = link.getAttribute("data-preview-desc");
+
+          if (hoverImg && previewSrc) {
+            hoverImg.style.opacity = "0";
+            hoverImg.style.transform = "scale(0.88)";
+            setTimeout(() => {
+              hoverImg.src = previewSrc;
+              hoverImg.style.opacity = "1";
+              hoverImg.style.transform = "scale(1)";
+            }, 160);
+          }
+          if (hoverTitle && previewTitle) hoverTitle.textContent = previewTitle;
+          if (hoverDesc && previewDesc) hoverDesc.textContent = previewDesc;
+        });
+      });
     })();
 
     /* ---------- HERO CAROUSEL & INTERACTIVE PARALLAX ---------- */
@@ -1050,7 +1457,7 @@
       const SLIDES = [
         { name: "Classic Masala Chai", img: "img/hero.png", tint: "var(--gold)", topIngredient: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png", bottomIngredient: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png" },
         { name: "Honey Lemon Green Tea", img: "img/product-2.png", tint: "#2E6941", topIngredient: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png", bottomIngredient: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png" },
-        { name: "Rose Cardamom Black Tea", img: "img/product-3.png", tint: "var(--cherry)", topIngredient: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png", bottomIngredient: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png" },
+        { name: "Rose Cardamom Black Tea", img: "img/product-3.png", tint: "var(--cherry)", topIngredient: "element-img/green_cardamom.png", bottomIngredient: "element-img/star_anise.png" },
       ];
       const wrap = document.getElementById("heroSlides"), tint = document.getElementById("heroTint"),
         tintWrap = document.getElementById("heroTintWrap"),
@@ -1064,7 +1471,7 @@
 
       wrap.innerHTML = SLIDES.map((s, i) => `
         <div class="hero-slide-item pointer-events-none absolute inset-0 flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform opacity-0" data-hero-slide="${i}">
-          <img src="${s.img}" alt="${s.name}" class="hero-floating-pack pointer-events-none h-[115%] sm:h-[120%] md:h-[125%] w-auto max-w-none object-contain">
+          <img src="${s.img}" alt="${s.name}" class="hero-floating-pack pointer-events-none h-[112%] sm:h-[118%] md:h-[124%] max-h-[540px] w-auto max-w-none object-contain">
         </div>
       `).join("");
       const slides = [...wrap.querySelectorAll(".hero-slide-item")];
@@ -1391,8 +1798,8 @@
           </svg>`,
           body: "No artificial flavours. No synthetic colours. Every blend is made with leaves, herbs, and botanicals exactly as nature intended — nothing more, nothing less."
         },
-        { 
-          title: "Ethically Sourced", 
+        {
+          title: "Ethically Sourced",
           bg: "#245836",
           icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-10 w-10 sm:h-14 sm:w-14 text-cream" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 13V6"></path>
@@ -1401,10 +1808,10 @@
             <path d="M2.5 14C4.2 13 6.5 13.2 8 14.5L9.5 16C11 17.3 13 17.3 14.5 16L16 14.5C17.5 13.2 19.8 13 21.5 14"></path>
             <path d="M4.5 18.5C7.2 20.8 10 21.8 12 21.8C14 21.8 16.8 20.8 19.5 18.5"></path>
           </svg>`,
-          body: "We partner directly with small-estate farmers across Darjeeling, Assam, and the Nilgiris. Fresh harvests, fair wages, and full traceability from garden to cup." 
+          body: "We partner directly with small-estate farmers across Darjeeling, Assam, and the Nilgiris. Fresh harvests, fair wages, and full traceability from garden to cup."
         },
-        { 
-          title: "No Preservatives", 
+        {
+          title: "No Preservatives",
           bg: "#871B26",
           icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-10 w-10 sm:h-14 sm:w-14 text-cream" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22S20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z"></path>
@@ -1413,10 +1820,10 @@
             <path d="M12 12C13.2 11 14.2 11.2 14.8 11.5"></path>
             <path d="M12 13.5C10.8 12.8 10 13 9.4 13.3"></path>
           </svg>`,
-          body: "Every pack is sealed at peak freshness without chemicals or preservatives. What you steep is what nature grew — authentic, clean, and alive with flavour." 
+          body: "Every pack is sealed at peak freshness without chemicals or preservatives. What you steep is what nature grew — authentic, clean, and alive with flavour."
         },
-        { 
-          title: "Wellness First", 
+        {
+          title: "Wellness First",
           bg: "#452410",
           icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-10 w-10 sm:h-14 sm:w-14 text-cream" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19.5 13.572L12 21L4.5 13.572C2.5 11.572 2.5 8.2 4.5 6.2C6.5 4.2 9.8 4.2 11.8 6.2L12 6.4L12.2 6.2C14.2 4.2 17.5 4.2 19.5 6.2C21.5 8.2 21.5 11.572 19.5 13.572Z"></path>
@@ -1424,7 +1831,7 @@
             <path d="M12 11.5C13.5 10.2 15 10.5 16 11"></path>
             <path d="M12 13.5C10.5 12.5 9.5 12.8 8.8 13.2"></path>
           </svg>`,
-          body: "Nidhi Tea blends are crafted with your well-being in mind — rich in antioxidants, calming adaptogens, and natural goodness that nourishes from the inside out." 
+          body: "Nidhi Tea blends are crafted with your well-being in mind — rich in antioxidants, calming adaptogens, and natural goodness that nourishes from the inside out."
         },
       ];
       const root = document.getElementById("benefits");
@@ -1554,17 +1961,57 @@
 
       <!-- Bottom Action Buttons Container (Hidden at idle, slides up on hover or click to take bottom place) -->
       <div data-buttons-container="true" class="actions absolute bottom-4 sm:bottom-5 md:bottom-6 left-4 right-4 sm:left-5 sm:right-5 md:left-6 md:right-6 z-20 flex flex-col gap-2.5 opacity-0 translate-y-6 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
-        <!-- Top Button: ADD TO CART -->
-        <button type="button" class="group/btn relative cursor-pointer w-full flex items-center justify-between rounded-xl bg-cream px-5 py-3.5 sm:py-4 min-h-[48px] sm:min-h-[52px] font-display font-black text-sm sm:text-base uppercase tracking-wider text-espresso transition-all duration-300 hover:bg-espresso hover:text-cream active:scale-[0.98]">
-          <span class="font-display font-black uppercase tracking-wider text-espresso transition-colors group-hover/btn:text-cream">ADD TO CART</span>
-          <span class="font-display font-black uppercase tracking-wider text-espresso transition-colors group-hover/btn:text-cream">${p.price}</span>
+        <!-- Top Button: ADD TO CART with Bucks multi-state roll-up animation -->
+        <button type="button" data-add-to-cart="true"
+          class="group/button relative flex items-center justify-between w-full min-h-[48px] sm:min-h-[52px] px-5 py-3.5 font-display font-black text-sm sm:text-base uppercase tracking-wider rounded-xl cursor-pointer text-espresso overflow-hidden transition-transform duration-200 active:scale-[0.98]">
+          <div data-button-bg="true" class="absolute inset-0 rounded-xl overflow-hidden border-2 border-cream bg-cream transition-colors duration-300 group-hover/button:bg-espresso group-hover/button:border-espresso pointer-events-none"></div>
+          <span class="relative z-20 flex items-center justify-between w-full pointer-events-none">
+            <!-- Label Roll-up Container -->
+            <span class="relative inline-flex items-center justify-start leading-none h-[1.3em] overflow-hidden">
+              <span class="invisible whitespace-pre" aria-hidden="true">Add to cart</span>
+              <span class="btn-label-default absolute inset-0 flex items-center justify-start whitespace-pre transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-espresso group-hover/button:text-cream">Add to cart</span>
+              <span class="btn-label-hover absolute inset-0 flex items-center justify-start whitespace-pre translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-cream">Add to cart</span>
+              <span class="btn-label-adding absolute inset-0 flex items-center justify-start whitespace-pre translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] text-cream">Adding</span>
+              <span class="btn-label-added absolute inset-0 flex items-center justify-start whitespace-pre translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] text-cream">Added</span>
+            </span>
+
+            <!-- Price & Status Container -->
+            <span class="relative shrink-0 inline-flex items-center justify-end leading-none h-[1.3em] overflow-hidden">
+              <span class="invisible whitespace-nowrap" aria-hidden="true">${p.price}</span>
+              <span class="btn-price-default absolute inset-0 flex items-center justify-end whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-espresso group-hover/button:text-cream">${p.price}</span>
+              <span class="btn-price-hover absolute inset-0 flex items-center justify-end whitespace-nowrap translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-cream">${p.price}</span>
+              <span class="btn-dots absolute inset-0 flex items-center justify-end translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] text-cream">
+                <span class="inline-flex items-end gap-1" aria-hidden="true">
+                  <span class="h-1.5 w-1.5 rounded-full bg-current animate-bucks-dot" style="animation-delay:0ms"></span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-current animate-bucks-dot" style="animation-delay:140ms"></span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-current animate-bucks-dot" style="animation-delay:280ms"></span>
+                </span>
+              </span>
+              <span class="btn-check absolute inset-0 flex items-center justify-end translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] text-cream">
+                <span class="inline-flex h-4 w-4 items-center justify-center">
+                  <svg width="22" height="22" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-cream"><path d="M10.718 18.6393C10.6875 18.7286 10.6281 18.8045 10.5171 18.8808C10.5607 18.7874 10.647 18.7252 10.688 18.6531C10.6884 18.6527 10.6888 18.6523 10.6892 18.6518C10.6993 18.6473 10.7081 18.6439 10.718 18.6393ZM10.3529 19.4068C10.3151 19.444 10.291 19.4422 10.261 19.4444C10.1816 19.4512 10.0936 19.4763 9.99199 19.5425C9.99154 19.543 9.99109 19.5434 9.99064 19.5439C9.91411 19.5795 9.90485 19.5375 9.92869 19.4775C9.96159 19.3951 10.0122 19.4244 10.0548 19.394C10.0725 19.3825 10.0884 19.3717 10.106 19.3603C10.1653 19.2985 10.2233 19.2378 10.2044 19.1746C10.2745 19.1586 10.3359 19.1321 10.258 19.2473C10.1922 19.3454 10.2239 19.3849 10.3198 19.3419C10.3488 19.3292 10.3867 19.2992 10.3912 19.3295C10.3952 19.3498 10.3807 19.3789 10.3529 19.4068ZM13.3985 16.2975C13.3655 16.3179 13.34 16.3246 13.3219 16.312C13.3008 16.2966 13.2719 16.2976 13.2274 16.3498C13.206 16.3862 13.1863 16.4218 13.165 16.4582C13.1287 16.5183 13.1087 16.5135 13.0995 16.4858C13.0942 16.4689 13.102 16.4433 13.105 16.4201C13.1184 16.3618 13.118 16.3163 13.0371 16.3551C13.0196 16.3666 13.003 16.3769 12.9841 16.3896C12.9743 16.3962 12.965 16.4036 12.956 16.4111C12.9477 16.4331 12.9468 16.4523 12.9577 16.4663C12.9809 16.5005 12.9448 16.5464 12.8959 16.5588C12.7661 16.5911 12.6542 16.6976 12.5416 16.8176C12.5121 16.8485 12.4819 16.8716 12.4551 16.8696C12.5433 16.7772 12.6319 16.6851 12.7207 16.5932C12.7197 16.5929 12.7188 16.5927 12.7179 16.5924C12.7216 16.57 12.7401 16.5542 12.762 16.5397C12.8508 16.4564 12.9074 16.3422 13.016 16.2779C13.0176 16.2778 13.0192 16.2777 13.0207 16.2776C13.1709 16.1629 13.2868 16.0058 13.4396 15.8674C13.4074 15.9279 13.3835 15.9935 13.3688 16.0627C13.3626 16.0949 13.3656 16.1094 13.4003 16.1024C13.4992 16.0834 13.4975 16.1835 13.3985 16.2975Z" fill="currentColor"/></svg>
+                </span>
+              </span>
+            </span>
+          </span>
         </button>
 
-        <!-- Bottom Button: VIEW PRODUCT -->
+        <!-- Bottom Button: VIEW PRODUCT with roll-up animation -->
         <a class="w-full block" href="#products">
-          <div class="group/link relative cursor-pointer w-full flex items-center justify-between rounded-xl border-2 border-cream bg-transparent px-5 py-3.5 sm:py-4 min-h-[48px] sm:min-h-[52px] font-display font-black text-sm sm:text-base uppercase tracking-wider text-cream transition-all duration-300 hover:bg-cream hover:text-espresso active:scale-[0.98]">
-            <span class="font-display font-black uppercase tracking-wider transition-colors duration-300 group-hover/link:text-espresso">VIEW PRODUCT</span>
-            <span class="font-display font-black text-lg sm:text-xl transition-all duration-300 group-hover/link:text-espresso group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">↗</span>
+          <div class="group/button relative cursor-pointer w-full flex items-center justify-between rounded-xl border-2 border-cream bg-transparent px-5 py-3.5 sm:py-4 min-h-[48px] sm:min-h-[52px] font-display font-black text-sm sm:text-base uppercase tracking-wider text-cream overflow-hidden transition-all duration-300 active:scale-[0.98]">
+            <div data-button-bg="true" class="absolute inset-0 rounded-xl overflow-hidden bg-transparent transition-all duration-300 group-hover/button:bg-cream pointer-events-none"></div>
+            <span class="relative z-20 flex items-center justify-between w-full pointer-events-none">
+              <span class="relative inline-flex items-center justify-start leading-none h-[1.3em] overflow-hidden">
+                <span class="invisible whitespace-pre" aria-hidden="true">VIEW PRODUCT</span>
+                <span class="absolute inset-0 flex items-center justify-start whitespace-pre transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-cream group-hover/button:text-espresso">VIEW PRODUCT</span>
+                <span class="absolute inset-0 flex items-center justify-start whitespace-pre translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-espresso">VIEW PRODUCT</span>
+              </span>
+              <span class="relative inline-flex items-center justify-end leading-none h-[1.3em] overflow-hidden text-lg sm:text-xl">
+                <span class="invisible" aria-hidden="true">↗</span>
+                <span class="absolute inset-0 flex items-center justify-end transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-cream group-hover/button:text-espresso">↗</span>
+                <span class="absolute inset-0 flex items-center justify-end translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-espresso">↗</span>
+              </span>
+            </span>
           </div>
         </a>
       </div>
@@ -1636,6 +2083,38 @@
             showCardDetails();
           }
         });
+      });
+
+      // Multi-state "Add to Cart" button animation handler
+      grid.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-add-to-cart]");
+        if (!btn || btn.classList.contains("btn-adding") || btn.classList.contains("btn-added")) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        // 1. Enter "Adding" state
+        btn.classList.add("btn-adding");
+
+        // 2. Transition to "Added" state after 750ms
+        setTimeout(() => {
+          btn.classList.remove("btn-adding");
+          btn.classList.add("btn-added");
+
+          // Increment cart badges in header
+          const cartBtns = document.querySelectorAll("header button, header a");
+          cartBtns.forEach((el) => {
+            if (el.textContent && el.textContent.includes("Cart(")) {
+              const current = parseInt(el.textContent.replace(/\D/g, "") || "0", 10);
+              el.textContent = `Cart(${current + 1})`;
+            }
+          });
+
+          // 3. Reset back to idle after 2000ms
+          setTimeout(() => {
+            btn.classList.remove("btn-added");
+          }, 2000);
+        }, 750);
       });
 
       // Slider navigation & progress
