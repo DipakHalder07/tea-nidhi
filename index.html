@@ -291,6 +291,23 @@
       display: inline-block;
       will-change: transform;
     }
+
+    #introText .intro-word {
+      display: inline-block;
+      white-space: nowrap;
+      vertical-align: top;
+      overflow: hidden;
+      padding-top: 0.28em;
+      margin-top: -0.28em;
+      padding-bottom: 0.18em;
+      margin-bottom: -0.18em;
+    }
+
+    #introText .intro-char {
+      display: inline-block;
+      will-change: transform, opacity;
+      transform-origin: 50% 100%;
+    }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -447,8 +464,9 @@
         </div>
 
         <button data-hero="-1" aria-label="Previous blend"
-          class="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-background transition-all duration-300 hover:scale-110 hover:bg-flame hover:text-cream sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 shadow-lg cursor-pointer"><span
-            class="text-lg leading-none sm:text-xl md:text-2xl">←</span></button>
+          class="relative z-40 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-background transition-all duration-300 hover:scale-110 hover:bg-flame hover:text-cream sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 shadow-lg cursor-pointer"
+          style="touch-action: manipulation;"><span
+            class="pointer-events-none text-lg leading-none sm:text-xl md:text-2xl">←</span></button>
 
         <div class="relative z-10 flex h-[46vh] flex-1 items-center justify-center sm:h-[60vh] md:h-[82vh]">
           <div id="heroTintWrap"
@@ -461,37 +479,38 @@
 
           <!-- Top-Right & Bottom-Left Floating Product Accents (Clean, Large, Transparent Elements) -->
           <div
-            class="pointer-events-none absolute inset-0 z-30 mx-auto flex max-w-[290px] items-center justify-center sm:max-w-[420px] md:max-w-[540px] lg:max-w-[620px] xl:max-w-[720px] 2xl:max-w-[800px]">
+            class="pointer-events-none absolute inset-0 z-20 mx-auto flex max-w-[290px] items-center justify-center sm:max-w-[420px] md:max-w-[540px] lg:max-w-[620px] xl:max-w-[720px] 2xl:max-w-[800px]">
 
             <!-- Top Right Companion (Shrink & Bloom on Slide) -->
             <div id="heroTopWrap"
-              class="absolute -top-6 -right-4 sm:-top-10 sm:-right-8 md:-top-14 md:-right-12 flex items-center justify-center transition-transform duration-500 will-change-transform"
+              class="pointer-events-none absolute -top-6 -right-4 sm:-top-10 sm:-right-8 md:-top-14 md:-right-12 flex items-center justify-center transition-transform duration-500 will-change-transform"
               style="transform: scale(1);">
-              <div class="animate-float-companion-top relative flex items-center justify-center">
+              <div class="animate-float-companion-top pointer-events-none relative flex items-center justify-center">
                 <img id="heroTopImg"
                   src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png"
-                  alt="Tea Spices" class="relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
+                  alt="Tea Spices" class="pointer-events-none relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
               </div>
             </div>
 
             <!-- Bottom Left Companion (Shrink & Bloom on Slide) -->
             <div id="heroBottomWrap"
-              class="absolute -bottom-6 -left-4 sm:-bottom-10 sm:-left-8 md:-bottom-14 md:-left-12 flex items-center justify-center transition-transform duration-500 will-change-transform"
+              class="pointer-events-none absolute -bottom-6 -left-4 sm:-bottom-10 sm:-left-8 md:-bottom-14 md:-left-12 flex items-center justify-center transition-transform duration-500 will-change-transform"
               style="transform: scale(1);">
-              <div class="animate-float-companion-bottom relative flex items-center justify-center">
+              <div class="animate-float-companion-bottom pointer-events-none relative flex items-center justify-center">
                 <img id="heroBottomImg"
                   src="element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png"
-                  alt="Tea Strainer" class="relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
+                  alt="Tea Strainer" class="pointer-events-none relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
               </div>
             </div>
           </div>
 
-          <div id="heroSlides"></div>
+          <div id="heroSlides" class="pointer-events-none"></div>
         </div>
 
         <button data-hero="1" aria-label="Next blend"
-          class="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-background transition-all duration-300 hover:scale-110 hover:bg-flame hover:text-cream sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 shadow-lg cursor-pointer"><span
-            class="text-lg leading-none sm:text-xl md:text-2xl">→</span></button>
+          class="relative z-40 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-background transition-all duration-300 hover:scale-110 hover:bg-flame hover:text-cream sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 shadow-lg cursor-pointer"
+          style="touch-action: manipulation;"><span
+            class="pointer-events-none text-lg leading-none sm:text-xl md:text-2xl">→</span></button>
       </div>
 
       <div class="relative z-10 flex items-center justify-center py-6">
@@ -507,7 +526,8 @@
 
     <!-- ============ INTRO TEXT ============ -->
     <section id="intro" class="relative z-10 px-5 py-10 md:py-16">
-      <p id="introText" class="mx-auto max-w-4xl text-center text-[7vw] leading-[1.15] text-cream md:text-5xl"></p>
+      <p id="introText"
+        class="mx-auto max-w-4xl text-center text-[7vw] leading-[1.15] text-cream md:text-5xl font-semibold"></p>
     </section>
 
     <!-- ============ BENEFITS ============ -->
@@ -847,7 +867,7 @@
         { x: "15vw", y: "25vh", rotation: -15 },
       ];
       const EXIT = 3.5, items = gsap.utils.toArray(".pl-item"), floats = [];
-      const tl = gsap.timeline({ delay: 0.2, onComplete: () => { el.remove(); document.body.style.overflow = ""; } });
+      const tl = gsap.timeline({ delay: 0.2, onComplete: () => { el.remove(); document.body.style.overflow = ""; if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh(); window.dispatchEvent(new Event("loaderComplete")); } });
 
       // 1. Circle reveal stagger expansion
       tl.to(".pl-revealer", { clipPath: "circle(150% at 50% 50%)", duration: 0.9, stagger: 0.2, ease: "power2.inOut" });
@@ -1003,8 +1023,8 @@
       let index = 0, autoplayTimer = null, btnPopupTimer = null, isTransitioning = false;
 
       wrap.innerHTML = SLIDES.map((s, i) => `
-        <div class="hero-slide-item absolute inset-0 flex items-center justify-center pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform opacity-0" data-hero-slide="${i}">
-          <img src="${s.img}" alt="${s.name}" class="hero-floating-pack h-[115%] sm:h-[120%] md:h-[125%] w-auto max-w-none object-contain">
+        <div class="hero-slide-item pointer-events-none absolute inset-0 flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform opacity-0" data-hero-slide="${i}">
+          <img src="${s.img}" alt="${s.name}" class="hero-floating-pack pointer-events-none h-[115%] sm:h-[120%] md:h-[125%] w-auto max-w-none object-contain">
         </div>
       `).join("");
       const slides = [...wrap.querySelectorAll(".hero-slide-item")];
@@ -1105,7 +1125,7 @@
           if (isActive) {
             sl.style.opacity = "1";
             sl.style.zIndex = "20";
-            sl.style.pointerEvents = "auto";
+            sl.style.pointerEvents = "none";
             sl.style.transform = "translate3d(0, 0, 0) scale(1) rotate(0deg)";
           } else if (off < 0) {
             sl.style.opacity = "0";
@@ -1142,9 +1162,40 @@
         }, 6000);
       }
 
-      heroBtns.forEach((b) => b.addEventListener("click", () => go(+b.dataset.hero)));
+      heroBtns.forEach((b) => {
+        b.addEventListener("click", (e) => {
+          e.stopPropagation();
+          go(+b.dataset.hero);
+        });
+      });
       render(false);
       resetAutoplay();
+
+      // Mobile Touch Swipe Navigation for Hero Slider
+      let touchStartX = 0, touchStartY = 0;
+      const carouselContainer = wrap.parentElement;
+      if (carouselContainer) {
+        carouselContainer.addEventListener("touchstart", (e) => {
+          if (e.touches && e.touches[0]) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+          }
+        }, { passive: true });
+
+        carouselContainer.addEventListener("touchend", (e) => {
+          if (!touchStartX) return;
+          const touchEndX = e.changedTouches[0].clientX;
+          const touchEndY = e.changedTouches[0].clientY;
+          const diffX = touchEndX - touchStartX;
+          const diffY = touchEndY - touchStartY;
+          if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX < 0) go(1);
+            else go(-1);
+          }
+          touchStartX = 0;
+          touchStartY = 0;
+        }, { passive: true });
+      }
 
       // Mouse Parallax on Hero Section
       if (heroSection && typeof gsap !== "undefined") {
@@ -1163,41 +1214,92 @@
       }
     })();
 
-    /* ---------- INTRO TEXT (GSAP Scroll Word Reveal) ---------- */
+    /* ---------- INTRO TEXT (GSAP Letters Slide Up Animation) ---------- */
     (function () {
       const TEXT = "Premium handcrafted teas sourced from the finest estates. ★ No artificial additives — just pure leaves, pure water, and a moment of peace in every single cup.";
       const p = document.getElementById("introText");
       if (!p) return;
-      p.innerHTML = TEXT.split(" ").map((w) => `<span class="intro-word mr-[.28em] inline-block will-change-transform" style="opacity:.15">${w}</span>`).join("");
-      const words = [...p.querySelectorAll(".intro-word")];
 
-      if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.to(words, {
-          opacity: 1,
-          stagger: 0.05,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#intro",
-            start: "top 80%",
-            end: "bottom 45%",
-            scrub: 0.5,
-          },
+      const words = TEXT.split(" ");
+      p.innerHTML = words
+        .map((w) => {
+          const isStar = w === "★";
+          const charsHtml = w
+            .split("")
+            .map((ch) => `<span class="intro-char ${isStar ? "text-gold" : ""}">${ch}</span>`)
+            .join("");
+          return `<span class="intro-word mr-[0.28em]">${charsHtml}</span>`;
+        })
+        .join("");
+
+      const chars = [...p.querySelectorAll(".intro-char")];
+
+      if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+        chars.forEach((c) => {
+          c.style.transform = "none";
+          c.style.opacity = "1";
         });
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Set initial hidden state immediately below masked baseline (scaled down for jump)
+      gsap.set(chars, { yPercent: 140, scale: 0.6, opacity: 0 });
+
+      let initialized = false;
+      function initIntroScroll() {
+        if (initialized) return;
+        initialized = true;
+
+        ScrollTrigger.refresh();
+
+        gsap.fromTo(
+          chars,
+          {
+            yPercent: 140,
+            scale: 0.6,
+            opacity: 0,
+          },
+          {
+            yPercent: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 0.55,
+            stagger: 0.007,
+            ease: "back.out(2.5)",
+            scrollTrigger: {
+              trigger: "#introText",
+              start: "top 78%",
+              toggleActions: "restart none none reverse",
+            },
+          }
+        );
+      }
+
+      // If preloader is active, wait until it finishes so it doesn't trigger prematurely
+      const loader = document.getElementById("loader");
+      if (loader) {
+        window.addEventListener("loaderComplete", initIntroScroll, { once: true });
+        setTimeout(initIntroScroll, 4200);
       } else {
-        function onScroll() {
-          const r = p.getBoundingClientRect(), vh = innerHeight;
-          const prog = Math.min(Math.max((vh * 0.85 - r.top) / (vh * 0.7), 0), 1);
-          words.forEach((w, i) => { w.style.opacity = prog > i / words.length ? 1 : 0.15; });
-        }
-        onScroll(); addEventListener("scroll", onScroll, { passive: true });
+        initIntroScroll();
       }
     })();
 
     /* ---------- BENEFITS (sticky stack + dim) ---------- */
     (function () {
       const CARDS = [
-        { title: "100% Natural", icon: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png", body: "No artificial flavours. No synthetic colours. Every blend is made with leaves, herbs, and botanicals exactly as nature intended — nothing more, nothing less." },
+        {
+          title: "100% Natural",
+          icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-10 w-10 sm:h-14 sm:w-14 text-cream" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+            <path d="M5.05857 11.7421C6.97712 11.9781 8.73113 10.5535 8.97628 8.56018C9.22142 6.56689 6.93885 4.64584 7.76802 2C3.66477 2.59449 2.25056 5.90113 2.02862 7.70572C1.78348 9.69901 3.14003 11.5062 5.05857 11.7421Z"></path>
+            <path d="M7 20C5.07536 15.3242 4.76992 11.1941 5.13275 8" stroke-linecap="round"></path>
+            <path d="M9.50786 17.6681C10.6828 20.0602 13.5206 20.7199 15.8463 19.1415C18.172 17.5631 18.5378 13.1898 22 11.6651C18.3054 7.57247 13.6971 9.04998 11.5916 10.4789C9.26587 12.0573 8.33296 15.276 9.50786 17.6681Z"></path>
+            <path d="M6 22C8.37778 17.9044 11.2644 15.43 14 14" stroke-linecap="round"></path>
+          </svg>`,
+          body: "No artificial flavours. No synthetic colours. Every blend is made with leaves, herbs, and botanicals exactly as nature intended — nothing more, nothing less."
+        },
         { title: "Ethically Sourced", icon: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png", body: "We partner directly with small-estate farmers across Darjeeling, Assam, and the Nilgiris. Fresh harvests, fair wages, and full traceability from garden to cup." },
         { title: "No Preservatives", icon: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png", body: "Every pack is sealed at peak freshness without chemicals or preservatives. What you steep is what nature grew — authentic, clean, and alive with flavour." },
         { title: "Wellness First", icon: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png", body: "Nidhi Tea blends are crafted with your well-being in mind — rich in antioxidants, calming adaptogens, and natural goodness that nourishes from the inside out." },
@@ -1214,8 +1316,8 @@
           <span class="text-lg leading-none text-background">•</span>
         </div>
         <div class="flex h-[300px] flex-col items-center justify-center gap-6 bg-background px-6 text-center sm:h-[360px] sm:gap-10 sm:px-12 md:h-[420px]">
-          <span class="flex h-20 w-20 items-center justify-center rounded-full border border-cream/35 sm:h-28 sm:w-28">
-            <img src="${c.icon}" alt="" loading="lazy" class="h-12 w-12 object-contain opacity-95 sm:h-16 sm:w-16">
+          <span class="flex h-20 w-20 items-center justify-center rounded-full border border-cream/35 sm:h-28 sm:w-28 text-cream">
+            ${c.icon.trim().startsWith("<svg") ? c.icon : `<img src="${c.icon}" alt="" loading="lazy" class="h-12 w-12 object-contain opacity-95 sm:h-16 sm:w-16">`}
           </span>
           <p class="text-base leading-relaxed text-cream/85 sm:text-lg">${c.body}</p>
         </div>

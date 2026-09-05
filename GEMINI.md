@@ -70,7 +70,7 @@ All animations in this project are finalized and calibrated for 60fps hardware-a
 | **6. Hero Carousel Slide** | Vanilla JS + Cubic-Bezier | `#heroSlides`, `data-hero-slide` | 3D depth transitions: Active slide is scale 1; outgoing slides shrink to 0.35 and translate ±120% with rotation. |
 | **7. Hero Mouse Parallax** | GSAP `mousemove` | `#top`, `#heroTintWrap`, `#heroSlides` | Smooth interactive mouse movement parallax tracking cursor position. |
 | **8. Header Morph on Scroll** | Vanilla JS scroll listener | `#logoBox`, `#navLinks`, `#navPill`, `#navBurger` | Above 80px scroll, large header logo shrinks, desktop links tuck away, and compact "Shop Tea" CTA pill docks in top right. |
-| **9. Intro Text Word Scrub** | GSAP ScrollTrigger | `#introText .intro-word` | Text words smoothly brighten from `opacity: 0.15` to `opacity: 1` as user scrolls down. |
+| **9. Intro Text Letters Slide Up** | GSAP ScrollTrigger | `#introText .intro-word`, `.intro-char` | Letters slide up smoothly from behind an overflow-hidden baseline with refined stagger when scrolling into view. |
 | **10. Benefits Floating Spices** | GSAP ScrollTrigger + CSS Float | `.floating-food-item` | 8 organic tea elements pop into view with spring elastic scale on scroll, then continuously float. |
 | **11. Benefits Sticky Stack** | Vanilla JS scroll/dim | `#benefits .bene-wrap`, `.bene-dim` | Cards stack with custom top offsets (`BASE + i * HEADER`) and previous cards darken via `.bene-dim` opacity transition. |
 | **12. Product Cards 3D Lift** | GSAP ScrollTrigger + CSS 3D | `#productGrid .prod`, `[data-bottle]`, `[data-shadow]` | On hover, bottle pack floats upwards (`translateY(-24px)`), shadow contracts, ingredient badges fan out, and action buttons reveal. |
