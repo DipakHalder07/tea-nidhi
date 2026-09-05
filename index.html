@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+<!-- test  -->
 
 <head>
   <meta charset="utf-8" />
@@ -77,7 +78,12 @@
       -webkit-font-smoothing: antialiased
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-family: 'Fraunces', serif;
       font-optical-sizing: auto;
     }
@@ -464,8 +470,7 @@
               <div class="animate-float-companion-top relative flex items-center justify-center">
                 <img id="heroTopImg"
                   src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png"
-                  alt="Tea Spices"
-                  class="relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
+                  alt="Tea Spices" class="relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
               </div>
             </div>
 
@@ -476,8 +481,7 @@
               <div class="animate-float-companion-bottom relative flex items-center justify-center">
                 <img id="heroBottomImg"
                   src="element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png"
-                  alt="Tea Strainer"
-                  class="relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
+                  alt="Tea Strainer" class="relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
               </div>
             </div>
           </div>
@@ -590,7 +594,7 @@
             </div>
 
             <!-- Overlapping Large Pill Badge with Prominent Peeking Mascot -->
-            <div class="relative -mt-14 sm:-mt-22 md:-mt-28 z-20 inline-flex items-center justify-center">
+            <div class="relative m-4 sm:-mt-22 md:-mt-28 z-20 inline-flex items-center justify-center">
               <div
                 class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-background shadow-[0_20px_45px_rgba(0,0,0,0.75)]">
                 <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-background"></span>
@@ -685,7 +689,8 @@
 
     <!-- ============ REVIEWS ============ -->
     <section id="reviewsSection" class="relative overflow-hidden py-20 md:py-28">
-      <h2 class="reviews-title display-tight text-outline px-4 text-center text-[clamp(2.8rem,10vw,7.5rem)] leading-[0.9] tracking-tight uppercase select-none">
+      <h2
+        class="reviews-title display-tight text-outline px-4 text-center text-[clamp(2.8rem,10vw,7.5rem)] leading-[0.9] tracking-tight uppercase select-none">
         Loved By All</h2>
       <div class="relative mt-8 sm:mt-12 md:mt-16 flex overflow-hidden select-none">
         <div id="reviewTrack" class="flex w-max will-change-transform cursor-grab active:cursor-grabbing"></div>
@@ -1627,7 +1632,7 @@
         reviewTrack.innerHTML = setHtml + setHtml + setHtml;
 
         reviewTrack.querySelectorAll("video").forEach((v) => {
-          v.play().catch(() => {});
+          v.play().catch(() => { });
         });
 
         let currentX = 0;
@@ -1727,7 +1732,7 @@
           entries.forEach((entry) => {
             const videos = reviewTrack.querySelectorAll("video");
             if (entry.isIntersecting) {
-              videos.forEach((v) => v.play().catch(() => {}));
+              videos.forEach((v) => v.play().catch(() => { }));
             } else {
               videos.forEach((v) => v.pause());
             }
