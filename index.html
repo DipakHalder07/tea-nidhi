@@ -134,6 +134,20 @@
       background-size: 12px 12px
     }
 
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .fruitTL, .fruitBR {
+      transition: opacity 0.35s ease-out, transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+      transform-origin: center center;
+      will-change: transform, opacity;
+    }
+
     @keyframes bucks-marquee {
       from {
         transform: translate3d(0, 0, 0)
@@ -527,8 +541,8 @@
     </section>
 
     <!-- ============ PRODUCTS ============ -->
-    <section id="products" class="relative overflow-hidden py-8 md:py-14">
-      <div class="relative flex select-none overflow-hidden py-6">
+    <section id="products" class="relative overflow-hidden py-8 md:py-16">
+      <div class="relative flex select-none overflow-hidden py-4 sm:py-6">
         <div class="flex w-max animate-marquee" style="--marquee-duration:26s">
           <span
             class="display-tight text-outline whitespace-nowrap px-6 text-[clamp(2.5rem,6vw,5.5rem)] leading-none opacity-70">Find
@@ -539,8 +553,53 @@
         </div>
       </div>
 
-      <div id="productGrid"
-        class="mx-auto mt-6 grid max-w-[1600px] grid-cols-1 gap-4 px-3 md:grid-cols-3 md:gap-5 md:px-4">
+      <!-- Slider Header Controls Bar -->
+      <div class="mx-auto max-w-[1600px] px-4 sm:px-6 md:px-8 mt-2 sm:mt-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-gold animate-pulse"></span>
+            <span class="font-sans text-xs uppercase tracking-[0.25em] text-cream/70">Artisan Harvest 2025</span>
+          </div>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-cream">
+            Our Master Blends
+          </h2>
+        </div>
+
+        <!-- Slider Navigation Controls & Counter -->
+        <div class="flex items-center gap-3 self-end sm:self-auto">
+          <div id="prodCounter" class="text-xs sm:text-sm font-mono text-cream/60 tracking-wider mr-1 select-none">
+            <span id="prodCurrentIndex" class="text-cream font-bold text-base">01</span> / <span id="prodTotalCount">05</span>
+          </div>
+          
+          <button id="prodPrev" type="button" aria-label="Previous Blend"
+            class="group w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-cream/30 bg-smoke/70 hover:bg-cream hover:text-background text-cream flex items-center justify-center transition-all duration-300 active:scale-90 cursor-pointer backdrop-blur-md shadow-lg">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          
+          <button id="prodNext" type="button" aria-label="Next Blend"
+            class="group w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-cream/30 bg-smoke/70 hover:bg-cream hover:text-background text-cream flex items-center justify-center transition-all duration-300 active:scale-90 cursor-pointer backdrop-blur-md shadow-lg">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Slider Track Container -->
+      <div class="relative w-full mt-4 sm:mt-6">
+        <div id="productGrid"
+          class="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory py-6 px-4 sm:px-6 md:px-12 max-w-[1700px] mx-auto no-scrollbar cursor-grab active:cursor-grabbing select-none"
+          style="-webkit-overflow-scrolling: touch;">
+        </div>
+
+        <!-- Slider Progress Indicator Bar -->
+        <div class="mx-auto max-w-[240px] sm:max-w-[320px] px-4 mt-2">
+          <div class="w-full h-1 bg-cream/15 rounded-full overflow-hidden">
+            <div id="prodProgressBar" class="h-full bg-gold transition-all duration-300 rounded-full" style="width: 20%;"></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1331,16 +1390,15 @@
       measure(); addEventListener("resize", measure); addEventListener("scroll", onScroll, { passive: true });
     })();
 
-    /* ---------- PRODUCTS (GSAP Staggered Reveal + 3D Hover) ---------- */
+    /* ---------- PRODUCTS (Slider Carousel + 3D Hover + Subtle Elements) ---------- */
     (function () {
       const PRODUCTS = [
         {
           name: ["Classic", "Masala", "Chai"],
           tagline: "Bold Spices. Warm Comfort. A Cup That Feels Like Home.",
           front: "img/hero.png",
-          fruit: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png",
-          fruitTL: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png",
-          fruitBR: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png",
+          fruitTL: "element-img/cinnamon_stick.png",
+          fruitBR: "element-img/star_anise.png",
           bg: "#BE8D3F",
           price: "₹299",
         },
@@ -1348,33 +1406,49 @@
           name: ["Honey", "Lemon", "Green Tea"],
           tagline: "Citrus Bright. Honey Sweet. Pure Morning Clarity.",
           front: "img/product-2.png",
-          fruit: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png",
-          fruitTL: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png",
+          fruitTL: "element-img/dried_lemon_slice.png",
           fruitBR: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png",
-          bg: "#F15726",
-          price: "₹299",
+          bg: "#D96B27",
+          price: "₹349",
         },
         {
           name: ["Rose", "Cardamom", "Black Tea"],
           tagline: "Floral Notes. Warm Depth. Elegance in Every Sip.",
           front: "img/product-3.png",
-          fruit: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png",
+          fruitTL: "element-img/green_cardamom.png",
+          fruitBR: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png",
+          bg: "#B82E28",
+          price: "₹399",
+        },
+        {
+          name: ["Artisan", "Assam", "Gold"],
+          tagline: "Single Estate. Malty Richness. The Golden Standard.",
+          front: "img/3-1.png",
           fruitTL: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png",
-          fruitBR: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png",
-          bg: "#C4321C",
-          price: "₹299",
+          fruitBR: "element-img/cinnamon_stick.png",
+          bg: "#7A4924",
+          price: "₹449",
+        },
+        {
+          name: ["Wild", "Honey", "Chamomile"],
+          tagline: "Sweet Blossom. Soothing Herbs. Gentle Evening Rest.",
+          front: "img/product-2.png",
+          fruitTL: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png",
+          fruitBR: "element-img/star_anise.png",
+          bg: "#4E6D38",
+          price: "₹379",
         },
       ];
       const grid = document.getElementById("productGrid");
       if (!grid) return;
       grid.innerHTML = PRODUCTS.map((p) => `
-    <article data-listing-card="true" class="prod group relative flex min-h-[460px] sm:min-h-[520px] md:min-h-[560px] lg:min-h-[600px] flex-col items-center justify-between overflow-hidden rounded-lg border border-cream/20 p-5 sm:p-6 md:p-8 gap-5 md:gap-6 transition-all duration-500 ease-out" style="background:${p.bg}">
+    <article data-listing-card="true" class="prod group relative flex min-h-[530px] sm:min-h-[570px] md:min-h-[610px] w-[300px] sm:w-[350px] md:w-[380px] lg:w-[400px] shrink-0 snap-start flex-col items-center justify-between overflow-hidden rounded-xl border border-cream/20 p-5 sm:p-6 md:p-7 gap-4 md:gap-5 transition-all duration-500 ease-out" style="background:${p.bg}">
       <a class="absolute inset-0 z-1" aria-label="${p.name.join(" ")}" href="#products"></a>
-      <div class="absolute z-0 pointer-events-none rounded-lg border border-cream/40  border-dashed inset-2.5"></div>
+      <div class="absolute z-0 pointer-events-none rounded-lg border border-cream/40 border-dashed inset-2.5"></div>
       
       <!-- Header Title & Tagline -->
       <div class="relative flex flex-col items-center text-center w-full pointer-events-none z-10">
-        <h3 data-title="true" class="uppercase flex flex-col font-display text-[1.8rem] sm:text-[2.2rem] md:text-[2.6rem] lg:text-[36px] xl:text-[40px] leading-[0.9] text-cream">
+        <h3 data-title="true" class="uppercase flex flex-col font-display text-[1.8rem] sm:text-[2.2rem] md:text-[2.5rem] lg:text-[32px] xl:text-[36px] leading-[0.9] text-cream">
           ${p.name.map((l) => `<span>${l}</span>`).join("")}
         </h3>
         <div data-tagline-wrapper="true" class="tagline mt-1.5 text-xs sm:text-sm font-sans text-cream/90 opacity-100 sm:opacity-0 transition-all duration-400 ease-out">
@@ -1384,30 +1458,35 @@
 
       <!-- Bottle & Shadow Container -->
       <div class="relative pointer-events-none w-full max-w-[280px] sm:max-w-[320px] h-56 sm:h-64 md:h-[260px] lg:h-[290px] flex items-center justify-center my-auto">
-        <div data-bottle="true" class="bottle absolute inset-0 z-10 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-center" style="transform: translate(0px, 12px) rotate(3deg) scale(1.32); transform-origin: 50% 50%;">
+        <!-- Top-Left Botanical Companion (BEHIND pack, z-0, large, pops up on hover) -->
+        <img src="${p.fruitTL}" alt="" class="fruitTL absolute -top-8 -left-8 sm:-top-10 sm:-left-10 md:-top-12 md:-left-12 w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 drop-shadow-[0_12px_24px_rgba(0,0,0,0.45)] group-hover:opacity-100 group-hover:scale-110" />
+        
+        <!-- Bottom-Right Botanical Companion (BEHIND pack, z-0, large, pops up on hover) -->
+        <img src="${p.fruitBR}" alt="" class="fruitBR absolute -bottom-8 -right-8 sm:-bottom-10 sm:-right-10 md:-bottom-12 md:-right-12 w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 drop-shadow-[0_12px_24px_rgba(0,0,0,0.45)] group-hover:opacity-100 group-hover:scale-110" />
+
+        <!-- Product Pack (Layered IN FRONT, z-10) -->
+        <div data-bottle="true" class="bottle relative w-full h-full z-10 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-center" style="transform: translate(0px, 12px) rotate(3deg) scale(1.32); transform-origin: 50% 50%;">
           <div class="bottle-float relative w-full h-full flex items-center justify-center">
-            <img src="${p.front}" alt="${p.name.join(" ")}" class="relative w-full h-full object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,.65)]" />
+            <img src="${p.front}" alt="${p.name.join(" ")}" class="relative z-10 w-full h-full object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,.65)]" />
           </div>
-          <!-- Top-Left Botanical Companion -->
-          <img src="${p.fruitTL || p.fruit}" alt="" class="fruitTL absolute -top-5 -left-5 sm:-top-7 sm:-left-7 md:-top-8 md:-left-8 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-contain opacity-0 scale-75 transition-all duration-500 pointer-events-none z-20 drop-shadow-[0_10px_22px_rgba(0,0,0,0.22)] sm:group-hover:opacity-100 sm:group-hover:scale-100" />
-          <!-- Bottom-Right Botanical Companion -->
-          <img src="${p.fruitBR || p.fruit}" alt="" class="fruitBR absolute -bottom-5 -right-5 sm:-bottom-7 sm:-right-7 md:-bottom-8 md:-right-8 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-contain opacity-0 scale-75 transition-all duration-500 pointer-events-none z-20 drop-shadow-[0_10px_22px_rgba(0,0,0,0.22)] sm:group-hover:opacity-100 sm:group-hover:scale-100" />
         </div>
+        
         <div data-shadow="true" class="shadow-el absolute bottom-0 left-1/2 w-40 sm:w-48 h-7 rounded-3xl blur-lg bg-black/75 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]" style="transform: translate(-50%, 28px) scale(1.3); opacity: 1;"></div>
       </div>
 
-      <!-- Bottom Action Buttons Container -->
-      <div data-buttons-container="true" class="actions relative z-20 grid grid-cols-1 sm:grid-cols-2 gap-2 w-full opacity-100 sm:opacity-0 sm:translate-y-3 transition-all duration-400 ease-out sm:group-hover:opacity-100 sm:group-hover:translate-y-0">
-        <button type="button" class="group/btn relative cursor-pointer flex items-center justify-between overflow-hidden rounded-lg border-2 border-transparent bg-cream px-3.5 py-3.5 min-h-[56px] font-display text-xs sm:text-sm uppercase tracking-wide md:px-4 text-background">
-          <span class="relative z-10 transition-colors duration-300 group-hover/btn:text-cream">Add to cart</span>
-          <span class="relative z-10 transition-colors duration-300 group-hover/btn:text-cream">${p.price}</span>
-          <span class="absolute inset-0 translate-y-full bg-background transition-transform duration-300 group-hover/btn:translate-y-0"></span>
+      <!-- Bottom Action Buttons Container (Hidden at idle, reveals on hover or click like older) -->
+      <div data-buttons-container="true" class="actions relative z-20 flex flex-col gap-2.5 w-full mt-auto pt-2 opacity-0 translate-y-3 pointer-events-none transition-all duration-400 ease-out sm:group-hover:opacity-100 sm:group-hover:translate-y-0 sm:group-hover:pointer-events-auto">
+        <!-- Top Button: ADD TO CART -->
+        <button type="button" class="group/btn relative cursor-pointer w-full flex items-center justify-between rounded-xl bg-cream px-5 py-3.5 sm:py-4 min-h-[48px] sm:min-h-[52px] font-display font-black text-sm sm:text-base uppercase tracking-wider text-background shadow-md transition-all duration-300 hover:brightness-105 active:scale-[0.98]">
+          <span class="font-display font-black uppercase tracking-wider text-background">ADD TO CART</span>
+          <span class="font-display font-black uppercase tracking-wider text-background">${p.price}</span>
         </button>
-        <a class="w-full" href="#products">
-          <div class="group/link relative cursor-pointer flex items-center justify-between overflow-hidden rounded-lg border-2 border-cream bg-transparent px-3.5 py-3.5 min-h-[56px] font-display text-xs sm:text-sm uppercase tracking-wide text-cream md:px-4">
-            <span class="relative z-10 transition-colors duration-300 group-hover/link:text-background">View product</span>
-            <span class="relative z-10 transition-all duration-300 group-hover/link:text-background">↗</span>
-            <span class="absolute inset-0 translate-y-full bg-cream transition-transform duration-300 group-hover/link:translate-y-0"></span>
+
+        <!-- Bottom Button: VIEW PRODUCT -->
+        <a class="w-full block" href="#products">
+          <div class="group/link relative cursor-pointer w-full flex items-center justify-between rounded-xl border-2 border-cream bg-transparent px-5 py-3.5 sm:py-4 min-h-[48px] sm:min-h-[52px] font-display font-black text-sm sm:text-base uppercase tracking-wider text-cream transition-all duration-300 hover:bg-cream hover:text-background active:scale-[0.98]">
+            <span class="font-display font-black uppercase tracking-wider transition-colors duration-300 group-hover/link:text-background">VIEW PRODUCT</span>
+            <span class="font-display font-black text-lg sm:text-xl transition-all duration-300 group-hover/link:text-background group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">↗</span>
           </div>
         </a>
       </div>
@@ -1423,27 +1502,145 @@
         const bottle = c.querySelector(".bottle");
         const shadowEl = c.querySelector(".shadow-el");
 
+        function showCardDetails() {
+          if (tagline) { tagline.style.opacity = "1"; tagline.style.transform = "translateY(0)"; }
+          if (fruitTL) { fruitTL.style.opacity = "1"; fruitTL.style.transform = "translate(-16px, -16px) rotate(-16deg) scale(1.15)"; }
+          if (fruitBR) { fruitBR.style.opacity = "1"; fruitBR.style.transform = "translate(16px, 16px) rotate(16deg) scale(1.15)"; }
+          if (actions) { actions.style.opacity = "1"; actions.style.transform = "translateY(0)"; actions.style.pointerEvents = "auto"; }
+          if (bottle) { bottle.style.transform = "translate(0px, -24px) rotate(3deg) scale(1, 1)"; }
+          if (shadowEl) { shadowEl.style.transform = "translate(-50%, 0%) scale(1, 1)"; shadowEl.style.opacity = "0.65"; }
+        }
+
+        function hideCardDetails() {
+          if (tagline) { tagline.style.opacity = "0"; tagline.style.transform = "translateY(-8px)"; }
+          if (fruitTL) { fruitTL.style.opacity = "0"; fruitTL.style.transform = "translate(0px, 0px) rotate(0deg) scale(0.2)"; }
+          if (fruitBR) { fruitBR.style.opacity = "0"; fruitBR.style.transform = "translate(0px, 0px) rotate(0deg) scale(0.2)"; }
+          if (actions) { actions.style.opacity = "0"; actions.style.transform = "translateY(12px)"; actions.style.pointerEvents = "none"; }
+          if (bottle) { bottle.style.transform = "translate(0px, 12px) rotate(3deg) scale(1.32, 1.32)"; }
+          if (shadowEl) { shadowEl.style.transform = "translate(-50%, 28px) scale(1.3, 1.3)"; shadowEl.style.opacity = "1"; }
+        }
+
         c.addEventListener("mouseenter", () => {
           if (window.innerWidth >= 640) {
-            if (tagline) { tagline.style.opacity = "1"; tagline.style.transform = "translateY(0)"; }
-            if (fruitTL) { fruitTL.style.opacity = "1"; fruitTL.style.transform = "rotate(-14deg) scale(1)"; }
-            if (fruitBR) { fruitBR.style.opacity = "1"; fruitBR.style.transform = "rotate(14deg) scale(1)"; }
-            if (actions) { actions.style.opacity = "1"; actions.style.transform = "translateY(0)"; actions.style.pointerEvents = "auto"; }
-            if (bottle) { bottle.style.transform = "translate(0px, -24px) rotate(3deg) scale(1, 1)"; }
-            if (shadowEl) { shadowEl.style.transform = "translate(-50%, 0%) scale(1, 1)"; shadowEl.style.opacity = "0.65"; }
+            showCardDetails();
           }
         });
+
         c.addEventListener("mouseleave", () => {
           if (window.innerWidth >= 640) {
-            if (tagline) { tagline.style.opacity = "0"; tagline.style.transform = "translateY(-8px)"; }
-            if (fruitTL) { fruitTL.style.opacity = "0"; fruitTL.style.transform = "rotate(0deg) scale(0.75)"; }
-            if (fruitBR) { fruitBR.style.opacity = "0"; fruitBR.style.transform = "rotate(0deg) scale(0.75)"; }
-            if (actions) { actions.style.opacity = "0"; actions.style.transform = "translateY(12px)"; actions.style.pointerEvents = "none"; }
-            if (bottle) { bottle.style.transform = "translate(0px, 12px) rotate(3deg) scale(1.32, 1.32)"; }
-            if (shadowEl) { shadowEl.style.transform = "translate(-50%, 28px) scale(1.3, 1.3)"; shadowEl.style.opacity = "1"; }
+            hideCardDetails();
+          }
+        });
+
+        // Click or tap to reveal on touch or desktop click
+        c.addEventListener("click", (e) => {
+          if (e.target.closest("button") || e.target.closest("a.block")) return;
+          const isVisible = actions && actions.style.opacity === "1";
+          if (isVisible) {
+            hideCardDetails();
+          } else {
+            cards.forEach(other => {
+              if (other !== c) {
+                const otherAct = other.querySelector(".actions");
+                const otherTL = other.querySelector(".fruitTL");
+                const otherBR = other.querySelector(".fruitBR");
+                const otherTag = other.querySelector(".tagline");
+                const otherBot = other.querySelector(".bottle");
+                const otherShd = other.querySelector(".shadow-el");
+                if (otherAct) { otherAct.style.opacity = "0"; otherAct.style.transform = "translateY(12px)"; otherAct.style.pointerEvents = "none"; }
+                if (otherTL) { otherTL.style.opacity = "0"; otherTL.style.transform = "translate(0, 0) scale(0.2)"; }
+                if (otherBR) { otherBR.style.opacity = "0"; otherBR.style.transform = "translate(0, 0) scale(0.2)"; }
+                if (otherTag) { otherTag.style.opacity = "0"; otherTag.style.transform = "translateY(-8px)"; }
+                if (otherBot) { otherBot.style.transform = "translate(0px, 12px) rotate(3deg) scale(1.32, 1.32)"; }
+                if (otherShd) { otherShd.style.transform = "translate(-50%, 28px) scale(1.3, 1.3)"; otherShd.style.opacity = "1"; }
+              }
+            });
+            showCardDetails();
           }
         });
       });
+
+      // Slider navigation & progress
+      const prevBtn = document.getElementById("prodPrev");
+      const nextBtn = document.getElementById("prodNext");
+      const counterCurrent = document.getElementById("prodCurrentIndex");
+      const counterTotal = document.getElementById("prodTotalCount");
+      const progressBar = document.getElementById("prodProgressBar");
+
+      if (counterTotal) counterTotal.textContent = String(PRODUCTS.length).padStart(2, "0");
+
+      function updateSliderProgress() {
+        if (!grid) return;
+        const scrollLeft = grid.scrollLeft;
+        const maxScroll = grid.scrollWidth - grid.clientWidth;
+        const progress = maxScroll > 0 ? (scrollLeft / maxScroll) : 0;
+        
+        if (progressBar) {
+          const pct = Math.max(20, Math.min(100, Math.round(progress * 80 + 20)));
+          progressBar.style.width = pct + "%";
+        }
+
+        const cardsList = grid.querySelectorAll(".prod");
+        if (cardsList.length > 0) {
+          const cardW = cardsList[0].offsetWidth + 16;
+          const idx = Math.min(cardsList.length - 1, Math.max(0, Math.round(scrollLeft / cardW)));
+          if (counterCurrent) {
+            counterCurrent.textContent = String(idx + 1).padStart(2, "0");
+          }
+        }
+      }
+
+      grid.addEventListener("scroll", updateSliderProgress, { passive: true });
+
+      function scrollSlide(dir) {
+        const firstCard = grid.querySelector(".prod");
+        const scrollAmount = firstCard ? firstCard.offsetWidth + 20 : 360;
+        grid.style.scrollBehavior = "smooth";
+        grid.scrollBy({ left: dir * scrollAmount, behavior: "smooth" });
+      }
+
+      if (prevBtn) prevBtn.addEventListener("click", () => scrollSlide(-1));
+      if (nextBtn) nextBtn.addEventListener("click", () => scrollSlide(1));
+
+      // Mouse drag-to-scroll
+      let isDown = false;
+      let startX = 0;
+      let scrollLeftStart = 0;
+      let hasDragged = false;
+
+      grid.addEventListener("mousedown", (e) => {
+        if (e.button !== 0) return;
+        isDown = true;
+        hasDragged = false;
+        startX = e.pageX - grid.offsetLeft;
+        scrollLeftStart = grid.scrollLeft;
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!isDown) return;
+        isDown = false;
+        grid.style.scrollBehavior = "smooth";
+      });
+
+      grid.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        const x = e.pageX - grid.offsetLeft;
+        const dist = x - startX;
+        if (Math.abs(dist) > 5) {
+          hasDragged = true;
+          grid.style.scrollBehavior = "auto";
+          e.preventDefault();
+          grid.scrollLeft = scrollLeftStart - dist;
+        }
+      });
+
+      grid.addEventListener("click", (e) => {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+          hasDragged = false;
+        }
+      }, true);
     })();
 
     /* ---------- WHY NIDHI TEA (Standalone Arched Heading Reveal) ---------- */
