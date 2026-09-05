@@ -1457,15 +1457,15 @@
       </div>
 
       <!-- Bottle & Shadow Container -->
-      <div class="relative pointer-events-none w-full max-w-[280px] sm:max-w-[320px] h-56 sm:h-64 md:h-[260px] lg:h-[290px] flex items-center justify-center my-auto">
+      <div class="relative pointer-events-none w-full max-w-[280px] sm:max-w-[320px] h-64 sm:h-72 md:h-[300px] lg:h-[320px] flex items-center justify-center my-auto">
         <!-- Left Botanical Companion (BEHIND product, z-0, small, centered on product left side) -->
-        <img src="${p.fruitTL}" alt="" class="fruitTL absolute top-[30%] sm:top-[32%] left-1 sm:left-2 md:left-3 w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 drop-shadow-[0_8px_16px_rgba(0,0,0,0.35)] group-hover:opacity-100 group-hover:scale-110" />
+        <img src="${p.fruitTL}" alt="" class="fruitTL absolute top-[30%] sm:top-[32%] left-1 sm:left-2 md:left-3 w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 drop-shadow-[0_8px_16px_rgba(0,0,0,0.35)]" />
         
         <!-- Right Botanical Companion (BEHIND product, z-0, small, centered on product right side) -->
-        <img src="${p.fruitBR}" alt="" class="fruitBR absolute top-[36%] sm:top-[38%] right-1 sm:right-2 md:right-3 w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 drop-shadow-[0_8px_16px_rgba(0,0,0,0.35)] group-hover:opacity-100 group-hover:scale-110" />
+        <img src="${p.fruitBR}" alt="" class="fruitBR absolute top-[36%] sm:top-[38%] right-1 sm:right-2 md:right-3 w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 drop-shadow-[0_8px_16px_rgba(0,0,0,0.35)]" />
 
-        <!-- Product Pack (Layered IN FRONT, z-10) -->
-        <div data-bottle="true" class="bottle relative w-full h-full z-10 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-center" style="transform: translate(0px, 12px) rotate(3deg) scale(1.32); transform-origin: 50% 50%;">
+        <!-- Product Pack (Layered IN FRONT, z-10, large at idle, shrinks and lifts on hover) -->
+        <div data-bottle="true" class="bottle relative w-full h-full z-10 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-center" style="transform: translate(0px, 20px) rotate(3deg) scale(1.52); transform-origin: 50% 50%;">
           <div class="bottle-float relative w-full h-full flex items-center justify-center">
             <img src="${p.front}" alt="${p.name.join(" ")}" class="relative z-10 w-full h-full object-contain" />
           </div>
@@ -1474,8 +1474,8 @@
         <div data-shadow="true" class="shadow-el hidden pointer-events-none" style="display: none !important;"></div>
       </div>
 
-      <!-- Bottom Action Buttons Container (Hidden at idle, reveals on hover or click like older) -->
-      <div data-buttons-container="true" class="actions relative z-20 flex flex-col gap-2.5 w-full mt-auto pt-2 opacity-0 translate-y-3 pointer-events-none transition-all duration-400 ease-out sm:group-hover:opacity-100 sm:group-hover:translate-y-0 sm:group-hover:pointer-events-auto">
+      <!-- Bottom Action Buttons Container (Hidden at idle, slides up on hover or click to take bottom place) -->
+      <div data-buttons-container="true" class="actions absolute bottom-4 sm:bottom-5 md:bottom-6 left-4 right-4 sm:left-5 sm:right-5 md:left-6 md:right-6 z-20 flex flex-col gap-2.5 opacity-0 translate-y-6 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
         <!-- Top Button: ADD TO CART -->
         <button type="button" class="group/btn relative cursor-pointer w-full flex items-center justify-between rounded-xl bg-cream px-5 py-3.5 sm:py-4 min-h-[48px] sm:min-h-[52px] font-display font-black text-sm sm:text-base uppercase tracking-wider text-background shadow-md transition-all duration-300 hover:brightness-105 active:scale-[0.98]">
           <span class="font-display font-black uppercase tracking-wider text-background">ADD TO CART</span>
@@ -1504,19 +1504,19 @@
 
         function showCardDetails() {
           if (tagline) { tagline.style.opacity = "1"; tagline.style.transform = "translateY(0)"; }
-          if (fruitTL) { fruitTL.style.opacity = "1"; fruitTL.style.transform = "translate(-12px, -6px) rotate(-14deg) scale(1.12)"; }
-          if (fruitBR) { fruitBR.style.opacity = "1"; fruitBR.style.transform = "translate(12px, 6px) rotate(14deg) scale(1.12)"; }
+          if (bottle) { bottle.style.transform = "translate(0px, -46px) rotate(2deg) scale(1.05)"; }
+          if (fruitTL) { fruitTL.style.opacity = "1"; fruitTL.style.transform = "translate(-14px, -46px) rotate(-14deg) scale(1.12)"; }
+          if (fruitBR) { fruitBR.style.opacity = "1"; fruitBR.style.transform = "translate(14px, -34px) rotate(14deg) scale(1.12)"; }
           if (actions) { actions.style.opacity = "1"; actions.style.transform = "translateY(0)"; actions.style.pointerEvents = "auto"; }
-          if (bottle) { bottle.style.transform = "translate(0px, -24px) rotate(3deg) scale(1, 1)"; }
           if (shadowEl) { shadowEl.style.display = "none"; }
         }
 
         function hideCardDetails() {
           if (tagline) { tagline.style.opacity = "0"; tagline.style.transform = "translateY(-8px)"; }
+          if (bottle) { bottle.style.transform = "translate(0px, 20px) rotate(3deg) scale(1.52)"; }
           if (fruitTL) { fruitTL.style.opacity = "0"; fruitTL.style.transform = "translate(0px, 0px) rotate(0deg) scale(0.2)"; }
           if (fruitBR) { fruitBR.style.opacity = "0"; fruitBR.style.transform = "translate(0px, 0px) rotate(0deg) scale(0.2)"; }
-          if (actions) { actions.style.opacity = "0"; actions.style.transform = "translateY(12px)"; actions.style.pointerEvents = "none"; }
-          if (bottle) { bottle.style.transform = "translate(0px, 12px) rotate(3deg) scale(1.32, 1.32)"; }
+          if (actions) { actions.style.opacity = "0"; actions.style.transform = "translateY(24px)"; actions.style.pointerEvents = "none"; }
           if (shadowEl) { shadowEl.style.display = "none"; }
         }
 
