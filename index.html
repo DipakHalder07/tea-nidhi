@@ -216,21 +216,9 @@
       will-change: transform;
     }
 
-    /* Product grid bottle float */
-    @keyframes product-card-float {
-
-      0%,
-      100% {
-        transform: translateY(0px);
-      }
-
-      50% {
-        transform: translateY(-8px);
-      }
-    }
-
+    /* Product grid bottle float (disabled) */
     .bottle-float {
-      animation: product-card-float 5s ease-in-out infinite;
+      animation: none;
     }
 
     /* Top Right Companion Floating Animation */
@@ -488,7 +476,8 @@
               <div class="animate-float-companion-top pointer-events-none relative flex items-center justify-center">
                 <img id="heroTopImg"
                   src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png"
-                  alt="Tea Spices" class="pointer-events-none relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
+                  alt="Tea Spices"
+                  class="pointer-events-none relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
               </div>
             </div>
 
@@ -499,7 +488,8 @@
               <div class="animate-float-companion-bottom pointer-events-none relative flex items-center justify-center">
                 <img id="heroBottomImg"
                   src="element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png"
-                  alt="Tea Strainer" class="pointer-events-none relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
+                  alt="Tea Strainer"
+                  class="pointer-events-none relative z-10 w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain" />
               </div>
             </div>
           </div>
@@ -1380,7 +1370,7 @@
       grid.innerHTML = PRODUCTS.map((p) => `
     <article data-listing-card="true" class="prod group relative flex min-h-[460px] sm:min-h-[520px] md:min-h-[560px] lg:min-h-[600px] flex-col items-center justify-between overflow-hidden rounded-lg border border-cream/20 p-5 sm:p-6 md:p-8 gap-5 md:gap-6 transition-all duration-500 ease-out" style="background:${p.bg}">
       <a class="absolute inset-0 z-1" aria-label="${p.name.join(" ")}" href="#products"></a>
-      <div class="absolute z-0 pointer-events-none rounded-lg border border-cream/40 opacity-30 border-dashed inset-2.5"></div>
+      <div class="absolute z-0 pointer-events-none rounded-lg border border-cream/40  border-dashed inset-2.5"></div>
       
       <!-- Header Title & Tagline -->
       <div class="relative flex flex-col items-center text-center w-full pointer-events-none z-10">
@@ -1424,27 +1414,6 @@
     </article>`).join("");
 
       const cards = [...grid.querySelectorAll(".prod")];
-
-      // GSAP ScrollTrigger Entrance for Product Cards (Reliable once trigger - always visible)
-      if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.fromTo(
-          cards,
-          { y: 50, opacity: 0.3 },
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.12,
-            duration: 0.8,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: "#products",
-              start: "top 85%",
-              once: true,
-            },
-          }
-        );
-      }
 
       cards.forEach((c) => {
         const tagline = c.querySelector(".tagline");
