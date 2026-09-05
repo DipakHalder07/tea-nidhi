@@ -876,7 +876,7 @@
         </div>
       </div>
 
-      <!-- Slider Header Controls Bar -->
+      <!-- Products Section Header -->
       <div
         class="mx-auto max-w-[1600px] px-4 sm:px-6 md:px-8 mt-2 sm:mt-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
@@ -889,44 +889,18 @@
           </h2>
         </div>
 
-        <!-- Slider Navigation Controls & Counter -->
-        <div class="flex items-center gap-3 self-end sm:self-auto">
-          <div id="prodCounter" class="text-xs sm:text-sm font-mono text-cream/60 tracking-wider mr-1 select-none">
-            <span id="prodCurrentIndex" class="text-cream font-bold text-base">01</span> / <span
-              id="prodTotalCount">05</span>
-          </div>
-
-          <button id="prodPrev" type="button" aria-label="Previous Blend"
-            class="group w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-cream/30 bg-smoke/70 hover:bg-cream hover:text-background text-cream flex items-center justify-center transition-all duration-300 active:scale-90 cursor-pointer backdrop-blur-md">
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:-translate-x-0.5" fill="none"
-              stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <button id="prodNext" type="button" aria-label="Next Blend"
-            class="group w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-cream/30 bg-smoke/70 hover:bg-cream hover:text-background text-cream flex items-center justify-center transition-all duration-300 active:scale-90 cursor-pointer backdrop-blur-md">
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-0.5" fill="none"
-              stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+        <div class="flex items-center gap-3">
+          <span
+            class="inline-flex items-center rounded-full border border-cream/25 bg-cream/10 px-4 py-1.5 font-mono text-xs uppercase tracking-widest text-cream/80 backdrop-blur-sm">
+            8 Signature Blends
+          </span>
         </div>
       </div>
 
-      <!-- Slider Track Container -->
-      <div class="relative w-full mt-4 sm:mt-6">
+      <!-- 4-Column Product Grid (4 Top, 4 Bottom) -->
+      <div class="relative w-full mt-6 sm:mt-8">
         <div id="productGrid"
-          class="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory py-6 px-4 sm:px-6 md:px-12 max-w-[1700px] mx-auto no-scrollbar cursor-grab active:cursor-grabbing select-none"
-          style="-webkit-overflow-scrolling: touch;">
-        </div>
-
-        <!-- Slider Progress Indicator Bar -->
-        <div class="mx-auto max-w-[240px] sm:max-w-[320px] px-4 mt-2">
-          <div class="w-full h-1 bg-cream/15 rounded-full overflow-hidden">
-            <div id="prodProgressBar" class="h-full bg-gold transition-all duration-300 rounded-full"
-              style="width: 20%;"></div>
-          </div>
+          class="mx-auto grid max-w-[1600px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 px-4 sm:px-6 md:px-8">
         </div>
       </div>
     </section>
@@ -1871,7 +1845,7 @@
       window.addEventListener("loaderComplete", measure);
     })();
 
-    /* ---------- PRODUCTS (Slider Carousel + 3D Hover + Subtle Elements) ---------- */
+    /* ---------- PRODUCTS (4-Column Grid + 3D Hover + Subtle Elements) ---------- */
     (function () {
       const PRODUCTS = [
         {
@@ -1919,34 +1893,61 @@
           bg: "#2B4734",
           price: "₹379",
         },
+        {
+          name: ["Kashmiri", "Saffron", "Kahwa"],
+          tagline: "Exotic Saffron. Crushed Spices. Royal Mountain Warmth.",
+          front: "img/hero.png",
+          fruitTL: "element-img/green_cardamom.png",
+          fruitBR: "element-img/cinnamon_stick.png",
+          bg: "#8B4513",
+          price: "₹499",
+        },
+        {
+          name: ["Darjeeling", "First", "Flush"],
+          tagline: "Champagne of Teas. Delicate Muscatel. Himalayan Mist.",
+          front: "img/product-3.png",
+          fruitTL: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png",
+          fruitBR: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png",
+          bg: "#5C2618",
+          price: "₹429",
+        },
+        {
+          name: ["Ginger", "Tulsi", "Herbal"],
+          tagline: "Fiery Sun-Dried Ginger. Holy Basil. Everyday Immunity.",
+          front: "img/3-1.png",
+          fruitTL: "img/ginger.webp",
+          fruitBR: "element-img/star_anise.png",
+          bg: "#362012",
+          price: "₹329",
+        },
       ];
       const grid = document.getElementById("productGrid");
       if (!grid) return;
       grid.innerHTML = PRODUCTS.map((p) => `
-    <article data-listing-card="true" class="prod group relative flex min-h-[530px] sm:min-h-[570px] md:min-h-[610px] w-[300px] sm:w-[350px] md:w-[380px] lg:w-[400px] shrink-0 snap-start flex-col items-center justify-between overflow-hidden rounded-xl border border-cream/25 p-5 sm:p-6 md:p-7 gap-4 md:gap-5 transition-all duration-500 ease-out" style="background:${p.bg}">
+    <article data-listing-card="true" class="prod group relative flex min-h-[500px] sm:min-h-[530px] md:min-h-[560px] w-full flex-col items-center justify-between overflow-hidden rounded-xl border border-cream/25 p-4 sm:p-5 md:p-6 gap-3 md:gap-4 transition-all duration-500 ease-out" style="background:${p.bg}">
       <a class="absolute inset-0 z-1" aria-label="${p.name.join(" ")}" href="#products"></a>
-      <div class="absolute z-0 pointer-events-none rounded-lg border border-cream/40 border-dashed inset-2.5"></div>
+      <div class="absolute z-0 pointer-events-none rounded-lg border border-cream/40 border-dashed inset-2 sm:inset-2.5"></div>
       
       <!-- Header Title & Tagline -->
       <div class="relative flex flex-col items-center text-center w-full pointer-events-none z-10">
-        <h3 data-title="true" class="uppercase flex flex-col font-display text-[1.8rem] sm:text-[2.2rem] md:text-[2.5rem] lg:text-[32px] xl:text-[36px] leading-[0.9] text-cream">
+        <h3 data-title="true" class="uppercase flex flex-col font-display text-[1.45rem] sm:text-[1.65rem] md:text-[1.85rem] lg:text-[22px] xl:text-[26px] leading-[0.9] text-cream">
           ${p.name.map((l) => `<span>${l}</span>`).join("")}
         </h3>
-        <div data-tagline-wrapper="true" class="tagline mt-1.5 text-xs sm:text-sm font-sans text-cream/90 opacity-100 sm:opacity-0 transition-all duration-400 ease-out">
+        <div data-tagline-wrapper="true" class="tagline mt-1.5 text-xs font-sans text-cream/90 opacity-100 sm:opacity-0 transition-all duration-400 ease-out">
           <p class="leading-tight text-cream">${p.tagline}</p>
         </div>
       </div>
 
       <!-- Bottle & Shadow Container -->
-      <div class="relative pointer-events-none w-full max-w-[280px] sm:max-w-[320px] h-64 sm:h-72 md:h-[300px] lg:h-[320px] flex items-center justify-center my-auto">
-        <!-- Left Botanical Companion (BEHIND product, z-0, small, centered on product left side) -->
-        <img src="${p.fruitTL}" alt="" class="fruitTL absolute top-[30%] sm:top-[32%] left-1 sm:left-2 md:left-3 w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 object-contain opacity-0 scale-[0.2] pointer-events-none z-0" />
+      <div class="relative pointer-events-none w-full max-w-[240px] sm:max-w-[270px] h-56 sm:h-64 md:h-72 flex items-center justify-center my-auto">
+        <!-- Left Botanical Companion -->
+        <img src="${p.fruitTL}" alt="" class="fruitTL absolute top-[30%] sm:top-[32%] left-1 sm:left-2 md:left-3 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain opacity-0 scale-[0.2] pointer-events-none z-0" />
         
-        <!-- Right Botanical Companion (BEHIND product, z-0, small, centered on product right side) -->
-        <img src="${p.fruitBR}" alt="" class="fruitBR absolute top-[36%] sm:top-[38%] right-1 sm:right-2 md:right-3 w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 object-contain opacity-0 scale-[0.2] pointer-events-none z-0" />
+        <!-- Right Botanical Companion -->
+        <img src="${p.fruitBR}" alt="" class="fruitBR absolute top-[36%] sm:top-[38%] right-1 sm:right-2 md:right-3 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain opacity-0 scale-[0.2] pointer-events-none z-0" />
 
-        <!-- Product Pack (Layered IN FRONT, z-10, large at idle, shrinks and lifts on hover) -->
-        <div data-bottle="true" class="bottle relative w-full h-full z-10 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-center" style="transform: translate(0px, 20px) rotate(3deg) scale(1.52); transform-origin: 50% 50%;">
+        <!-- Product Pack -->
+        <div data-bottle="true" class="bottle relative w-full h-full z-10 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-center" style="transform: translate(0px, 16px) rotate(2deg) scale(1.42); transform-origin: 50% 50%;">
           <div class="bottle-float relative w-full h-full flex items-center justify-center">
             <img src="${p.front}" alt="${p.name.join(" ")}" class="relative z-10 w-full h-full object-contain" />
           </div>
@@ -1956,10 +1957,10 @@
       </div>
 
       <!-- Bottom Action Buttons Container (Hidden at idle, slides up on hover or click to take bottom place) -->
-      <div data-buttons-container="true" class="actions absolute bottom-4 sm:bottom-5 md:bottom-6 left-4 right-4 sm:left-5 sm:right-5 md:left-6 md:right-6 z-20 flex flex-col gap-2.5 opacity-0 translate-y-6 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
-        <!-- Top Button: ADD TO CART with Bucks multi-state roll-up animation -->
+      <div data-buttons-container="true" class="actions absolute bottom-3 sm:bottom-4 md:bottom-5 left-3 right-3 sm:left-4 sm:right-4 md:left-5 md:right-5 z-20 flex flex-col gap-2 opacity-0 translate-y-6 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
+        <!-- Top Button: ADD TO CART with multi-state roll-up animation -->
         <button type="button" data-add-to-cart="true"
-          class="group/button relative flex items-center justify-between w-full min-h-[48px] sm:min-h-[52px] px-5 py-3.5 font-display font-black text-sm sm:text-base uppercase tracking-wider rounded-xl cursor-pointer text-espresso overflow-hidden transition-transform duration-200 active:scale-[0.98]">
+          class="group/button relative flex items-center justify-between w-full min-h-[44px] sm:min-h-[48px] px-4 py-3 font-display font-black text-xs sm:text-sm uppercase tracking-wider rounded-xl cursor-pointer text-espresso overflow-hidden transition-transform duration-200 active:scale-[0.98]">
           <div data-button-bg="true" class="absolute inset-0 rounded-xl overflow-hidden border-2 border-cream bg-cream transition-colors duration-300 group-hover/button:bg-espresso group-hover/button:border-espresso pointer-events-none"></div>
           <span class="relative z-20 flex items-center justify-between w-full pointer-events-none">
             <!-- Label Roll-up Container -->
@@ -1994,7 +1995,7 @@
 
         <!-- Bottom Button: VIEW PRODUCT with roll-up animation -->
         <a class="w-full block" href="#products">
-          <div class="group/button relative cursor-pointer w-full flex items-center justify-between rounded-xl border-2 border-cream bg-transparent px-5 py-3.5 sm:py-4 min-h-[48px] sm:min-h-[52px] font-display font-black text-sm sm:text-base uppercase tracking-wider text-cream overflow-hidden transition-all duration-300 active:scale-[0.98]">
+          <div class="group/button relative cursor-pointer w-full flex items-center justify-between rounded-xl border-2 border-cream bg-transparent px-4 py-2.5 sm:py-3 min-h-[44px] sm:min-h-[48px] font-display font-black text-xs sm:text-sm uppercase tracking-wider text-cream overflow-hidden transition-all duration-300 active:scale-[0.98]">
             <div data-button-bg="true" class="absolute inset-0 rounded-xl overflow-hidden bg-transparent transition-all duration-300 group-hover/button:bg-cream pointer-events-none"></div>
             <span class="relative z-20 flex items-center justify-between w-full pointer-events-none">
               <span class="relative inline-flex items-center justify-start leading-none h-[1.3em] overflow-hidden">
@@ -2002,7 +2003,7 @@
                 <span class="absolute inset-0 flex items-center justify-start whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-cream group-hover/button:text-espresso">VIEW PRODUCT</span>
                 <span class="absolute inset-0 flex items-center justify-start whitespace-nowrap translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-espresso">VIEW PRODUCT</span>
               </span>
-              <span class="relative inline-flex items-center justify-end leading-none h-[1.3em] overflow-hidden text-lg sm:text-xl">
+              <span class="relative inline-flex items-center justify-end leading-none h-[1.3em] overflow-hidden text-base sm:text-lg">
                 <span class="invisible" aria-hidden="true">↗</span>
                 <span class="absolute inset-0 flex items-center justify-end transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-cream group-hover/button:text-espresso">↗</span>
                 <span class="absolute inset-0 flex items-center justify-end translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-espresso">↗</span>
@@ -2025,16 +2026,16 @@
 
         function showCardDetails() {
           if (tagline) { tagline.style.opacity = "1"; tagline.style.transform = "translateY(0)"; }
-          if (bottle) { bottle.style.transform = "translate(0px, -46px) rotate(2deg) scale(1.05)"; }
-          if (fruitTL) { fruitTL.style.opacity = "1"; fruitTL.style.transform = "translate(-14px, -46px) rotate(-14deg) scale(1.12)"; }
-          if (fruitBR) { fruitBR.style.opacity = "1"; fruitBR.style.transform = "translate(14px, -34px) rotate(14deg) scale(1.12)"; }
+          if (bottle) { bottle.style.transform = "translate(0px, -40px) rotate(1deg) scale(1.05)"; }
+          if (fruitTL) { fruitTL.style.opacity = "1"; fruitTL.style.transform = "translate(-12px, -36px) rotate(-14deg) scale(1.08)"; }
+          if (fruitBR) { fruitBR.style.opacity = "1"; fruitBR.style.transform = "translate(12px, -28px) rotate(14deg) scale(1.08)"; }
           if (actions) { actions.style.opacity = "1"; actions.style.transform = "translateY(0)"; actions.style.pointerEvents = "auto"; }
           if (shadowEl) { shadowEl.style.display = "none"; }
         }
 
         function hideCardDetails() {
           if (tagline) { tagline.style.opacity = "0"; tagline.style.transform = "translateY(-8px)"; }
-          if (bottle) { bottle.style.transform = "translate(0px, 20px) rotate(3deg) scale(1.52)"; }
+          if (bottle) { bottle.style.transform = "translate(0px, 16px) rotate(2deg) scale(1.42)"; }
           if (fruitTL) { fruitTL.style.opacity = "0"; fruitTL.style.transform = "translate(0px, 0px) rotate(0deg) scale(0.2)"; }
           if (fruitBR) { fruitBR.style.opacity = "0"; fruitBR.style.transform = "translate(0px, 0px) rotate(0deg) scale(0.2)"; }
           if (actions) { actions.style.opacity = "0"; actions.style.transform = "translateY(24px)"; actions.style.pointerEvents = "none"; }
@@ -2067,13 +2068,11 @@
                 const otherBR = other.querySelector(".fruitBR");
                 const otherTag = other.querySelector(".tagline");
                 const otherBot = other.querySelector(".bottle");
-                const otherShd = other.querySelector(".shadow-el");
-                if (otherAct) { otherAct.style.opacity = "0"; otherAct.style.transform = "translateY(12px)"; otherAct.style.pointerEvents = "none"; }
+                if (otherAct) { otherAct.style.opacity = "0"; otherAct.style.transform = "translateY(24px)"; otherAct.style.pointerEvents = "none"; }
                 if (otherTL) { otherTL.style.opacity = "0"; otherTL.style.transform = "translate(0, 0) scale(0.2)"; }
                 if (otherBR) { otherBR.style.opacity = "0"; otherBR.style.transform = "translate(0, 0) scale(0.2)"; }
                 if (otherTag) { otherTag.style.opacity = "0"; otherTag.style.transform = "translateY(-8px)"; }
-                if (otherBot) { otherBot.style.transform = "translate(0px, 12px) rotate(3deg) scale(1.32, 1.32)"; }
-                if (otherShd) { otherShd.style.transform = "translate(-50%, 28px) scale(1.3, 1.3)"; otherShd.style.opacity = "1"; }
+                if (otherBot) { otherBot.style.transform = "translate(0px, 16px) rotate(2deg) scale(1.42)"; }
               }
             });
             showCardDetails();
@@ -2112,88 +2111,6 @@
           }, 2000);
         }, 750);
       });
-
-      // Slider navigation & progress
-      const prevBtn = document.getElementById("prodPrev");
-      const nextBtn = document.getElementById("prodNext");
-      const counterCurrent = document.getElementById("prodCurrentIndex");
-      const counterTotal = document.getElementById("prodTotalCount");
-      const progressBar = document.getElementById("prodProgressBar");
-
-      if (counterTotal) counterTotal.textContent = String(PRODUCTS.length).padStart(2, "0");
-
-      function updateSliderProgress() {
-        if (!grid) return;
-        const scrollLeft = grid.scrollLeft;
-        const maxScroll = grid.scrollWidth - grid.clientWidth;
-        const progress = maxScroll > 0 ? (scrollLeft / maxScroll) : 0;
-
-        if (progressBar) {
-          const pct = Math.max(20, Math.min(100, Math.round(progress * 80 + 20)));
-          progressBar.style.width = pct + "%";
-        }
-
-        const cardsList = grid.querySelectorAll(".prod");
-        if (cardsList.length > 0) {
-          const cardW = cardsList[0].offsetWidth + 16;
-          const idx = Math.min(cardsList.length - 1, Math.max(0, Math.round(scrollLeft / cardW)));
-          if (counterCurrent) {
-            counterCurrent.textContent = String(idx + 1).padStart(2, "0");
-          }
-        }
-      }
-
-      grid.addEventListener("scroll", updateSliderProgress, { passive: true });
-
-      function scrollSlide(dir) {
-        const firstCard = grid.querySelector(".prod");
-        const scrollAmount = firstCard ? firstCard.offsetWidth + 20 : 360;
-        grid.style.scrollBehavior = "smooth";
-        grid.scrollBy({ left: dir * scrollAmount, behavior: "smooth" });
-      }
-
-      if (prevBtn) prevBtn.addEventListener("click", () => scrollSlide(-1));
-      if (nextBtn) nextBtn.addEventListener("click", () => scrollSlide(1));
-
-      // Mouse drag-to-scroll
-      let isDown = false;
-      let startX = 0;
-      let scrollLeftStart = 0;
-      let hasDragged = false;
-
-      grid.addEventListener("mousedown", (e) => {
-        if (e.button !== 0) return;
-        isDown = true;
-        hasDragged = false;
-        startX = e.pageX - grid.offsetLeft;
-        scrollLeftStart = grid.scrollLeft;
-      });
-
-      window.addEventListener("mouseup", () => {
-        if (!isDown) return;
-        isDown = false;
-        grid.style.scrollBehavior = "smooth";
-      });
-
-      grid.addEventListener("mousemove", (e) => {
-        if (!isDown) return;
-        const x = e.pageX - grid.offsetLeft;
-        const dist = x - startX;
-        if (Math.abs(dist) > 5) {
-          hasDragged = true;
-          grid.style.scrollBehavior = "auto";
-          e.preventDefault();
-          grid.scrollLeft = scrollLeftStart - dist;
-        }
-      });
-
-      grid.addEventListener("click", (e) => {
-        if (hasDragged) {
-          e.preventDefault();
-          e.stopPropagation();
-          hasDragged = false;
-        }
-      }, true);
     })();
 
     /* ---------- WHY NIDHI TEA (Standalone Arched Heading Reveal) ---------- */
