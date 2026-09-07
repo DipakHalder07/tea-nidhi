@@ -699,11 +699,12 @@
 
     let isAnimating = false;
 
-    /* Render Active Product with Silky Smooth GSAP Left-to-Right / Right-to-Left Sliding */
+    /* Render Active Product: Smooth GSAP Gallery Slide with NO text changes */
     function renderProduct(index, direction = 0) {
       const p = PRODUCTS[index];
+      const baseProduct = PRODUCTS[0];
 
-      // Initial page load without sliding motion
+      // Initial page load without sliding motion: populate text once
       if (direction === 0 || typeof gsap === "undefined") {
         packImg.src = p.pack;
         foodFg.src = p.foodFg;
@@ -711,30 +712,30 @@
         foodTr.src = p.foodTr;
         foodMl.src = p.foodMl;
         foodMr.src = p.foodMr;
-        mascotImg.src = p.mascot;
+        mascotImg.src = baseProduct.mascot;
 
         if (stageBgA) {
-          stageBgA.style.background = p.stageBg;
+          stageBgA.style.background = baseProduct.stageBg;
           stageBgA.style.opacity = "1";
         }
         if (stageBgB) stageBgB.style.opacity = "0";
 
-        titleEl.innerHTML = p.title;
-        taglineEl.textContent = p.tagline;
-        heatBadge.textContent = p.intensity;
-        if (pairsWithText && p.pairingsText) pairsWithText.textContent = p.pairingsText;
-        if (intensityDesc && p.intensityDesc) intensityDesc.textContent = p.intensityDesc;
+        titleEl.innerHTML = baseProduct.title;
+        taglineEl.textContent = baseProduct.tagline;
+        heatBadge.textContent = baseProduct.intensity;
+        if (pairsWithText && baseProduct.pairingsText) pairsWithText.textContent = baseProduct.pairingsText;
+        if (intensityDesc && baseProduct.intensityDesc) intensityDesc.textContent = baseProduct.intensityDesc;
 
-        if (intensityMeter && p.intensityScore) {
+        if (intensityMeter && baseProduct.intensityScore) {
           let dotsHtml = "";
           for (let i = 1; i <= 10; i++) {
-            const isActive = i <= p.intensityScore;
+            const isActive = i <= baseProduct.intensityScore;
             dotsHtml += `<div class="h-full ${isActive ? 'bg-gold' : 'bg-cream/10'} rounded-full flex-1 transition-colors duration-500"></div>`;
           }
           intensityMeter.innerHTML = dotsHtml;
         }
 
-        tasteList.innerHTML = p.bullets.map(b => `
+        tasteList.innerHTML = baseProduct.bullets.map(b => `
           <li class="flex items-start gap-2.5">
             <span class="text-gold shrink-0 text-xs mt-0.5">•</span>
             <span>${b}</span>
@@ -749,8 +750,8 @@
       isAnimating = true;
 
       // Horizontal Motion Vectors:
-      // direction = 1 (Next): Active pack & ingredients slide OUT LEFT (-380px), incoming slides IN RIGHT (+380px)
-      // direction = -1 (Prev): Active pack & ingredients slide OUT RIGHT (+380px), incoming slides IN LEFT (-380px)
+      // direction = 1 (Next): Active pack & botanicals slide OUT LEFT (-380px), incoming slides IN RIGHT (+380px)
+      // direction = -1 (Prev): Active pack & botanicals slide OUT RIGHT (+380px), incoming slides IN LEFT (-380px)
       const exitPackX = direction * -380;
       const exitPackRot = direction * -10;
       const enterPackX = direction * 380;
@@ -759,62 +760,18 @@
       const exitSpicesX = direction * -220;
       const enterSpicesX = direction * 220;
 
-      const exitTextX = direction * -35;
-      const enterTextX = direction * 35;
-
       const spiceWrappers = [wrapFg, wrapTl, wrapTr, wrapMl, wrapMr].filter(Boolean);
-      const textGroup = [titleEl, taglineEl, mascotWrap, tasteList, pairsWithText, heatBadge, intensityDesc].filter(Boolean);
 
-      // Smooth Background Crossfade
-      if (stageBgA && stageBgB) {
-        if (currentBgLayer === "A") {
-          stageBgB.style.background = p.stageBg;
-          gsap.to(stageBgB, { opacity: 1, duration: 0.6, ease: "power2.out" });
-          gsap.to(stageBgA, { opacity: 0, duration: 0.6, ease: "power2.out" });
-          currentBgLayer = "B";
-        } else {
-          stageBgA.style.background = p.stageBg;
-          gsap.to(stageBgA, { opacity: 1, duration: 0.6, ease: "power2.out" });
-          gsap.to(stageBgB, { opacity: 0, duration: 0.6, ease: "power2.out" });
-          currentBgLayer = "A";
-        }
-      }
-
-      // PHASE 1: EXIT TIMELINE (Snappy 0.22s exit)
+      // PHASE 1: EXIT TIMELINE (Snappy 0.22s exit of product pack and botanicals only - NO text change/animation)
       const exitTl = gsap.timeline({
         onComplete: () => {
-          // Swap image assets and copy
+          // Swap image assets ONLY - NO text changes
           packImg.src = p.pack;
           foodFg.src = p.foodFg;
           foodTl.src = p.foodTl;
           foodTr.src = p.foodTr;
           foodMl.src = p.foodMl;
           foodMr.src = p.foodMr;
-          mascotImg.src = p.mascot;
-
-          titleEl.innerHTML = p.title;
-          taglineEl.textContent = p.tagline;
-          heatBadge.textContent = p.intensity;
-          if (pairsWithText && p.pairingsText) pairsWithText.textContent = p.pairingsText;
-          if (intensityDesc && p.intensityDesc) intensityDesc.textContent = p.intensityDesc;
-
-          if (intensityMeter && p.intensityScore) {
-            let dotsHtml = "";
-            for (let i = 1; i <= 10; i++) {
-              const isActive = i <= p.intensityScore;
-              dotsHtml += `<div class="h-full ${isActive ? 'bg-gold' : 'bg-cream/10'} rounded-full flex-1 transition-colors duration-500"></div>`;
-            }
-            intensityMeter.innerHTML = dotsHtml;
-          }
-
-          tasteList.innerHTML = p.bullets.map(b => `
-            <li class="flex items-start gap-2.5">
-              <span class="text-gold shrink-0 text-xs mt-0.5">•</span>
-              <span>${b}</span>
-            </li>
-          `).join("");
-
-          updatePrice();
 
           // PHASE 2: ENTER TIMELINE (Fluid spring-assisted entrance from opposite side)
           const enterTl = gsap.timeline({
@@ -835,13 +792,6 @@
             { x: enterSpicesX, opacity: 0, scale: 0.8 },
             { x: 0, opacity: 1, scale: 1, duration: 0.48, stagger: 0.03, ease: "power3.out" },
             0.04
-          );
-
-          // Right-hand typography slides in smoothly
-          enterTl.fromTo(textGroup,
-            { x: enterTextX, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.42, stagger: 0.02, ease: "power3.out" },
-            0.06
           );
         }
       });
@@ -864,19 +814,11 @@
         stagger: 0.015,
         ease: "power2.in"
       }, 0);
-
-      // Animate Text Out
-      exitTl.to(textGroup, {
-        x: exitTextX,
-        opacity: 0,
-        duration: 0.18,
-        ease: "power2.in"
-      }, 0);
     }
 
     /* Price Calculator */
     function updatePrice() {
-      const p = PRODUCTS[currentIndex];
+      const p = PRODUCTS[0];
       const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
       const sizeMultiplier = selectedOption.value === "2" ? 1.83 : (selectedOption.value === "4" ? 3.34 : 1);
       const unitPrice = Math.round(p.price * sizeMultiplier);
@@ -1031,7 +973,7 @@
     }
 
     addToCartBtn.addEventListener("click", () => {
-      const p = PRODUCTS[currentIndex];
+      const p = PRODUCTS[0];
       const selectedSize = sizeSelect.options[sizeSelect.selectedIndex].text;
       const currentTotal = updatePrice();
 
@@ -1068,7 +1010,7 @@
 
     if (buyNowBtn) {
       buyNowBtn.addEventListener("click", () => {
-        const p = PRODUCTS[currentIndex];
+        const p = PRODUCTS[0];
         const selectedSize = sizeSelect.options[sizeSelect.selectedIndex].text;
         const currentTotal = updatePrice();
 
