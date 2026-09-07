@@ -24,7 +24,7 @@
         extend: {
           colors: {
             background: "#100B06",
-            cream: "#FFF5EA",
+            cream: "#f5e4c7",
             gold: "#C48D42",
             "gold-hover": "#A87532",
             amber: "#D99948",
@@ -32,7 +32,7 @@
             cherry: "#C4321C",
             smoke: "#1A130C",
             panel: "#16100A",
-            borderCol: "rgba(255, 245, 234, 0.16)",
+            borderCol: "rgba(245, 228, 199, 0.16)",
           },
           fontFamily: {
             display: ['"Fraunces"', 'serif'],
@@ -50,11 +50,11 @@
   <style>
     :root {
       --background: #100B06;
-      --cream: #FFF5EA;
+      --cream: #f5e4c7;
       --gold: #C48D42;
       --gold-hover: #A87532;
       --panel: #16100A;
-      --border: rgba(255, 245, 234, 0.15);
+      --border: rgba(245, 228, 199, 0.15);
     }
 
     * {
@@ -78,7 +78,7 @@
       background-color: #100B06;
       background-image: 
         radial-gradient(circle at 50% 50%, rgba(26, 18, 11, 0.7) 0%, rgba(16, 11, 6, 0.95) 100%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFF5EA' fill-opacity='0.025' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f5e4c7' fill-opacity='0.025' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
     }
 
     /* Visual Showcase Stage Radial Lighting */
@@ -144,12 +144,12 @@
     .glass-card {
       background: rgba(22, 16, 10, 0.85);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 245, 234, 0.15);
+      border: 1px solid rgba(245, 228, 199, 0.15);
     }
 
     /* Custom select styling */
     select {
-      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23FFF5EA' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23f5e4c7' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 14px center;
       -webkit-appearance: none;
@@ -233,7 +233,7 @@
 
           <!-- Ambient Radial Lighting behind the Tea Pack -->
           <div id="stageGlow"
-            class="pointer-events-none absolute inset-0 bg-radial from-white/20 via-transparent to-black/25 opacity-70 z-1">
+            class="pointer-events-none absolute inset-0 bg-radial from-cream/20 via-transparent to-black/25 opacity-70 z-1">
           </div>
 
           <!-- PERSPECTIVAL 3D FLOATING TEA INGREDIENTS -->
@@ -241,39 +241,39 @@
           <div id="wrapFg"
             class="pointer-events-none absolute -bottom-8 -left-10 sm:-bottom-10 sm:-left-8 w-44 sm:w-56 md:w-68 lg:w-76 xl:w-84 z-30 will-change-transform"
             style="--rot: -22deg; filter: blur(2.5px);">
-            <img id="foodFg" src="element-img/cinnamon_stick.png" alt="Tea Ingredients Foreground"
+            <img id="foodFg" src="element-img/ginger.png" alt="Mountain Ginger"
               class="animate-float-slow w-full h-auto object-contain drop-shadow-2xl" />
           </div>
 
-          <!-- 2. Midground Floating Element (Top-Left: Green Cardamom) -->
+          <!-- 2. Midground Floating Element (Top-Left: Chamomile Botanical Tea) -->
           <div id="wrapTl"
             class="pointer-events-none absolute top-4 left-4 sm:top-8 sm:left-8 w-20 sm:w-26 md:w-32 z-20 will-change-transform"
             style="--rot: 18deg;">
-            <img id="foodTl" src="element-img/green_cardamom.png" alt="Green Cardamom"
+            <img id="foodTl" src="element-img/chamomile-tea.png" alt="Chamomile Tea"
               class="animate-float-medium w-full h-auto object-contain drop-shadow-xl" />
           </div>
 
-          <!-- 3. Midground Floating Element (Top-Right: Star Anise) -->
+          <!-- 3. Midground Floating Element (Top-Right: Tea with Lemon) -->
           <div id="wrapTr"
             class="pointer-events-none absolute -top-3 right-10 sm:top-4 sm:right-16 w-24 sm:w-30 md:w-36 z-10 will-change-transform"
             style="--rot: -35deg;">
-            <img id="foodTr" src="element-img/star_anise.png" alt="Star Anise"
+            <img id="foodTr" src="element-img/tea-with-lemon.png" alt="Tea with Lemon"
               class="animate-float-slow w-full h-auto object-contain drop-shadow-xl" />
           </div>
 
-          <!-- 4. Floating Small Element (Mid-Left: Sun-Dried Ginger) -->
+          <!-- 4. Floating Small Element (Mid-Left: Artisan Cup of Tea) -->
           <div id="wrapMl"
             class="pointer-events-none absolute top-[38%] -left-5 sm:left-2 w-16 sm:w-22 md:w-28 z-20 will-change-transform"
             style="--rot: 42deg;">
-            <img id="foodMl" src="img/ginger.webp" alt="Ginger Piece"
+            <img id="foodMl" src="element-img/cup-of-tea.png" alt="Cup of Tea"
               class="animate-float-slow w-full h-auto object-contain drop-shadow-lg" />
           </div>
 
-          <!-- 5. Floating Element (Mid-Right: Cinnamon Stick) -->
+          <!-- 5. Floating Element (Mid-Right: Artisanal Jam) -->
           <div id="wrapMr"
             class="pointer-events-none absolute top-[52%] -right-8 sm:-right-4 w-28 sm:w-36 md:w-44 z-20 will-change-transform"
             style="--rot: -16deg;">
-            <img id="foodMr" src="element-img/cinnamon_stick.png" alt="Cinnamon Stick"
+            <img id="foodMr" src="element-img/jam.png" alt="Artisan Jam"
               class="animate-float-medium w-full h-auto object-contain drop-shadow-xl" />
           </div>
 
@@ -328,7 +328,7 @@
             <!-- Tasteful Floating Teapot Sticker -->
             <div id="mascotWrap"
               class="relative shrink-0 -mt-6 sm:-mt-10 mr-1 sm:mr-2 will-change-transform">
-              <img id="mascotImg" src="element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png" alt="Artisan Teapot"
+              <img id="mascotImg" src="element-img/cup-of-tea.png" alt="Artisan Teacup"
                 class="w-16 sm:w-20 md:w-24 h-auto object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)] rotate-6 transition-transform duration-300 hover:scale-110 hover:rotate-12 cursor-pointer" />
             </div>
           </div>
@@ -443,7 +443,7 @@
                 <span>BUY NOW</span>
                 <span id="priceDisplay" class="font-bold">₹299</span>
                 <span id="btnFlash"
-                  class="absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300 pointer-events-none"></span>
+                  class="absolute inset-0 bg-cream/20 translate-y-full transition-transform duration-300 pointer-events-none"></span>
               </button>
             </div>
           </div>
@@ -527,12 +527,12 @@
         intensityScore: 8,
         aroma: "Cardamom & Ginger",
         pack: "img/hero.png",
-        foodFg: "element-img/cinnamon_stick.png",
-        foodTl: "element-img/green_cardamom.png",
-        foodTr: "element-img/star_anise.png",
-        foodMl: "img/ginger.webp",
-        foodMr: "element-img/cinnamon_stick.png",
-        mascot: "element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png",
+        foodFg: "element-img/ginger.png",
+        foodTl: "element-img/chamomile-tea.png",
+        foodTr: "element-img/tea-with-lemon.png",
+        foodMl: "element-img/cup-of-tea.png",
+        foodMr: "element-img/jam.png",
+        mascot: "element-img/cup-of-tea.png",
         stageBg: "radial-gradient(circle at 48% 46%, #D9A45F 0%, #B87E34 38%, #6E4515 80%, #442908 100%)",
         goldColor: "#C48D42",
         price: 299,
@@ -552,12 +552,12 @@
         intensity: "Crisp & Clarifying (5/10)",
         intensityScore: 5,
         pack: "img/product-2.png",
-        foodFg: "element-img/dried_lemon_slice.png",
-        foodTl: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png",
-        foodTr: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png",
-        foodMl: "element-img/dried_lemon_slice.png",
-        foodMr: "img/tea-leaf.webp",
-        mascot: "element-img/isolated_steaming_cup_of_green_tea_in_a_porcelain_cup_top_down_view.png",
+        foodFg: "element-img/lemonade.png",
+        foodTl: "element-img/tea-with-lemon.png",
+        foodTr: "element-img/chamomile-tea.png",
+        foodMl: "element-img/lemonade.png",
+        foodMr: "element-img/cup-of-tea.png",
+        mascot: "element-img/tea-with-lemon.png",
         stageBg: "radial-gradient(circle at 48% 46%, #4BA868 0%, #2A7242 38%, #144424 80%, #0A2613 100%)",
         goldColor: "#2E6941",
         price: 349,
@@ -577,12 +577,12 @@
         intensity: "Floral & Elegant (7/10)",
         intensityScore: 7,
         pack: "img/product-3.png",
-        foodFg: "element-img/green_cardamom.png",
-        foodTl: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png",
-        foodTr: "element-img/star_anise.png",
-        foodMl: "element-img/green_cardamom.png",
-        foodMr: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png",
-        mascot: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png",
+        foodFg: "element-img/chamomile-tea.png",
+        foodTl: "element-img/cup-of-tea.png",
+        foodTr: "element-img/jam.png",
+        foodMl: "element-img/chamomile-tea.png",
+        foodMr: "element-img/tea-with-lemon.png",
+        mascot: "element-img/chamomile-tea.png",
         stageBg: "radial-gradient(circle at 48% 46%, #C03E58 0%, #8A1C2C 38%, #520B15 80%, #2E040B 100%)",
         goldColor: "#C4321C",
         price: 399,
@@ -602,12 +602,12 @@
         intensity: "Rich & Malty (9/10)",
         intensityScore: 9,
         pack: "img/3-1.png",
-        foodFg: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png",
-        foodTl: "element-img/cinnamon_stick.png",
-        foodTr: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png",
-        foodMl: "element-img/star_anise.png",
-        foodMr: "element-img/cinnamon_stick.png",
-        mascot: "element-img/isolated_rustic_clay_tea_pot_yixing_style_side_view_transparent_background.png",
+        foodFg: "element-img/cup-of-tea.png",
+        foodTl: "element-img/ginger.png",
+        foodTr: "element-img/tea-with-lemon.png",
+        foodMl: "element-img/jam.png",
+        foodMr: "element-img/lemonade.png",
+        mascot: "element-img/cup-of-tea.png",
         stageBg: "radial-gradient(circle at 48% 46%, #D19A4B 0%, #A46F25 38%, #633D0D 80%, #361F04 100%)",
         goldColor: "#BE8D3F",
         price: 449,
@@ -627,12 +627,12 @@
         intensity: "Exotic & Warming (8/10)",
         intensityScore: 8,
         pack: "img/hero.png",
-        foodFg: "element-img/green_cardamom.png",
-        foodTl: "element-img/cinnamon_stick.png",
-        foodTr: "element-img/star_anise.png",
-        foodMl: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png",
-        foodMr: "element-img/green_cardamom.png",
-        mascot: "element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png",
+        foodFg: "element-img/ginger.png",
+        foodTl: "element-img/tea-with-lemon.png",
+        foodTr: "element-img/cup-of-tea.png",
+        foodMl: "element-img/jam.png",
+        foodMr: "element-img/chamomile-tea.png",
+        mascot: "element-img/tea-with-lemon.png",
         stageBg: "radial-gradient(circle at 48% 46%, #E0953E 0%, #B86518 38%, #723708 80%, #441E02 100%)",
         goldColor: "#D97706",
         price: 499,
