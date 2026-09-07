@@ -139,6 +139,18 @@
       will-change: transform;
     }
 
+    path.why-line {
+      width: auto;
+      height: auto;
+      background: none;
+      stroke-dasharray: 8 14;
+      stroke: rgba(255, 245, 234, 0.42);
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      will-change: stroke-dashoffset;
+    }
+
     .noise-panel {
       background-color: #1A130C;
       background-image: radial-gradient(circle at 1px 1px, rgba(255, 245, 234, .07) 1px, transparent 0);
@@ -1018,21 +1030,12 @@
         <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
           class="pointer-events-none absolute -bottom-20 -right-24 w-[450px] sm:w-[580px] md:w-[720px] h-auto opacity-15 rotate-135 select-none z-0" />
 
-        <!-- Ambient Circular SVG Dashed Ring (Framing Slide Content) -->
+        <!-- Arched Dotted Orbital Track Line (Curved across the screen passing through slides) -->
         <div
-          class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[960px] aspect-square z-0 select-none">
-          <svg viewBox="0 0 960 960" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="480" cy="480" r="470" stroke="#F6E9D7" stroke-width="1.2" stroke-dasharray="4 10"
-              opacity="0.18" />
-            <circle cx="480" cy="480" r="410" stroke="#BE8D3F" stroke-width="0.8" stroke-dasharray="2 8"
-              opacity="0.14" />
+          class="line-wrapper pointer-events-none absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden z-0 select-none">
+          <svg viewBox="0 0 2400 900" class="w-[180vw] min-w-[2000px] h-full overflow-visible select-none pointer-events-none" preserveAspectRatio="none">
+            <path id="whyArcLine" class="why-line" d="M -300, 780 Q 1200, 310 2700, 780" />
           </svg>
-        </div>
-
-        <!-- Full Viewport Width Continuous Dotted Background Line -->
-        <div
-          class="line-wrapper pointer-events-none absolute inset-x-0 w-full h-[2px] top-[48%] sm:top-[46%] -translate-y-1/2 overflow-hidden z-0">
-          <div class="why-line w-[300%] h-full"></div>
         </div>
 
         <!-- Slides Stack (Centered in full 100vh) -->
@@ -1059,7 +1062,7 @@
               </div>
               <img src="element-img/isolated_rustic_clay_tea_pot_yixing_style_side_view_transparent_background.png"
                 alt="Estate Clay Teapot"
-                class="mascot absolute -right-8 -bottom-6 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-28 sm:h-40 md:h-52 lg:h-60 w-auto animate-float pointer-events-none -z-10"
+                class="mascot absolute -right-8 -bottom-6 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-28 sm:h-40 md:h-52 lg:h-60 w-auto animate-float pointer-events-none z-0"
                 style="--float-duration:7s">
             </div>
 
@@ -1092,7 +1095,7 @@
               </div>
               <img src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png"
                 alt="Botanical Spices"
-                class="mascot absolute -right-8 -bottom-6 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-28 sm:h-40 md:h-52 lg:h-60 w-auto animate-float pointer-events-none -z-10"
+                class="mascot absolute -right-8 -bottom-6 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-28 sm:h-40 md:h-52 lg:h-60 w-auto animate-float pointer-events-none z-0"
                 style="--float-duration:8s">
             </div>
 
@@ -1125,7 +1128,7 @@
               </div>
               <img src="element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png"
                 alt="Artisan Blooming Tea"
-                class="mascot absolute -right-8 -bottom-6 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-28 sm:h-40 md:h-52 lg:h-60 w-auto animate-float pointer-events-none -z-10"
+                class="mascot absolute -right-8 -bottom-6 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-28 sm:h-40 md:h-52 lg:h-60 w-auto animate-float pointer-events-none z-0"
                 style="--float-duration:7.5s">
             </div>
 
@@ -2299,7 +2302,7 @@
       }
     })();
 
-    /* ---------- WHY NIDHI TEA (Scroll-Scrubbed Pinned Slides) ---------- */
+    /* ---------- WHY NIDHI TEA (Round Orbital Arc On-Scroll Scrub) ---------- */
     (function () {
       if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
       gsap.registerPlugin(ScrollTrigger);
@@ -2307,61 +2310,109 @@
       const section = document.getElementById("whySection");
       if (!section) return;
 
-      // Base placement: all slides full opacity, centered horizontally & vertically
+      // Mathematical Arc Spacing Helper functions (Responsive for all screen sizes)
+      function getXDist() {
+        return window.innerWidth < 768 ? window.innerWidth * 0.96 : window.innerWidth * 0.72;
+      }
+      function getYDrop() {
+        return window.innerWidth < 768 ? 130 : 210;
+      }
+      function getRot() {
+        return window.innerWidth < 768 ? 10 : 14;
+      }
+
+      // Base placement: all slides centered horizontally & vertically on orbital peak
       gsap.set(".slide", {
-        yPercent: -50,
         left: "50%",
-        top: "50%",
-        opacity: 1,
-      });
-
-      // Slide 1: starts centered
-      gsap.set(".slide-1", {
+        top: "46%",
         xPercent: -50,
+        yPercent: -50,
+        opacity: 1,
+        transformOrigin: "center center",
       });
 
-      // Slides 2 & 3: start off-screen to the right
-      gsap.set(".slide-2, .slide-3", {
-        xPercent: 130,
+      // Initial positions along the arc:
+      // Slide 1: at center peak (upright 0deg)
+      gsap.set(".slide-1", {
+        x: 0,
+        y: 0,
+        rotation: 0,
       });
 
-      // Scroll-scrubbed GSAP Timeline (Pure horizontal slide, no fade)
+      // Slide 2: poised on the right along the curve (descended + tilted +rot)
+      gsap.set(".slide-2", {
+        x: () => getXDist(),
+        y: () => getYDrop(),
+        rotation: () => getRot(),
+      });
+
+      // Slide 3: further right along the curve
+      gsap.set(".slide-3", {
+        x: () => getXDist() * 1.85,
+        y: () => getYDrop() * 2.2,
+        rotation: () => getRot() * 1.85,
+      });
+
+      // Scroll-scrubbed GSAP Timeline along the round orbital arc
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: "#whySection",
           start: "top top",
           end: "bottom bottom",
-          scrub: true,
+          scrub: 0.6,
+          invalidateOnRefresh: true,
         },
         defaults: { ease: "none" },
       });
 
-      // Phase 1: Slide 1 goes left, Slide 2 enters from right to center
+      // Phase 1 (0 -> 1): Slide 1 descends left along arc; Slide 2 crests to center
       tl.to(".slide-1", {
-        xPercent: -230,
+        x: () => -getXDist(),
+        y: () => getYDrop(),
+        rotation: () => -getRot(),
         duration: 1,
-      }, 0)
-        .fromTo(".slide-2",
-          { xPercent: 130 },
-          { xPercent: -50, duration: 1 },
-          0
-        );
+      }, 0);
 
-      // Phase 2: Slide 2 goes left, Slide 3 enters from right to center
       tl.to(".slide-2", {
-        xPercent: -230,
+        x: 0,
+        y: 0,
+        rotation: 0,
         duration: 1,
-      }, 1)
-        .fromTo(".slide-3",
-          { xPercent: 130 },
-          { xPercent: -50, duration: 1 },
-          1
-        );
+      }, 0);
 
-      // Continuous moving dotted line across scroll
+      tl.to(".slide-3", {
+        x: () => getXDist(),
+        y: () => getYDrop(),
+        rotation: () => getRot(),
+        duration: 1,
+      }, 0);
+
+      // Phase 2 (1 -> 2): Slide 2 descends left along arc; Slide 3 crests to center
+      tl.to(".slide-1", {
+        x: () => -getXDist() * 1.85,
+        y: () => getYDrop() * 2.2,
+        rotation: () => -getRot() * 1.85,
+        duration: 1,
+      }, 1);
+
+      tl.to(".slide-2", {
+        x: () => -getXDist(),
+        y: () => getYDrop(),
+        rotation: () => -getRot(),
+        duration: 1,
+      }, 1);
+
+      tl.to(".slide-3", {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        duration: 1,
+      }, 1);
+
+      // Dotted orbital arc line scrubbing smoothly along the curve
       tl.fromTo(".why-line",
-        { xPercent: 0 },
-        { xPercent: -50, duration: 2, ease: "none" },
+        { strokeDashoffset: 0 },
+        { strokeDashoffset: -1600, duration: 2, ease: "none" },
         0
       );
     })();
