@@ -2052,14 +2052,11 @@
       <a class="absolute inset-0 z-1" aria-label="${p.name.join(" ")}" href="product.html"></a>
       <div class="absolute z-0 pointer-events-none rounded-xl border border-cream/20 border-dashed inset-2 sm:inset-2.5"></div>
       
-      <!-- Header Title & Tagline -->
+      <!-- Header Title -->
       <div class="relative flex flex-col items-center text-center w-full pointer-events-none z-10 pt-1 sm:pt-2">
-        <h3 data-title="true" class="uppercase flex flex-col font-display text-[1.45rem] sm:text-[1.65rem] md:text-[1.85rem] lg:text-[22px] xl:text-[26px] leading-[0.9] text-cream">
+        <h3 data-title="true" class="uppercase flex flex-col font-display text-[1.45rem] sm:text-[1.65rem] md:text-[1.85rem] lg:text-[22px] xl:text-[26px] leading-[0.9] text-cream transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[0.88] origin-top will-change-transform">
           ${p.name.map((l) => `<span>${l}</span>`).join("")}
         </h3>
-        <div data-tagline-wrapper="true" class="tagline mt-1.5 text-xs font-sans text-cream/90 opacity-100 sm:opacity-0 transition-all duration-400 ease-out">
-          <p class="leading-tight text-cream">${p.tagline}</p>
-        </div>
       </div>
 
       <!-- Bottle & Shadow Container -->
@@ -2141,7 +2138,7 @@
       const cards = [...grid.querySelectorAll(".prod")];
 
       cards.forEach((c) => {
-        const tagline = c.querySelector(".tagline");
+        const title = c.querySelector("[data-title]");
         const fruitTL = c.querySelector(".fruitTL") || c.querySelector(".fruitTR");
         const fruitBR = c.querySelector(".fruitBR") || c.querySelector(".fruitBL");
         const actions = c.querySelector(".actions");
@@ -2149,7 +2146,7 @@
         const shadowEl = c.querySelector(".shadow-el");
 
         function showCardDetails() {
-          if (tagline) { tagline.style.opacity = "1"; tagline.style.transform = "translateY(0)"; }
+          if (title) { title.style.transform = "scale(0.88)"; }
           if (bottle) { bottle.style.transform = "translate(0px, -28px) rotate(0deg) scale(1.0)"; }
           if (fruitTL) { fruitTL.style.opacity = "1"; fruitTL.style.transform = "translate(-10px, -24px) rotate(-14deg) scale(1.05)"; }
           if (fruitBR) { fruitBR.style.opacity = "1"; fruitBR.style.transform = "translate(10px, -18px) rotate(14deg) scale(1.05)"; }
@@ -2158,7 +2155,7 @@
         }
 
         function hideCardDetails() {
-          if (tagline) { tagline.style.opacity = "0"; tagline.style.transform = "translateY(-8px)"; }
+          if (title) { title.style.transform = "scale(1)"; }
           if (bottle) { bottle.style.transform = "translate(0px, 0px) rotate(1deg) scale(1.12)"; }
           if (fruitTL) { fruitTL.style.opacity = "0"; fruitTL.style.transform = "translate(0px, 0px) rotate(0deg) scale(0.2)"; }
           if (fruitBR) { fruitBR.style.opacity = "0"; fruitBR.style.transform = "translate(0px, 0px) rotate(0deg) scale(0.2)"; }
@@ -2190,12 +2187,12 @@
                 const otherAct = other.querySelector(".actions");
                 const otherTL = other.querySelector(".fruitTL");
                 const otherBR = other.querySelector(".fruitBR");
-                const otherTag = other.querySelector(".tagline");
+                const otherTitle = other.querySelector("[data-title]");
                 const otherBot = other.querySelector(".bottle");
                 if (otherAct) { otherAct.style.opacity = "0"; otherAct.style.transform = "translateY(24px)"; otherAct.style.pointerEvents = "none"; }
                 if (otherTL) { otherTL.style.opacity = "0"; otherTL.style.transform = "translate(0, 0) scale(0.2)"; }
                 if (otherBR) { otherBR.style.opacity = "0"; otherBR.style.transform = "translate(0, 0) scale(0.2)"; }
-                if (otherTag) { otherTag.style.opacity = "0"; otherTag.style.transform = "translateY(-8px)"; }
+                if (otherTitle) { otherTitle.style.transform = "scale(1)"; }
                 if (otherBot) { otherBot.style.transform = "translate(0px, 0px) rotate(1deg) scale(1.12)"; }
               }
             });
