@@ -290,15 +290,6 @@
               class="animate-pack h-full max-h-[520px] sm:max-h-[580px] lg:max-h-[620px] w-auto object-contain drop-shadow-[0_22px_38px_rgba(0,0,0,0.6)] will-change-transform" />
           </div>
 
-          <!-- SLEEK MINIMALIST BLEND INDICATOR PILL (Bottom-Left) -->
-          <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-30 flex items-center gap-2 bg-black/45 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-cream/15 text-[11px] font-bold uppercase tracking-widest text-cream/90 shadow-lg pointer-events-none select-none">
-            <span id="sliderBlendNum" class="text-gold font-display font-bold">01</span>
-            <span class="text-cream/30">/</span>
-            <span class="text-cream/50">05</span>
-            <span class="mx-1 h-2.5 w-[1px] bg-cream/25"></span>
-            <span id="sliderBlendLabel" class="text-cream font-medium tracking-normal text-xs">Classic Masala Chai</span>
-          </div>
-
           <!-- CAROUSEL ARROW BUTTONS (Stacked on the right edge of stage) -->
           <div class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-3 sm:gap-4">
             <!-- Prev Product Button (Left Direction) -->
@@ -667,8 +658,6 @@
 
     const bottleContainer = document.getElementById("bottleContainer");
     const packImg = document.getElementById("mainBottleImg");
-    const sliderBlendNum = document.getElementById("sliderBlendNum");
-    const sliderBlendLabel = document.getElementById("sliderBlendLabel");
 
     const wrapFg = document.getElementById("wrapFg");
     const wrapTl = document.getElementById("wrapTl");
@@ -729,9 +718,6 @@
           stageBgA.style.opacity = "1";
         }
         if (stageBgB) stageBgB.style.opacity = "0";
-
-        if (sliderBlendNum) sliderBlendNum.textContent = "0" + (index + 1);
-        if (sliderBlendLabel) sliderBlendLabel.textContent = p.title.replace(/<br>/g, " ");
 
         titleEl.innerHTML = p.title;
         taglineEl.textContent = p.tagline;
@@ -805,9 +791,6 @@
           foodMl.src = p.foodMl;
           foodMr.src = p.foodMr;
           mascotImg.src = p.mascot;
-
-          if (sliderBlendNum) sliderBlendNum.textContent = "0" + (index + 1);
-          if (sliderBlendLabel) sliderBlendLabel.textContent = p.title.replace(/<br>/g, " ");
 
           titleEl.innerHTML = p.title;
           taglineEl.textContent = p.tagline;
