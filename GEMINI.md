@@ -15,7 +15,7 @@ Nidhi Tea is an ultra-premium, high-performance single-page e-commerce landing e
 * **Typography**: Google Fonts — **Anton** (Display / Headlines) and **Inter Tight** (Body / Sans / UI).
 * **Animation Engine**: **GSAP 3.12.5** + **ScrollTrigger** (`https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js` & `ScrollTrigger.min.js`).
 * **Text Splitting**: Built-in native `SplitTextPlugin` class polyfill (zero dependency, no paid GSAP Club token required).
-* **Video Media**: HTML5 4K cinematic video (`nidhi-tea-cinematics-.mp4`) with custom custom glassmorphic UI controls.
+* **Video Media**: Handcrafted creator reviews reels (`video/reels/`) in an infinite continuous auto-sliding showcase.
 
 ---
 
@@ -34,17 +34,25 @@ Nidhi Tea is an ultra-premium, high-performance single-page e-commerce landing e
 ```
 
 ### Typography Hierarchy
-* **Display / Headlines**: `font-family: Anton, 'Arial Narrow', sans-serif;`
-  * Applied via class `.display-tight` with `text-transform: uppercase`, `line-height: .88`, `letter-spacing: -.005em`.
+* **Display / Headlines**: Google Font **Fraunces** (`font-family: 'Fraunces', serif; font-optical-sizing: auto;`)
+  * Applied to `h1, h2, h3, h4, h5, h6`, Tailwind classes `font-display` / `font-heading`, and `.display-tight` with `text-transform: uppercase`, `line-height: .88`, `letter-spacing: -.005em`, `font-weight: 700`.
 * **Subtitles & Outlined Text**:
   * `.text-outline`: `color: transparent; -webkit-text-stroke: 1.5px var(--cream);`
   * `.number`: `color: transparent; -webkit-text-stroke: 3px var(--cream); letter-spacing: 0.02em;`
-* **Body / Interface**: `font-family: "Inter Tight", system-ui, sans-serif;` with crisp `-webkit-font-smoothing: antialiased`.
+* **Body / Interface**: Google Fonts **Inter Tight** & **Poppins** (`font-family: "Inter Tight", "Poppins", system-ui, sans-serif;`) with crisp `-webkit-font-smoothing: antialiased`.
 
 ### Visual Treatments & Textures
 * **Noise Panels (`.noise-panel`)**: Subtle dark textured cards (`#1A130C` with radial dotted matrix).
 * **Dotted Dividers (`.dotted-rule`)**: `repeating-linear-gradient` horizontal rules between sections.
 * **Animated Scroller Line (`.why-line`)**: 300% width repeating linear dotted track driven across the screen by GSAP ScrollTrigger.
+
+### Shape & Component Architecture
+* **Radius System**: Restrained 10px corner language (`rounded-lg: 10px`, `rounded-xl: 12px`, `rounded-md: 8px`, `rounded-sm: 4px`).
+* **Elevation & Framing**: Flat, framed surfaces with delicate 1px/2px borders rather than heavy drop shadows on card containers.
+* **Buttons**:
+  * Primary (`bg-cream text-background`): `rounded-lg` (10px), 56px height, sturdy padding (`px-3.5 py-3.5`), 2px border.
+  * Secondary (`bg-transparent text-cream border-2 border-cream`): `rounded-lg` (10px), 56px height, outlined counterpart.
+* **Cards & Inputs**: `rounded-lg` (10px), surface fill, clean framed border, generous vertical breathing room.
 
 ---
 
@@ -62,14 +70,13 @@ All animations in this project are finalized and calibrated for 60fps hardware-a
 | **6. Hero Carousel Slide** | Vanilla JS + Cubic-Bezier | `#heroSlides`, `data-hero-slide` | 3D depth transitions: Active slide is scale 1; outgoing slides shrink to 0.35 and translate ±120% with rotation. |
 | **7. Hero Mouse Parallax** | GSAP `mousemove` | `#top`, `#heroTintWrap`, `#heroSlides` | Smooth interactive mouse movement parallax tracking cursor position. |
 | **8. Header Morph on Scroll** | Vanilla JS scroll listener | `#logoBox`, `#navLinks`, `#navPill`, `#navBurger` | Above 80px scroll, large header logo shrinks, desktop links tuck away, and compact "Shop Tea" CTA pill docks in top right. |
-| **9. Intro Text Word Scrub** | GSAP ScrollTrigger | `#introText .intro-word` | Text words smoothly brighten from `opacity: 0.15` to `opacity: 1` as user scrolls down. |
+| **9. Intro Text Letters Slide Up** | GSAP ScrollTrigger | `#introText .intro-word`, `.intro-char` | Letters slide up smoothly from behind an overflow-hidden baseline with refined stagger when scrolling into view. |
 | **10. Benefits Floating Spices** | GSAP ScrollTrigger + CSS Float | `.floating-food-item` | 8 organic tea elements pop into view with spring elastic scale on scroll, then continuously float. |
 | **11. Benefits Sticky Stack** | Vanilla JS scroll/dim | `#benefits .bene-wrap`, `.bene-dim` | Cards stack with custom top offsets (`BASE + i * HEADER`) and previous cards darken via `.bene-dim` opacity transition. |
 | **12. Product Cards 3D Lift** | GSAP ScrollTrigger + CSS 3D | `#productGrid .prod`, `[data-bottle]`, `[data-shadow]` | On hover, bottle pack floats upwards (`translateY(-24px)`), shadow contracts, ingredient badges fan out, and action buttons reveal. |
 | **13. Why Standalone SVG Arc** | GSAP ScrollTrigger | `#whyIntroSection`, `#whyArcPath`, `svg` | Huge curved headline follows SVG path, reveals with smooth scaling and ambient pulsing background glow. |
 | **14. Why Horizontal Scrub** | GSAP ScrollTrigger Pinned Timeline | `#whySection`, `#whyStickyContainer`, `.slide-1`, `.slide-2`, `.slide-3` | Pinned `300vh` section where 3 giant numbered slides glide horizontally across screen as user scrolls, synchronized with the moving dotted line. |
-| **15. Cinema 4K Video Section** | GSAP ScrollTrigger + HTML5 Video API | `#cinemaSection`, `#cinemaFrame`, `#cinemaVideo` | Video container scales up from 0.88 to 1.0 on scroll, auto-plays when entering viewport, with glassmorphic play/pause, scrubbable progress bar, mute, and fullscreen. |
-| **16. Customer Reviews Marquee** | CSS Keyframe | `#reviewTrack`, `@keyframes bucks-marquee` | Continuous infinite marquee horizontal glide across cards. |
+| **15. Reels Video Slider ("Loved By All")** | GSAP Ticker + Infinite Wrap | `#reviewTrack`, `.reel-video`, `.reel-sound-btn` | Hardware-synchronized continuous infinite auto-glide across 5 creator video review cards with hover-pause, mouse drag/touch swipe, and sound toggle. |
 
 ---
 
@@ -87,10 +94,7 @@ All animations in this project are finalized and calibrated for 60fps hardware-a
      2. `Blend N0.02`: **Honey Lemon Green Tea** (`var(--flame)`)
      3. `Blend N0.03`: **Rose Cardamom Black Tea** (`var(--cherry)`)
    * Introduced dual floating companion botanical accents that dynamically swap and bloom per blend.
-3. **Dedicated 4K Cinematic Tea Story Added (`#cinemaSection`)**:
-   * Integrated `nidhi-tea-cinematics-.mp4` with a custom-engineered, fully responsive HTML5 video player.
-   * Features GSAP ScrollTrigger scroll expansion, scroll autoplay/pause, seekable progress bar, time counters, mute/unmute, and fullscreen mode.
-4. **Why Nidhi Tea Section Redesign**:
+3. **Why Nidhi Tea Section Redesign**:
    * Separated into an **Intro Arched Heading Section** (`#whyIntroSection`) using dynamic SVG `<textPath>` and a **3-Phase Scroll-Pinned Scrub** (`#whySection`).
    * Pinned horizontal scrub with 3 slides featuring huge outlined numbers (`01`, `02`, `03`), badge pills, and floating mascot teapots.
 5. **Enhanced Preloader & Elastic Heading Reveal**:
@@ -110,7 +114,6 @@ When making modifications or updates, **ONLY** edit within the following safe zo
     const TEXT = "Premium handcrafted teas sourced from the finest estates. ★ No artificial additives...";
     ```
   * Why Nidhi Tea paragraph copy inside `.slide-1 .text`, `.slide-2 .text`, `.slide-3 .text`.
-  * Cinema header text in `.cinema-header`.
   * Footer about text, copyright notices, and company details.
 
 ### B. Product Offerings & Slide Data
@@ -131,12 +134,12 @@ When making modifications or updates, **ONLY** edit within the following safe zo
     ];
     ```
 
-### C. Testimonials & Reviews
-* **Review Cards (`REVIEWS` array)**:
-  * Safe to add, remove, or modify review entries:
+### C. Testimonials & Reels
+* **Reel Cards (`REELS` array)**:
+  * Safe to add, remove, or modify creator reel video entries:
     ```javascript
-    const REVIEWS = [
-      { name: "Priya S.", quote: "...", body: "...", handle: "@handle" },
+    const REELS = [
+      { handle: "@...", displayName: "@...", link: "https://...", video: "video/reels/...", cdn: "https://...", poster: "img/reels/..." },
       ...
     ];
     ```
@@ -166,9 +169,8 @@ The following IDs and classes are strictly bound to GSAP timelines and scroll li
 * Navigation: `#logoBox`, `#logoImg`, `#navLinks`, `#navPill`, `#navBurger`, `#mobileMenu`
 * Floating Food & Intro: `#intro`, `#introText`, `.intro-word`, `.floating-food`, `.floating-food-item`
 * Benefits: `#benefits`, `.bene-wrap`, `.bene-dim`
-* Products: `#products`, `#productGrid`, `.prod`, `[data-bottle]`, `[data-shadow]`, `.fruitTR`, `.fruitBL`, `.tagline`, `.actions`
+* Products: `#products`, `#productGrid`, `.prod`, `[data-bottle]`, `[data-shadow]`, `.fruitTL`, `.fruitBR`, `.fruitTR`, `.fruitBL`, `.tagline`, `.actions`
 * Why Pinned Section: `#whySection`, `#whyStickyContainer`, `.slide`, `.slide-1`, `.slide-2`, `.slide-3`, `.why-line`, `.num-wrapper`, `.number`
-* Cinema Video: `#cinemaSection`, `#cinemaArena`, `#cinemaFrame`, `#cinemaVideo`, `#cinemaPlayBtn`, `#cinemaMiniPlayBtn`, `#cinemaMuteBtn`, `#cinemaFullscreenBtn`, `#cinemaProgressBar`, `#cinemaProgressFill`, `#cinemaTime`, `#cinemaOverlay`
 * Reviews: `#reviewsSection`, `#reviewTrack`, `.reviews-title`
 * Footer: `#footerSection`, `.footer-grid`
 
@@ -187,8 +189,8 @@ The following IDs and classes are strictly bound to GSAP timelines and scroll li
 * Any element with `will-change-transform` has been placed there to force GPU layer compositing and prevent frame drops during GSAP scrubbing.
 * Do not remove inline styles such as `transform: translate3d(...)` or `clip-path: circle(...)`.
 
-### 5. DO NOT Remove `muted` and `playsinline` on the Video
-* Modern web browsers strictly forbid autoplay for videos with audio. The `muted` and `playsinline` attributes on `#cinemaVideo` are mandatory for the ScrollTrigger intersection autoplay to function.
+### 5. Video Autoplay Best Practices
+* Reel videos keep `muted` and `playsinline` attributes to comply with modern mobile browser autoplay policies.
 
 ---
 
