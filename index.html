@@ -426,28 +426,6 @@
       opacity: 1 !important;
     }
 
-    /* ============ CUSTOM CURSOR (Bucks Sauce Style) ============ */
-    @media (pointer: fine) {
-      * {
-        cursor: none !important;
-      }
-    }
-
-    .custom-cursor {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--cream);
-      pointer-events: none;
-      z-index: 99999;
-      mix-blend-mode: difference;
-      top: 0;
-      left: 0;
-      will-change: transform, width, height;
-      opacity: 0;
-    }
-
     /* ============ BURGER → X ANIMATION ============ */
     #navBurger .burger-line {
       transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
@@ -807,7 +785,7 @@
 
   <main>
     <!-- ============ HERO ============ -->
-    <section id="top" class="relative overflow-hidden pt-28 sm:pt-36 md:pt-40 pb-6 sm:pb-8">
+    <section id="top" class="relative overflow-hidden pt-24 sm:pt-36 md:pt-40 pb-4 sm:pb-8">
       <!-- Ambient Botanical Leaf Watermarks in Background -->
       <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
         class="pointer-events-none absolute -top-16 -left-20 w-[300px] sm:w-[540px] md:w-[720px] xl:w-[860px] h-auto opacity-10 sm:opacity-15 -rotate-45 select-none z-0" />
@@ -822,7 +800,7 @@
         </h1>
       </div>
 
-      <div class="relative z-10 mt-8 sm:mt-10 md:mt-12">
+      <div class="relative z-10 mt-6 sm:mt-10 md:mt-12">
         <div class="dotted-rule absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-60"></div>
         <div
           class="relative mx-auto flex max-w-[1500px] items-center justify-between px-5 font-display text-[11px] uppercase tracking-[.2em] text-cream md:px-10 md:text-sm lg:text-base font-semibold">
@@ -832,7 +810,7 @@
       </div>
 
       <!-- ============ HERO CAROUSEL ROW WITH FULL-WIDTH DOTTED LINE ============ -->
-      <div class="relative z-10 w-full my-6 sm:my-8 md:my-10 lg:my-12">
+      <div class="relative z-10 w-full my-4 sm:my-8 md:my-10 lg:my-12">
         <!-- Edge-to-Edge Full-Width Horizontal Dotted Line Behind Slider & Navigation Buttons -->
         <div class="dotted-rule pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-70 z-0">
         </div>
@@ -846,7 +824,7 @@
               class="pointer-events-none text-base leading-none sm:text-lg md:text-xl lg:text-2xl font-bold">←</span></button>
 
           <div
-            class="relative z-10 flex h-[48vh] sm:h-[56vh] md:h-[64vh] lg:h-[72vh] xl:h-[78vh] min-h-[440px] max-h-[760px] flex-1 items-center justify-center">
+            class="relative z-10 flex h-[46vh] sm:h-[56vh] md:h-[64vh] lg:h-[72vh] xl:h-[78vh] min-h-[380px] sm:min-h-[440px] max-h-[760px] flex-1 items-center justify-center">
             <div id="heroTintWrap"
               class="absolute flex items-center justify-center pointer-events-none transition-transform duration-500 will-change-transform"
               style="transform: scale(1);">
@@ -895,7 +873,7 @@
         </div>
       </div>
 
-      <div class="relative z-10 flex items-center justify-center py-6 sm:py-8 md:py-10">
+      <div class="relative z-10 flex items-center justify-center py-4 sm:py-8 md:py-10">
         <div class="dotted-rule pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-70"></div>
         <a href="#products"
           class="group/button relative z-10 inline-flex items-center justify-center overflow-hidden rounded-xl border-2 border-pink bg-pink px-8 sm:px-10 md:px-12 py-4 sm:py-4.5 font-display text-sm sm:text-base uppercase tracking-[0.2em] font-bold text-cream transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-pink/40 hover:border-red active:scale-95 cursor-pointer">
@@ -916,21 +894,21 @@
     </section>
 
     <!-- ============ INTRO TEXT ============ -->
-    <section id="intro" class="relative z-10 px-5 py-10 md:py-16 overflow-hidden">
+    <section id="intro" class="relative z-10 px-5 py-6 sm:py-10 md:py-16 overflow-hidden">
       <p id="introText"
         class="relative z-10 mx-auto max-w-4xl text-center text-[7vw] leading-[1.15] text-cream md:text-5xl font-semibold">
       </p>
     </section>
 
     <!-- ============ BENEFITS ============ -->
-    <section class="relative pb-10 md:pb-16">
+    <section class="relative pb-4 sm:pb-10 md:pb-16">
       <div class="floating-food pointer-events-none absolute inset-0 overflow-hidden z-0" data-opacity="opacity-70">
       </div>
       <div id="benefits" class="relative z-10 mx-auto max-w-[640px] px-4"></div>
 
       <!-- End Icon After Wellness First Card (download.svg) -->
       <div id="benefitsEndIcon"
-        class="relative z-10 flex flex-col items-center justify-center mt-12 sm:mt-16 md:mt-24 mb-2 sm:mb-4 select-none pointer-events-none">
+        class="relative z-10 flex flex-col items-center justify-center mt-4 sm:mt-12 md:mt-24 mb-1 sm:mb-4 select-none pointer-events-none">
         <div class="opacity-20 hover:opacity-40 transition-opacity duration-300 w-32 sm:w-34 h-auto text-cream">
           <svg width="132" height="55" viewBox="0 0 132 55" fill="none" xmlns="http://www.w3.org/2000/svg"
             class="w-full h-full" aria-label="End Flourish Icon">
@@ -947,8 +925,8 @@
     </section>
 
     <!-- ============ PRODUCTS ============ -->
-    <section id="products" class="relative overflow-hidden pt-8 md:pt-14 pb-10 md:pb-14">
-      <div class="relative flex select-none overflow-hidden py-4 sm:py-6">
+    <section id="products" class="relative overflow-hidden pt-4 sm:pt-8 md:pt-14 pb-5 sm:pb-10 md:pb-14">
+      <div class="relative flex select-none overflow-hidden py-2 sm:py-6">
         <div class="flex w-max animate-marquee" style="--marquee-duration:26s">
           <span
             class="display-tight text-outline whitespace-nowrap px-6 text-[clamp(2.5rem,6vw,5.5rem)] leading-none opacity-70">Find
@@ -961,7 +939,7 @@
 
       <!-- Products Section Header -->
       <div
-        class="mx-auto max-w-[1600px] px-4 sm:px-6 md:px-8 mt-2 sm:mt-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        class="mx-auto max-w-[1600px] px-4 sm:px-6 md:px-8 mt-1 sm:mt-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <div class="flex items-center gap-2 mb-2">
             <span class="inline-block w-2 h-2 rounded-full bg-red animate-pulse"></span>
@@ -974,7 +952,7 @@
       </div>
 
       <!-- 4-Column Product Grid (4 Top, 4 Bottom) with balanced card row and column spacing -->
-      <div class="relative w-full mt-6 sm:mt-8">
+      <div class="relative w-full mt-4 sm:mt-8">
         <div id="productGrid"
           class="mx-auto grid max-w-[1600px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 sm:gap-x-6 lg:gap-x-7 xl:gap-x-8 gap-y-7 sm:gap-y-9 lg:gap-y-11 px-4 sm:px-6 md:px-8">
         </div>
@@ -983,7 +961,7 @@
 
     <!-- ============ WHY NIDHI TEA (STANDALONE INTRO HEADING SECTION) ============ -->
     <section id="whyIntroSection"
-      class="relative w-full min-h-[60vh] sm:min-h-[70vh] py-10 sm:py-14 md:py-18 flex flex-col items-center justify-center text-center px-2 sm:px-6 md:px-8 bg-background overflow-hidden">
+      class="relative w-full min-h-0 sm:min-h-[50vh] md:min-h-[70vh] py-5 sm:py-12 md:py-18 flex flex-col items-center justify-center text-center px-2 sm:px-6 md:px-8 bg-background overflow-hidden">
       <!-- Background Ambient Glow -->
       <div id="whyIntroGlow"
         class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[1200px] aspect-square rounded-full bg-gradient-to-tr from-cream/20 via-gold/15 to-transparent blur-[140px] -z-10 transition-transform duration-1000">
@@ -999,7 +977,7 @@
       <div class="why-intro-content flex flex-col items-center w-full max-w-[1600px] mx-auto z-10 select-none">
         <!-- Giant Arched SVG Headline -->
         <div
-          class="relative w-full aspect-[1600/320] min-h-[140px] sm:min-h-[220px] md:min-h-[300px] lg:min-h-[340px] flex items-center justify-center">
+          class="relative w-full aspect-[1600/320] min-h-[85px] sm:min-h-[180px] md:min-h-[300px] lg:min-h-[340px] flex items-center justify-center">
           <svg viewBox="0 0 1600 320" class="w-full h-full overflow-visible" preserveAspectRatio="xMidYMid meet"
             aria-hidden="true">
             <path id="whyArcPath" d="M 40,300 Q 800,-40 1560,300" fill="none" stroke="none"></path>
@@ -1014,7 +992,7 @@
 
         <!-- Centered Subtitle Paragraph (Stacked cleanly) -->
         <p
-          class="why-intro-subtitle text-center font-sans uppercase tracking-[0.14em] sm:tracking-[0.18em] text-cream text-sm sm:text-lg md:text-xl max-w-[360px] sm:max-w-lg md:max-w-xl leading-relaxed mt-4 sm:mt-8 md:mt-10 font-bold">
+          class="why-intro-subtitle text-center font-sans uppercase tracking-[0.14em] sm:tracking-[0.18em] text-cream text-sm sm:text-lg md:text-xl max-w-[360px] sm:max-w-lg md:max-w-xl leading-relaxed mt-2 sm:mt-6 md:mt-10 font-bold">
           WE CRAFT SMALL-BATCH MOUNTAIN<br>
           TEAS BECAUSE MASS-PRODUCED<br>
           TEA TASTES LIKE DUST. WE'RE<br>
@@ -1052,32 +1030,32 @@
 
           <!-- Slide 1 -->
           <div
-            class="slide slide-1 absolute top-1/2 left-1/2 w-[94%] max-w-3xl flex flex-col items-center text-center will-change-transform z-10">
+            class="slide slide-1 absolute top-[44%] sm:top-1/2 left-1/2 w-[94%] max-w-3xl flex flex-col items-center text-center will-change-transform z-10">
             <!-- Massive Outlined Number (Centered over dotted line) -->
             <div class="num-wrapper relative inline-flex items-center justify-center select-none">
               <span
-                class="number display-tight text-[44vw] sm:text-[32vw] md:text-[18rem] lg:text-[22rem] leading-none select-none">01</span>
+                class="number display-tight text-[36vw] sm:text-[32vw] md:text-[18rem] lg:text-[22rem] leading-none select-none">01</span>
             </div>
 
-            <!-- Large Pill Badge with Prominent Peeking Mascot (10px margin, no negative margin) -->
-            <div class="relative mt-[10px] z-20 inline-flex items-center justify-center">
+            <!-- Large Pill Badge with Prominent Mascot Behind Text -->
+            <div class="relative mt-2 sm:mt-[10px] z-20 inline-flex items-center justify-center">
               <div
-                class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-espresso">
-                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-red"></span>
+                class="heading relative z-20 inline-flex items-center gap-2.5 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-6 py-2.5 sm:px-12 sm:py-4 text-espresso shadow-xl">
+                <span class="h-2 w-2 sm:h-3.5 sm:w-3.5 rounded-full bg-red"></span>
                 <h3
-                  class="font-display text-xl uppercase tracking-wider text-espresso sm:text-3xl md:text-4xl font-extrabold">
+                  class="font-display text-base sm:text-3xl md:text-4xl font-extrabold uppercase tracking-wider text-espresso">
                   ESTATE SOURCED</h3>
-                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-red"></span>
+                <span class="h-2 w-2 sm:h-3.5 sm:w-3.5 rounded-full bg-red"></span>
               </div>
               <img src="element-img/isolated_rustic_clay_tea_pot_yixing_style_side_view_transparent_background.png"
                 alt="Estate Clay Teapot"
-                class="mascot absolute -right-8 -bottom-6 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-28 sm:h-40 md:h-52 lg:h-60 w-auto animate-float pointer-events-none z-0"
+                class="mascot absolute -right-6 -bottom-4 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-24 sm:h-40 md:h-52 lg:h-60 w-auto animate-float pointer-events-none -z-10"
                 style="--float-duration:7s">
             </div>
 
             <!-- Clear Centered Description Text -->
             <p
-              class="text mt-6 sm:mt-10 md:mt-12 text-lg sm:text-2xl md:text-3xl font-sans font-normal leading-[1.35] sm:leading-[1.4] text-cream max-w-sm sm:max-w-xl md:max-w-2xl">
+              class="text mt-4 sm:mt-8 md:mt-12 text-sm sm:text-2xl md:text-3xl font-sans font-normal leading-[1.35] sm:leading-[1.4] text-cream max-w-xs sm:max-w-xl md:max-w-2xl">
               Direct partnerships with heritage tea gardens across Assam, Darjeeling and the Nilgiris. Pure whole
               leaves, harvested at peak freshness.
             </p>
@@ -1085,32 +1063,32 @@
 
           <!-- Slide 2 -->
           <div
-            class="slide slide-2 absolute top-1/2 left-1/2 w-[94%] max-w-3xl flex flex-col items-center text-center will-change-transform z-10">
+            class="slide slide-2 absolute top-[44%] sm:top-1/2 left-1/2 w-[94%] max-w-3xl flex flex-col items-center text-center will-change-transform z-10">
             <!-- Massive Outlined Number (Centered over dotted line) -->
             <div class="num-wrapper relative inline-flex items-center justify-center select-none">
               <span
-                class="number display-tight text-[44vw] sm:text-[32vw] md:text-[18rem] lg:text-[22rem] leading-none select-none">02</span>
+                class="number display-tight text-[36vw] sm:text-[32vw] md:text-[18rem] lg:text-[22rem] leading-none select-none">02</span>
             </div>
 
-            <!-- Large Pill Badge with Prominent Peeking Mascot (10px margin, no negative margin) -->
-            <div class="relative mt-[10px] z-20 inline-flex items-center justify-center">
+            <!-- Large Pill Badge with Prominent Mascot Behind Text -->
+            <div class="relative mt-2 sm:mt-[10px] z-20 inline-flex items-center justify-center">
               <div
-                class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-espresso">
-                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-red"></span>
+                class="heading relative z-20 inline-flex items-center gap-2.5 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-6 py-2.5 sm:px-12 sm:py-4 text-espresso shadow-xl">
+                <span class="h-2 w-2 sm:h-3.5 sm:w-3.5 rounded-full bg-red"></span>
                 <h3
-                  class="font-display text-xl uppercase tracking-wider text-espresso sm:text-3xl md:text-4xl font-extrabold">
+                  class="font-display text-base sm:text-3xl md:text-4xl font-extrabold uppercase tracking-wider text-espresso">
                   100% BOTANICALS</h3>
-                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-red"></span>
+                <span class="h-2 w-2 sm:h-3.5 sm:w-3.5 rounded-full bg-red"></span>
               </div>
               <img src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png"
                 alt="Botanical Spices"
-                class="mascot absolute -right-8 -bottom-6 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-28 sm:h-40 md:h-52 lg:h-60 w-auto animate-float pointer-events-none z-0"
+                class="mascot absolute -right-6 -bottom-4 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-24 sm:h-40 md:h-52 lg:h-60 w-auto animate-float pointer-events-none -z-10"
                 style="--float-duration:8s">
             </div>
 
             <!-- Clear Centered Description Text -->
             <p
-              class="text mt-6 sm:mt-10 md:mt-12 text-lg sm:text-2xl md:text-3xl font-sans font-normal leading-[1.35] sm:leading-[1.4] text-cream max-w-sm sm:max-w-xl md:max-w-2xl">
+              class="text mt-4 sm:mt-8 md:mt-12 text-sm sm:text-2xl md:text-3xl font-sans font-normal leading-[1.35] sm:leading-[1.4] text-cream max-w-xs sm:max-w-xl md:max-w-2xl">
               Fresh crushed mountain spices, sun-dried herbs and raw ginger roots. No powders, no artificial flavours,
               no synthetic additives.
             </p>
@@ -1118,47 +1096,65 @@
 
           <!-- Slide 3 -->
           <div
-            class="slide slide-3 absolute top-1/2 left-1/2 w-[94%] max-w-3xl flex flex-col items-center text-center will-change-transform z-10">
+            class="slide slide-3 absolute top-[44%] sm:top-1/2 left-1/2 w-[94%] max-w-3xl flex flex-col items-center text-center will-change-transform z-10">
             <!-- Massive Outlined Number (Centered over dotted line) -->
             <div class="num-wrapper relative inline-flex items-center justify-center select-none">
               <span
-                class="number display-tight text-[44vw] sm:text-[32vw] md:text-[18rem] lg:text-[22rem] leading-none select-none">03</span>
+                class="number display-tight text-[36vw] sm:text-[32vw] md:text-[18rem] lg:text-[22rem] leading-none select-none">03</span>
             </div>
 
-            <!-- Large Pill Badge with Prominent Peeking Mascot (10px margin, no negative margin) -->
-            <div class="relative mt-[10px] z-20 inline-flex items-center justify-center">
+            <!-- Large Pill Badge with Prominent Mascot Behind Text -->
+            <div class="relative mt-2 sm:mt-[10px] z-20 inline-flex items-center justify-center">
               <div
-                class="heading inline-flex items-center gap-3 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-8 py-3 sm:px-12 sm:py-4 text-espresso">
-                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-red"></span>
+                class="heading relative z-20 inline-flex items-center gap-2.5 sm:gap-5 rounded-2xl sm:rounded-3xl bg-cream px-6 py-2.5 sm:px-12 sm:py-4 text-espresso shadow-xl">
+                <span class="h-2 w-2 sm:h-3.5 sm:w-3.5 rounded-full bg-red"></span>
                 <h3
-                  class="font-display text-xl uppercase tracking-wider text-espresso sm:text-3xl md:text-4xl font-extrabold">
+                  class="font-display text-base sm:text-3xl md:text-4xl font-extrabold uppercase tracking-wider text-espresso">
                   ARTISAN FRESH</h3>
-                <span class="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full bg-red"></span>
+                <span class="h-2 w-2 sm:h-3.5 sm:w-3.5 rounded-full bg-red"></span>
               </div>
               <img src="element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png"
                 alt="Artisan Blooming Tea"
-                class="mascot absolute -right-8 -bottom-6 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-28 sm:h-40 md:h-52 lg:h-60 w-auto animate-float pointer-events-none z-0"
+                class="mascot absolute -right-6 -bottom-4 sm:-right-14 sm:-bottom-10 md:-right-20 md:-bottom-14 h-24 sm:h-40 md:h-52 lg:h-60 w-auto animate-float pointer-events-none -z-10"
                 style="--float-duration:7.5s">
             </div>
 
             <!-- Clear Centered Description Text -->
             <p
-              class="text mt-6 sm:mt-10 md:mt-12 text-lg sm:text-2xl md:text-3xl font-sans font-normal leading-[1.35] sm:leading-[1.4] text-cream max-w-sm sm:max-w-xl md:max-w-2xl">
+              class="text mt-4 sm:mt-8 md:mt-12 text-sm sm:text-2xl md:text-3xl font-sans font-normal leading-[1.35] sm:leading-[1.4] text-cream max-w-xs sm:max-w-xl md:max-w-2xl">
               Slow-blended in small batches and vacuum-sealed to preserve natural essential oils for a fragrant,
               soothing cup every single time.
             </p>
           </div>
 
         </div>
+
+        <!-- Mobile Slider Left Arrow Button -->
+        <button id="whyMobilePrev"
+          class="md:hidden absolute left-2.5 sm:left-4 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-11 h-11 rounded-full bg-[#1A130C]/90 text-cream border border-cream/25 shadow-2xl active:scale-90 transition-all cursor-pointer backdrop-blur-md opacity-40"
+          aria-label="Previous Slide">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Slider Right Arrow Button -->
+        <button id="whyMobileNext"
+          class="md:hidden absolute right-2.5 sm:right-4 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-11 h-11 rounded-full bg-[#1A130C]/90 text-cream border border-cream/25 shadow-2xl active:scale-90 transition-all cursor-pointer backdrop-blur-md"
+          aria-label="Next Slide">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
       </div>
     </section>
 
     <!-- ============ REVIEWS ============ -->
-    <section id="reviewsSection" class="relative overflow-hidden py-20 md:py-28">
+    <section id="reviewsSection" class="relative overflow-hidden py-8 sm:py-16 md:py-28">
       <h2
         class="reviews-title display-tight text-outline px-4 text-center text-[clamp(2.8rem,10vw,7.5rem)] leading-[0.9] tracking-tight uppercase select-none">
         Loved By All</h2>
-      <div class="relative mt-8 sm:mt-12 md:mt-16 flex overflow-hidden select-none">
+      <div class="relative mt-4 sm:mt-10 md:mt-16 flex overflow-hidden select-none">
         <div id="reviewTrack" class="flex w-max will-change-transform cursor-grab active:cursor-grabbing"></div>
       </div>
     </section>
@@ -1166,12 +1162,12 @@
 
   <!-- ============ FOOTER ============ -->
   <footer id="footerSection"
-    class="relative border-t border-cream/20 px-5 pb-8 pt-14 md:px-10 overflow-hidden bg-background">
+    class="relative border-t border-cream/20 px-5 pb-6 pt-8 sm:pt-12 md:pt-14 md:px-10 overflow-hidden bg-background">
     <!-- Ambient Botanical Tea Branch in Footer -->
     <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
       class="pointer-events-none absolute -bottom-24 -right-20 w-[450px] sm:w-[560px] md:w-[680px] h-auto opacity-15 rotate-45 select-none z-0" />
 
-    <div class="footer-grid mx-auto grid max-w-[1600px] grid-cols-1 gap-10 md:grid-cols-[auto_1fr_1.2fr_auto]">
+    <div class="footer-grid mx-auto grid max-w-[1600px] grid-cols-1 gap-6 sm:gap-8 md:gap-10 md:grid-cols-[auto_1fr_1.2fr_auto]">
       <a href="#top" class="block w-36 sm:w-44 md:w-52"><img src="img/logo.webp" alt="Nidhi Tea Logo"
           class="h-auto w-full object-contain" /></a>
       <ul class="flex flex-col">
@@ -1221,7 +1217,7 @@
       </div>
     </div>
     <div
-      class="mx-auto mt-12 flex max-w-[1600px] flex-col items-center justify-between gap-2 text-[11px] text-cream/70 md:flex-row">
+      class="mx-auto mt-6 sm:mt-10 md:mt-12 flex max-w-[1600px] flex-col items-center justify-between gap-2 text-[11px] text-cream/70 md:flex-row">
       <span>© 2026. Nidhi Tea. All rights reserved.</span><span>Premium Handcrafted Teas from India</span>
     </div>
   </footer>
@@ -2052,9 +2048,9 @@
       const grid = document.getElementById("productGrid");
       if (!grid) return;
       grid.innerHTML = PRODUCTS.map((p) => `
-    <article data-listing-card="true" class="prod group relative flex min-h-[440px] sm:min-h-[460px] md:min-h-[485px] w-full flex-col items-center justify-between overflow-hidden rounded-2xl border border-cream/20 hover:border-pink/60 hover:shadow-2xl hover:shadow-pink/15 p-4 sm:p-5 md:p-6 gap-2 transition-all duration-500 ease-out backdrop-blur-sm" style="background:${p.bg}">
+    <article data-listing-card="true" class="prod group relative flex min-h-[440px] sm:min-h-[460px] md:min-h-[485px] w-full flex-col items-center justify-between overflow-hidden rounded-2xl hover:shadow-2xl hover:shadow-black/40 p-4 sm:p-5 md:p-6 gap-2 transition-all duration-500 ease-out backdrop-blur-sm" style="background:${p.bg}">
       <a class="absolute inset-0 z-1" aria-label="${p.name.join(" ")}" href="product.html"></a>
-      <div class="absolute z-0 pointer-events-none rounded-xl border border-cream/20 border-dashed inset-2 sm:inset-2.5 transition-colors duration-300 group-hover:border-pink/30"></div>
+      <div class="absolute z-0 pointer-events-none rounded-xl border border-cream/20 border-dashed inset-2 sm:inset-2.5"></div>
       
       <!-- Header Title & Tagline -->
       <div class="relative flex flex-col items-center text-center w-full pointer-events-none z-10 pt-1 sm:pt-2">
@@ -2370,6 +2366,9 @@
           end: "bottom bottom",
           scrub: 0.6,
           invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            updateWhyMobile(self.progress);
+          },
         },
         defaults: { ease: "none" },
       });
@@ -2424,6 +2423,55 @@
         { strokeDashoffset: -1600, duration: 2, ease: "none" },
         0
       );
+
+      // Mobile Slider Controls & Touch Swiping Engine
+      let currentWhySlide = 0;
+      function updateWhyMobile(progress) {
+        const idx = Math.min(2, Math.max(0, Math.round(progress * 2)));
+        if (idx === currentWhySlide) return;
+        currentWhySlide = idx;
+
+        const prevBtn = document.getElementById("whyMobilePrev");
+        const nextBtn = document.getElementById("whyMobileNext");
+        if (prevBtn) prevBtn.style.opacity = idx === 0 ? "0.35" : "1";
+        if (nextBtn) nextBtn.style.opacity = idx === 2 ? "0.35" : "1";
+      }
+
+      function goToWhySlide(targetIndex) {
+        targetIndex = Math.max(0, Math.min(2, targetIndex));
+        const st = tl.scrollTrigger;
+        if (!st) return;
+        const targetProgress = targetIndex / 2;
+        const targetY = st.start + targetProgress * (st.end - st.start);
+        window.scrollTo({ top: targetY, behavior: "smooth" });
+      }
+
+      const prevBtn = document.getElementById("whyMobilePrev");
+      const nextBtn = document.getElementById("whyMobileNext");
+      if (prevBtn) prevBtn.addEventListener("click", () => goToWhySlide(currentWhySlide - 1));
+      if (nextBtn) nextBtn.addEventListener("click", () => goToWhySlide(currentWhySlide + 1));
+
+      // Touch swipe handler for mobile screen
+      const stickyBox = document.getElementById("whyStickyContainer");
+      if (stickyBox) {
+        let touchStartX = 0, touchStartY = 0;
+        stickyBox.addEventListener("touchstart", (e) => {
+          touchStartX = e.changedTouches[0].clientX;
+          touchStartY = e.changedTouches[0].clientY;
+        }, { passive: true });
+
+        stickyBox.addEventListener("touchend", (e) => {
+          const diffX = e.changedTouches[0].clientX - touchStartX;
+          const diffY = e.changedTouches[0].clientY - touchStartY;
+          if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.2) {
+            if (diffX < 0) {
+              goToWhySlide(currentWhySlide + 1);
+            } else {
+              goToWhySlide(currentWhySlide - 1);
+            }
+          }
+        }, { passive: true });
+      }
     })();
 
     /* ---------- REVIEWS & FOOTER (GSAP ScrollTrigger Reveals) ---------- */
@@ -2733,56 +2781,6 @@
           ease: "power3.out",
         });
       }
-    })();
-
-    /* ---------- CUSTOM CURSOR (Bucks Sauce Signature) ---------- */
-    (function () {
-      // Only on devices with fine pointer (desktop/laptop)
-      if (!window.matchMedia("(pointer: fine)").matches) return;
-      if (typeof gsap === "undefined") return;
-
-      const cursor = document.createElement("div");
-      cursor.className = "custom-cursor";
-      document.body.appendChild(cursor);
-
-      let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
-      let curX = mouseX, curY = mouseY;
-      let isVisible = false;
-
-      // Position cursor at center initially (hidden)
-      gsap.set(cursor, { xPercent: -50, yPercent: -50, x: mouseX, y: mouseY });
-
-      document.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        if (!isVisible) {
-          isVisible = true;
-          gsap.to(cursor, { autoAlpha: 1, duration: 0.4 });
-        }
-      });
-
-      document.addEventListener("mouseleave", () => {
-        isVisible = false;
-        gsap.to(cursor, { autoAlpha: 0, duration: 0.3 });
-      });
-
-      // GSAP ticker: cursor follows mouse with spring-like lag
-      gsap.ticker.add(() => {
-        curX += (mouseX - curX) * 0.14;
-        curY += (mouseY - curY) * 0.14;
-        gsap.set(cursor, { x: curX, y: curY });
-      });
-
-      // Scale up on interactive elements
-      const hoverTargets = document.querySelectorAll("a, button, [data-menu], [data-menu-close], .prod, input, label");
-      hoverTargets.forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-          gsap.to(cursor, { width: 30, height: 30, duration: 0.22, ease: "power2.out" });
-        });
-        el.addEventListener("mouseleave", () => {
-          gsap.to(cursor, { width: 10, height: 10, duration: 0.22, ease: "power2.out" });
-        });
-      });
     })();
   </script>
 </body>
