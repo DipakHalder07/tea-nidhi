@@ -1,0 +1,1138 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/webp" href="img/logo.webp" />
+  <title>Classic Masala Chai — Nidhi Tea Reserve Collection</title>
+  <meta name="description"
+    content="Classic Masala Chai — Sip Wellness, Taste Purity. Handpicked single-estate Assam tea leaves blended with stone-ground mountain spices. 100% natural, zero additives." />
+
+  <!-- Google Fonts: Fraunces (Display) and Inter Tight (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Poppins:wght@400;500;600;700&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: "#100B06",
+            cream: "#FFF5EA",
+            gold: "#C48D42",
+            "gold-hover": "#A87532",
+            amber: "#D99948",
+            flame: "#F15726",
+            cherry: "#C4321C",
+            smoke: "#1A130C",
+            panel: "#16100A",
+            borderCol: "rgba(255, 245, 234, 0.16)",
+          },
+          fontFamily: {
+            display: ['"Fraunces"', 'serif'],
+            heading: ['"Fraunces"', 'serif'],
+            sans: ['"Inter Tight"', '"Poppins"', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- GSAP Animation Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <style>
+    :root {
+      --background: #100B06;
+      --cream: #FFF5EA;
+      --gold: #C48D42;
+      --gold-hover: #A87532;
+      --panel: #16100A;
+      --border: rgba(255, 245, 234, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      background-color: var(--background);
+      color: var(--cream);
+      font-family: "Inter Tight", sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Subtle Textured Leaf Pattern Background */
+    .bg-pattern {
+      background-color: #100B06;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(26, 18, 11, 0.7) 0%, rgba(16, 11, 6, 0.95) 100%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFF5EA' fill-opacity='0.025' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* Visual Showcase Stage Radial Lighting */
+    .showcase-stage {
+      background: radial-gradient(circle at 48% 46%, #D9A45F 0%, #B87E34 38%, #6E4515 80%, #442908 100%);
+      transition: background 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Floating Keyframe Animations */
+    @keyframes float-idle-slow {
+      0%, 100% {
+        transform: translateY(0px) rotate(var(--rot, 0deg));
+      }
+      50% {
+        transform: translateY(-14px) rotate(calc(var(--rot, 0deg) + 3deg));
+      }
+    }
+
+    @keyframes float-idle-medium {
+      0%, 100% {
+        transform: translateY(0px) rotate(var(--rot, 0deg));
+      }
+      50% {
+        transform: translateY(-18px) rotate(calc(var(--rot, 0deg) - 4deg));
+      }
+    }
+
+    @keyframes float-pack {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-12px) rotate(1deg);
+      }
+    }
+
+    .animate-float-slow {
+      animation: float-idle-slow 6s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .animate-float-medium {
+      animation: float-idle-medium 4.8s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .animate-pack {
+      animation: float-pack 5.5s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Custom outline and display typography */
+    .display-headline {
+      font-family: 'Fraunces', serif;
+      font-optical-sizing: auto;
+      text-transform: uppercase;
+      line-height: 0.88;
+      letter-spacing: -0.015em;
+      font-weight: 900;
+    }
+
+    /* Noise Texture panel */
+    .glass-card {
+      background: rgba(22, 16, 10, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 245, 234, 0.15);
+    }
+
+    /* Custom select styling */
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23FFF5EA' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #100B06;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3A2B1E;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body class="bg-pattern relative flex flex-col justify-between min-h-screen">
+
+  <!-- ================= TOP HEADER BAR ================= -->
+  <header class="w-full z-40 flex items-start justify-between px-3 pt-3 sm:px-6 sm:pt-5 lg:px-8 lg:pt-6 pointer-events-none">
+    <!-- Top-Left Brand Logo Plaque Badge -->
+    <a href="index.html" title="Back to Nidhi Tea Home"
+      class="pointer-events-auto group relative flex items-center justify-center h-14 w-28 sm:h-16 sm:w-36 md:h-18 md:w-44 bg-[#0D0905] rounded-br-2xl border-r border-b border-cream/20 shadow-xl transition-all duration-300 hover:border-gold hover:bg-[#150F08] p-2">
+      <img src="img/logo.webp" alt="Nidhi Tea Logo"
+        class="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105" />
+      <!-- Tooltip -->
+      <span class="absolute -bottom-7 left-2 whitespace-nowrap text-[10px] uppercase font-bold tracking-widest text-cream/60 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+        ← Back to Home
+      </span>
+    </a>
+
+    <!-- Top-Right Action Buttons: Cart Button & Menu Button -->
+    <div class="pointer-events-auto flex items-center gap-2.5 sm:gap-3.5">
+      <!-- Shopping Cart Button -->
+      <button id="cartBtn" aria-label="Open Cart"
+        class="group relative flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-xl border border-cream/25 bg-[#120D08]/90 text-cream backdrop-blur-md transition-all duration-300 hover:border-gold hover:text-gold hover:scale-105 active:scale-95 shadow-lg cursor-pointer">
+        <!-- Basket Icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+          class="h-5 w-5 sm:h-6 sm:w-6 transition-transform group-hover:scale-110">
+          <path d="M4 8h16l-1.5 11.5a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 5.5 19.5L4 8Z" />
+          <path d="M8 8V5a3 3 0 0 1 6 0v3" />
+          <line x1="10" y1="12" x2="10" y2="16" />
+          <line x1="14" y1="12" x2="14" y2="16" />
+        </svg>
+        <!-- Counter Badge -->
+        <span id="cartCountBadge"
+          class="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-gold font-sans text-[11px] font-extrabold text-background ring-2 ring-background transition-transform duration-300">
+          1
+        </span>
+      </button>
+
+      <!-- Hamburger Menu Button -->
+      <button id="menuBtn" aria-label="Toggle Menu"
+        class="group relative flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-xl border border-cream/25 bg-[#120D08]/90 text-cream backdrop-blur-md transition-all duration-300 hover:border-gold hover:text-gold hover:scale-105 active:scale-95 shadow-lg cursor-pointer">
+        <div class="flex flex-col gap-1.5 items-center justify-center w-5 sm:w-6">
+          <span class="w-full h-0.5 bg-current rounded-full transition-transform duration-300"></span>
+          <span class="w-full h-0.5 bg-current rounded-full transition-transform duration-300"></span>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= MAIN SHOWCASE CONTAINER ================= -->
+  <main class="w-full max-w-[1740px] mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 my-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-stretch">
+
+      <!-- ================= LEFT COLUMN: TEA SHOWCASE STAGE ================= -->
+      <section class="lg:col-span-5 xl:col-span-6 flex flex-col justify-center">
+        <!-- Frame Container with Warm Botanical Studio Lighting and Rounded Corners -->
+        <div id="showcaseStage"
+          class="showcase-stage relative w-full aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] xl:aspect-[5/6] max-h-[780px] rounded-[24px] sm:rounded-[32px] overflow-hidden flex items-center justify-center p-4 sm:p-8 select-none shadow-2xl border border-cream/10">
+
+          <!-- Dual Crossfading Background Gradients for Silky Smooth GSAP Color Morphs -->
+          <div id="stageBgA" class="pointer-events-none absolute inset-0 z-0 opacity-100"></div>
+          <div id="stageBgB" class="pointer-events-none absolute inset-0 z-0 opacity-0"></div>
+
+          <!-- Ambient Radial Lighting behind the Tea Pack -->
+          <div id="stageGlow"
+            class="pointer-events-none absolute inset-0 bg-radial from-white/20 via-transparent to-black/25 opacity-70 z-1">
+          </div>
+
+          <!-- PERSPECTIVAL 3D FLOATING TEA INGREDIENTS -->
+          <!-- 1. Foreground Large Blurry Spices/Leaves (Bottom-Left - Extreme Camera Depth) -->
+          <div id="wrapFg"
+            class="pointer-events-none absolute -bottom-8 -left-10 sm:-bottom-10 sm:-left-8 w-44 sm:w-56 md:w-68 lg:w-76 xl:w-84 z-30 will-change-transform"
+            style="--rot: -22deg; filter: blur(2.5px);">
+            <img id="foodFg" src="element-img/cinnamon_stick.png" alt="Tea Ingredients Foreground"
+              class="animate-float-slow w-full h-auto object-contain drop-shadow-2xl" />
+          </div>
+
+          <!-- 2. Midground Floating Element (Top-Left: Green Cardamom) -->
+          <div id="wrapTl"
+            class="pointer-events-none absolute top-4 left-4 sm:top-8 sm:left-8 w-20 sm:w-26 md:w-32 z-20 will-change-transform"
+            style="--rot: 18deg;">
+            <img id="foodTl" src="element-img/green_cardamom.png" alt="Green Cardamom"
+              class="animate-float-medium w-full h-auto object-contain drop-shadow-xl" />
+          </div>
+
+          <!-- 3. Midground Floating Element (Top-Right: Star Anise) -->
+          <div id="wrapTr"
+            class="pointer-events-none absolute -top-3 right-10 sm:top-4 sm:right-16 w-24 sm:w-30 md:w-36 z-10 will-change-transform"
+            style="--rot: -35deg;">
+            <img id="foodTr" src="element-img/star_anise.png" alt="Star Anise"
+              class="animate-float-slow w-full h-auto object-contain drop-shadow-xl" />
+          </div>
+
+          <!-- 4. Floating Small Element (Mid-Left: Sun-Dried Ginger) -->
+          <div id="wrapMl"
+            class="pointer-events-none absolute top-[38%] -left-5 sm:left-2 w-16 sm:w-22 md:w-28 z-20 will-change-transform"
+            style="--rot: 42deg;">
+            <img id="foodMl" src="img/ginger.webp" alt="Ginger Piece"
+              class="animate-float-slow w-full h-auto object-contain drop-shadow-lg" />
+          </div>
+
+          <!-- 5. Floating Element (Mid-Right: Cinnamon Stick) -->
+          <div id="wrapMr"
+            class="pointer-events-none absolute top-[52%] -right-8 sm:-right-4 w-28 sm:w-36 md:w-44 z-20 will-change-transform"
+            style="--rot: -16deg;">
+            <img id="foodMr" src="element-img/cinnamon_stick.png" alt="Cinnamon Stick"
+              class="animate-float-medium w-full h-auto object-contain drop-shadow-xl" />
+          </div>
+
+          <!-- CENTERPIECE TEA PRODUCT PACK (Hardware-Accelerated Container without CSS Transition Conflicts) -->
+          <div id="bottleContainer"
+            class="relative z-20 flex flex-col items-center justify-center w-full h-full max-h-[88%] cursor-pointer will-change-transform">
+            <!-- Realistic Ground/Contact Shadow -->
+            <div
+              class="absolute bottom-6 sm:bottom-8 w-44 sm:w-56 md:w-72 h-8 sm:h-10 bg-black/60 rounded-[100%] blur-md sm:blur-lg -z-10">
+            </div>
+
+            <!-- Product Pack Image (100% Nidhi Tea) -->
+            <img id="mainBottleImg" src="img/hero.png" alt="Classic Masala Chai Pack"
+              class="animate-pack h-full max-h-[520px] sm:max-h-[580px] lg:max-h-[620px] w-auto object-contain drop-shadow-[0_22px_38px_rgba(0,0,0,0.6)] will-change-transform" />
+          </div>
+
+          <!-- SLEEK MINIMALIST BLEND INDICATOR PILL (Bottom-Left) -->
+          <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-30 flex items-center gap-2 bg-black/45 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-cream/15 text-[11px] font-bold uppercase tracking-widest text-cream/90 shadow-lg pointer-events-none select-none">
+            <span id="sliderBlendNum" class="text-gold font-display font-bold">01</span>
+            <span class="text-cream/30">/</span>
+            <span class="text-cream/50">05</span>
+            <span class="mx-1 h-2.5 w-[1px] bg-cream/25"></span>
+            <span id="sliderBlendLabel" class="text-cream font-medium tracking-normal text-xs">Classic Masala Chai</span>
+          </div>
+
+          <!-- CAROUSEL ARROW BUTTONS (Stacked on the right edge of stage) -->
+          <div class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-3 sm:gap-4">
+            <!-- Prev Product Button (Left Direction) -->
+            <button id="prevBtn" type="button" aria-label="Previous Blend"
+              class="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-cream text-background shadow-xl transition-transform duration-200 hover:scale-110 active:scale-90 cursor-pointer">
+              <span class="text-sm sm:text-base font-extrabold leading-none pointer-events-none">←</span>
+            </button>
+            <!-- Next Product Button (Right Direction) -->
+            <button id="nextBtn" type="button" aria-label="Next Blend"
+              class="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-cream text-background shadow-xl transition-transform duration-200 hover:scale-110 active:scale-90 cursor-pointer">
+              <span class="text-sm sm:text-base font-extrabold leading-none pointer-events-none">→</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= RIGHT COLUMN: PRODUCT DETAILS & PURCHASE ================= -->
+      <section class="lg:col-span-7 xl:col-span-6 flex flex-col justify-center gap-5 sm:gap-6 lg:gap-7">
+
+        <!-- 1. BIG BOLD TITLE & TAGLINE ROW WITH ARTISAN TEAPOT MASCOT -->
+        <div class="relative w-full">
+          <!-- Main Display Tea Title -->
+          <h1 id="productTitle"
+            class="display-headline text-cream text-[38px] sm:text-[54px] md:text-[64px] xl:text-[76px] tracking-tight uppercase will-change-transform">
+            CLASSIC<br>MASALA<br>CHAI
+          </h1>
+
+          <!-- Tagline & Subtle Mascot Sticker -->
+          <div class="relative flex items-center justify-between gap-4 mt-3 sm:mt-4 pr-2 sm:pr-6">
+            <p id="productTagline"
+              class="text-cream/90 font-sans font-bold text-xs sm:text-sm md:text-base uppercase tracking-[0.14em] max-w-[440px] leading-snug will-change-transform">
+              HANDCRAFTED ESTATE LEAVES BLENDED WITH STONE-GROUND MOUNTAIN SPICES
+            </p>
+
+            <!-- Tasteful Floating Teapot Sticker -->
+            <div id="mascotWrap"
+              class="relative shrink-0 -mt-6 sm:-mt-10 mr-1 sm:mr-2 will-change-transform">
+              <img id="mascotImg" src="element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png" alt="Artisan Teapot"
+                class="w-16 sm:w-20 md:w-24 h-auto object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)] rotate-6 transition-transform duration-300 hover:scale-110 hover:rotate-12 cursor-pointer" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. MINIMALIST BALANCED 2x2 CARDS GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 mt-2">
+
+          <!-- CARD 1 (Top Left): TASTE PROFILE -->
+          <div class="glass-card rounded-xl p-5 sm:p-6 flex flex-col justify-start">
+            <h2 class="font-display uppercase tracking-wider text-cream font-bold text-sm sm:text-base mb-3">
+              Taste Profile
+            </h2>
+            <ul id="tasteList" class="space-y-2 text-xs sm:text-[13px] text-cream/80 font-normal leading-relaxed">
+              <li class="flex items-start gap-2.5">
+                <span class="text-gold shrink-0 text-xs mt-0.5">•</span>
+                <span>Robust Assam maltiness leads upfront with deep amber liquor</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-gold shrink-0 text-xs mt-0.5">•</span>
+                <span>Crushed ginger and green cardamom build comforting warmth</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-gold shrink-0 text-xs mt-0.5">•</span>
+                <span>Clean, balanced finish with sweet cinnamon lingering</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-gold shrink-0 text-xs mt-0.5">•</span>
+                <span>Medium-full body — traditional invigorating morning spirit</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- CARD 2 (Top Right): PAIRS WITH (Clean Minimalist Text) -->
+          <div class="glass-card rounded-xl p-5 sm:p-6 flex flex-col justify-start">
+            <h2 class="font-display uppercase tracking-wider text-cream font-bold text-sm sm:text-base mb-3">
+              Pairs With
+            </h2>
+            <p id="pairsWithText" class="text-xs sm:text-[13px] text-cream/80 font-normal leading-relaxed">
+              Warm samosas, morning ginger biscuits, cardamom cookies, buttered toast, morning oats, dark chocolate tarts, afternoon crisp rusk, steamed momos.
+            </p>
+          </div>
+
+          <!-- CARD 3 (Bottom Left): BLEND INTENSITY -->
+          <div class="glass-card rounded-xl p-5 sm:p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h2 class="font-display uppercase tracking-wider text-cream font-bold text-sm sm:text-base">
+                  Blend Intensity
+                </h2>
+                <span id="heatBadge" class="text-gold font-bold font-sans text-xs">
+                  Bold & Spiced (8/10)
+                </span>
+              </div>
+
+              <!-- Sleek 10-Segment Bar -->
+              <div id="intensityMeter" class="w-full h-1.5 bg-cream/10 rounded-full overflow-hidden flex gap-1 my-3.5">
+                <div class="h-full bg-gold rounded-full flex-1"></div>
+                <div class="h-full bg-gold rounded-full flex-1"></div>
+                <div class="h-full bg-gold rounded-full flex-1"></div>
+                <div class="h-full bg-gold rounded-full flex-1"></div>
+                <div class="h-full bg-gold rounded-full flex-1"></div>
+                <div class="h-full bg-gold rounded-full flex-1"></div>
+                <div class="h-full bg-gold rounded-full flex-1"></div>
+                <div class="h-full bg-gold rounded-full flex-1"></div>
+                <div class="h-full bg-cream/10 rounded-full flex-1"></div>
+                <div class="h-full bg-cream/10 rounded-full flex-1"></div>
+              </div>
+            </div>
+
+            <p id="intensityDesc" class="text-xs text-cream/60 leading-relaxed mt-1">
+              Full-bodied single-estate Assam black tea harmoniously balanced with slow-ground mountain spices.
+            </p>
+          </div>
+
+          <!-- CARD 4 (Bottom Right): ORDER SELECTION & PURCHASE -->
+          <div class="glass-card rounded-xl p-5 sm:p-6 flex flex-col justify-between space-y-3">
+            <!-- Pack Selector Dropdown + Quantity Stepper -->
+            <div class="grid grid-cols-12 gap-2">
+              <div class="col-span-8">
+                <select id="sizeSelect"
+                  class="w-full h-11 px-3 rounded-lg border border-cream/15 bg-background/90 text-xs font-semibold uppercase tracking-wider text-cream cursor-pointer transition-colors focus:border-gold focus:outline-none">
+                  <option value="1" data-price="299">1 Tin (100g) — ₹299</option>
+                  <option value="2" data-price="549">Twin Pack (200g) — Save ₹49</option>
+                  <option value="4" data-price="999">Heritage Box (400g) — Save ₹197</option>
+                </select>
+              </div>
+              <div class="col-span-4 flex items-center justify-between h-11 px-3 rounded-lg border border-cream/15 bg-background/90 text-cream">
+                <button id="qtyMinus" type="button" aria-label="Decrease quantity"
+                  class="text-base font-bold text-cream/50 hover:text-cream transition-colors cursor-pointer select-none">
+                  −
+                </button>
+                <span id="qtyVal" class="font-display font-bold text-sm">1</span>
+                <button id="qtyPlus" type="button" aria-label="Increase quantity"
+                  class="text-base font-bold text-cream/50 hover:text-cream transition-colors cursor-pointer select-none">
+                  +
+                </button>
+              </div>
+            </div>
+
+            <!-- Dual Action Buttons: ADD TO CART & BUY NOW -->
+            <div class="grid grid-cols-2 gap-2">
+              <!-- ADD TO CART -->
+              <button id="addToCartBtn" type="button"
+                class="flex items-center justify-center w-full h-11 px-3 rounded-lg border border-cream/30 bg-transparent text-cream font-sans font-bold text-xs uppercase tracking-wider transition-all duration-200 hover:border-gold hover:text-gold active:scale-95 cursor-pointer">
+                <span id="cartBtnLabel">ADD TO CART</span>
+              </button>
+
+              <!-- BUY NOW with Dynamic Total -->
+              <button id="buyNowBtn" type="button"
+                class="flex items-center justify-between w-full h-11 px-4 rounded-lg bg-gold text-background font-sans font-extrabold text-xs uppercase tracking-wider transition-all duration-200 hover:bg-gold-hover active:scale-95 cursor-pointer shadow-md">
+                <span>BUY NOW</span>
+                <span id="priceDisplay" class="font-bold">₹299</span>
+                <span id="btnFlash"
+                  class="absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300 pointer-events-none"></span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ================= SLIDE-OVER MINI CART DRAWER ================= -->
+  <div id="cartDrawerBackdrop"
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-400">
+  </div>
+
+  <aside id="cartDrawer"
+    class="fixed top-0 right-0 h-full w-full max-w-[420px] bg-[#140E08] border-l border-cream/15 z-50 flex flex-col justify-between p-6 translate-x-full transition-transform duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-2xl">
+    
+    <!-- Drawer Header -->
+    <div class="flex items-center justify-between border-b border-cream/15 pb-4">
+      <div class="flex items-center gap-2.5">
+        <h3 class="font-display uppercase text-xl font-bold text-cream">Your Tea Basket</h3>
+        <span id="drawerCountBadge" class="px-2 py-0.5 rounded-full bg-gold text-background font-bold text-xs">1</span>
+      </div>
+      <button id="closeCartBtn" aria-label="Close Cart"
+        class="h-9 w-9 flex items-center justify-center rounded-lg border border-cream/20 text-cream hover:border-gold hover:text-gold transition-colors cursor-pointer">
+        ✕
+      </button>
+    </div>
+
+    <!-- Drawer Items List -->
+    <div id="cartItemsList" class="flex-1 overflow-y-auto py-6 space-y-4">
+      <!-- Active Item -->
+      <div class="flex items-center gap-4 p-3.5 rounded-xl bg-panel border border-cream/10">
+        <img id="drawerItemImg" src="img/hero.png" alt="Cart Item" class="w-14 h-18 object-contain" />
+        <div class="flex-1">
+          <h4 id="drawerItemTitle" class="font-display text-sm uppercase font-bold text-cream">Classic Masala Chai</h4>
+          <p id="drawerItemSize" class="text-xs text-cream/60 mt-0.5">1 Tin (100g / 50 Cups)</p>
+          <div class="flex items-center justify-between mt-2">
+            <span id="drawerItemPrice" class="font-display font-bold text-gold text-sm">₹299</span>
+            <span id="drawerItemQty" class="text-xs text-cream/80">Qty: 1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="border-t border-cream/15 pt-5 space-y-4">
+      <div class="flex items-center justify-between text-sm font-semibold">
+        <span class="text-cream/70 uppercase">Subtotal</span>
+        <span id="drawerSubtotal" class="font-display text-lg text-cream font-bold">₹299</span>
+      </div>
+      <p class="text-[11px] text-cream/50">Fresh harvest direct from Darjeeling & Assam estates. Free shipping on orders over ₹499.</p>
+      <button id="checkoutBtn"
+        class="w-full py-4 rounded-xl bg-gold text-background font-display font-bold uppercase tracking-wider text-sm hover:bg-gold-hover transition-colors shadow-lg shadow-gold/20 cursor-pointer">
+        Proceed to Checkout →
+      </button>
+      <a href="index.html" class="block text-center text-xs text-cream/60 hover:text-cream transition-colors pt-1">
+        Or continue browsing all blends
+      </a>
+    </div>
+  </aside>
+
+  <!-- ================= FLOATING TOAST NOTIFICATION ================= -->
+  <div id="toast"
+    class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-xl bg-[#1A130C] border border-gold text-cream shadow-2xl translate-y-20 opacity-0 pointer-events-none transition-all duration-400">
+    <span class="flex h-6 w-6 items-center justify-center rounded-full bg-gold text-background text-xs font-bold">✓</span>
+    <span id="toastMsg" class="text-sm font-semibold">Added to your tea basket!</span>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    /* 100% Authentic Nidhi Tea Product Catalog */
+    const PRODUCTS = [
+      {
+        id: "masala-chai",
+        title: "CLASSIC<br>MASALA<br>CHAI",
+        tagline: "HANDCRAFTED ESTATE LEAVES BLENDED WITH STONE-GROUND MOUNTAIN SPICES",
+        intensity: "Bold & Spiced (8/10)",
+        intensityScore: 8,
+        aroma: "Cardamom & Ginger",
+        pack: "img/hero.png",
+        foodFg: "element-img/cinnamon_stick.png",
+        foodTl: "element-img/green_cardamom.png",
+        foodTr: "element-img/star_anise.png",
+        foodMl: "img/ginger.webp",
+        foodMr: "element-img/cinnamon_stick.png",
+        mascot: "element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png",
+        stageBg: "radial-gradient(circle at 48% 46%, #D9A45F 0%, #B87E34 38%, #6E4515 80%, #442908 100%)",
+        goldColor: "#C48D42",
+        price: 299,
+        intensityDesc: "Full-bodied single-estate Assam black tea harmoniously balanced with slow-ground mountain spices.",
+        bullets: [
+          "Robust Assam maltiness leads upfront with deep amber liquor",
+          "Crushed ginger & green cardamom create comforting warmth",
+          "Clean, balanced finish with sweet Ceylon cinnamon lingering",
+          "Medium-full body — traditional invigorating morning spirit"
+        ],
+        pairingsText: "Warm samosas, morning ginger biscuits, cardamom cookies, buttered toast, morning oats, dark chocolate tarts, afternoon crisp rusk, steamed momos."
+      },
+      {
+        id: "green-tea",
+        title: "HONEY LEMON<br>GREEN TEA<br>ELIXIR",
+        tagline: "SUN-DRIED CITRUS WITH PURE WILD MOUNTAIN HONEY & WHOLE LEAF GREEN TEA",
+        intensity: "Crisp & Clarifying (5/10)",
+        intensityScore: 5,
+        pack: "img/product-2.png",
+        foodFg: "element-img/dried_lemon_slice.png",
+        foodTl: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png",
+        foodTr: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png",
+        foodMl: "element-img/dried_lemon_slice.png",
+        foodMr: "img/tea-leaf.webp",
+        mascot: "element-img/isolated_steaming_cup_of_green_tea_in_a_porcelain_cup_top_down_view.png",
+        stageBg: "radial-gradient(circle at 48% 46%, #4BA868 0%, #2A7242 38%, #144424 80%, #0A2613 100%)",
+        goldColor: "#2E6941",
+        price: 349,
+        intensityDesc: "High-elevation green tea leaves lifted by organic sun-dried citrus and raw wild Himalayan honey.",
+        bullets: [
+          "High-elevation whole-leaf green tea clarity with zero bitterness",
+          "Zesty organic sun-dried lemon peel delivers bright vitality",
+          "Raw wild Himalayan honey smoothness lingers at the finish",
+          "Packed with active L-theanine adaptogens and polyphenols"
+        ],
+        pairingsText: "Avocado toast, fresh garden salads, steamed dumplings, lemon macarons, berry fruit tarts, meditation bowl."
+      },
+      {
+        id: "rose-cardamom",
+        title: "ROSE CARDAMOM<br>BLACK TEA<br>ROYALE",
+        tagline: "ROYAL DAMASCUS ROSE PETALS WITH CRUSHED AROMATIC GREEN CARDAMOM",
+        intensity: "Floral & Elegant (7/10)",
+        intensityScore: 7,
+        pack: "img/product-3.png",
+        foodFg: "element-img/green_cardamom.png",
+        foodTl: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png",
+        foodTr: "element-img/star_anise.png",
+        foodMl: "element-img/green_cardamom.png",
+        foodMr: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png",
+        mascot: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png",
+        stageBg: "radial-gradient(circle at 48% 46%, #C03E58 0%, #8A1C2C 38%, #520B15 80%, #2E040B 100%)",
+        goldColor: "#C4321C",
+        price: 399,
+        intensityDesc: "Fragrant Damascus rose petals married with freshly cracked cardamom pods and orthodox leaf.",
+        bullets: [
+          "Fragrant Damascus rose petals lead a romantic bouquet",
+          "Crushed green cardamom pods unfold in soothing layers",
+          "Velvety golden black tea base with natural floral sweetness",
+          "An aromatherapeutic heritage cup crafted for quiet luxury"
+        ],
+        pairingsText: "Pistachio pastries, dark chocolate truffles, saffron shortbread, high tea sandwiches, cardamom cake."
+      },
+      {
+        id: "assam-gold",
+        title: "ARTISAN<br>ASSAM GOLD<br>HARVEST",
+        tagline: "SINGLE ESTATE GOLDEN TIPS DELIVERING LEGENDARY MALTY STRENGTH",
+        intensity: "Rich & Malty (9/10)",
+        intensityScore: 9,
+        pack: "img/3-1.png",
+        foodFg: "element-img/isolated_ceramic_bowl_of_dark_loose_leaf_oolong_tea_top_down_view_transparent.png",
+        foodTl: "element-img/cinnamon_stick.png",
+        foodTr: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png",
+        foodMl: "element-img/star_anise.png",
+        foodMr: "element-img/cinnamon_stick.png",
+        mascot: "element-img/isolated_rustic_clay_tea_pot_yixing_style_side_view_transparent_background.png",
+        stageBg: "radial-gradient(circle at 48% 46%, #D19A4B 0%, #A46F25 38%, #633D0D 80%, #361F04 100%)",
+        goldColor: "#BE8D3F",
+        price: 449,
+        intensityDesc: "High-grade single estate golden tips delivering iconic bold maltiness and amber copper depth.",
+        bullets: [
+          "Handpicked golden tips yield deep, radiant amber liquor",
+          "Complex natural notes of honeyed dates and toasted caramel",
+          "Full-bodied robust strength that marries perfectly with milk",
+          "The undisputed benchmark of Indian estate single-origin tea"
+        ],
+        pairingsText: "Full morning breakfast, sourdough butter toast, warm scones, walnut cake, crisp biscuits."
+      },
+      {
+        id: "saffron-kahwa",
+        title: "KASHMIRI<br>SAFFRON KAHWA<br>HERITAGE",
+        tagline: "VALLEY KASHMIRI SAFFRON, GREEN CARDAMOM PODS & CRUSHED CINNAMON",
+        intensity: "Exotic & Warming (8/10)",
+        intensityScore: 8,
+        pack: "img/hero.png",
+        foodFg: "element-img/green_cardamom.png",
+        foodTl: "element-img/cinnamon_stick.png",
+        foodTr: "element-img/star_anise.png",
+        foodMl: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png",
+        foodMr: "element-img/green_cardamom.png",
+        mascot: "element-img/isolated_glass_teapot_filled_with_blooming_jasmine_tea_side_view_professional.png",
+        stageBg: "radial-gradient(circle at 48% 46%, #E0953E 0%, #B86518 38%, #723708 80%, #441E02 100%)",
+        goldColor: "#D97706",
+        price: 499,
+        intensityDesc: "Precious mountain saffron threads steeped with green cardamom, Ceylon cinnamon and almond flakes.",
+        bullets: [
+          "Authentic Kashmiri saffron threads impart golden regal glow",
+          "Green cardamom pods and Ceylon cinnamon provide warm comfort",
+          "Crushed almonds add rich, nourishing texture to every sip",
+          "Ancient Himalayan digestive and wellness celebratory secret"
+        ],
+        pairingsText: "Kashmiri girda, roasted almonds, wild honey baklava, dried figs, sweet saffron treats."
+      }
+    ];
+
+    let currentIndex = 0;
+    let quantity = 1;
+
+    // DOM Elements
+    const stage = document.getElementById("showcaseStage");
+    const stageBgA = document.getElementById("stageBgA");
+    const stageBgB = document.getElementById("stageBgB");
+    let currentBgLayer = "A";
+
+    const bottleContainer = document.getElementById("bottleContainer");
+    const packImg = document.getElementById("mainBottleImg");
+    const sliderBlendNum = document.getElementById("sliderBlendNum");
+    const sliderBlendLabel = document.getElementById("sliderBlendLabel");
+
+    const wrapFg = document.getElementById("wrapFg");
+    const wrapTl = document.getElementById("wrapTl");
+    const wrapTr = document.getElementById("wrapTr");
+    const wrapMl = document.getElementById("wrapMl");
+    const wrapMr = document.getElementById("wrapMr");
+    const foodFg = document.getElementById("foodFg");
+    const foodTl = document.getElementById("foodTl");
+    const foodTr = document.getElementById("foodTr");
+    const foodMl = document.getElementById("foodMl");
+    const foodMr = document.getElementById("foodMr");
+
+    const titleEl = document.getElementById("productTitle");
+    const taglineEl = document.getElementById("productTagline");
+    const mascotWrap = document.getElementById("mascotWrap");
+    const mascotImg = document.getElementById("mascotImg");
+    const heatBadge = document.getElementById("heatBadge");
+    const tasteList = document.getElementById("tasteList");
+    const pairsWithText = document.getElementById("pairsWithText");
+    const intensityMeter = document.getElementById("intensityMeter");
+    const intensityDesc = document.getElementById("intensityDesc");
+
+    const priceDisplay = document.getElementById("priceDisplay");
+    const sizeSelect = document.getElementById("sizeSelect");
+    const qtyVal = document.getElementById("qtyVal");
+    const qtyMinus = document.getElementById("qtyMinus");
+    const qtyPlus = document.getElementById("qtyPlus");
+    const addToCartBtn = document.getElementById("addToCartBtn");
+    const buyNowBtn = document.getElementById("buyNowBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    const cartCountBadge = document.getElementById("cartCountBadge");
+    const drawerCountBadge = document.getElementById("drawerCountBadge");
+    const cartDrawer = document.getElementById("cartDrawer");
+    const cartBackdrop = document.getElementById("cartDrawerBackdrop");
+    const cartBtn = document.getElementById("cartBtn");
+    const closeCartBtn = document.getElementById("closeCartBtn");
+
+    let isAnimating = false;
+
+    /* Render Active Product with Silky Smooth GSAP Left-to-Right / Right-to-Left Sliding */
+    function renderProduct(index, direction = 0) {
+      const p = PRODUCTS[index];
+
+      // Initial page load without sliding motion
+      if (direction === 0 || typeof gsap === "undefined") {
+        packImg.src = p.pack;
+        foodFg.src = p.foodFg;
+        foodTl.src = p.foodTl;
+        foodTr.src = p.foodTr;
+        foodMl.src = p.foodMl;
+        foodMr.src = p.foodMr;
+        mascotImg.src = p.mascot;
+
+        if (stageBgA) {
+          stageBgA.style.background = p.stageBg;
+          stageBgA.style.opacity = "1";
+        }
+        if (stageBgB) stageBgB.style.opacity = "0";
+
+        if (sliderBlendNum) sliderBlendNum.textContent = "0" + (index + 1);
+        if (sliderBlendLabel) sliderBlendLabel.textContent = p.title.replace(/<br>/g, " ");
+
+        titleEl.innerHTML = p.title;
+        taglineEl.textContent = p.tagline;
+        heatBadge.textContent = p.intensity;
+        if (pairsWithText && p.pairingsText) pairsWithText.textContent = p.pairingsText;
+        if (intensityDesc && p.intensityDesc) intensityDesc.textContent = p.intensityDesc;
+
+        if (intensityMeter && p.intensityScore) {
+          let dotsHtml = "";
+          for (let i = 1; i <= 10; i++) {
+            const isActive = i <= p.intensityScore;
+            dotsHtml += `<div class="h-full ${isActive ? 'bg-gold' : 'bg-cream/10'} rounded-full flex-1 transition-colors duration-500"></div>`;
+          }
+          intensityMeter.innerHTML = dotsHtml;
+        }
+
+        tasteList.innerHTML = p.bullets.map(b => `
+          <li class="flex items-start gap-2.5">
+            <span class="text-gold shrink-0 text-xs mt-0.5">•</span>
+            <span>${b}</span>
+          </li>
+        `).join("");
+
+        updatePrice();
+        return;
+      }
+
+      if (isAnimating) return;
+      isAnimating = true;
+
+      // Horizontal Motion Vectors:
+      // direction = 1 (Next): Active pack & ingredients slide OUT LEFT (-380px), incoming slides IN RIGHT (+380px)
+      // direction = -1 (Prev): Active pack & ingredients slide OUT RIGHT (+380px), incoming slides IN LEFT (-380px)
+      const exitPackX = direction * -380;
+      const exitPackRot = direction * -10;
+      const enterPackX = direction * 380;
+      const enterPackRot = direction * 10;
+
+      const exitSpicesX = direction * -220;
+      const enterSpicesX = direction * 220;
+
+      const exitTextX = direction * -35;
+      const enterTextX = direction * 35;
+
+      const spiceWrappers = [wrapFg, wrapTl, wrapTr, wrapMl, wrapMr].filter(Boolean);
+      const textGroup = [titleEl, taglineEl, mascotWrap, tasteList, pairsWithText, heatBadge, intensityDesc].filter(Boolean);
+
+      // Smooth Background Crossfade
+      if (stageBgA && stageBgB) {
+        if (currentBgLayer === "A") {
+          stageBgB.style.background = p.stageBg;
+          gsap.to(stageBgB, { opacity: 1, duration: 0.6, ease: "power2.out" });
+          gsap.to(stageBgA, { opacity: 0, duration: 0.6, ease: "power2.out" });
+          currentBgLayer = "B";
+        } else {
+          stageBgA.style.background = p.stageBg;
+          gsap.to(stageBgA, { opacity: 1, duration: 0.6, ease: "power2.out" });
+          gsap.to(stageBgB, { opacity: 0, duration: 0.6, ease: "power2.out" });
+          currentBgLayer = "A";
+        }
+      }
+
+      // PHASE 1: EXIT TIMELINE (Snappy 0.22s exit)
+      const exitTl = gsap.timeline({
+        onComplete: () => {
+          // Swap image assets and copy
+          packImg.src = p.pack;
+          foodFg.src = p.foodFg;
+          foodTl.src = p.foodTl;
+          foodTr.src = p.foodTr;
+          foodMl.src = p.foodMl;
+          foodMr.src = p.foodMr;
+          mascotImg.src = p.mascot;
+
+          if (sliderBlendNum) sliderBlendNum.textContent = "0" + (index + 1);
+          if (sliderBlendLabel) sliderBlendLabel.textContent = p.title.replace(/<br>/g, " ");
+
+          titleEl.innerHTML = p.title;
+          taglineEl.textContent = p.tagline;
+          heatBadge.textContent = p.intensity;
+          if (pairsWithText && p.pairingsText) pairsWithText.textContent = p.pairingsText;
+          if (intensityDesc && p.intensityDesc) intensityDesc.textContent = p.intensityDesc;
+
+          if (intensityMeter && p.intensityScore) {
+            let dotsHtml = "";
+            for (let i = 1; i <= 10; i++) {
+              const isActive = i <= p.intensityScore;
+              dotsHtml += `<div class="h-full ${isActive ? 'bg-gold' : 'bg-cream/10'} rounded-full flex-1 transition-colors duration-500"></div>`;
+            }
+            intensityMeter.innerHTML = dotsHtml;
+          }
+
+          tasteList.innerHTML = p.bullets.map(b => `
+            <li class="flex items-start gap-2.5">
+              <span class="text-gold shrink-0 text-xs mt-0.5">•</span>
+              <span>${b}</span>
+            </li>
+          `).join("");
+
+          updatePrice();
+
+          // PHASE 2: ENTER TIMELINE (Fluid spring-assisted entrance from opposite side)
+          const enterTl = gsap.timeline({
+            onComplete: () => {
+              isAnimating = false;
+            }
+          });
+
+          // Centerpiece pack glides in with responsive spring settling
+          enterTl.fromTo(bottleContainer,
+            { x: enterPackX, rotation: enterPackRot, scale: 0.88, opacity: 0 },
+            { x: 0, rotation: 0, scale: 1, opacity: 1, duration: 0.52, ease: "back.out(1.15)" },
+            0
+          );
+
+          // Botanical ingredients float in with camera depth stagger
+          enterTl.fromTo(spiceWrappers,
+            { x: enterSpicesX, opacity: 0, scale: 0.8 },
+            { x: 0, opacity: 1, scale: 1, duration: 0.48, stagger: 0.03, ease: "power3.out" },
+            0.04
+          );
+
+          // Right-hand typography slides in smoothly
+          enterTl.fromTo(textGroup,
+            { x: enterTextX, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.42, stagger: 0.02, ease: "power3.out" },
+            0.06
+          );
+        }
+      });
+
+      // Animate Pack Out
+      exitTl.to(bottleContainer, {
+        x: exitPackX,
+        rotation: exitPackRot,
+        scale: 0.88,
+        opacity: 0,
+        duration: 0.22,
+        ease: "power2.in"
+      }, 0);
+
+      // Animate Spices Out
+      exitTl.to(spiceWrappers, {
+        x: exitSpicesX,
+        opacity: 0,
+        duration: 0.2,
+        stagger: 0.015,
+        ease: "power2.in"
+      }, 0);
+
+      // Animate Text Out
+      exitTl.to(textGroup, {
+        x: exitTextX,
+        opacity: 0,
+        duration: 0.18,
+        ease: "power2.in"
+      }, 0);
+    }
+
+    /* Price Calculator */
+    function updatePrice() {
+      const p = PRODUCTS[currentIndex];
+      const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+      const sizeMultiplier = selectedOption.value === "2" ? 1.83 : (selectedOption.value === "4" ? 3.34 : 1);
+      const unitPrice = Math.round(p.price * sizeMultiplier);
+      const total = unitPrice * quantity;
+      priceDisplay.textContent = "₹" + total;
+      return total;
+    }
+
+    /* Button Tactile Feedback Helper */
+    function punchButton(btn) {
+      if (!btn || typeof gsap === "undefined") return;
+      gsap.fromTo(btn, { scale: 0.85 }, { scale: 1, duration: 0.35, ease: "back.out(2)" });
+    }
+
+    /* Carousel Nav Listeners (Left to Right / Right to Left) */
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        if (isAnimating) return;
+        punchButton(prevBtn);
+        currentIndex = (currentIndex - 1 + PRODUCTS.length) % PRODUCTS.length;
+        renderProduct(currentIndex, -1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        if (isAnimating) return;
+        punchButton(nextBtn);
+        currentIndex = (currentIndex + 1) % PRODUCTS.length;
+        renderProduct(currentIndex, 1);
+      });
+    }
+
+    // Keyboard Arrow Navigation
+    window.addEventListener("keydown", (e) => {
+      if (isAnimating) return;
+      if (e.key === "ArrowLeft") {
+        punchButton(prevBtn);
+        currentIndex = (currentIndex - 1 + PRODUCTS.length) % PRODUCTS.length;
+        renderProduct(currentIndex, -1);
+      } else if (e.key === "ArrowRight") {
+        punchButton(nextBtn);
+        currentIndex = (currentIndex + 1) % PRODUCTS.length;
+        renderProduct(currentIndex, 1);
+      }
+    });
+
+    // Quantity Stepper
+    qtyMinus.addEventListener("click", () => {
+      if (quantity > 1) {
+        quantity--;
+        qtyVal.textContent = quantity;
+        updatePrice();
+      }
+    });
+
+    qtyPlus.addEventListener("click", () => {
+      quantity++;
+      qtyVal.textContent = quantity;
+      updatePrice();
+    });
+
+    sizeSelect.addEventListener("change", updatePrice);
+
+    /* Touch Swipe Gesture Support (Left / Right Swipe on Stage) */
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    if (stage) {
+      stage.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      stage.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchEndX - touchStartX;
+        if (Math.abs(diff) > 40) {
+          if (isAnimating) return;
+          if (diff < 0) {
+            // Swiped Left -> Next Blend
+            punchButton(nextBtn);
+            currentIndex = (currentIndex + 1) % PRODUCTS.length;
+            renderProduct(currentIndex, 1);
+          } else {
+            // Swiped Right -> Prev Blend
+            punchButton(prevBtn);
+            currentIndex = (currentIndex - 1 + PRODUCTS.length) % PRODUCTS.length;
+            renderProduct(currentIndex, -1);
+          }
+        }
+      }, { passive: true });
+    }
+
+    /* Interactive Mouse Parallax on Showcase Stage */
+    const stageCard = document.getElementById("showcaseStage");
+    if (stageCard) {
+      stageCard.addEventListener("mousemove", (e) => {
+        if (isAnimating) return;
+        const rect = stageCard.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        gsap.to(bottleContainer, {
+          x: x * 16,
+          y: y * 16,
+          rotation: x * 4,
+          duration: 0.4,
+          ease: "power2.out",
+          overwrite: "auto"
+        });
+        gsap.to(wrapFg, { x: x * -24, y: y * -24, duration: 0.4, ease: "power2.out", overwrite: "auto" });
+        gsap.to(wrapTr, { x: x * 20, y: y * 20, duration: 0.4, ease: "power2.out", overwrite: "auto" });
+        gsap.to(wrapTl, { x: x * -16, y: y * -16, duration: 0.4, ease: "power2.out", overwrite: "auto" });
+      });
+
+      stageCard.addEventListener("mouseleave", () => {
+        if (isAnimating) return;
+        gsap.to([bottleContainer, wrapFg, wrapTr, wrapTl], {
+          x: 0,
+          y: 0,
+          rotation: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          overwrite: "auto"
+        });
+      });
+    }
+
+    /* Add To Cart Workflow */
+    const toast = document.getElementById("toast");
+    let toastTimer = null;
+
+    function showToast(msg) {
+      document.getElementById("toastMsg").textContent = msg;
+      toast.classList.remove("translate-y-20", "opacity-0", "pointer-events-none");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add("translate-y-20", "opacity-0", "pointer-events-none");
+      }, 3000);
+    }
+
+    function openCartDrawer() {
+      cartDrawer.classList.remove("translate-x-full");
+      cartBackdrop.classList.remove("opacity-0", "pointer-events-none");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeCartDrawer() {
+      cartDrawer.classList.add("translate-x-full");
+      cartBackdrop.classList.add("opacity-0", "pointer-events-none");
+      document.body.style.overflow = "";
+    }
+
+    addToCartBtn.addEventListener("click", () => {
+      const p = PRODUCTS[currentIndex];
+      const selectedSize = sizeSelect.options[sizeSelect.selectedIndex].text;
+      const currentTotal = updatePrice();
+
+      // Button ripple & flash effect
+      const btnFlash = document.getElementById("btnFlash");
+      btnFlash.classList.remove("translate-y-full");
+      setTimeout(() => btnFlash.classList.add("translate-y-full"), 250);
+
+      // Add to cart state
+      const label = document.getElementById("cartBtnLabel");
+      label.textContent = "ADDING...";
+      setTimeout(() => {
+        label.textContent = "ADDED ✓";
+        setTimeout(() => { label.textContent = "ADD TO CART"; }, 1400);
+
+        // Update Drawer Content
+        document.getElementById("drawerItemTitle").innerHTML = p.title.replace(/<br>/g, " ");
+        document.getElementById("drawerItemImg").src = p.pack;
+        document.getElementById("drawerItemSize").textContent = selectedSize;
+        document.getElementById("drawerItemPrice").textContent = "₹" + currentTotal;
+        document.getElementById("drawerItemQty").textContent = "Qty: " + quantity;
+        document.getElementById("drawerSubtotal").textContent = "₹" + currentTotal;
+
+        // Badge update
+        cartCountBadge.textContent = quantity;
+        drawerCountBadge.textContent = quantity;
+
+        showToast(`Added ${quantity}x ${p.title.replace(/<br>/g, " ")} to your basket!`);
+
+        // Open Drawer
+        setTimeout(openCartDrawer, 400);
+      }, 350);
+    });
+
+    if (buyNowBtn) {
+      buyNowBtn.addEventListener("click", () => {
+        const p = PRODUCTS[currentIndex];
+        const selectedSize = sizeSelect.options[sizeSelect.selectedIndex].text;
+        const currentTotal = updatePrice();
+
+        // Button ripple & flash effect
+        const btnFlash = document.getElementById("btnFlash");
+        if (btnFlash) {
+          btnFlash.classList.remove("translate-y-full");
+          setTimeout(() => btnFlash.classList.add("translate-y-full"), 250);
+        }
+
+        // Direct Checkout Setup
+        document.getElementById("drawerItemTitle").innerHTML = p.title.replace(/<br>/g, " ");
+        document.getElementById("drawerItemImg").src = p.pack;
+        document.getElementById("drawerItemSize").textContent = selectedSize;
+        document.getElementById("drawerItemPrice").textContent = "₹" + currentTotal;
+        document.getElementById("drawerItemQty").textContent = "Qty: " + quantity;
+        document.getElementById("drawerSubtotal").textContent = "₹" + currentTotal;
+
+        cartCountBadge.textContent = quantity;
+        drawerCountBadge.textContent = quantity;
+
+        showToast(`Proceeding to checkout for ${p.title.replace(/<br>/g, " ")} (₹${currentTotal})`);
+        setTimeout(openCartDrawer, 200);
+      });
+    }
+
+    cartBtn.addEventListener("click", openCartDrawer);
+    closeCartBtn.addEventListener("click", closeCartDrawer);
+    cartBackdrop.addEventListener("click", closeCartDrawer);
+
+    const menuBtn = document.getElementById("menuBtn");
+    if (menuBtn) {
+      menuBtn.addEventListener("click", () => {
+        window.location.href = "index.html";
+      });
+    }
+
+    const checkoutBtn = document.getElementById("checkoutBtn");
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener("click", () => {
+        showToast("Redirecting to 100% Secure Checkout... (Demo Order Initiated!)");
+      });
+    }
+
+    // Initial render
+    renderProduct(0);
+  </script>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<!-- test  -->
+
 
 <head>
   <meta charset="utf-8" />
@@ -416,8 +416,11 @@
 
     /* ============ CUSTOM CURSOR (Bucks Sauce Style) ============ */
     @media (pointer: fine) {
-      * { cursor: none !important; }
+      * {
+        cursor: none !important;
+      }
     }
+
     .custom-cursor {
       position: fixed;
       width: 10px;
@@ -436,17 +439,20 @@
     /* ============ BURGER → X ANIMATION ============ */
     #navBurger .burger-line {
       transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
-                  width 0.35s cubic-bezier(0.23, 1, 0.32, 1),
-                  opacity 0.25s ease;
+        width 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+        opacity 0.25s ease;
     }
+
     #navBurger.menu-active {
       background: var(--pink) !important;
       border-color: var(--pink) !important;
       color: #ffffff !important;
     }
+
     #navBurger.menu-active .burger-line:first-child {
       transform: translateY(4.5px) rotate(45deg) !important;
     }
+
     #navBurger.menu-active .burger-line:last-child {
       transform: translateY(-3.5px) rotate(-45deg) !important;
       width: 100% !important;
@@ -522,7 +528,7 @@
       <!-- Modern Actions Cluster: Shop Tea CTA + Cart Button + Modern Hamburger Menu Button -->
       <div id="navPill" class="relative z-10 flex items-center gap-2.5 sm:gap-3 transition-all duration-500">
         <!-- Shop Tea CTA Button with rolling double-text -->
-        <a href="#products"
+        <a href="product.html"
           class="group/button relative hidden overflow-hidden rounded-xl border-2 border-pink bg-pink px-5 py-3 font-display text-sm uppercase tracking-wider text-white transition-all duration-300 md:inline-flex active:scale-95 shadow-lg shadow-pink/30 hover:border-red hover:shadow-red/40">
           <div data-button-bg="true"
             class="absolute inset-0 rounded-xl overflow-hidden bg-pink transition-all duration-300 group-hover/button:bg-red pointer-events-none">
@@ -531,9 +537,11 @@
             class="relative z-20 flex items-center justify-center leading-none h-[1.3em] overflow-hidden pointer-events-none">
             <span class="invisible whitespace-nowrap font-bold" aria-hidden="true">Shop Tea</span>
             <span
-              class="absolute inset-0 flex items-center justify-center whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-white font-bold">Shop Tea</span>
+              class="absolute inset-0 flex items-center justify-center whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-white font-bold">Shop
+              Tea</span>
             <span
-              class="absolute inset-0 flex items-center justify-center whitespace-nowrap translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-white font-bold">Shop Tea</span>
+              class="absolute inset-0 flex items-center justify-center whitespace-nowrap translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-white font-bold">Shop
+              Tea</span>
           </span>
         </a>
 
@@ -552,7 +560,8 @@
         <!-- Modern Bucks-Style Hamburger Menu Button -->
         <button data-menu id="navBurger" aria-label="Toggle menu" type="button"
           class="group/menu relative flex h-12 items-center gap-2.5 sm:gap-3 rounded-xl border-2 border-pink/40 bg-background/80 px-4 sm:px-5 text-cream backdrop-blur-md transition-all duration-300 hover:border-pink hover:bg-pink/15 hover:text-pink active:scale-95 cursor-pointer shadow-lg shadow-black/25">
-          <span class="hidden sm:inline-block font-display text-sm uppercase tracking-widest font-bold pointer-events-none">Menu</span>
+          <span
+            class="hidden sm:inline-block font-display text-sm uppercase tracking-widest font-bold pointer-events-none">Menu</span>
           <div class="flex flex-col justify-center gap-[6px] w-5 sm:w-5 pointer-events-none">
             <span class="burger-line block h-[2px] w-full bg-current rounded-full"></span>
             <span class="burger-line block h-[2px] w-3/4 bg-current rounded-full"></span>
@@ -881,13 +890,14 @@
           <div data-button-bg="true"
             class="absolute inset-0 rounded-xl overflow-hidden bg-pink transition-all duration-300 group-hover/button:bg-red pointer-events-none">
           </div>
-          <span
-            class="relative z-20 block overflow-hidden pointer-events-none h-[1.35em] leading-[1.35em]">
+          <span class="relative z-20 block overflow-hidden pointer-events-none h-[1.35em] leading-[1.35em]">
             <span class="invisible block whitespace-nowrap font-bold" aria-hidden="true">Explore Blends</span>
             <span
-              class="absolute inset-0 flex items-center justify-center whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-white font-bold">Explore Blends</span>
+              class="absolute inset-0 flex items-center justify-center whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-white font-bold">Explore
+              Blends</span>
             <span
-              class="absolute inset-0 flex items-center justify-center whitespace-nowrap translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-white font-bold">Explore Blends</span>
+              class="absolute inset-0 flex items-center justify-center whitespace-nowrap translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-white font-bold">Explore
+              Blends</span>
           </span>
         </a>
       </div>
@@ -2031,7 +2041,7 @@
       if (!grid) return;
       grid.innerHTML = PRODUCTS.map((p) => `
     <article data-listing-card="true" class="prod group relative flex min-h-[440px] sm:min-h-[460px] md:min-h-[485px] w-full flex-col items-center justify-between overflow-hidden rounded-2xl border border-cream/20 hover:border-pink/60 hover:shadow-2xl hover:shadow-pink/15 p-4 sm:p-5 md:p-6 gap-2 transition-all duration-500 ease-out backdrop-blur-sm" style="background:${p.bg}">
-      <a class="absolute inset-0 z-1" aria-label="${p.name.join(" ")}" href="#products"></a>
+      <a class="absolute inset-0 z-1" aria-label="${p.name.join(" ")}" href="product.html"></a>
       <div class="absolute z-0 pointer-events-none rounded-xl border border-cream/20 border-dashed inset-2 sm:inset-2.5 transition-colors duration-300 group-hover:border-pink/30"></div>
       
       <!-- Header Title & Tagline -->
