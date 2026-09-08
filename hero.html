@@ -246,6 +246,10 @@
           class="flex items-center gap-1.5 rounded-xl border border-cream/25 bg-background/60 px-3.5 py-2 sm:px-4 sm:py-2.5 font-display text-xs sm:text-sm uppercase tracking-wider text-cream backdrop-blur-md transition-all duration-300 hover:border-pink hover:bg-pink/15 hover:text-pink active:scale-95 shadow-sm">
           <span>← Full Store</span>
         </a>
+        <a href="cards.html"
+          class="hidden sm:inline-flex items-center gap-1.5 rounded-xl border border-gold/40 bg-gold/10 px-3.5 py-2 sm:px-4 sm:py-2.5 font-display text-xs sm:text-sm uppercase tracking-wider text-gold backdrop-blur-md transition-all duration-300 hover:bg-gold/20 active:scale-95 shadow-sm">
+          <span>Card Lab ✦</span>
+        </a>
         <a href="product.html"
           class="hidden sm:inline-flex items-center gap-1.5 rounded-xl border-2 border-pink bg-pink px-4 py-2 sm:px-5 sm:py-2.5 font-display text-xs sm:text-sm uppercase tracking-wider text-cream transition-all duration-300 hover:bg-red hover:border-red hover:shadow-lg hover:shadow-pink/30 active:scale-95">
           <span>All Blends ↗</span>
@@ -302,8 +306,8 @@
               class="absolute flex items-center justify-center pointer-events-none transition-transform duration-500 will-change-transform"
               style="transform: scale(1);">
               <div id="heroTint"
-                class="h-56 w-56 rounded-full sm:h-72 sm:w-72 md:h-[400px] md:w-[400px] lg:h-[480px] lg:w-[480px] xl:h-[540px] xl:w-[540px] animate-hero-bg shadow-2xl overflow-hidden border border-cream/20"
-                style="background-image: url('Gemini_Generated_Image_5twsob5twsob5tws (2).png'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+                class="h-56 w-56 rounded-full sm:h-72 sm:w-72 md:h-[400px] md:w-[400px] lg:h-[480px] lg:w-[480px] xl:h-[540px] xl:w-[540px] animate-hero-bg shadow-2xl overflow-hidden border border-cream/20 bg-fixed"
+                style="background-image: url('Gemini_Generated_Image_5twsob5twsob5tws (2).png'); background-attachment: fixed; background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
             </div>
 
             <!-- Top-Right & Bottom-Left Floating Companion Accents (Dynamic Shrink & Bloom) -->
@@ -637,6 +641,7 @@
           setTimeout(() => {
             if (tint) {
               tint.style.backgroundImage = `url('${SLIDES[index].bgImg || "Gemini_Generated_Image_5twsob5twsob5tws (2).png"}')`;
+              tint.style.backgroundAttachment = "fixed";
               tint.style.backgroundSize = "cover";
               tint.style.backgroundPosition = "center";
               tint.style.backgroundRepeat = "no-repeat";
@@ -667,6 +672,7 @@
         } else {
           if (tint) {
             tint.style.backgroundImage = `url('${SLIDES[index].bgImg || "Gemini_Generated_Image_5twsob5twsob5tws (2).png"}')`;
+            tint.style.backgroundAttachment = "fixed";
             tint.style.backgroundSize = "cover";
             tint.style.backgroundPosition = "center";
             tint.style.backgroundRepeat = "no-repeat";

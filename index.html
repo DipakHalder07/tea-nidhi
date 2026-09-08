@@ -829,8 +829,8 @@
               class="absolute flex items-center justify-center pointer-events-none transition-transform duration-500 will-change-transform"
               style="transform: scale(1);">
               <div id="heroTint"
-                class="h-56 w-56 rounded-full sm:h-72 sm:w-72 md:h-[400px] md:w-[400px] lg:h-[480px] lg:w-[480px] xl:h-[560px] xl:w-[560px] animate-hero-bg shadow-2xl overflow-hidden border border-cream/20"
-                style="background-image: url('Gemini_Generated_Image_5twsob5twsob5tws (2).png'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+                class="h-56 w-56 rounded-full sm:h-72 sm:w-72 md:h-[400px] md:w-[400px] lg:h-[480px] lg:w-[480px] xl:h-[560px] xl:w-[560px] animate-hero-bg shadow-2xl overflow-hidden border border-cream/20 bg-fixed"
+                style="background-image: url('Gemini_Generated_Image_5twsob5twsob5tws (2).png'); background-attachment: fixed; background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
             </div>
 
             <!-- Top-Right & Bottom-Left Floating Product Accents (Clean, Scaled for Majestic Presence) -->
@@ -1613,6 +1613,7 @@
           setTimeout(() => {
             if (tint) {
               tint.style.backgroundImage = `url('${SLIDES[index].bgImg || "Gemini_Generated_Image_5twsob5twsob5tws (2).png"}')`;
+              tint.style.backgroundAttachment = "fixed";
               tint.style.backgroundSize = "cover";
               tint.style.backgroundPosition = "center";
               tint.style.backgroundRepeat = "no-repeat";
@@ -1645,6 +1646,7 @@
         } else {
           if (tint) {
             tint.style.backgroundImage = `url('${SLIDES[index].bgImg || "Gemini_Generated_Image_5twsob5twsob5tws (2).png"}')`;
+            tint.style.backgroundAttachment = "fixed";
             tint.style.backgroundSize = "cover";
             tint.style.backgroundPosition = "center";
             tint.style.backgroundRepeat = "no-repeat";

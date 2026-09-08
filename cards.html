@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/webp" href="img/logo.webp" />
+  <title>Nidhi Tea — Product Card Design Lab (img/3-1.png + Hover Elements)</title>
+  <meta name="description"
+    content="Interactive test lab for Nidhi Tea product cards using img/3-1.png and hover elements from product-hover-element-img." />
+
+  <!-- Google Fonts: Fraunces (Display) and Inter Tight / Poppins (Sans/UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Poppins:wght@400;500;600;700&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: "#100B06",
+            cream: "#f5e4c7",
+            gold: "#F7C665",
+            amber: "#D99948",
+            flame: "#F15726",
+            cherry: "#C4321C",
+            smoke: "#1A130C",
+            panel: "#16100A",
+            pink: "#FF3366",
+            "pink-hover": "#E01E5A",
+            red: "#E63946",
+            "red-dark": "#C4321C",
+          },
+          fontFamily: {
+            display: ['"Fraunces"', 'serif'],
+            heading: ['"Fraunces"', 'serif'],
+            sans: ['"Inter Tight"', '"Poppins"', 'system-ui', 'sans-serif'],
+          },
+          borderRadius: {
+            none: '0px',
+            sm: '4px',
+            md: '8px',
+            lg: '10px',
+            xl: '12px',
+            '2xl': '16px',
+            '3xl': '24px',
+            full: '9999px',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- GSAP Animation Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <style>
+    :root {
+      --background: #100B06;
+      --cream: #f5e4c7;
+      --gold: #F7C665;
+      --flame: #F15726;
+      --cherry: #C4321C;
+      --smoke: #2A231C;
+      --panel: #16100A;
+      --pink: #FF3366;
+      --red: #E63946;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      background-color: var(--background);
+      color: var(--cream);
+      font-family: "Inter Tight", "Poppins", system-ui, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Outlined Typography Utilities */
+    .text-outline {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--cream);
+    }
+
+    .display-tight {
+      font-family: 'Fraunces', serif;
+      font-optical-sizing: auto;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: -0.015em;
+    }
+
+    /* Dotted Rule */
+    .dotted-rule {
+      background-image: repeating-linear-gradient(to right,
+          var(--cream) 0px,
+          var(--cream) 3px,
+          transparent 3px,
+          transparent 8px);
+      background-size: 8px 1px;
+      background-repeat: repeat-x;
+    }
+
+    /* Subtly Textured Background Matrix */
+    .bg-grid-dots {
+      background-image: radial-gradient(rgba(245, 228, 199, 0.08) 1.2px, transparent 1.2px);
+      background-size: 28px 28px;
+    }
+
+    /* Bouncing Add to Cart dots */
+    @keyframes btn-dot-pulse {
+      0%, 80%, 100% {
+        transform: scale(0.6);
+        opacity: 0.4;
+      }
+      40% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    .animate-btn-dot {
+      animation: btn-dot-pulse 0.9s infinite ease-in-out;
+    }
+
+    /* Floating Keyframe for Hover Elements */
+    @keyframes float-gentle {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-6px) rotate(2deg);
+      }
+    }
+
+    .animate-float-gentle {
+      animation: float-gentle 4s ease-in-out infinite;
+    }
+
+    /* Glass Panel */
+    .glass-panel {
+      background: rgba(22, 16, 10, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(245, 228, 199, 0.12);
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #100B06;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2A231C;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #BE8D3F;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-cream selection:bg-pink selection:text-cream bg-grid-dots">
+
+  <!-- ============ LAB TOP NAVIGATION BAR ============ -->
+  <header class="sticky top-0 z-50 w-full border-b border-cream/10 bg-background/90 backdrop-blur-xl transition-all duration-300">
+    <div class="mx-auto flex max-w-[1700px] items-center justify-between px-4 sm:px-6 md:px-10 py-3.5 sm:py-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="group flex items-center gap-3 transition-transform duration-300 hover:scale-[1.02]">
+          <div class="h-10 w-28 sm:h-12 sm:w-36 overflow-hidden">
+            <img src="img/logo.webp" alt="Nidhi Tea Logo" class="h-full w-full object-contain object-left" />
+          </div>
+        </a>
+
+        <!-- Lab Badge -->
+        <div class="flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-[11px] font-sans font-semibold uppercase tracking-wider text-gold">
+          <span class="h-2 w-2 rounded-full bg-gold animate-pulse"></span>
+          <span>Card Test Lab (3-1.png)</span>
+        </div>
+      </div>
+
+      <!-- Quick Navigation & Cart Count -->
+      <div class="flex items-center gap-2.5 sm:gap-4">
+        <a href="index.html"
+          class="hidden sm:inline-flex items-center gap-1.5 rounded-xl border border-cream/20 bg-panel px-3.5 py-2 font-display text-xs uppercase tracking-wider text-cream transition-all duration-200 hover:border-cream/50 hover:bg-cream/10">
+          <span>← Home Store</span>
+        </a>
+        <a href="hero.html"
+          class="hidden md:inline-flex items-center gap-1.5 rounded-xl border border-cream/20 bg-panel px-3.5 py-2 font-display text-xs uppercase tracking-wider text-cream transition-all duration-200 hover:border-cream/50 hover:bg-cream/10">
+          <span>Hero Slider</span>
+        </a>
+        <a href="product.html"
+          class="hidden lg:inline-flex items-center gap-1.5 rounded-xl border border-cream/20 bg-panel px-3.5 py-2 font-display text-xs uppercase tracking-wider text-cream transition-all duration-200 hover:border-cream/50 hover:bg-cream/10">
+          <span>Product Detail</span>
+        </a>
+
+        <!-- Live Cart Button with Counter -->
+        <button id="cartBtn"
+          class="flex items-center gap-2 rounded-xl border-2 border-pink bg-pink/20 hover:bg-pink px-3.5 py-2 font-display text-xs uppercase tracking-wider text-cream transition-all duration-200 shadow-lg shadow-pink/20 cursor-pointer">
+          <svg class="w-4 h-4 text-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+          <span class="font-bold">Bag (<span id="cartCount">0</span>)</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============ HERO LAB CONTROLS & HEADER ============ -->
+  <section class="relative w-full pt-8 sm:pt-10 pb-6 px-4 sm:px-6 md:px-10 border-b border-cream/10">
+    <div class="mx-auto max-w-[1700px]">
+      
+      <!-- Headline & Introduction -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="h-2 w-2 rounded-full bg-red animate-ping"></span>
+            <span class="font-sans text-xs uppercase tracking-[0.25em] text-cream/70 font-semibold">Active Product: img/3-1.png</span>
+          </div>
+          <h1 class="display-tight text-3xl sm:text-5xl md:text-6xl text-cream leading-[0.92]">
+            Product Card <span class="text-outline">Hover Lab</span>
+          </h1>
+          <p class="font-sans text-xs sm:text-sm md:text-base text-cream/70 max-w-3xl mt-2.5 leading-relaxed">
+            Testing product pack <code class="text-gold font-mono bg-panel px-2 py-0.5 rounded border border-gold/30">img/3-1.png</code> with authentic hover elements from <code class="text-gold font-mono bg-panel px-2 py-0.5 rounded border border-gold/30">product-hover-element-img</code> (Terracotta Kulhad Cup, Dried Leaves Pile, Fresh Green Sprigs, Tea Branch & Estate Circle).
+          </p>
+        </div>
+
+        <!-- Mode & Simulation Switchers -->
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+          <!-- Force State Controls -->
+          <div class="flex items-center gap-1 p-1 rounded-xl border border-cream/20 bg-panel">
+            <button id="btnStateDefault" class="state-toggle active px-3.5 py-1.5 rounded-lg text-xs font-display uppercase tracking-wider bg-cream text-background font-bold transition-all">
+              Resting Idle
+            </button>
+            <button id="btnStateHover" class="state-toggle px-3.5 py-1.5 rounded-lg text-xs font-display uppercase tracking-wider text-cream/70 hover:text-cream transition-all">
+              All Hover (Inspect)
+            </button>
+          </div>
+
+          <!-- Column View Toggle -->
+          <div class="flex items-center gap-1 p-1 rounded-xl border border-cream/20 bg-panel">
+            <button data-cols="4" class="col-toggle active px-3 py-1.5 rounded-lg text-xs font-display uppercase tracking-wider bg-cream/20 text-cream font-bold transition-all">
+              4 Cols
+            </button>
+            <button data-cols="3" class="col-toggle px-3 py-1.5 rounded-lg text-xs font-display uppercase tracking-wider text-cream/70 hover:text-cream transition-all">
+              3 Cols
+            </button>
+            <button data-cols="2" class="col-toggle px-3 py-1.5 rounded-lg text-xs font-display uppercase tracking-wider text-cream/70 hover:text-cream transition-all">
+              2 Cols
+            </button>
+            <button data-cols="1" class="col-toggle px-3 py-1.5 rounded-lg text-xs font-display uppercase tracking-wider text-cream/70 hover:text-cream transition-all">
+              Spotlight
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Hover Element Asset Inspector Bar -->
+      <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-none pt-2 border-t border-cream/10">
+        <span class="text-xs font-sans uppercase tracking-wider text-cream/50 shrink-0 font-semibold mr-1">Hover Assets:</span>
+        
+        <div class="flex items-center gap-2 shrink-0 bg-panel border border-cream/15 rounded-xl px-3 py-1.5">
+          <img src="product-hover-element-img/isolate_and_generate_a_single_separate_asset_a_traditional_terracotta_clay_cup-removebg-preview.png" alt="" class="w-5 h-5 object-contain" />
+          <span class="text-[11px] font-sans text-cream/80 font-medium">Terracotta Kulhad Cup</span>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0 bg-panel border border-cream/15 rounded-xl px-3 py-1.5">
+          <img src="product-hover-element-img/extract_and_regenerate_the_dried_black_tea_leaves_pile_from_the_top_left-removebg-preview.png" alt="" class="w-5 h-5 object-contain" />
+          <span class="text-[11px] font-sans text-cream/80 font-medium">Dried Tea Leaves Pile</span>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0 bg-panel border border-cream/15 rounded-xl px-3 py-1.5">
+          <img src="product-hover-element-img/regenerate_the_fresh_green_tea_leaves_sprig_from_the_reference_image_data_image-removebg-preview.png" alt="" class="w-5 h-5 object-contain" />
+          <span class="text-[11px] font-sans text-cream/80 font-medium">Fresh Green Sprig</span>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0 bg-panel border border-cream/15 rounded-xl px-3 py-1.5">
+          <img src="product-hover-element-img/modify_reference_image_data_image_image_1_so_that_the_tea_branch_stem_dal-removebg-preview.png" alt="" class="w-5 h-5 object-contain" />
+          <span class="text-[11px] font-sans text-cream/80 font-medium">Tea Branch Stem</span>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0 bg-panel border border-cream/15 rounded-xl px-3 py-1.5">
+          <img src="product-hover-element-img/isolate_and_generate_a_single_separate_asset_a_scenic_lush_green_rolling_tea.png" alt="" class="w-5 h-5 object-contain rounded-full" />
+          <span class="text-[11px] font-sans text-cream/80 font-medium">Rolling Estate Disc</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ MAIN PRODUCT GRID TEST STAGE ============ -->
+  <main class="relative w-full py-8 sm:py-12 px-4 sm:px-6 md:px-10">
+    <div class="mx-auto max-w-[1700px]">
+
+      <!-- Active Status Row -->
+      <div class="flex items-center justify-between pb-6 text-xs font-sans uppercase tracking-widest text-cream/60">
+        <div>Product Showcase: <span class="font-bold text-cream">Nidhi Gold (img/3-1.png)</span> across 8 aesthetic card variations</div>
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Hover or tap card to trigger 3D levitation & botanical pop</span>
+        </div>
+      </div>
+
+      <!-- The Dynamic Grid Container -->
+      <div id="testGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 lg:gap-8 transition-all duration-500">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============ INTERACTIVE DESIGN COMPARISON MATRIX ============ -->
+  <section class="relative w-full py-16 px-4 sm:px-6 md:px-10 border-t border-cream/10 bg-smoke/40">
+    <div class="mx-auto max-w-[1700px]">
+      
+      <!-- Section Title -->
+      <div class="text-center max-w-3xl mx-auto pb-12">
+        <div class="flex items-center justify-center gap-2 mb-2">
+          <span class="h-2 w-2 rounded-full bg-gold"></span>
+          <span class="font-sans text-xs uppercase tracking-[0.25em] text-gold font-semibold">Asset Integration Report</span>
+        </div>
+        <h2 class="display-tight text-3xl sm:text-4xl md:text-5xl text-cream">
+          Configured <span class="text-outline">Elements</span>
+        </h2>
+        <p class="font-sans text-xs sm:text-sm text-cream/70 mt-3">
+          Verification of all five assets extracted from <code class="text-gold font-mono">C:\Users\USER\Downloads\product-hover-element-img</code> in harmony with <code class="text-gold font-mono">img/3-1.png</code>.
+        </p>
+      </div>
+
+      <!-- 5 Asset Integration Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        
+        <!-- Asset 1: Kulhad Cup -->
+        <div class="glass-panel p-5 rounded-2xl flex flex-col items-center text-center justify-between">
+          <div class="h-32 w-full flex items-center justify-center">
+            <img src="product-hover-element-img/isolate_and_generate_a_single_separate_asset_a_traditional_terracotta_clay_cup-removebg-preview.png" alt="Clay Cup" class="max-h-28 w-auto object-contain drop-shadow-xl animate-float-gentle" />
+          </div>
+          <div class="w-full mt-4 pt-3 border-t border-cream/10">
+            <h4 class="font-display uppercase text-sm text-cream font-bold">Terracotta Kulhad Cup</h4>
+            <p class="font-sans text-[11px] text-cream/60 mt-1">Bottom-right hover burst with steam & cardamom garnish</p>
+          </div>
+        </div>
+
+        <!-- Asset 2: Tea Leaves Pile -->
+        <div class="glass-panel p-5 rounded-2xl flex flex-col items-center text-center justify-between">
+          <div class="h-32 w-full flex items-center justify-center">
+            <img src="product-hover-element-img/extract_and_regenerate_the_dried_black_tea_leaves_pile_from_the_top_left-removebg-preview.png" alt="Dried Leaves" class="max-h-28 w-auto object-contain drop-shadow-xl" />
+          </div>
+          <div class="w-full mt-4 pt-3 border-t border-cream/10">
+            <h4 class="font-display uppercase text-sm text-cream font-bold">Dried CTC Leaf Pile</h4>
+            <p class="font-sans text-[11px] text-cream/60 mt-1">Bottom-left hover burst showcasing pure tea leaf texture</p>
+          </div>
+        </div>
+
+        <!-- Asset 3: Fresh Green Sprig -->
+        <div class="glass-panel p-5 rounded-2xl flex flex-col items-center text-center justify-between">
+          <div class="h-32 w-full flex items-center justify-center">
+            <img src="product-hover-element-img/regenerate_the_fresh_green_tea_leaves_sprig_from_the_reference_image_data_image-removebg-preview.png" alt="Green Sprig" class="max-h-28 w-auto object-contain drop-shadow-xl" />
+          </div>
+          <div class="w-full mt-4 pt-3 border-t border-cream/10">
+            <h4 class="font-display uppercase text-sm text-cream font-bold">Fresh Green Sprig</h4>
+            <p class="font-sans text-[11px] text-cream/60 mt-1">Top-right botanical accent with morning dew drops</p>
+          </div>
+        </div>
+
+        <!-- Asset 4: Tea Branch Stem -->
+        <div class="glass-panel p-5 rounded-2xl flex flex-col items-center text-center justify-between">
+          <div class="h-32 w-full flex items-center justify-center">
+            <img src="product-hover-element-img/modify_reference_image_data_image_image_1_so_that_the_tea_branch_stem_dal-removebg-preview.png" alt="Tea Branch" class="max-h-28 w-auto object-contain drop-shadow-xl" />
+          </div>
+          <div class="w-full mt-4 pt-3 border-t border-cream/10">
+            <h4 class="font-display uppercase text-sm text-cream font-bold">Tea Branch Stem</h4>
+            <p class="font-sans text-[11px] text-cream/60 mt-1">Top-left lateral foliage framing the main tea pack</p>
+          </div>
+        </div>
+
+        <!-- Asset 5: Rolling Estate Disc -->
+        <div class="glass-panel p-5 rounded-2xl flex flex-col items-center text-center justify-between">
+          <div class="h-32 w-full flex items-center justify-center">
+            <img src="product-hover-element-img/isolate_and_generate_a_single_separate_asset_a_scenic_lush_green_rolling_tea.png" alt="Estate Disc" class="max-h-28 w-auto object-contain rounded-full drop-shadow-xl" />
+          </div>
+          <div class="w-full mt-4 pt-3 border-t border-cream/10">
+            <h4 class="font-display uppercase text-sm text-cream font-bold">Rolling Estate Disc</h4>
+            <p class="font-sans text-[11px] text-cream/60 mt-1">Center-stage ambient portal behind active tea pouch</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ TOAST NOTIFICATION POPUP ============ -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-2xl border border-gold/40 bg-panel px-5 py-4 text-cream shadow-2xl backdrop-blur-2xl transition-all duration-400 translate-y-24 opacity-0 pointer-events-none">
+    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+      </svg>
+    </div>
+    <div>
+      <div id="toastTitle" class="font-display font-bold text-sm uppercase text-cream">Item Added to Bag</div>
+      <div id="toastSub" class="font-sans text-xs text-cream/70">Nidhi Gold 250g Master Reserve Pouch</div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="border-t border-cream/10 py-10 px-4 sm:px-6 text-center text-xs font-sans text-cream/50 uppercase tracking-widest">
+    <div>Nidhi Tea — Artisan Tea Experience Test Laboratory</div>
+    <div class="mt-2 text-[11px] text-cream/40">Powered by img/3-1.png & product-hover-element-img</div>
+  </footer>
+
+  <!-- ============ JAVASCRIPT ENGINE ============ -->
+  <script>
+    (function () {
+      // 5 Assets Paths from product-hover-element-img
+      const ASSETS = {
+        cup: "product-hover-element-img/isolate_and_generate_a_single_separate_asset_a_traditional_terracotta_clay_cup-removebg-preview.png",
+        leaves: "product-hover-element-img/extract_and_regenerate_the_dried_black_tea_leaves_pile_from_the_top_left-removebg-preview.png",
+        sprig: "product-hover-element-img/regenerate_the_fresh_green_tea_leaves_sprig_from_the_reference_image_data_image-removebg-preview.png",
+        branch: "product-hover-element-img/modify_reference_image_data_image_image_1_so_that_the_tea_branch_stem_dal-removebg-preview.png",
+        estate: "product-hover-element-img/isolate_and_generate_a_single_separate_asset_a_scenic_lush_green_rolling_tea.png",
+      };
+
+      // 8 Variations of Product Cards all featuring img/3-1.png with varied hover arrangements
+      const CARD_VARIATIONS = [
+        {
+          id: "card-1-grand-burst",
+          badge: "Full Botanical Pop",
+          title: ["Nidhi", "Gold", "Royal"],
+          sub: "Assam CTC & Golden Mountain Leaves",
+          front: "img/3-1.png",
+          bg: "linear-gradient(180deg, #3A1809 0%, #150702 100%)",
+          price: "₹250",
+          weight: "250g Pouch",
+          hasBackdropDisc: true,
+          elBottomRight: ASSETS.cup,
+          elBottomLeft: ASSETS.leaves,
+          elTopRight: ASSETS.sprig,
+          elTopLeft: ASSETS.branch,
+          desc: "Full 4-quadrant burst: Terracotta cup, CTC leaf pile, green sprig & tea branch stem."
+        },
+        {
+          id: "card-2-classic-kulhad",
+          badge: "Kulhad & Leaf Focus",
+          title: ["Nidhi", "Gold", "Classic"],
+          sub: "Slow-Steeped Desi Chai Blend",
+          front: "img/3-1.png",
+          bg: "linear-gradient(180deg, #2B1607 0%, #120902 100%)",
+          price: "₹250",
+          weight: "250g Pouch",
+          hasBackdropDisc: false,
+          elBottomRight: ASSETS.cup,
+          elBottomLeft: ASSETS.leaves,
+          elTopRight: null,
+          elTopLeft: null,
+          desc: "Dual lower pop: Steaming hot terracotta kulhad on right + dry tea leaves pile on left."
+        },
+        {
+          id: "card-3-fresh-harvest",
+          badge: "Fresh Leaf Harvest",
+          title: ["Nidhi", "Gold", "Harvest"],
+          sub: "Direct From Dooars & Assam Gardens",
+          front: "img/3-1.png",
+          bg: "linear-gradient(180deg, #1A2814 0%, #091207 100%)",
+          price: "₹250",
+          weight: "250g Pouch",
+          hasBackdropDisc: false,
+          elBottomRight: ASSETS.leaves,
+          elBottomLeft: null,
+          elTopRight: ASSETS.sprig,
+          elTopLeft: ASSETS.branch,
+          desc: "Foliage pop: Fresh green dew-drop sprig at top right + lateral tea branch at top left."
+        },
+        {
+          id: "card-4-estate-portal",
+          badge: "Scenic Estate Portal",
+          title: ["Nidhi", "Gold", "Reserve"],
+          sub: "Lush Mountain Terroir Blend",
+          front: "img/3-1.png",
+          bg: "linear-gradient(180deg, #221508 0%, #0D0703 100%)",
+          price: "₹275",
+          weight: "250g Pouch",
+          hasBackdropDisc: true,
+          elBottomRight: ASSETS.cup,
+          elBottomLeft: null,
+          elTopRight: null,
+          elTopLeft: ASSETS.branch,
+          desc: "Portal reveal: Rolling tea garden circle blooms behind packet + steaming clay cup."
+        },
+        {
+          id: "card-5-amber-velvet",
+          badge: "Estate Malty Gold",
+          title: ["Nidhi", "Gold", "Malty"],
+          sub: "Rich Amber Liquor • Strong Kadak",
+          front: "img/3-1.png",
+          bg: "linear-gradient(180deg, #421C0A 0%, #1A0902 100%)",
+          price: "₹250",
+          weight: "250g Pouch",
+          hasBackdropDisc: false,
+          elBottomRight: ASSETS.cup,
+          elBottomLeft: ASSETS.leaves,
+          elTopRight: ASSETS.sprig,
+          elTopLeft: null,
+          desc: "3-element harmony: Kulhad cup, leaf pile, and upper green tea leaf sprig."
+        },
+        {
+          id: "card-6-deep-obsidian",
+          badge: "Dark Obsidian Luxe",
+          title: ["Nidhi", "Gold", "Select"],
+          sub: "First Selection Golden Pekoe",
+          front: "img/3-1.png",
+          bg: "linear-gradient(180deg, #1E1208 0%, #0E0703 100%)",
+          price: "₹260",
+          weight: "250g Pouch",
+          hasBackdropDisc: true,
+          elBottomRight: null,
+          elBottomLeft: ASSETS.leaves,
+          elTopRight: ASSETS.sprig,
+          elTopLeft: null,
+          desc: "Diagonal leaf burst: Dry black tea leaves bottom-left with fresh green sprig top-right."
+        },
+        {
+          id: "card-7-kulhad-spotlight",
+          badge: "Morning Kulhad Chai",
+          title: ["Nidhi", "Gold", "Morning"],
+          sub: "Everyday Energy • Desi Kadak Chai",
+          front: "img/3-1.png",
+          bg: "linear-gradient(180deg, #321607 0%, #160802 100%)",
+          price: "₹250",
+          weight: "250g Pouch",
+          hasBackdropDisc: false,
+          elBottomRight: ASSETS.cup,
+          elBottomLeft: null,
+          elTopRight: null,
+          elTopLeft: ASSETS.branch,
+          desc: "Corner diagonal: Prominent terracotta kulhad chai with upper branch foliage."
+        },
+        {
+          id: "card-8-master-harvest",
+          badge: "Master Selection",
+          title: ["Nidhi", "Gold", "Special"],
+          sub: "Handpicked Valley Leaves",
+          front: "img/3-1.png",
+          bg: "linear-gradient(180deg, #381A08 0%, #140802 100%)",
+          price: "₹250",
+          weight: "250g Pouch",
+          hasBackdropDisc: true,
+          elBottomRight: ASSETS.cup,
+          elBottomLeft: ASSETS.leaves,
+          elTopRight: ASSETS.sprig,
+          elTopLeft: ASSETS.branch,
+          desc: "Grand ensemble: All 5 elements active simultaneously in motion."
+        },
+      ];
+
+      const grid = document.getElementById("testGrid");
+      const toast = document.getElementById("toast");
+      const toastTitle = document.getElementById("toastTitle");
+      const toastSub = document.getElementById("toastSub");
+      const cartCountEl = document.getElementById("cartCount");
+      let totalCartCount = 0;
+      let toastTimer = null;
+      let forceHoverActive = false;
+
+      // Render All Cards with img/3-1.png
+      function renderCards() {
+        grid.innerHTML = CARD_VARIATIONS.map((c) => `
+          <article data-listing-card="true" class="prod group relative flex min-h-[470px] sm:min-h-[490px] md:min-h-[520px] w-full flex-col items-center justify-between overflow-hidden rounded-2xl hover:shadow-2xl hover:shadow-black/60 p-4 sm:p-5 md:p-6 gap-2 transition-all duration-500 ease-out backdrop-blur-sm border border-cream/15" style="background:${c.bg}">
+            
+            <!-- Clickable PDP Link Overlay -->
+            <a class="absolute inset-0 z-1" aria-label="${c.title.join(" ")}" href="product.html"></a>
+            
+            <!-- Interior Dashed Border -->
+            <div class="absolute z-0 pointer-events-none rounded-xl border border-cream/15 border-dashed inset-2 sm:inset-2.5"></div>
+            
+            <!-- Top Status Badge Pill & Weight -->
+            <div class="relative z-10 w-full flex items-center justify-between pointer-events-none">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/15 px-2.5 py-0.5 text-[10px] font-sans font-semibold uppercase tracking-wider text-gold backdrop-blur-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse"></span>
+                <span>${c.badge}</span>
+              </span>
+              <span class="text-[11px] font-sans font-bold text-cream/75 bg-background/40 px-2 py-0.5 rounded-md border border-cream/10">${c.weight}</span>
+            </div>
+
+            <!-- Header Title -->
+            <div class="relative flex flex-col items-center text-center w-full pointer-events-none z-10 pt-2">
+              <h3 data-title="true" class="uppercase flex flex-col font-display text-[1.45rem] sm:text-[1.65rem] md:text-[1.85rem] lg:text-[22px] xl:text-[26px] leading-[0.9] text-cream transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[0.88] origin-top will-change-transform">
+                ${c.title.map((l) => `<span>${l}</span>`).join("")}
+              </h3>
+              <p class="font-sans text-[11px] text-cream/65 tracking-wider uppercase mt-1 transition-opacity duration-300 group-hover:opacity-0">
+                ${c.sub}
+              </p>
+            </div>
+
+            <!-- Central Stage Container (Pack + Hover Burst Elements) -->
+            <div class="relative pointer-events-none w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] h-52 sm:h-56 md:h-64 flex items-center justify-center my-auto">
+              
+              <!-- Optional Ambient Rolling Estate Disc Backdrop -->
+              ${c.hasBackdropDisc ? `
+                <div class="el-backdrop absolute w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-full overflow-hidden opacity-0 scale-[0.6] pointer-events-none z-0 transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] border border-cream/20 shadow-2xl">
+                  <img src="${ASSETS.estate}" alt="" class="w-full h-full object-cover" />
+                </div>
+              ` : ''}
+
+              <!-- Top-Left Hover Companion (e.g. Tea Branch) -->
+              ${c.elTopLeft ? `
+                <img src="${c.elTopLeft}" alt="" class="el-top-left absolute top-[12%] left-[-8px] sm:left-[-12px] w-16 h-16 sm:w-20 sm:h-20 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] drop-shadow-xl" />
+              ` : ''}
+
+              <!-- Top-Right Hover Companion (e.g. Fresh Sprig) -->
+              ${c.elTopRight ? `
+                <img src="${c.elTopRight}" alt="" class="el-top-right absolute top-[14%] right-[-6px] sm:right-[-10px] w-14 h-14 sm:w-18 sm:h-18 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] drop-shadow-xl" />
+              ` : ''}
+
+              <!-- Bottom-Left Hover Companion (e.g. Leaf Pile) -->
+              ${c.elBottomLeft ? `
+                <img src="${c.elBottomLeft}" alt="" class="el-bottom-left absolute bottom-[16%] left-[-4px] sm:left-[-8px] w-16 h-16 sm:w-20 sm:h-20 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] drop-shadow-2xl" />
+              ` : ''}
+
+              <!-- Bottom-Right Hover Companion (e.g. Terracotta Kulhad Cup) -->
+              ${c.elBottomRight ? `
+                <img src="${c.elBottomRight}" alt="" class="el-bottom-right absolute bottom-[14%] right-[-8px] sm:right-[-14px] w-18 h-18 sm:w-22 sm:h-22 md:w-24 md:h-24 object-contain opacity-0 scale-[0.2] pointer-events-none z-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] drop-shadow-2xl" />
+              ` : ''}
+
+              <!-- Main Product Pack: img/3-1.png -->
+              <div data-bottle="true" class="bottle relative w-full h-full z-10 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-center" style="transform: translate(0px, 0px) rotate(1deg) scale(1.12); transform-origin: 50% 50%;">
+                <div class="relative w-full h-full flex items-center justify-center">
+                  <img src="${c.front}" alt="${c.title.join(" ")}" class="relative z-10 w-full h-full object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,0.65)]" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Action Buttons Container (Slides up on hover) -->
+            <div data-buttons-container="true" class="actions absolute bottom-3 sm:bottom-4 md:bottom-5 left-3 right-3 sm:left-4 sm:right-4 md:left-5 md:right-5 z-20 flex flex-col gap-2 opacity-0 translate-y-6 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
+              
+              <!-- Primary Action Button: ADD TO CART with multi-state roll-up -->
+              <button type="button" data-add-to-cart="true" data-product-title="${c.title.join(" ")}" data-product-price="${c.price}"
+                class="group/button relative flex items-center justify-between w-full min-h-[44px] sm:min-h-[48px] px-4 py-3 font-display font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl cursor-pointer text-cream overflow-hidden transition-transform duration-200 active:scale-[0.98] shadow-md shadow-pink/30">
+                <div data-button-bg="true" class="absolute inset-0 rounded-xl overflow-hidden border-2 border-pink bg-pink transition-colors duration-300 group-hover/button:bg-red group-hover/button:border-red pointer-events-none"></div>
+                <span class="relative z-20 flex items-center justify-between w-full pointer-events-none">
+                  
+                  <!-- Label Roll-up Container -->
+                  <span class="relative inline-flex items-center justify-start leading-none h-[1.3em] overflow-hidden">
+                    <span class="invisible whitespace-nowrap" aria-hidden="true">Add to bag</span>
+                    <span class="btn-label-default absolute inset-0 flex items-center justify-start whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-cream font-bold">Add to bag</span>
+                    <span class="btn-label-hover absolute inset-0 flex items-center justify-start whitespace-nowrap translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-cream font-bold">Add to bag</span>
+                    <span class="btn-label-adding absolute inset-0 flex items-center justify-start whitespace-nowrap translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] text-cream font-bold">Brewing...</span>
+                    <span class="btn-label-added absolute inset-0 flex items-center justify-start whitespace-nowrap translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] text-cream font-bold">In Your Bag</span>
+                  </span>
+
+                  <!-- Price & Status Container -->
+                  <span class="relative shrink-0 inline-flex items-center justify-end leading-none h-[1.3em] overflow-hidden">
+                    <span class="invisible whitespace-nowrap" aria-hidden="true">${c.price}</span>
+                    <span class="btn-price-default absolute inset-0 flex items-center justify-end whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-cream font-bold">${c.price}</span>
+                    <span class="btn-price-hover absolute inset-0 flex items-center justify-end whitespace-nowrap translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-cream font-bold">${c.price}</span>
+                    
+                    <!-- Bouncing Dots Spinner for Adding State -->
+                    <span class="btn-dots absolute inset-0 flex items-center justify-end translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] text-cream">
+                      <span class="inline-flex items-center gap-1">
+                        <span class="h-1.5 w-1.5 rounded-full bg-cream animate-btn-dot" style="animation-delay:0ms"></span>
+                        <span class="h-1.5 w-1.5 rounded-full bg-cream animate-btn-dot" style="animation-delay:180ms"></span>
+                        <span class="h-1.5 w-1.5 rounded-full bg-cream animate-btn-dot" style="animation-delay:360ms"></span>
+                      </span>
+                    </span>
+
+                    <!-- Checkmark Icon for Added State -->
+                    <span class="btn-check absolute inset-0 flex items-center justify-end translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] text-cream">
+                      <svg class="w-4 h-4 text-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </span>
+                  </span>
+                </span>
+              </button>
+
+              <!-- Secondary Button: VIEW DETAILS -->
+              <a class="w-full block" href="product.html">
+                <div class="group/button relative cursor-pointer w-full flex items-center justify-between rounded-xl border border-cream/30 bg-background/60 backdrop-blur-md px-4 py-2.5 min-h-[40px] font-display font-semibold text-xs uppercase tracking-wider text-cream overflow-hidden transition-all duration-300 active:scale-[0.98] hover:border-cream hover:bg-cream/15">
+                  <span class="relative z-20 flex items-center justify-between w-full pointer-events-none">
+                    <span class="flex items-center gap-1.5">
+                      <span>Reserve Details</span>
+                    </span>
+                    <span>↗</span>
+                  </span>
+                </div>
+              </a>
+            </div>
+
+          </article>
+        `).join("");
+
+        setupCardListeners();
+        if (forceHoverActive) applyForceHover(true);
+      }
+
+      // Card Mouse and Touch Listeners
+      function setupCardListeners() {
+        const cards = [...grid.querySelectorAll(".prod")];
+
+        cards.forEach((c) => {
+          const title = c.querySelector("[data-title]");
+          const bottle = c.querySelector(".bottle");
+          const actions = c.querySelector(".actions");
+          const backdrop = c.querySelector(".el-backdrop");
+          const topLeft = c.querySelector(".el-top-left");
+          const topRight = c.querySelector(".el-top-right");
+          const bottomLeft = c.querySelector(".el-bottom-left");
+          const bottomRight = c.querySelector(".el-bottom-right");
+
+          function showDetails() {
+            if (title) title.style.transform = "scale(0.88)";
+            if (bottle) bottle.style.transform = "translate(0px, -28px) rotate(0deg) scale(1.0)";
+            
+            // Pop out backdrop estate circle
+            if (backdrop) {
+              backdrop.style.opacity = "0.75";
+              backdrop.style.transform = "scale(1.08) rotate(2deg)";
+            }
+
+            // Pop out botanical elements
+            if (topLeft) {
+              topLeft.style.opacity = "1";
+              topLeft.style.transform = "translate(-14px, -18px) rotate(-18deg) scale(1.1)";
+            }
+            if (topRight) {
+              topRight.style.opacity = "1";
+              topRight.style.transform = "translate(14px, -18px) rotate(18deg) scale(1.1)";
+            }
+            if (bottomLeft) {
+              bottomLeft.style.opacity = "1";
+              bottomLeft.style.transform = "translate(-16px, 12px) rotate(-12deg) scale(1.15)";
+            }
+            if (bottomRight) {
+              bottomRight.style.opacity = "1";
+              bottomRight.style.transform = "translate(16px, 10px) rotate(14deg) scale(1.18)";
+            }
+
+            if (actions) {
+              actions.style.opacity = "1";
+              actions.style.transform = "translateY(0)";
+              actions.style.pointerEvents = "auto";
+            }
+          }
+
+          function hideDetails() {
+            if (forceHoverActive) return;
+            if (title) title.style.transform = "scale(1)";
+            if (bottle) bottle.style.transform = "translate(0px, 0px) rotate(1deg) scale(1.12)";
+            
+            if (backdrop) {
+              backdrop.style.opacity = "0";
+              backdrop.style.transform = "scale(0.6) rotate(0deg)";
+            }
+            if (topLeft) {
+              topLeft.style.opacity = "0";
+              topLeft.style.transform = "translate(0, 0) scale(0.2)";
+            }
+            if (topRight) {
+              topRight.style.opacity = "0";
+              topRight.style.transform = "translate(0, 0) scale(0.2)";
+            }
+            if (bottomLeft) {
+              bottomLeft.style.opacity = "0";
+              bottomLeft.style.transform = "translate(0, 0) scale(0.2)";
+            }
+            if (bottomRight) {
+              bottomRight.style.opacity = "0";
+              bottomRight.style.transform = "translate(0, 0) scale(0.2)";
+            }
+
+            if (actions) {
+              actions.style.opacity = "0";
+              actions.style.transform = "translateY(24px)";
+              actions.style.pointerEvents = "none";
+            }
+          }
+
+          c.addEventListener("mouseenter", () => {
+            if (window.innerWidth >= 640) showDetails();
+          });
+
+          c.addEventListener("mouseleave", () => {
+            if (window.innerWidth >= 640) hideDetails();
+          });
+
+          // Touch tap support for mobile devices
+          c.addEventListener("click", (e) => {
+            if (e.target.closest("button") || e.target.closest("a.block")) return;
+            const isVisible = actions && actions.style.opacity === "1";
+            if (isVisible) {
+              hideDetails();
+            } else {
+              cards.forEach(other => {
+                if (other !== c) {
+                  const otherAct = other.querySelector(".actions");
+                  const otherBot = other.querySelector(".bottle");
+                  const otherTitle = other.querySelector("[data-title]");
+                  const otherTL = other.querySelector(".el-top-left");
+                  const otherTR = other.querySelector(".el-top-right");
+                  const otherBL = other.querySelector(".el-bottom-left");
+                  const otherBR = other.querySelector(".el-bottom-right");
+                  const otherDisc = other.querySelector(".el-backdrop");
+
+                  if (otherAct) { otherAct.style.opacity = "0"; otherAct.style.transform = "translateY(24px)"; otherAct.style.pointerEvents = "none"; }
+                  if (otherTitle) otherTitle.style.transform = "scale(1)";
+                  if (otherBot) otherBot.style.transform = "translate(0px, 0px) rotate(1deg) scale(1.12)";
+                  if (otherDisc) { otherDisc.style.opacity = "0"; otherDisc.style.transform = "scale(0.6)"; }
+                  if (otherTL) { otherTL.style.opacity = "0"; otherTL.style.transform = "translate(0, 0) scale(0.2)"; }
+                  if (otherTR) { otherTR.style.opacity = "0"; otherTR.style.transform = "translate(0, 0) scale(0.2)"; }
+                  if (otherBL) { otherBL.style.opacity = "0"; otherBL.style.transform = "translate(0, 0) scale(0.2)"; }
+                  if (otherBR) { otherBR.style.opacity = "0"; otherBR.style.transform = "translate(0, 0) scale(0.2)"; }
+                }
+              });
+              showDetails();
+            }
+          });
+        });
+      }
+
+      // Add to Cart Multi-Stage Animation Handler
+      grid.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-add-to-cart]");
+        if (!btn || btn.classList.contains("btn-adding") || btn.classList.contains("btn-added")) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const defaultLabel = btn.querySelector(".btn-label-default");
+        const hoverLabel = btn.querySelector(".btn-label-hover");
+        const addingLabel = btn.querySelector(".btn-label-adding");
+        const addedLabel = btn.querySelector(".btn-label-added");
+        const defaultPrice = btn.querySelector(".btn-price-default");
+        const hoverPrice = btn.querySelector(".btn-price-hover");
+        const dots = btn.querySelector(".btn-dots");
+        const check = btn.querySelector(".btn-check");
+        const buttonBg = btn.querySelector("[data-button-bg]");
+
+        // 1. Enter "Adding" state
+        btn.classList.add("btn-adding");
+        if (defaultLabel) defaultLabel.style.transform = "translateY(-100%)";
+        if (hoverLabel) hoverLabel.style.transform = "translateY(-100%)";
+        if (addingLabel) { addingLabel.style.transform = "translateY(0)"; addingLabel.style.opacity = "1"; }
+        if (defaultPrice) defaultPrice.style.transform = "translateY(-100%)";
+        if (hoverPrice) hoverPrice.style.transform = "translateY(-100%)";
+        if (dots) { dots.style.transform = "translateY(0)"; dots.style.opacity = "1"; }
+
+        // 2. Transition to "Added" state after 750ms
+        setTimeout(() => {
+          btn.classList.remove("btn-adding");
+          btn.classList.add("btn-added");
+          if (addingLabel) { addingLabel.style.transform = "translateY(-100%)"; addingLabel.style.opacity = "0"; }
+          if (addedLabel) { addedLabel.style.transform = "translateY(0)"; addedLabel.style.opacity = "1"; }
+          if (dots) { dots.style.transform = "translateY(-100%)"; dots.style.opacity = "0"; }
+          if (check) { check.style.transform = "translateY(0)"; check.style.opacity = "1"; }
+          if (buttonBg) {
+            buttonBg.style.backgroundColor = "#10B981"; // Emerald green success
+            buttonBg.style.borderColor = "#10B981";
+          }
+
+          // Increment Cart Count
+          totalCartCount++;
+          cartCountEl.textContent = totalCartCount;
+          cartCountEl.classList.add("animate-ping");
+          setTimeout(() => cartCountEl.classList.remove("animate-ping"), 600);
+
+          // Trigger Toast Notification
+          showToast(btn.dataset.productTitle || "Nidhi Gold", btn.dataset.productPrice || "₹250");
+
+          // 3. Reset back to Idle state after 1500ms
+          setTimeout(() => {
+            btn.classList.remove("btn-added");
+            if (addedLabel) { addedLabel.style.transform = "translateY(100%)"; addedLabel.style.opacity = "0"; }
+            if (defaultLabel) { defaultLabel.style.transform = "translateY(0)"; defaultLabel.style.opacity = "1"; }
+            if (hoverLabel) { hoverLabel.style.transform = "translateY(100%)"; hoverLabel.style.opacity = "0"; }
+            if (check) { check.style.transform = "translateY(100%)"; check.style.opacity = "0"; }
+            if (defaultPrice) { defaultPrice.style.transform = "translateY(0)"; defaultPrice.style.opacity = "1"; }
+            if (hoverPrice) { hoverPrice.style.transform = "translateY(100%)"; hoverPrice.style.opacity = "0"; }
+            if (buttonBg) {
+              buttonBg.style.backgroundColor = "";
+              buttonBg.style.borderColor = "";
+            }
+          }, 1500);
+        }, 750);
+      });
+
+      // Toast Notification Engine
+      function showToast(title, price) {
+        clearTimeout(toastTimer);
+        toastTitle.textContent = `${title} added (${price})`;
+        toastSub.textContent = "Nidhi Gold 250g Master Reserve selection is secured";
+        toast.style.transform = "translateY(0)";
+        toast.style.opacity = "1";
+        toast.style.pointerEvents = "auto";
+
+        toastTimer = setTimeout(() => {
+          toast.style.transform = "translateY(6rem)";
+          toast.style.opacity = "0";
+          toast.style.pointerEvents = "none";
+        }, 3200);
+      }
+
+      // Force Hover Mode
+      function applyForceHover(active) {
+        forceHoverActive = active;
+        const cards = [...grid.querySelectorAll(".prod")];
+        cards.forEach(c => {
+          const title = c.querySelector("[data-title]");
+          const bottle = c.querySelector(".bottle");
+          const actions = c.querySelector(".actions");
+          const backdrop = c.querySelector(".el-backdrop");
+          const topLeft = c.querySelector(".el-top-left");
+          const topRight = c.querySelector(".el-top-right");
+          const bottomLeft = c.querySelector(".el-bottom-left");
+          const bottomRight = c.querySelector(".el-bottom-right");
+
+          if (active) {
+            if (title) title.style.transform = "scale(0.88)";
+            if (bottle) bottle.style.transform = "translate(0px, -28px) rotate(0deg) scale(1.0)";
+            if (backdrop) { backdrop.style.opacity = "0.75"; backdrop.style.transform = "scale(1.08) rotate(2deg)"; }
+            if (topLeft) { topLeft.style.opacity = "1"; topLeft.style.transform = "translate(-14px, -18px) rotate(-18deg) scale(1.1)"; }
+            if (topRight) { topRight.style.opacity = "1"; topRight.style.transform = "translate(14px, -18px) rotate(18deg) scale(1.1)"; }
+            if (bottomLeft) { bottomLeft.style.opacity = "1"; bottomLeft.style.transform = "translate(-16px, 12px) rotate(-12deg) scale(1.15)"; }
+            if (bottomRight) { bottomRight.style.opacity = "1"; bottomRight.style.transform = "translate(16px, 10px) rotate(14deg) scale(1.18)"; }
+            if (actions) { actions.style.opacity = "1"; actions.style.transform = "translateY(0)"; actions.style.pointerEvents = "auto"; }
+          } else {
+            if (title) title.style.transform = "scale(1)";
+            if (bottle) bottle.style.transform = "translate(0px, 0px) rotate(1deg) scale(1.12)";
+            if (backdrop) { backdrop.style.opacity = "0"; backdrop.style.transform = "scale(0.6) rotate(0deg)"; }
+            if (topLeft) { topLeft.style.opacity = "0"; topLeft.style.transform = "translate(0, 0) scale(0.2)"; }
+            if (topRight) { topRight.style.opacity = "0"; topRight.style.transform = "translate(0, 0) scale(0.2)"; }
+            if (bottomLeft) { bottomLeft.style.opacity = "0"; bottomLeft.style.transform = "translate(0, 0) scale(0.2)"; }
+            if (bottomRight) { bottomRight.style.opacity = "0"; bottomRight.style.transform = "translate(0, 0) scale(0.2)"; }
+            if (actions) { actions.style.opacity = "0"; actions.style.transform = "translateY(24px)"; actions.style.pointerEvents = "none"; }
+          }
+        });
+      }
+
+      // State Mode Toggles (Default vs Hovered)
+      const btnDefault = document.getElementById("btnStateDefault");
+      const btnHover = document.getElementById("btnStateHover");
+
+      btnDefault.addEventListener("click", () => {
+        btnDefault.classList.add("active", "bg-cream", "text-background", "font-bold");
+        btnDefault.classList.remove("text-cream/70");
+        btnHover.classList.remove("active", "bg-cream", "text-background", "font-bold");
+        btnHover.classList.add("text-cream/70");
+        applyForceHover(false);
+      });
+
+      btnHover.addEventListener("click", () => {
+        btnHover.classList.add("active", "bg-cream", "text-background", "font-bold");
+        btnHover.classList.remove("text-cream/70");
+        btnDefault.classList.remove("active", "bg-cream", "text-background", "font-bold");
+        btnDefault.classList.add("text-cream/70");
+        applyForceHover(true);
+      });
+
+      // Column Layout Switcher
+      const colButtons = document.querySelectorAll("[data-cols]");
+      colButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          colButtons.forEach(b => {
+            b.classList.remove("active", "bg-cream/20", "text-cream", "font-bold");
+            b.classList.add("text-cream/70");
+          });
+          btn.classList.add("active", "bg-cream/20", "text-cream", "font-bold");
+          btn.classList.remove("text-cream/70");
+
+          const cols = btn.dataset.cols;
+          grid.className = "grid gap-6 sm:gap-7 lg:gap-8 transition-all duration-500 ";
+          if (cols === "4") {
+            grid.className += "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
+          } else if (cols === "3") {
+            grid.className += "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-[1350px] mx-auto";
+          } else if (cols === "2") {
+            grid.className += "grid-cols-1 sm:grid-cols-2 max-w-[900px] mx-auto";
+          } else if (cols === "1") {
+            grid.className += "grid-cols-1 max-w-[440px] mx-auto";
+          }
+        });
+      });
+
+      // Initial Render
+      renderCards();
+    })();
+  </script>
+</body>
+
+</html>
