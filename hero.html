@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/webp" href="img/logo.webp" />
+  <title>Nidhi Tea — Hero Slider Experience</title>
+  <meta name="description"
+    content="Experience the Nidhi Tea artisan hero carousel. Sip Wellness, Taste Purity. Handcrafted mountain teas." />
+
+  <!-- Google Fonts: Fraunces (Display) + Inter Tight & Poppins (Sans/UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Poppins:wght@400;500;600;700&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: "#100B06",
+            cream: "#f5e4c7",
+            gold: "#F7C665",
+            flame: "#F15726",
+            cherry: "#C4321C",
+            smoke: "#2A231C",
+            espresso: "#100B06",
+            pink: "#FF3366",
+            "pink-hover": "#E01E5A",
+            red: "#E63946",
+            "red-dark": "#C4321C",
+          },
+          fontFamily: {
+            display: ['"Fraunces"', 'serif'],
+            heading: ['"Fraunces"', 'serif'],
+            sans: ['"Inter Tight"', '"Poppins"', 'system-ui', 'sans-serif'],
+          },
+          borderRadius: {
+            none: '0px',
+            sm: '4px',
+            md: '8px',
+            lg: '10px',
+            xl: '12px',
+            full: '9999px',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- GSAP Animation Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <style>
+    :root {
+      --background: #100B06;
+      --cream: #f5e4c7;
+      --gold: #F7C665;
+      --flame: #F15726;
+      --cherry: #C4321C;
+      --smoke: #2A231C;
+      --espresso: #100B06;
+      --pink: #FF3366;
+      --pink-hover: #E01E5A;
+      --red: #E63946;
+      --red-dark: #C4321C;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--cream);
+      font-family: "Inter Tight", system-ui, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: var(--pink);
+      color: var(--cream);
+    }
+
+    .display-tight {
+      font-family: 'Fraunces', serif;
+      font-optical-sizing: auto;
+      text-transform: uppercase;
+      line-height: .88;
+      letter-spacing: -.005em;
+      font-weight: 700;
+    }
+
+    .text-outline {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--cream);
+    }
+
+    .dotted-rule {
+      background-image: repeating-linear-gradient(to right, rgba(245, 228, 199, .35) 0 4px, transparent 4px 10px);
+    }
+
+    /* Hero full-color solid circle animation (no opacity / no blur) */
+    @keyframes hero-bg-pulse {
+      0%, 100% {
+        transform: scale(0.96);
+      }
+      50% {
+        transform: scale(1.04);
+      }
+    }
+
+    .animate-hero-bg {
+      animation: hero-bg-pulse 6s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Hero Pack Floating idle animation */
+    @keyframes hero-pack-float {
+      0%, 100% {
+        transform: rotate(5deg) translateY(0px);
+      }
+      50% {
+        transform: rotate(6.5deg) translateY(-16px);
+      }
+    }
+
+    .hero-floating-pack {
+      animation: hero-pack-float 5s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Top Right Companion Floating Animation */
+    @keyframes float-companion-top {
+      0%, 100% {
+        transform: translateY(0px) rotate(14deg);
+      }
+      50% {
+        transform: translateY(-24px) rotate(22deg);
+      }
+    }
+
+    /* Bottom Left Companion Floating Animation */
+    @keyframes float-companion-bottom {
+      0%, 100% {
+        transform: translateY(0px) rotate(-14deg);
+      }
+      50% {
+        transform: translateY(-22px) rotate(-8deg);
+      }
+    }
+
+    .animate-float-companion-top {
+      animation: float-companion-top 4.2s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .animate-float-companion-bottom {
+      animation: float-companion-bottom 4.6s ease-in-out infinite;
+      animation-delay: 0.6s;
+      will-change: transform;
+    }
+
+    @keyframes bucks-fade {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .animate-fade-in {
+      animation: bucks-fade .5s ease-out both;
+    }
+
+    #heroTitle .char,
+    #heroTitle .word {
+      display: inline-block;
+      will-change: transform, opacity;
+    }
+
+    /* Slide active pill animation */
+    .slider-dot {
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .slider-dot.active {
+      width: 2.25rem;
+      background-color: var(--pink);
+      border-color: var(--pink);
+      box-shadow: 0 0 16px rgba(255, 51, 102, 0.5);
+    }
+  </style>
+</head>
+
+<body class="relative min-h-screen justify-between">
+
+  <!-- ============ AMBIENT BOTANICAL TEA LEAF PATTERN BACKGROUND ============ -->
+  <div class="pointer-events-none fixed inset-0 z-0 bg-repeat opacity-25 select-none"
+    style="background-image: url('element-img/tea-leaf-pattern.svg'); background-size: 260px 260px;"></div>
+
+  <!-- Ambient Botanical Leaf Watermarks in Background -->
+  <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+    class="pointer-events-none fixed -top-16 -left-20 w-[300px] sm:w-[540px] md:w-[720px] xl:w-[860px] h-auto opacity-10 sm:opacity-15 -rotate-45 select-none z-0" />
+  <img src="element-img/botanical-tea-branch.svg" alt="" aria-hidden="true"
+    class="pointer-events-none fixed -bottom-20 -right-24 w-[320px] sm:w-[580px] md:w-[760px] xl:w-[900px] h-auto opacity-10 sm:opacity-15 rotate-135 select-none z-0" />
+
+  <!-- ============ MINIMAL LUXURY HEADER ============ -->
+  <header class="relative z-30 w-full pt-4 sm:pt-6 px-5 md:px-10">
+    <nav class="mx-auto flex max-w-[1500px] items-center justify-between">
+      <!-- Brand Logo linking to Home -->
+      <a href="index.html" class="group flex items-center gap-3 transition-transform duration-300 hover:scale-[1.02]">
+        <div class="h-12 w-32 sm:h-14 sm:w-40 md:h-16 md:w-48 overflow-hidden">
+          <img src="img/logo.webp" alt="Nidhi Tea Logo"
+            class="h-full w-full object-contain object-left transition-opacity duration-300 group-hover:opacity-90" />
+        </div>
+      </a>
+
+      <!-- Middle Status Pill -->
+      <div
+        class="hidden sm:flex items-center gap-2.5 rounded-full border border-cream/20 bg-background/80 px-4 py-1.5 backdrop-blur-md shadow-md">
+        <span class="h-2 w-2 rounded-full bg-pink animate-pulse"></span>
+        <span class="font-sans text-xs uppercase tracking-[0.2em] text-cream/80 font-medium">Hero Slider Showcase</span>
+      </div>
+
+      <!-- Action Navigation Links -->
+      <div class="flex items-center gap-3">
+        <a href="index.html"
+          class="flex items-center gap-1.5 rounded-xl border border-cream/25 bg-background/60 px-3.5 py-2 sm:px-4 sm:py-2.5 font-display text-xs sm:text-sm uppercase tracking-wider text-cream backdrop-blur-md transition-all duration-300 hover:border-pink hover:bg-pink/15 hover:text-pink active:scale-95 shadow-sm">
+          <span>← Full Store</span>
+        </a>
+        <a href="product.html"
+          class="hidden sm:inline-flex items-center gap-1.5 rounded-xl border-2 border-pink bg-pink px-4 py-2 sm:px-5 sm:py-2.5 font-display text-xs sm:text-sm uppercase tracking-wider text-cream transition-all duration-300 hover:bg-red hover:border-red hover:shadow-lg hover:shadow-pink/30 active:scale-95">
+          <span>All Blends ↗</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ============ HERO SECTION (ONLY THIS SECTION) ============ -->
+  <main id="hero" class="relative z-10 flex flex-1 flex-col justify-center overflow-hidden py-4 sm:py-6 md:py-8">
+    <section id="top" class="relative overflow-hidden w-full">
+
+      <!-- Hero Main Headline -->
+      <div class="relative z-10 mx-auto max-w-[1500px] px-5 md:px-10">
+        <h1 id="heroTitle"
+          class="display-tight mx-auto max-w-5xl text-center text-[9vw] leading-[.90] md:text-[4.6rem] lg:text-[5.4rem] xl:text-[6.2rem]">
+          <span class="text-outline">Sip Wellness.</span>
+          <span class="text-cream">Taste Purity. Love Every Cup.</span>
+        </h1>
+      </div>
+
+      <!-- Blend Number & Name Status Row with Full-Width Dotted Rule -->
+      <div class="relative z-10 mt-6 sm:mt-8 md:mt-10">
+        <div class="dotted-rule absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-60"></div>
+        <div
+          class="relative mx-auto flex max-w-[1500px] items-center justify-between px-5 font-display text-[11px] uppercase tracking-[.2em] text-cream md:px-10 md:text-sm lg:text-base font-semibold">
+          <span id="heroNo" class="bg-background pr-4">Blend N0.01</span>
+          <span id="heroName" class="bg-background pl-4 animate-fade-in">Classic Masala Chai</span>
+        </div>
+      </div>
+
+      <!-- ============ HERO CAROUSEL ROW WITH FULL-WIDTH DOTTED LINE ============ -->
+      <div class="relative z-10 w-full my-3 sm:my-6 md:my-8 lg:my-10">
+        <!-- Edge-to-Edge Full-Width Horizontal Dotted Line Behind Slider & Navigation Buttons -->
+        <div class="dotted-rule pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-70 z-0">
+        </div>
+
+        <div
+          class="relative z-10 mx-auto flex max-w-[1500px] items-center justify-between gap-3 px-3 sm:gap-6 sm:px-6 md:px-10">
+
+          <!-- Previous Button -->
+          <button data-hero="-1" aria-label="Previous blend"
+            class="relative z-40 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-pink bg-pink text-cream shadow-lg shadow-pink/30 transition-all duration-300 hover:scale-110 hover:bg-red hover:border-red sm:h-13 sm:w-13 md:h-16 md:w-16 lg:h-20 lg:w-20 cursor-pointer active:scale-95"
+            style="touch-action: manipulation;">
+            <span class="pointer-events-none text-base leading-none sm:text-lg md:text-xl lg:text-2xl font-bold">←</span>
+          </button>
+
+          <!-- Center Stage Container -->
+          <div
+            class="relative z-10 flex h-[46vh] sm:h-[54vh] md:h-[62vh] lg:h-[68vh] xl:h-[72vh] min-h-[360px] sm:min-h-[420px] max-h-[720px] flex-1 items-center justify-center select-none">
+            
+            <!-- Breathing Full-Cover Image Circle Behind Active Pack (No BG Color) -->
+            <div id="heroTintWrap"
+              class="absolute flex items-center justify-center pointer-events-none transition-transform duration-500 will-change-transform"
+              style="transform: scale(1);">
+              <div id="heroTint"
+                class="h-56 w-56 rounded-full sm:h-72 sm:w-72 md:h-[400px] md:w-[400px] lg:h-[480px] lg:w-[480px] xl:h-[540px] xl:w-[540px] animate-hero-bg shadow-2xl overflow-hidden border border-cream/20"
+                style="background-image: url('Gemini_Generated_Image_5twsob5twsob5tws (2).png'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+            </div>
+
+            <!-- Top-Right & Bottom-Left Floating Companion Accents (Dynamic Shrink & Bloom) -->
+            <div
+              class="pointer-events-none absolute inset-0 z-20 mx-auto flex max-w-[300px] items-center justify-center sm:max-w-[380px] md:max-w-[480px] lg:max-w-[580px] xl:max-w-[680px]">
+
+              <!-- Top Right Companion (Shrink & Bloom on Slide) -->
+              <div id="heroTopWrap"
+                class="pointer-events-none absolute -top-4 right-0 sm:-top-8 sm:-right-4 md:-top-10 md:-right-8 lg:-top-14 lg:-right-12 xl:-top-16 xl:-right-16 flex items-center justify-center transition-transform duration-500 will-change-transform"
+                style="transform: scale(1);">
+                <div class="animate-float-companion-top pointer-events-none relative flex items-center justify-center">
+                  <img id="heroTopImg"
+                    src="element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png"
+                    alt="Tea Spices"
+                    class="pointer-events-none relative z-10 w-16 sm:w-22 md:w-32 lg:w-44 xl:w-52 h-auto object-contain drop-shadow-xl" />
+                </div>
+              </div>
+
+              <!-- Bottom Left Companion (Visible on sm+) -->
+              <div id="heroBottomWrap"
+                class="pointer-events-none absolute -bottom-4 -left-2 sm:-bottom-8 sm:-left-4 md:-bottom-10 md:-left-8 lg:-bottom-14 lg:-left-12 xl:-bottom-16 xl:-left-16 hidden sm:flex items-center justify-center transition-transform duration-500 will-change-transform"
+                style="transform: scale(1);">
+                <div
+                  class="animate-float-companion-bottom pointer-events-none relative flex items-center justify-center">
+                  <img id="heroBottomImg"
+                    src="element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png"
+                    alt="Tea Strainer"
+                    class="pointer-events-none relative z-10 w-16 sm:w-22 md:w-32 lg:w-44 xl:w-52 h-auto object-contain drop-shadow-xl" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Slides Container -->
+            <div id="heroSlides" class="pointer-events-none"></div>
+          </div>
+
+          <!-- Next Button -->
+          <button data-hero="1" aria-label="Next blend"
+            class="relative z-40 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-pink bg-pink text-cream shadow-lg shadow-pink/30 transition-all duration-300 hover:scale-110 hover:bg-red hover:border-red sm:h-13 sm:w-13 md:h-16 md:w-16 lg:h-20 lg:w-20 cursor-pointer active:scale-95"
+            style="touch-action: manipulation;">
+            <span class="pointer-events-none text-base leading-none sm:text-lg md:text-xl lg:text-2xl font-bold">→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Slide Navigation Indicator Dots (Pills) -->
+      <div class="relative z-10 flex items-center justify-center gap-2.5 pb-2">
+        <button type="button" data-dot="0" aria-label="Go to blend 1"
+          class="slider-dot active h-2.5 w-2.5 rounded-full border border-cream/40 bg-cream/30 hover:bg-cream/60 cursor-pointer"></button>
+        <button type="button" data-dot="1" aria-label="Go to blend 2"
+          class="slider-dot h-2.5 w-2.5 rounded-full border border-cream/40 bg-cream/30 hover:bg-cream/60 cursor-pointer"></button>
+        <button type="button" data-dot="2" aria-label="Go to blend 3"
+          class="slider-dot h-2.5 w-2.5 rounded-full border border-cream/40 bg-cream/30 hover:bg-cream/60 cursor-pointer"></button>
+      </div>
+
+      <!-- Action Button Area with Dotted Line -->
+      <div class="relative z-10 flex items-center justify-center py-4 sm:py-6 md:py-8">
+        <div class="dotted-rule pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 opacity-70"></div>
+        <div class="relative z-10 flex items-center gap-4 bg-background px-4">
+          <!-- Primary CTA Button with Double-Rolling Text -->
+          <a href="product.html"
+            class="group/button relative inline-flex items-center justify-center overflow-hidden rounded-xl border-2 border-pink bg-pink px-8 sm:px-10 md:px-12 py-3.5 sm:py-4 font-display text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] font-bold text-cream transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-pink/40 hover:border-red active:scale-95 cursor-pointer">
+            <div data-button-bg="true"
+              class="absolute inset-0 rounded-xl overflow-hidden bg-pink transition-all duration-300 group-hover/button:bg-red pointer-events-none">
+            </div>
+            <span class="relative z-20 block overflow-hidden pointer-events-none h-[1.35em] leading-[1.35em]">
+              <span class="invisible block whitespace-nowrap font-bold" aria-hidden="true">Explore Blends</span>
+              <span
+                class="absolute inset-0 flex items-center justify-center whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:-translate-y-full group-hover/button:opacity-0 text-cream font-bold">Explore
+                Blends</span>
+              <span
+                class="absolute inset-0 flex items-center justify-center whitespace-nowrap translate-y-full opacity-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/button:translate-y-0 group-hover/button:opacity-100 text-cream font-bold">Explore
+                Blends</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ============ MINIMAL FOOTER BAR ============ -->
+  <footer class="relative z-20 w-full border-t border-cream/15 py-4 px-5 md:px-10 bg-background/90 backdrop-blur-md">
+    <div
+      class="mx-auto flex max-w-[1500px] flex-col sm:flex-row items-center justify-between gap-2 text-[11px] sm:text-xs text-cream/60 font-sans">
+      <div class="flex items-center gap-2">
+        <span class="h-1.5 w-1.5 rounded-full bg-gold"></span>
+        <span>Nidhi Tea — 100% Mountain Handcrafted Single-Estate Artisan Harvest</span>
+      </div>
+      <div class="flex items-center gap-4 text-cream/80 font-display uppercase tracking-wider">
+        <span>Use ← → Arrow Keys To Switch Blends</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ JAVASCRIPT ANIMATION & CONTROLLER ============ -->
+  <script>
+    /* ---------- SPLIT TEXT PLUGIN POLYFILL ---------- */
+    const SplitTextPlugin = window.SplitText || class {
+      constructor(target, options = {}) {
+        const elements = typeof target === "string" ? Array.from(document.querySelectorAll(target)) : (Array.isArray(target) ? target : [target]);
+        this.chars = [];
+        this.words = [];
+        this.lines = [];
+
+        elements.forEach((el) => {
+          const wordsClass = options.wordsClass || "word";
+          const charsClass = options.charsClass || "char";
+          const includeChars = options.type && options.type.includes("chars");
+
+          const processNode = (node, extraClasses = []) => {
+            const fragment = document.createDocumentFragment();
+
+            if (node.nodeType === 3) {
+              const text = node.textContent;
+              const wordsArr = text.split(/(\s+)/);
+
+              wordsArr.forEach((part) => {
+                if (/\s+/.test(part)) {
+                  fragment.appendChild(document.createTextNode(part));
+                  return;
+                }
+                if (!part) return;
+
+                const wordSpan = document.createElement("span");
+                wordSpan.className = [wordsClass, ...extraClasses].filter(Boolean).join(" ");
+                wordSpan.style.display = "inline-block";
+
+                if (includeChars) {
+                  part.split("").forEach((char) => {
+                    const charSpan = document.createElement("span");
+                    charSpan.className = [charsClass, ...extraClasses].filter(Boolean).join(" ");
+                    charSpan.style.display = "inline-block";
+                    charSpan.textContent = char;
+                    wordSpan.appendChild(charSpan);
+                    this.chars.push(charSpan);
+                  });
+                } else {
+                  wordSpan.textContent = part;
+                }
+
+                fragment.appendChild(wordSpan);
+                this.words.push(wordSpan);
+              });
+            } else if (node.nodeType === 1) {
+              if (node.tagName === "BR") {
+                fragment.appendChild(node.cloneNode(true));
+              } else {
+                const elementClasses = Array.from(node.classList).filter(c => !["block", "flex", "grid", "hidden", "inline"].includes(c));
+                const combinedClasses = [...extraClasses, ...elementClasses];
+                Array.from(node.childNodes).forEach((child) => {
+                  fragment.appendChild(processNode(child, combinedClasses));
+                });
+                if (node.classList.contains("block")) {
+                  fragment.appendChild(document.createElement("br"));
+                }
+              }
+            }
+
+            return fragment;
+          };
+
+          const childNodes = Array.from(el.childNodes);
+          el.innerHTML = "";
+          childNodes.forEach((child) => {
+            el.appendChild(processNode(child));
+          });
+
+          this.lines.push(el);
+        });
+      }
+
+      static create(target, options) {
+        return new SplitTextPlugin(target, options);
+      }
+    };
+
+    /* ---------- HERO HEADING ENTRANCE ANIMATION ---------- */
+    window.addEventListener("DOMContentLoaded", () => {
+      // Split heading into chars and set bouncy elastic pop on page load
+      const heading = SplitTextPlugin.create("#heroTitle", {
+        type: "lines, words, chars",
+        charsClass: "char",
+        wordsClass: "word",
+      });
+
+      gsap.fromTo(
+        heading.chars,
+        { y: 55, opacity: 0, scale: 0.45 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          stagger: 0.015,
+          ease: "elastic.out(0.75, 0.25)",
+          delay: 0.1,
+        }
+      );
+
+      gsap.fromTo(
+        ["#heroNo", "#heroName"],
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.1, duration: 0.8, ease: "power3.out", delay: 0.4 }
+      );
+
+      gsap.fromTo(
+        "[data-hero]",
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, stagger: 0.12, duration: 0.7, ease: "back.out(1.8)", delay: 0.5 }
+      );
+    });
+
+    /* ---------- HERO CAROUSEL CONTROLLER ---------- */
+    (function () {
+      const SLIDES = [
+        {
+          name: "Classic Masala Chai",
+          no: "Blend N0.01",
+          img: "img/hero.png",
+          bgImg: "Gemini_Generated_Image_5twsob5twsob5tws (2).png",
+          tint: "var(--pink)",
+          topIngredient: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png",
+          bottomIngredient: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png"
+        },
+        {
+          name: "Honey Lemon Green Tea",
+          no: "Blend N0.02",
+          img: "img/product-2.png",
+          bgImg: "Gemini_Generated_Image_5twsob5twsob5tws (2).png",
+          tint: "#2E6941",
+          topIngredient: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png",
+          bottomIngredient: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png"
+        },
+        {
+          name: "Rose Cardamom Black Tea",
+          no: "Blend N0.03",
+          img: "img/product-3.png",
+          bgImg: "Gemini_Generated_Image_5twsob5twsob5tws (2).png",
+          tint: "var(--red)",
+          topIngredient: "element-img/green_cardamom.png",
+          bottomIngredient: "element-img/star_anise.png"
+        },
+      ];
+
+      const wrap = document.getElementById("heroSlides");
+      const tint = document.getElementById("heroTint");
+      const tintWrap = document.getElementById("heroTintWrap");
+      const topWrap = document.getElementById("heroTopWrap");
+      const bottomWrap = document.getElementById("heroBottomWrap");
+      const topImg = document.getElementById("heroTopImg");
+      const bottomImg = document.getElementById("heroBottomImg");
+      const nameEl = document.getElementById("heroName");
+      const noEl = document.getElementById("heroNo");
+      const heroBtns = document.querySelectorAll("[data-hero]");
+      const dotBtns = document.querySelectorAll("[data-dot]");
+      const heroSection = document.getElementById("hero");
+
+      let index = 0;
+      let autoplayTimer = null;
+      let btnPopupTimer = null;
+      let isTransitioning = false;
+
+      // Populate slide packs
+      wrap.innerHTML = SLIDES.map((s, i) => `
+        <div class="hero-slide-item pointer-events-none absolute inset-0 flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform opacity-0" data-hero-slide="${i}">
+          <img src="${s.img}" alt="${s.name}" class="hero-floating-pack pointer-events-none h-[115%] sm:h-[122%] md:h-[130%] lg:h-[138%] xl:h-[142%] max-h-[700px] xl:max-h-[800px] w-auto max-w-none object-contain drop-shadow-2xl">
+        </div>
+      `).join("");
+      const slides = [...wrap.querySelectorAll(".hero-slide-item")];
+
+      function hideHeroBtns() {
+        heroBtns.forEach((b) => {
+          b.style.transition = "transform 220ms ease-out, opacity 220ms ease-out";
+          b.style.transform = "scale(0)";
+          b.style.opacity = "0";
+          b.style.pointerEvents = "none";
+        });
+      }
+
+      function popupHeroBtns() {
+        clearTimeout(btnPopupTimer);
+        btnPopupTimer = setTimeout(() => {
+          heroBtns.forEach((b) => {
+            b.style.transition = "transform 480ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 320ms ease";
+            b.style.transform = "scale(1)";
+            b.style.opacity = "1";
+            b.style.pointerEvents = "auto";
+          });
+          isTransitioning = false;
+        }, 620);
+      }
+
+      function updateDots() {
+        dotBtns.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.add("active");
+          } else {
+            dot.classList.remove("active");
+          }
+        });
+      }
+
+      function render(animateEffects = false) {
+        const n = SLIDES.length;
+
+        if (animateEffects) {
+          isTransitioning = true;
+          hideHeroBtns();
+          popupHeroBtns();
+
+          // Center Disc subtle breathing dip
+          if (tintWrap) {
+            tintWrap.style.transition = "transform 260ms cubic-bezier(0.4, 0, 0.2, 1)";
+            tintWrap.style.transform = "scale(0.85)";
+          }
+
+          // Companion elements shrink & rotate out
+          if (topWrap) {
+            topWrap.style.transition = "transform 260ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease";
+            topWrap.style.transform = "scale(0) rotate(-35deg)";
+            topWrap.style.opacity = "0";
+          }
+          if (bottomWrap) {
+            bottomWrap.style.transition = "transform 260ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease";
+            bottomWrap.style.transform = "scale(0) rotate(35deg)";
+            bottomWrap.style.opacity = "0";
+          }
+
+          // Swap images and spring bloom at halfway (260ms)
+          setTimeout(() => {
+            if (tint) {
+              tint.style.backgroundImage = `url('${SLIDES[index].bgImg || "Gemini_Generated_Image_5twsob5twsob5tws (2).png"}')`;
+              tint.style.backgroundSize = "cover";
+              tint.style.backgroundPosition = "center";
+              tint.style.backgroundRepeat = "no-repeat";
+              tint.style.backgroundColor = "transparent";
+            }
+
+            if (tintWrap) {
+              tintWrap.style.transition = "transform 550ms cubic-bezier(0.34, 1.56, 0.64, 1)";
+              tintWrap.style.transform = "scale(1)";
+            }
+
+            if (topImg && bottomImg) {
+              topImg.src = SLIDES[index].topIngredient;
+              bottomImg.src = SLIDES[index].bottomIngredient;
+            }
+
+            if (topWrap) {
+              topWrap.style.transition = "transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 300ms ease";
+              topWrap.style.transform = "scale(1) rotate(0deg)";
+              topWrap.style.opacity = "1";
+            }
+            if (bottomWrap) {
+              bottomWrap.style.transition = "transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 300ms ease";
+              bottomWrap.style.transform = "scale(1) rotate(0deg)";
+              bottomWrap.style.opacity = "1";
+            }
+          }, 260);
+        } else {
+          if (tint) {
+            tint.style.backgroundImage = `url('${SLIDES[index].bgImg || "Gemini_Generated_Image_5twsob5twsob5tws (2).png"}')`;
+            tint.style.backgroundSize = "cover";
+            tint.style.backgroundPosition = "center";
+            tint.style.backgroundRepeat = "no-repeat";
+            tint.style.backgroundColor = "transparent";
+          }
+          if (tintWrap) tintWrap.style.transform = "scale(1)";
+          if (topWrap) { topWrap.style.transform = "scale(1)"; topWrap.style.opacity = "1"; }
+          if (bottomWrap) { bottomWrap.style.transform = "scale(1)"; bottomWrap.style.opacity = "1"; }
+          if (topImg) topImg.src = SLIDES[index].topIngredient;
+          if (bottomImg) bottomImg.src = SLIDES[index].bottomIngredient;
+        }
+
+        // Product packs 3D slide
+        slides.forEach((sl, i) => {
+          let off = i - index;
+          if (off > n / 2) off -= n;
+          if (off < -n / 2) off += n;
+
+          const isActive = off === 0;
+          if (isActive) {
+            sl.style.opacity = "1";
+            sl.style.zIndex = "20";
+            sl.style.pointerEvents = "none";
+            sl.style.transform = "translate3d(0, 0, 0) scale(1) rotate(0deg)";
+          } else if (off < 0) {
+            sl.style.opacity = "0";
+            sl.style.zIndex = "10";
+            sl.style.pointerEvents = "none";
+            sl.style.transform = "translate3d(-180%, 0, 0) scale(0.7) rotate(-10deg)";
+          } else {
+            sl.style.opacity = "0";
+            sl.style.zIndex = "10";
+            sl.style.pointerEvents = "none";
+            sl.style.transform = "translate3d(180%, 0, 0) scale(0.7) rotate(10deg)";
+          }
+        });
+
+        nameEl.textContent = SLIDES[index].name;
+        nameEl.classList.remove("animate-fade-in");
+        void nameEl.offsetWidth;
+        nameEl.classList.add("animate-fade-in");
+        noEl.textContent = SLIDES[index].no;
+
+        updateDots();
+      }
+
+      function go(step) {
+        if (isTransitioning) return;
+        index = (index + step + SLIDES.length) % SLIDES.length;
+        render(true);
+        resetAutoplay();
+      }
+
+      function goTo(newIndex) {
+        if (isTransitioning || newIndex === index) return;
+        index = newIndex;
+        render(true);
+        resetAutoplay();
+      }
+
+      function resetAutoplay() {
+        clearInterval(autoplayTimer);
+        autoplayTimer = setInterval(() => {
+          index = (index + 1) % SLIDES.length;
+          render(true);
+        }, 6000);
+      }
+
+      // Prev / Next button listeners
+      heroBtns.forEach((b) => {
+        b.addEventListener("click", (e) => {
+          e.stopPropagation();
+          go(+b.dataset.hero);
+        });
+      });
+
+      // Pagination dot listeners
+      dotBtns.forEach((dot) => {
+        dot.addEventListener("click", (e) => {
+          e.stopPropagation();
+          goTo(+dot.dataset.dot);
+        });
+      });
+
+      // Keyboard arrow navigation
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") {
+          go(-1);
+        } else if (e.key === "ArrowRight") {
+          go(1);
+        }
+      });
+
+      // Touch swipe navigation for mobile
+      let touchStartX = 0, touchStartY = 0;
+      const carouselContainer = wrap.parentElement;
+      if (carouselContainer) {
+        carouselContainer.addEventListener("touchstart", (e) => {
+          if (e.touches && e.touches[0]) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+          }
+        }, { passive: true });
+
+        carouselContainer.addEventListener("touchend", (e) => {
+          if (!touchStartX) return;
+          const touchEndX = e.changedTouches[0].clientX;
+          const touchEndY = e.changedTouches[0].clientY;
+          const diffX = touchEndX - touchStartX;
+          const diffY = touchEndY - touchStartY;
+          if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX < 0) go(1);
+            else go(-1);
+          }
+          touchStartX = 0;
+          touchStartY = 0;
+        }, { passive: true });
+      }
+
+      // Mouse Parallax on Hero Section
+      if (heroSection && typeof gsap !== "undefined") {
+        heroSection.addEventListener("mousemove", (e) => {
+          const rect = heroSection.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+          gsap.to(tintWrap, { x: x * 22, y: y * 22, duration: 0.8, ease: "power2.out" });
+          gsap.to(wrap, { x: x * 14, y: y * 14, duration: 0.8, ease: "power2.out" });
+        });
+
+        heroSection.addEventListener("mouseleave", () => {
+          gsap.to([tintWrap, wrap], { x: 0, y: 0, duration: 1, ease: "power2.out" });
+        });
+      }
+
+      // Initial render & autoplay start
+      render(false);
+      resetAutoplay();
+    })();
+  </script>
+</body>
+
+</html>

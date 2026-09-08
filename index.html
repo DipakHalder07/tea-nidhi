@@ -829,8 +829,8 @@
               class="absolute flex items-center justify-center pointer-events-none transition-transform duration-500 will-change-transform"
               style="transform: scale(1);">
               <div id="heroTint"
-                class="h-56 w-56 rounded-full transition-colors duration-700 sm:h-72 sm:w-72 md:h-[400px] md:w-[400px] lg:h-[480px] lg:w-[480px] xl:h-[560px] xl:w-[560px] animate-hero-bg shadow-2xl"
-                style="background:var(--pink)"></div>
+                class="h-56 w-56 rounded-full sm:h-72 sm:w-72 md:h-[400px] md:w-[400px] lg:h-[480px] lg:w-[480px] xl:h-[560px] xl:w-[560px] animate-hero-bg shadow-2xl overflow-hidden border border-cream/20"
+                style="background-image: url('Gemini_Generated_Image_5twsob5twsob5tws (2).png'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
             </div>
 
             <!-- Top-Right & Bottom-Left Floating Product Accents (Clean, Scaled for Majestic Presence) -->
@@ -1540,9 +1540,9 @@
     /* ---------- HERO CAROUSEL & INTERACTIVE PARALLAX ---------- */
     (function () {
       const SLIDES = [
-        { name: "Classic Masala Chai", img: "img/hero.png", tint: "var(--pink)", topIngredient: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png", bottomIngredient: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png" },
-        { name: "Honey Lemon Green Tea", img: "img/product-2.png", tint: "#2E6941", topIngredient: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png", bottomIngredient: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png" },
-        { name: "Rose Cardamom Black Tea", img: "img/product-3.png", tint: "var(--red)", topIngredient: "element-img/green_cardamom.png", bottomIngredient: "element-img/star_anise.png" },
+        { name: "Classic Masala Chai", img: "img/hero.png", bgImg: "Gemini_Generated_Image_5twsob5twsob5tws (2).png", tint: "var(--pink)", topIngredient: "element-img/isolated_cinnamon_sticks_star_anise_and_dried_orange_slices_for_tea_flavoring.png", bottomIngredient: "element-img/isolated_vintage_silver_tea_strainer_with_loose_black_tea_leaves_transparent.png" },
+        { name: "Honey Lemon Green Tea", img: "img/product-2.png", bgImg: "Gemini_Generated_Image_5twsob5twsob5tws (2).png", tint: "#2E6941", topIngredient: "element-img/isolated_honey_dipper_with_dripping_golden_honey_transparent_background.png", bottomIngredient: "element-img/isolated_fresh_green_tea_leaves_with_water_droplets_macro_photography.png" },
+        { name: "Rose Cardamom Black Tea", img: "img/product-3.png", bgImg: "Gemini_Generated_Image_5twsob5twsob5tws (2).png", tint: "var(--red)", topIngredient: "element-img/green_cardamom.png", bottomIngredient: "element-img/star_anise.png" },
       ];
       const wrap = document.getElementById("heroSlides"), tint = document.getElementById("heroTint"),
         tintWrap = document.getElementById("heroTintWrap"),
@@ -1611,7 +1611,13 @@
 
           // 3. At halfway (260ms), update colors, images, and pop BG & companion elements big!
           setTimeout(() => {
-            if (tint) tint.style.background = SLIDES[index].tint;
+            if (tint) {
+              tint.style.backgroundImage = `url('${SLIDES[index].bgImg || "Gemini_Generated_Image_5twsob5twsob5tws (2).png"}')`;
+              tint.style.backgroundSize = "cover";
+              tint.style.backgroundPosition = "center";
+              tint.style.backgroundRepeat = "no-repeat";
+              tint.style.backgroundColor = "transparent";
+            }
             if (topBg) topBg.style.background = SLIDES[index].tint;
             if (bottomBg) bottomBg.style.background = SLIDES[index].tint;
 
@@ -1637,7 +1643,13 @@
             }
           }, 260);
         } else {
-          if (tint) tint.style.background = SLIDES[index].tint;
+          if (tint) {
+            tint.style.backgroundImage = `url('${SLIDES[index].bgImg || "Gemini_Generated_Image_5twsob5twsob5tws (2).png"}')`;
+            tint.style.backgroundSize = "cover";
+            tint.style.backgroundPosition = "center";
+            tint.style.backgroundRepeat = "no-repeat";
+            tint.style.backgroundColor = "transparent";
+          }
           if (topBg) topBg.style.background = SLIDES[index].tint;
           if (bottomBg) bottomBg.style.background = SLIDES[index].tint;
           if (tintWrap) tintWrap.style.transform = "scale(1)";
